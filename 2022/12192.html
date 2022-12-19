@@ -1,0 +1,2185 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="pytorch使用, 朝暮惜">
+    <meta name="description" content="[TOC]
+Numpy基础Numpy提供了两种基本的对象： ndarray(N-dimensional Array Object)和ufunc (Universal Function Object)。 ndarray是存储单一数据类型的多维">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>pytorch使用 | 朝暮惜</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="朝暮惜" type="application/atom+xml">
+</head>
+
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">朝暮惜</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">朝暮惜</div>
+        <div class="logo-desc">
+            
+            活到老，学到老
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/4.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">pytorch使用</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/pytorch/">
+                                <span class="chip bg-color">pytorch</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Pytorch/" class="post-category">
+                                Pytorch
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2022-12-19
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2022-12-19
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    8k
+                </div>
+                
+
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>[TOC]</p>
+<h2 id="Numpy基础"><a href="#Numpy基础" class="headerlink" title="Numpy基础"></a>Numpy基础</h2><p>Numpy提供了两种基本的对象： ndarray(N-dimensional Array Object)和ufunc (Universal Function Object)。 ndarray是存储单一数据类型的多维数组， 而ufunc则是 能够对数组进行处理的函数。</p>
+<h4 id="生成ndarray的几种方式："><a href="#生成ndarray的几种方式：" class="headerlink" title="生成ndarray的几种方式："></a>生成ndarray的几种方式：</h4><ol>
+<li><p>从已有数据中创建</p>
+<pre><code class="python">import numpy as np
+list1=[3.14,2.17,0,1,2]
+nd1=np.array(list1)
+print(nd1)#[3.14 2.17 0.   1.   2.  ]
+</code></pre>
+</li>
+<li><p>利用random 创建 ，在深度学习中， 经常需要对一些参数进行初始化， 因此为了更有效地训练模型， 提高模型的性能， 有些初始化还需要满足一定的条件， 如满足正态分布或均匀分布等。可以利用np.random模块常用的函数实现。                          </p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>np.random.random</td>
+<td>生成0到1之间的随机数</td>
+</tr>
+<tr>
+<td>np.random.uniform</td>
+<td>生成均匀分布的随机数</td>
+</tr>
+<tr>
+<td>np.random.randn</td>
+<td>生成标准正态的随机数</td>
+</tr>
+<tr>
+<td>np.random.randint</td>
+<td>生成随机的整数</td>
+</tr>
+<tr>
+<td>np.random.normal</td>
+<td>生成正态分布</td>
+</tr>
+<tr>
+<td>np.random.shuffle</td>
+<td>随机打乱顺序</td>
+</tr>
+<tr>
+<td>np.random.seed</td>
+<td>设置随机数种子</td>
+</tr>
+<tr>
+<td>random_sample</td>
+<td>生成随机的浮点数</td>
+</tr>
+</tbody></table>
+<pre><code class="import">
+nd1=np.random.random([3,3])#指定维数时可以用[]，也可用()，下方同理。
+
+nd2=np.random.random([4])#给定一个数据时，表示生成一行只有四个元素的数据
+
+print(nd2)#[0.85529956 0.99554336 0.20784373 0.48278592]
+
+print(nd1)#[[0.02986193 0.12572112 0.75996264]
+
+           #[0.0162905  0.23816636 0.28736631]
+
+           #[0.41927611 0.33388733 0.93705356]]
+
+print(nd1.shape)#形状为3*3的矩阵
+</code></pre>
+</li>
+<li><p>创建特定形状的多维数组</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>np.zeros((3,4))</td>
+<td>创建3x4的元素全为0的数组</td>
+</tr>
+<tr>
+<td>np.ones((3,4))</td>
+<td>创建3x4的元素全为1的数组</td>
+</tr>
+<tr>
+<td>np.empty((2,3))</td>
+<td>创建2x3的空数组，空数据中的值并不为0,而是未初始化的垃圾值</td>
+</tr>
+<tr>
+<td>np.zeros _like(ndarr)</td>
+<td>以ndarr相同维度创建元素全为0数组</td>
+</tr>
+<tr>
+<td>np.ones_like(ndarr)</td>
+<td>以ndarr相同维度创建元素全为1数组</td>
+</tr>
+<tr>
+<td>np.empty _like(ndarr)</td>
+<td>以ndarr相同维度创建空数组</td>
+</tr>
+<tr>
+<td>np.eye(5)</td>
+<td>该函数用于创建一个5x5的单位矩阵，对角线为1,其余为0</td>
+</tr>
+<tr>
+<td>np.full((3,5),666)</td>
+<td>创建3x5的元素全为666的数组，666为指定值</td>
+</tr>
+<tr>
+<td>np.diag((1,2,3))</td>
+<td>创建对角元素为1,2,3的3维对角矩阵</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>利用arange、linspace 函数生成</p>
+<p>arange是numpy模块中的函数， 其格式为：arange ([start,] stop[,step,J, dtype (None)),其中start为开始位置，stop为结束位置，step为步长，其功能与Python内置函数range类似。</p>
+<pre><code class="python">import numpy as np 
+print(np.range(10)) 
+#(0 1 2 3 4 5 6 7 8 9） 
+print(np.arange(1, 4, 0.5)) 
+# [1. 1.5 2. 2.5 3. 3.5] 
+</code></pre>
+<p>linspace也是numpy模块中常用的函数，其格式为：np.linspace(start, stop, num＝50,endpoint&#x3D;True, retstep&#x3D;False, dtype&#x3D;None),linspace可以根据输入的指定数据范围和等分数，自动生成一个线性等分向量．其中endpoint（包含终点）默认为True,等分数num默认为50。如果将retstep设置为 True,则会返回一个带步长的ndarray。</p>
+<pre><code class="python">import numpy as np
+nd=np.linspace(0,1,10)#注意这里的num是等分数，不是步长，步长=(终点-起点)/(等分数-1)
+print(nd)
+#[0.         0.11111111 0.22222222 0.33333333 0.44444444 0.55555556
+ #0.66666667 0.77777778 0.88888889 1.] 
+&quot;&#39;这里并没有像我们预期的那样，生成0.1,0.2,..., 1.0这样步长为0.1 的ndarray、这是因为linspace必定会包含数据起点和终点，那么其步长则为(1-0)/ 9 = 0.11111111 如果需要产生0.1,0.2,..., 1.0这样的数据，只需要将数据起点0修改为0.1即可&#39;&quot;
+</code></pre>
+</li>
+</ol>
+<h4 id="保存数据以及恢复数据"><a href="#保存数据以及恢复数据" class="headerlink" title="保存数据以及恢复数据"></a>保存数据以及恢复数据</h4><pre><code class="python">import numpy as np 
+nd1=np.random.random([5, 5]) 
+np.savetxt(X=nd1, fname=&#39;./test1.txt&#39;) 
+nd2 = np.loadtxt(&#39;./test1. txt&#39;) 
+print(nd2) 
+</code></pre>
+<h4 id="获取数组中的元素值："><a href="#获取数组中的元素值：" class="headerlink" title="获取数组中的元素值："></a>获取数组中的元素值：</h4><p>索引(类似对列表和元组的操作)、函数random.choice ，从指定的样本中随机抽取数据</p>
+<pre><code class="python">＃截取一个多维数组的一个区域内数据
+nd=np. arange(25). reshape([5,5]) 
+nd[1:3,1:3] #表示读取2,3行，2,3列的公共部分
+</code></pre>
+<pre><code class="python">import numpy as np 
+a=np. arange(1,25,dtype=float) 
+cl=random. choice (a, size= (3, 4)) #size指定输出数组形状
+c2=random.choice(a,size=(3,4),replace=False) #replace缺省为True,即可重复抽取。
+#下式中参数p指定每个元素对应的抽取概率，缺省为每个元素被抽取的概率相同 
+c3=random.choice(a,size=(3,4),p=a/np.sum(a)) 
+print(“ 随机可重复抽取“ )
+print(cl) 
+print(“随机但不重复抽取“ )
+print(c2) 
+print( “随机但按制度概率抽取“ )
+print(c3) 
+</code></pre>
+<h4 id="数组运算"><a href="#数组运算" class="headerlink" title="数组运算"></a>数组运算</h4><p>逐元乘法 (Element-Wise Product)，运算符为np.multiply()或＊， 另一种是点积或内积元素 ，运算符为 np.dot()。数组通过激活函数后，输出与输入形状一致。</p>
+<h4 id="数组变形"><a href="#数组变形" class="headerlink" title="数组变形"></a>数组变形</h4><ol>
+<li><p>更改数组的形状：</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>arr.reshape</td>
+<td>重新将向量 arr 维度进行改变，不修改向量本身。指定维度时，参数的个数代表维度，可以只指定行数或列数， 其他用 -1代替,不能单单只指定行数或列数。且所指定的行数或列数一定要能被整除。</td>
+</tr>
+<tr>
+<td>arr.resize</td>
+<td>重新将向量 arr 维度进行改变，修改向量本身</td>
+</tr>
+<tr>
+<td>arr.T</td>
+<td>对向量arr 进行转置</td>
+</tr>
+<tr>
+<td>arr.ravel</td>
+<td>对向量 arr 进行展平，即将多维数组变成 1 维数组，不会产生原数组的副本。默认按照行优先展平，设置参数’F’，则可按照列优先展平。</td>
+</tr>
+<tr>
+<td>arr. flatten</td>
+<td>对向量 arr 进行展平，即将多维数组变成 1 维数组，返回原数组的副本</td>
+</tr>
+<tr>
+<td>arr. squeeze</td>
+<td>只能对维数为 1 的维度降维，把矩阵中维度为1的去掉。对多维数组使用时不会报错，但是不会产生任何影响</td>
+</tr>
+<tr>
+<td>arr. transpose</td>
+<td>对高维矩阵进行轴对换，比如把图片中表示颜色顺序的RGB改为GBR</td>
+</tr>
+</tbody></table>
+<pre><code class="python">import numpy as np 
+arr =np.arange(10)  
+＃将向量 arr 维度变换为2行5列
+print(arr.reshape(2, 5)) 
+＃指定维度时可以只指定行数或列数， 其他用-1代替
+print(arr.reshape(5, -1)) 
+print(arr.reshape(-1, 5))
+#arr.reshape(3,-1) 会报错，3不能被10整除
+
+arr1 =np.arange (6).reshape (2, -1)  
+print(＂按照列优先展平” )
+print (arr1.ravel (&#39;F&#39;)) 
+print(“桉照行优先展平“ )
+print(arr1.ravel())
+
+arr2 =np.arange(6).reshape(3,1,2,1)#3个 高为1 的2行1列矩阵 
+print(arr2)
+[[[[0]
+   [1]]]
+
+
+ [[[2]
+   [3]]]
+
+
+ [[[4]
+   [5]]]]
+
+arr=np.arange(24).reshape(2,3,4)
+print(arr.shape)#(2, 3, 4)
+print(arr.transpose(1,2,0).shape)#(3, 4, 2)
+</code></pre>
+</li>
+<li><p>合并数组</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>np.append</td>
+<td>内存占用大</td>
+</tr>
+<tr>
+<td>np.concatenate</td>
+<td>没有内存问题</td>
+</tr>
+<tr>
+<td>np.stack</td>
+<td>沿看新的轴加入一系列数组</td>
+</tr>
+<tr>
+<td>np.hstack</td>
+<td>堆栈数组垂直顺序（行）</td>
+</tr>
+<tr>
+<td>np.vstack</td>
+<td>堆栈数组垂直顺序（列）</td>
+</tr>
+<tr>
+<td>np.dstack</td>
+<td>堆栈数组按顺序深入（沿第 3 维）</td>
+</tr>
+<tr>
+<td>np.vsplit</td>
+<td>将数组分解成垂直的多个子数组的列表</td>
+</tr>
+</tbody></table>
+<p>注：append 、 concatenate以及stack 都有一个 axis 参数， 用于控制数组的合并方式是按行还是按列。对于 append 和 concatenate, 待合并的数组必须有相同的行数或列数（满足一个即可）。stack、hstack、dstack,要求待合并的数组必须具有相同的形状(shape)。</p>
+<pre><code class="python">import numpy as np 
+a =np.arange(4).reshape(2, 2) 
+b = np.arange(4).reshape(2, 2) 
+c = np.append(a, b, axis=0)
+print(&#39;按行合并后的结果&#39;)
+print(c) 
+print(&#39;合并后数据维度&#39;,c.shape)
+&#39;&#39;&#39;按行合并后的结果
+[[0 1]
+ [2 3]
+ [0 1]
+ [2 3]]
+合并后数据维度 (4, 2)&#39;&#39;&#39;
+
+d = np.append(a, b, axis=1)
+print(&#39;按列合并后的结果&#39;)
+print (d) 
+print (&#39;合并后数据维度&#39;,d.shape)
+&#39;&#39;&#39;按列合并后的结果
+[[0 1 0 1]
+ [2 3 2 3]]
+合并后数据维度 (2, 4)&#39;&#39;&#39;
+
+e=np.array([[1,2],[3,4]])
+f=np.array([[5,6],[7,8]])
+print(np.stack((e,f),axis=0))#沿指定轴堆叠数组或矩阵
+&#39;&#39;&#39;[[[1 2]
+  [3 4]]
+
+ [[5 6]
+  [7 8]]]&#39;&#39;&#39;
+</code></pre>
+</li>
+</ol>
+<h4 id="批处理数据"><a href="#批处理数据" class="headerlink" title="批处理数据"></a>批处理数据</h4><p>得到数据集、随机打乱数据、定义批大小、批处理数据集</p>
+<pre><code class="python">import numpy as np 
+#生成10000个形状为2X3的矩阵,这是一个3维矩阵 ， 第1个维度为样本数， 后两个是数据形状
+data_train = np.random.randn(10000,2,3) 
+#打乱这10000条数据
+np.random.shuffle(data_train)
+#定义批量大小
+batch_size=100
+#进行批处理
+for i in range(0,len(data_train),batch_size):
+    x_batch_sum=np.sum(data_train[i:i+batch_size]) 
+    print(&quot; 第&#123;&#125;批次，该批次的数据之和：&#123;&#125; &quot;.format(i,x_batch_sum))
+</code></pre>
+<h4 id="通用函数（ufunc）"><a href="#通用函数（ufunc）" class="headerlink" title="通用函数（ufunc）"></a>通用函数（ufunc）</h4><p>许多ufunc函数都是用C语言级别实现的， 因此它们的计算速度非常快 此外，它们比math模块中的函数更灵活。 math模块的输入一 般是标量， 但Numpy中的函数可以是向量或矩阵， 而利用向量或矩阵可以避免使用循环语句。这点在机器学习、 深度学习中非常重要。</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>sqrt</td>
+<td>计算序列化数据的平方根</td>
+</tr>
+<tr>
+<td>sin,cos</td>
+<td>三角函数</td>
+</tr>
+<tr>
+<td>abs</td>
+<td>计算序列化数据的绝对值</td>
+</tr>
+<tr>
+<td>dot</td>
+<td>矩阵运算</td>
+</tr>
+<tr>
+<td>log,log10,log2</td>
+<td>对数函数</td>
+</tr>
+<tr>
+<td>exp</td>
+<td>指数函数</td>
+</tr>
+<tr>
+<td>cumsum,cumproduct</td>
+<td>累计求和、 求积</td>
+</tr>
+<tr>
+<td>sum</td>
+<td>对一个序列化数据进行求和</td>
+</tr>
+<tr>
+<td>mean</td>
+<td>计算均值</td>
+</tr>
+<tr>
+<td>median</td>
+<td>计算中位数</td>
+</tr>
+<tr>
+<td>std</td>
+<td>计算标准差</td>
+</tr>
+<tr>
+<td>var</td>
+<td>计算方差</td>
+</tr>
+<tr>
+<td>corrcoef</td>
+<td>计算相关系数</td>
+</tr>
+</tbody></table>
+<h4 id="广播机制"><a href="#广播机制" class="headerlink" title="广播机制"></a>广播机制</h4><p>Numpy 的Universal functions中要求输入的数组shape是一致的， 当数组的shape不相等时，会使用广播机制调整数组的形状使其一致，但需满足一下规则：</p>
+<ol>
+<li><p>让所有输入数组都向其中shape最长的数组看齐，不足的部分则通过在前面加1补齐</p>
+</li>
+<li><p>输出数组的shape是输入数组shape的各个轴上的最大值</p>
+</li>
+<li><p>如果输入数组的某个轴和输出数组的对应轴的长度相同或者某个轴的长度为1时，这个数组能被用来计算， 否则出错；</p>
+</li>
+<li><p>当输入数组的某个轴的长度为1时， 沿着此轴运算时都用（或<strong>复制</strong>）此轴上的第一组值。</p>
+<p>例：A+B, 其中A为4x1矩阵， B为一维向量(3,）。 要相加， 需要做如下处理：</p>
+<ul>
+<li>根据规则1. B需要向看齐， 把B变为(1,3)</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>根据规则2, 输出的结果为各个轴上的最大值， 即输出结果应该为(4,3)矩阵，需要将A由(4,1)变为(4,3)矩阵， 将B由(1,3)变为(4,3)矩阵。<ul>
+<li>根据规则4,用此轴上的第一组值（要主要区分是哪个轴）， 进行复制（但在实际处理中不是真正复制，否则太耗内存， 而是采用其他对象如ogrid对象， 进行网格处理）即可。</li>
+</ul>
+</li>
+</ul>
+<h2 id="Tensor"><a href="#Tensor" class="headerlink" title="Tensor"></a>Tensor</h2><p>Tensor, 它可以是零维（又称为标量或一个数）、一维、二维及多维的数组。Tensor 自称为神经网络界的 Numpy, 它与Numpy 相似，二者可以共享内存且之间的转换非常方便和高效。不过它们也有不同之处，最大的区别就是 Numpy 会把 ndarray 放在 CPU 中进行加速运算，而由torch产生的Tensor会放在GPU中进行计算。</p>
+<h4 id="创建Tensor"><a href="#创建Tensor" class="headerlink" title="创建Tensor"></a>创建Tensor</h4><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Tensor(*size)</td>
+<td>直接从参数构造一个的张量，支持List、 Numpy数组</td>
+</tr>
+<tr>
+<td>eye(row, column)</td>
+<td>创建指定行数，列数的二维单位Tensor</td>
+</tr>
+<tr>
+<td>linspace(start,end,steps)</td>
+<td>从start到end,均匀切分成steps份</td>
+</tr>
+<tr>
+<td>logspace(start,end,steps)</td>
+<td>从10^start ， 到10^end.均匀切分成steps份</td>
+</tr>
+<tr>
+<td>rand&#x2F;randn(*size)</td>
+<td>生成(0,1)均匀分布&#x2F;标准正态分布数据</td>
+</tr>
+<tr>
+<td>ones(*size)</td>
+<td>返同指定shape的张量，元素初始为1</td>
+</tr>
+<tr>
+<td>zeros(*size)</td>
+<td>返回指定shape的张量，元素初始为0</td>
+</tr>
+<tr>
+<td>ones_like(t)</td>
+<td>返回与T的shape相同的张量，且元素初始为1</td>
+</tr>
+<tr>
+<td>zeros_like(t)</td>
+<td>返同与T的shape相同的张量，且元素初始为0</td>
+</tr>
+<tr>
+<td>arange(start,end.step)</td>
+<td>在区间[start,end)上以间隔step生成一个序列张量</td>
+</tr>
+<tr>
+<td>from_Numpy(ndarray)</td>
+<td>从ndarray创建一个Tensor</td>
+</tr>
+</tbody></table>
+<pre><code class="python">import torch
+print(torch.Tensor([1,2,3,4,5,6]))
+print(torch.Tensor(2,3))#输出一个两行三列的二维矩阵，矩阵值随机
+t=torch.Tensor([[1,2,3],[4,5,6]])
+print(t)
+print(t.size())##shape与size(）等价
+print(torch.Tensor(t.size()))
+print(torch.linspace(1,10,4))
+print(torch.rand(2,3))
+print(torch.randn(2,3))
+</code></pre>
+<p>注：torch.Tensor与torch.tensor的区别：torch. Tensor是torch.empty和torch.tensor之间的一种混合，但是， 当传入数据时，torch. Tensor使用全局默认dtype (FloatTensor)， 而torch.tensor是从数据中推断数据类型。torch.tensor(1)返回一个固定值1，而torch.Tensor(1)返回一个大小为1的张量， 它是随机初始化的值。</p>
+<h4 id="修改Tensor形状"><a href="#修改Tensor形状" class="headerlink" title="修改Tensor形状"></a>修改Tensor形状</h4><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>size()</td>
+<td>返回张量的shape属性值，与函数shape等价</td>
+</tr>
+<tr>
+<td>numel(input)</td>
+<td>计算Tensor的元素个数</td>
+</tr>
+<tr>
+<td>view(* shape)</td>
+<td>修改Tensor的shape,与Reshape (0.4版新增）类似，但View返回的对象与源Tensor共享内存， 修改一个，另一个同时修改。Reshape将生成新的Tensor,而且不要求源Tensor是 连续的。View(-1)展平数组</td>
+</tr>
+<tr>
+<td>resize</td>
+<td>类似于view,但在size超出时会重新分配内存空间</td>
+</tr>
+<tr>
+<td>Item</td>
+<td>若Tensor为单元素，则返回Python的标量</td>
+</tr>
+<tr>
+<td>unsqueeze</td>
+<td>在指定维度增加一个 “ 1”</td>
+</tr>
+<tr>
+<td>squeeze</td>
+<td>在指定维度压缩一个 “ 1”</td>
+</tr>
+</tbody></table>
+<pre><code class="python">import torch 
+＃生成一个形状为2x3的矩阵
+x = torch.randn(2, 3) 
+＃查看矩阵的形状
+x.size() ＃结果为torch.Size([2, 3])
+＃查看x的维度
+x.dim()     ＃结果为2                    
+＃把x变为3x2的矩阵                         
+x.view(3,2)
+＃把x展平为1维向量
+y=x.view(-1)
+y.shape
+＃添加一个维度
+z=torch.unsqueeze(y,0)
+＃查看z的形状
+z.size() ＃结果为torch.Size([1, 6]) 
+＃计算z的元素个数
+z.numel() ＃结果为6                         
+</code></pre>
+<h4 id="索引操作"><a href="#索引操作" class="headerlink" title="索引操作"></a>索引操作</h4><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>index_select(input,dim,iodex)</td>
+<td>在指定维度上选择一些行或列</td>
+</tr>
+<tr>
+<td>nonzero(input)</td>
+<td>获取非 0 元素的下标</td>
+</tr>
+<tr>
+<td>masked_select(input,mask)</td>
+<td>使用二元值进行选择</td>
+</tr>
+<tr>
+<td>gather(input,dim,index)</td>
+<td>在指定维度上选择数据，输出的形状与 index ( index 的类型必须是 LongTensor 类型的）一致</td>
+</tr>
+<tr>
+<td>scatter_(input,dim,index,src)</td>
+<td>为gather 的反操作， 根据指定索引补充数据</td>
+</tr>
+</tbody></table>
+<pre><code class="python">#设置一个随机种子
+torch.manual_seed(100) 
+#生成一个形状为2x3的矩阵
+x = torch.randn(2, 3)
+print(x)
+#根据索引获取笫1行所有数据
+print(x [0,: ])
+#获取最后一列数据
+print(x [:, -1])
+#生成是否大于0的Byter张量
+mask=x&gt;0 
+#护获取大于0的值
+print(torch.masked_select (x, mask))
+#获取非0下标，即行,列索引
+print(torch.nonzero(mask))
+#获取指定索引对应的值，输出根据以下规则得到
+#out [i][j] = input[index[i][j]][j] # if dim == 0 
+#out [i][j] = input[i][index[i][j]] # if dim == 1 
+index=torch.LongTensor([[0,1,1]])
+print(index) 
+print(torch.gather(x,0,index)) 
+index=torch.LongTensor([[0,1,1], [1,1, 1]]) 
+print(index)
+a=torch.gather(x,1,index) 
+print(a)
+#把a的值返回到一个2x3的0矩阵中
+z=torch.zeros(2,3) 
+print(z)
+print(z.scatter_(1,index,a))
+&#39;&#39;&#39;
+tensor([[ 0.3607, -0.2859, -0.3938],
+        [ 0.2429, -1.3833, -2.3134]])
+tensor([ 0.3607, -0.2859, -0.3938])
+tensor([-0.3938, -2.3134])
+tensor([0.3607, 0.2429])
+tensor([[0, 0],
+        [1, 0]])
+tensor([[0, 1, 1]])
+tensor([[ 0.3607, -1.3833, -2.3134]])
+tensor([[0, 1, 1],
+        [1, 1, 1]])
+tensor([[ 0.3607, -0.2859, -0.2859],
+        [-1.3833, -1.3833, -1.3833]])
+tensor([[0., 0., 0.],
+        [0., 0., 0.]])
+tensor([[ 0.3607, -0.2859,  0.0000],
+        [ 0.0000, -1.3833,  0.0000]])
+&#39;&#39;&#39;
+</code></pre>
+<h4 id="逐元素操作"><a href="#逐元素操作" class="headerlink" title="逐元素操作"></a>逐元素操作</h4><p>大部分数学运算都属于逐元索操作， 其输入与输出的形状相同 。这些操作均会创建新的 Tensor, 如果需要就地操作， 可以使用这些方法的下划线版本 ，例如x.add(y), x 的数据不变，返回一个新的 Tensor 。x.add_(y) （运行符带下划线后缀），运算结果存在 x 中，x 被修改。</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>abs&#x2F;add</td>
+<td>绝对值／加法</td>
+</tr>
+<tr>
+<td>addcdiv(t, v, t1, t2)</td>
+<td>t1与t2的按元素除后乘v加t</td>
+</tr>
+<tr>
+<td>addcmul(t,v, t1, t2)</td>
+<td>t1与12的按元素乘后乘v加t</td>
+</tr>
+<tr>
+<td>ceil&#x2F;floor</td>
+<td>向上取整／向下取整</td>
+</tr>
+<tr>
+<td>clamp(t, min, max)</td>
+<td>将张量元素限制在指定区间</td>
+</tr>
+<tr>
+<td>exp&#x2F;log&#x2F;pow</td>
+<td>指数／对数／幂</td>
+</tr>
+<tr>
+<td>mul(或＊）／neg</td>
+<td>逐元素乘法／取反</td>
+</tr>
+<tr>
+<td>sigmoid&#x2F;tanh&#x2F;softmax</td>
+<td>激活函数</td>
+</tr>
+<tr>
+<td>sign&#x2F;sqrt</td>
+<td>取符号／开根号</td>
+</tr>
+</tbody></table>
+<h4 id="归并操作"><a href="#归并操作" class="headerlink" title="归并操作"></a>归并操作</h4><p>归并操作顾名思义 ， 就是对输入进行归并或合计等操作， 这类操作的输入输出形状一般并不相同 ， 而且往往是输入大于输出形状。 归并操作可以对整个 Tensor, 也可以沿着某 个维度进行归并 。归并操作一般涉及一个 dim参数，指定沿哪个维进行归并。 另一个参数是 keepdim, 说明输出结果中是否保留维度1. 缺省情况是False, 即不保留。</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>cumprod(t、axis)</td>
+<td>在指定维度对t进行累积</td>
+</tr>
+<tr>
+<td>cumsum</td>
+<td>在指定维度对t进行累加</td>
+</tr>
+<tr>
+<td>dist(a,b,p&#x3D;2)</td>
+<td>返回a,b之间的p阶范数</td>
+</tr>
+<tr>
+<td>mean&#x2F;median</td>
+<td>均值／中位数</td>
+</tr>
+<tr>
+<td>std&#x2F;var</td>
+<td>标准差／方差</td>
+</tr>
+<tr>
+<td>norm(t,p&#x3D;2)</td>
+<td>返回t的p阶范数</td>
+</tr>
+<tr>
+<td>prod(t)&#x2F;sum(t)</td>
+<td>返回t所有元素的积&#x2F;和</td>
+</tr>
+</tbody></table>
+<pre><code class="python">#生成一个含6个数的向量
+a=torch.linspace(0,10,6) 
+#使用view方法 把a变为2x3矩阵
+a=a.view ((2, 3)) 
+print(a)
+#沿y轴方向累加，即dim=0
+b=a.sum (dim=0) 
+print(b)
+#b的形状为(3)
+#沿y轴方向累加，即dim=0，并保留含1的维度
+b=a.sum(dim=0,keepdim=True) 
+print(b)
+#b的形状为[1,3)
+&#39;&#39;&#39;
+tensor([[ 0.,  2.,  4.],
+        [ 6.,  8., 10.]])
+tensor([ 6., 10., 14.])
+tensor([[ 6., 10., 14.]])
+&#39;&#39;&#39;
+</code></pre>
+<h4 id="比较操作"><a href="#比较操作" class="headerlink" title="比较操作"></a>比较操作</h4><p>比较操作一般是进行逐元素比较， 有些是按指定方向比较。</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>eq</td>
+<td>比较Tensor是否相等． 支持broadcast</td>
+</tr>
+<tr>
+<td>equal</td>
+<td>比较Tensor是否有相同的shape与值</td>
+</tr>
+<tr>
+<td>ge&#x2F;le&#x2F;gt&#x2F;lt</td>
+<td>大于／小于比较／大于等于／小于等于比较</td>
+</tr>
+<tr>
+<td>max&#x2F;min(t,axis)</td>
+<td>返回最值， 若指定axis, 则额外返回下标</td>
+</tr>
+<tr>
+<td>topk(t,k,axis)</td>
+<td>在指定的axis维上取最高的K个值</td>
+</tr>
+</tbody></table>
+<h4 id="矩阵操作"><a href="#矩阵操作" class="headerlink" title="矩阵操作"></a>矩阵操作</h4><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>dot(t1, t2 )</td>
+<td>计算张量(1D)的内积或点积</td>
+</tr>
+<tr>
+<td>mm(mat1, mat2)&#x2F;bmm(batch1,batch2)</td>
+<td>计算矩阵乘法／含batch的3D矩阵乘法</td>
+</tr>
+<tr>
+<td>mv(t1 ，v1)</td>
+<td>计算矩阵与向量乘法</td>
+</tr>
+<tr>
+<td>t</td>
+<td>转置</td>
+</tr>
+<tr>
+<td>svd(t)</td>
+<td>计算t的SVD分解</td>
+</tr>
+</tbody></table>
+<p>注： Torch的dot 与Numpy的dot有点不同，Torch中的dot是对两个为1D张量进行点积运算，Numpy中的dot无此限制。mm是对2D的矩阵进行点积，bmm对含batch的3D进行点积运算。转置运算会导致存储空间不连续，需要调用contiguous方法转为连续。</p>
+<h4 id="Autograd-自动求导"><a href="#Autograd-自动求导" class="headerlink" title="Autograd(自动求导)"></a>Autograd(自动求导)</h4><ol>
+<li><p>对于表达式：z&#x3D; wx + b。可写成两个表示式： y&#x3D; wx, 则z &#x3D; y + b, 其中x、 W、b为变量， 是用户创建的变量， 不依赖于其他变量， 故又称为叶子节点。 y、z是计算得到的变量， 是非叶子节点，z为根节点。</p>
+</li>
+<li><p>步骤：</p>
+<ul>
+<li><p>创建叶子节点 (Leaf Node) 的 Tensor 、使用 requires_grad 参数指定是否记录对其的操作， 以便之后利用 backward(）方法进行梯度求解。 requires_grad 参数的缺省值为 False。 如果要对其求导需设置为 True, 然后与之有依赖关系的节点会自动变为 True。</p>
+</li>
+<li><p>通过运算创建的 Tensor 得到非叶子节点， 会自动被赋予 grad_fn 属性，该属性表示梯度函数。叶子节点的 grad_fn 为 None。最后得到的 Tensor 执行 backward( ）函数，此时自动计算所有叶子节点的梯度，并将累加结果保存到grad属性中，计算完成后， 非叶子节点的梯度自动释放。</p>
+</li>
+<li><p>backward()函数需要接收参数，该参数应和调用backward(）函数的Tensor 的维度相同， 或者是可broadcast 的维度。如果求导的Tensor 为标量（即一个数字）， 则backward中的参数可省略。反向传播的中间缓存会被清空，如果需要进行多次反向传播， 需要指定backward中的参数retain _graph&#x3D;True 。多次反向传播时， 梯度是累加的。非叶子节点的梯度backward调用后即被清空。</p>
+</li>
+<li><p>可利用 requires_grad_（）方法修改 Tensor 的 requires_grad 属性。可以调用 .detach() 或 with torch.no_grad() :， 将不再计算张量的梯度， 跟踪张量的历史记录。也可以通过用torch.no_grad(）包裹代码块的形式来阻止autograd去跟踪那些标记为.requesgrad&#x3D;True 的张量的历史记录，这些在评估模型、 测试模型阶段中常常用到。</p>
+<pre><code class="python">import torch 
+#定义输入张量x
+x=torch.Tensor((2))
+print(x) 
+#初始化权重参数w，偏移量b、井设置require_grad属性为True,为自动求导
+w=torch.randn(1,requires_grad=True) 
+b=torch.randn(1,requires_grad=True) 
+print(w)
+print(b)
+#实现前向传播
+y=torch.mul(w,x) #等价于w*x 
+z=torch.add(y,b) #等价于y+b
+#查看x,w, b页子节点的requite_grad属性
+print(&quot;x,w,b的require_grad属性分别为： &#123;&#125;, &#123;&#125;, &#123;&#125;&quot;. format (x.requires_grad, w.requires_grad,b.requires_grad)) 
+#查看非叶子节点的requres_grad属性，
+print(&quot;y, z的requires_grad属性分别为： &#123;&#125;，&#123;&#125; &quot;.format(y.requires_grad,z.requires_grad)) 
+#因与w, b有依赖关系，故y, z的requires_grad属性也是: True, True 
+#查看各节点是否为叶子节点
+print (&quot;x, w, b, y, z的是否为叶子节点： &#123;&#125;，&#123;&#125;，&#123;&#125;，&#123;&#125;，&#123;&#125; &quot; . format (x.is_leaf,w.is_leaf,b.is_leaf,y.is_leaf,z.is_leaf)) 
+#x, w. b. y, z的是否为叶子节点：True,True,True,False,False
+#查看叶子节点的grad_fn属性
+print (&quot;x, w, b的grad_fn属性： &#123;&#125;，&#123;&#125;，&#123;&#125;&quot;.format(x.grad_fn,w.grad_fn,b.grad_fn)) 
+#因x, w, b为用户创建的，为通过其他张量计算得到，故x, w, b的grad_fn属性:None,None,None 
+#查看非叶子节点的grad_fn属性
+print (&quot;y, z的是否为叶子节点： &#123;&#125;，&#123;&#125; &quot;.format (y.grad_fn, z. grad_fn)) 
+
+#基于z张量进行梯度反向传播，执行backward之后计算图会自动清空 ．
+z.backward(torch.ones_like(z))
+#如果想要多次使用backward,需要修改参数retain_graph为True,此时梯度是累加的
+#z.backward(retain_graph=True)
+#查看叶子节点的梯度， x是叶子节点但它无须求导，故其梯度为None
+print(&quot;参数w,b的梯度分别为： &#123;&#125;，&#123;&#125;，&#123;&#125;&quot;.format(w.grad,b.grad,x.grad)) 
+#参数w,b的梯度分别为：tensor ([ 2. I), tensor ([ 1. ]), None 
+#非叶子节点的梯度，执行backward之后，会自动清空
+print(&quot;非叶子节点y,z的梯度分别为：&#123;&#125;，&#123;&#125;&quot;.format(y.grad,z.grad))
+
+
+&quot;&quot;&quot;
+tensor([0., 0.])
+tensor([-0.0008], requires_grad=True)
+tensor([-1.3176], requires_grad=True)
+x,w,b的require_grad属性分别为： False, True, True
+y, z的requires_grad属性分别为： True，True 
+x, w, b, y, z的是否为叶子节点： True，True，True，False，False 
+x, w, b的grad_fn属性： None，None，None
+y, z的是否为叶子节点： &lt;MulBackward0 object at 0x0000020D9C9BBA58&gt;，&lt;AddBackward0 object at 0x0000020D9C9BBB38&gt; 
+参数w,b的梯度分别为： tensor([0.])，tensor([2.])，None
+非叶子节点y,z的梯度分别为：None，None
+&quot;&quot;&quot;
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p>使用Tensor及Antograd实现机器学习示例</p>
+<pre><code class="python">import torch as t 
+%matplotlib inline 
+from matplotlib import pyplot as plt 
+#生成训练数据， 并可视化数据分布情况
+t.manual_seed(100)
+dtype = t.float
+#生成x坐标数据，x为tenor, 需要把x的形状转换为100x1
+x = t.unsqueeze(t.linspace(-1, 1, 100), dim=1)
+#生成y坐标数据，y为tenor, 形状为100x1, 另加上一些噪声
+y = 3*x.pow(2) +2+ 0.2*t.rand(x.size())
+#画图，把tensor数据转换为numpy数据
+plt.scatter(x.numpy(), y.numpy()) 
+plt.show() 
+#初始化权重参数。 
+#随机初始化参数，参数w、b为需要学习的，故需requires_grad=True
+w=t.randn(1,1, dtype=dtype,requires_grad=True)
+b = t.zeros(1,1, dtype=dtype, requires_grad=True)
+#训练模型
+lr =0.001 #学习率
+for ii in range (800): 
+    #前向传播并定义损失函数loss
+    y_pred= x.pow(2).mm(w) + b
+    loss =0.5 * (y_pred - y) ** 2
+    loss = loss. sum () 
+    #自动计算梯度，梯度存放在grad属性中 
+    loss. backward () 
+    #手动更新参数需要用torch.no _grad()使上下文环境中切断自动求导的计算
+    with t.no_grad(): 
+        w -= lr * w.grad 
+        b -= lr * b.grad
+        #梯度清零
+        w.grad.zero_() 
+        b.grad.zero_()
+#可视化训练结果。
+plt.plot(x.numpy(), y_pred.detach().numpy(),&#39;r-&#39;,label=&#39;predict&#39;)#predict
+plt.scatter (x. numpy (), y. numpy (),color=&#39;blue&#39;, marker=&#39;o&#39;, label= &#39;true&#39;) #true data 
+plt.xlim(-1,1) 
+plt.ylim(2,6) 
+plt. legend () 
+plt.show () 
+print(w, b) 
+</code></pre>
+</li>
+</ol>
+<h2 id="神经网络"><a href="#神经网络" class="headerlink" title="神经网络"></a>神经网络</h2><h4 id="核心组件"><a href="#核心组件" class="headerlink" title="核心组件"></a>核心组件</h4><p>层、模型（层构成的网络）、损失函数、优化器。PyTorch 的 nn 工具箱，可以构建一个神经网络实例。 nn 中对这些组件都有现成包或类， 可以直接使用， 非常方便。构建网络层可以基于 Module 类或函数 (nn.functional) 。 nn 中的大多数层 (Layer) 在 functional 中都有与之对应的函数。 nn.functional 中函数与 nn.Module 中的 Layer 的主要区别是后者继承 Module 类， 会自动提取可学习的参数。 而 nn.functional 更像是纯函数。 两者功能相同， 且性能也没有很大区别， 像卷积层、 全连接层、 Dropout 层等因含有可学习参数， 一般使用 nn.Module, 而激活函数、 池化层不含可学习参数， 可以使用 nn.functional 中对应的函数。 </p>
+<p><img src="C:\Users\haolei\AppData\Roaming\Typora\typora-user-images\1651736202552.png" alt="PyTorch实现神经网络主要工具及相互关系"></p>
+<h4 id="神经网络实例"><a href="#神经网络实例" class="headerlink" title="神经网络实例"></a>神经网络实例</h4><pre><code class="python">import numpy as np 
+import torch 
+import matplotlib.pyplot as plt 
+%matplotlib inline 
+#导入PyTorch内置的mnist数据
+from torchvision.datasets import mnist 
+#导入预处理模块
+import torchvision.transforms as transforms
+from torch.utils.data import DataLoader
+#导入nn及优化器
+import torch.nn.functional as F 
+import torch.optim as optim 
+from torch import nn 
+
+#定义一些超参数
+train_batch_size=64
+test_batch_size=128
+learning_rate= 0.01 
+num_epoches = 20 
+lr = 0.01 
+momentum = 0.5 
+#定义预处理函数，这些预处理依次放在Compose函数中 transforms.Compose可以把一些转换函数组合在一起；
+#Normalize([0.5], [0.5]）对张量进行归一化，这里两个0.5分别表示对张量进行归一化的全局平均值和方差。因图像是灰色的只有一个通道，如果有多个通道，需要有多个数字．如3个通道，应该是Normalize([ml,m2,m3],[nl,n2,n3]); 
+transform = transforms.Compose([transforms.ToTensor (), transforms.Normalize ([0.5], [0.5])])
+#下载数据并对数据进行预处理。download参数控制是否需要下载，如果．/data目录下已有MNIST,可选择False;
+train_dataset = mnist.MNIST(&#39;./data&#39;, train=True, transform=transform, download=True) 
+test_dataset= mnist.MNIST(&#39;./data&#39;,train=False, transform=transform)
+#dataloader是一个可迭代对象， 可以使用迭代器一样使用。用DataLoader得到生成器，这可节省内存；
+train_loader = DataLoader(train_dataset,batch_size=train_batch_size, shuffle=True)
+test_loader =DataLoader(test_dataset, batch_size=test_batch_size,shuffle=False)
+
+#可视化源数据
+examples= enumerate(test_loader) 
+batch_idx, (example_data, example_targets) = next(examples)
+fig= plt.figure()
+for i in range(6):
+    plt.subplot (2, 3, i +1) 
+    plt.tight_layout () 
+    plt.imshow(example_data[i][0], cmap=&#39;gray&#39;, interpolation=&#39;none&#39;) 
+    plt.title (&quot;Ground Truth: &#123;&#125;&quot;. format (example_targets [i])) 
+    plt.xticks([]) 
+    plt.yticks([]) 
+
+#构建网络模型
+class Net(nn.Module):
+    #使用sequential构建网络，Sequential()函数的功能是将网络的层组合到一起
+    def __init__(self,in_dim, n_hidden_1, n_hidden_2, out_dim): 
+        super(Net,self).__init__()
+        self.layerl = nn.Sequential(nn.Linear(in_dim,n_hidden_1),nn.BatchNorm1d(n_hidden_1)) 
+        self.layer2 = nn.Sequential(nn.Linear(n_hidden_1, n_hidden_2),nn.BatchNorm1d(n_hidden_2)) 
+        self.layer3 = nn.Sequential(nn.Linear(n_hidden_2, out_dim))
+    #forward函数的任务需要把输入层、网络层、输出层链接起来 ，实现信息的前向传导。该函数的参数一般为输入数据，返回值为输出数据。
+    def forward(self, x): 
+        x = F.relu(self.layerl(x)) 
+        x = F.relu(self.layer2(x))
+        x = self.layer3(x) 
+        return x 
+
+#检测是否有可用的GPU,有则使用，否则使用CPU
+#如果希望用GPU训练，需要把模型、训练数据、测试数据发送到 GPU上， 即调用.to(device)
+device= torch.device(&quot;cuda:0&quot; if torch.cuda.is_available() else &quot;cpu&quot;) 
+#实例化网络
+model = Net(28 * 28, 300, 100, 10) 
+model.to(device)
+#定义损失函数和优化器
+criterion= nn.CrossEntropyLoss () 
+optimizer= optim.SGD(model.parameters(), lr=lr, momentum=momentum) 
+
+#开始训练
+losses = [] 
+acces = [] 
+eval_losses=[]
+eval_acces=[] 
+for epoch in range(num_epoches):
+    train_loss = 0 
+    train_acc= 0 
+    #训练模型时需要注意使模型处于训练模式，即调用model.train() 。调用model.train()会把所有的module设置为训练模式。 
+    #如果是测试或验证阶段，需要使模型处于验证阶段 ，即调用model.eval(),调用model.eval会把所有的training属性设置为False 。
+    model.train () 
+    #动态修改参数学习率
+    if epoch%5==0: 
+        optimizer. param_groups[0][&#39;lr&#39;] *=0.1 
+    for img, label in train_loader: 
+        img=img.to(device) 
+        label = label.to(device)
+        img =img.view(img.size(0), -1)
+        #前向传播
+        out = model (img) 
+        loss = criterion(out, label) 
+        #反向传播
+        #缺省情况下梯度是累加的，需要手工把梯度初始化或清零，调用optimizer.zero_grad()即可。 
+        optimizer.zero_grad() 
+        loss.backward () 
+        #使用optimizer.step()执行优化器
+        optimizer.step () 
+        #记录误差
+        train_loss += loss.item() 
+        #计算分类的准确率
+        _,pred = out.max(1) 
+        num_correct = (pred == label).sum().item() 
+        acc = num_correct / img.shape[0] 
+        train_acc += acc 
+losses.append(train_loss / len(train_loader)) 
+acces.append(train_acc/ len(train_loader)) 
+#在测试集上检验效果
+eval_loss = 0 
+eval_acc = 0 
+#将模型改为预测模式
+model.eval() 
+for img, label in test_loader:
+    img=img.to(device) 
+    label = label.to(device) 
+    img = img.view(img.size(0), -1) 
+    out = model (img) 
+    loss = criterion(out, label) 
+    #记录误差
+    eval_loss += loss.item()
+    #记录准确率
+    _, pred= out.max(1)
+    num_correct= (pred ==label).sum().item()
+    acc =num_correct /img.shape[0]
+    eval_acc += acc 
+eval_losses.append(eval_loss / len(test_loader)) 
+eval_acces.append(eval_acc / len(test_loader)) 
+print (&#39;epoch: &#123;&#125;, Train Loss: &#123;:.4f&#125;, Train Acc: &#123;:.4f&#125;, Test Loss: &#123;:.4f&#125;, Test Acc: &#123;:.4f&#125;&#39;.format(epoch, train_loss / len(train_loader), train_acc / len(train_loader),eval_loss / len(test_loader), eval_acc / len(test_loader)))
+plt.title(&#39;trainloss&#39;) 
+plt.plot(np.arange(len(losses)), losses) 
+plt.legend([&#39;Train Loss&#39;], loc=&#39;upper right&#39;)
+</code></pre>
+<h4 id="卷积神经网络"><a href="#卷积神经网络" class="headerlink" title="卷积神经网络"></a>卷积神经网络</h4><p>在深度学习学习中，过滤器也是需要通过模型训练来得到。卷积神经网络主要目的就是计算出这些filter的数值。设输入数据大小为n，填充为p,过滤器大小为f，步幅大小为s，则卷积后的大小为：$$(n+2p-f)&#x2F;s+1$$</p>
+<ol>
+<li><p>通常Pytorch的卷积运算是通过nn.Conv2d来完成。</p>
+<pre><code class="python">torch.nn.Conv2d(in_channels, out_channels, kernel_size, stride=1, padding=0, dilation=1, groups=1, bias=True, padding_mode=&#39;zeros&#39;)
+
+&quot;&quot;&quot;
+dilation(int or tuple, optional)
+卷积核元素之间的间距
+
+groups(int, optional)
+控制输入和输出之间的连接： group=1，输出是所有的输入的卷积；group=2，此时相当于有并排的两个卷积层，每个卷积层计算输入通道的一半，并且产生的输出是输出通道的一半，随后将这两个输出连接起来。
+
+bias(bool, optional)
+如果bias=True，添加偏置。其中参数kernel_size，stride,padding，dilation也可以是一个int的数据，此时卷积height和width值相同;也可以是一个tuple数组，tuple的第一维度表示height的数值，tuple的第二维度表示width的数值
+&quot;&quot;&quot;
+</code></pre>
+</li>
+<li><p>池化(Pooling)又称下采样 ，池化层比卷积层更简单， 它没有卷积运算， 只是在滤波器算子滑动区域内取最大值或平均值。 池化的作用则体现在降采样：保留显著特征、 降低特征维度， 增大感受野。常用的池化方式通常有3种：</p>
+<ul>
+<li>最大池化(Max Pooling)：选择Pooling窗口中的最大值作为采样值</li>
+<li>均值池化(Mean Pooling)：将Pooling窗口中的所有值相加取平均， 以平均值作为采样值。</li>
+<li>全局最大（或均值）池化： 与平常最大或最小池化相对而言， 全局池化是对整个特征图的池化而不是在移动窗口范围内的池化。</li>
+</ul>
+<p>在PyTorch中， 最大池化常使用nn.MaxPool2d,平均池化使用nn.AvgPool2d。</p>
+<pre><code class="python">torch.nn.MaxPool2d(kernel_size, stride=None, padding=O, dilation=l, return indices=False, ceil_mode=False) 
+
+&quot;&quot;&quot;
+kemel_size :池化窗口的大小．取一个4维向址，一般是(height,width)，如果两者相等，可以是一个数字.
+stride：窗口在每一个维度上滑动的步长，一般也是(stride_b,stride_w)，如果两者相等，可以是一个数字
+&quot;&quot;&quot;
+</code></pre>
+</li>
+</ol>
+<p>下例是由卷积层(Conv2d)、池化层(MaxPool2d)和全连接层(Linear)叠加而成一个比较简单的卷积神经网络。</p>
+<pre><code class="python">class CNNNet(nn.Module):
+    def __init__(self):
+        super(CNNNet,self).__init__()
+        self.conv1 = nn.Conv2d(in_channels=3,out_channels=16,kernel_size=5,stride=1)
+        self.pool1 = nn.MaxPool2d(kernel_size=2,stride=2)
+        self.conv2 = nn.Conv2d(in_channels=16,out_channels=36,kernel_size=3,stride=1)
+        self.pool2 = nn.MaxPool2d(kernel_size=2, stride=2)
+        self.fc1 = nn.Linear(1296,128)
+        self.fc2 = nn.Linear(128,10)      
+ 
+    def forward(self,x):
+        x=self.pool1(F.relu(self.conv1(x)))
+        x=self.pool2(F.relu(self.conv2(x)))
+        #print(x.shape)
+        x=x.view(-1,36*6*6)
+        x=F.relu(self.fc2(F.relu(self.fc1(x))))
+        return x
+</code></pre>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">HL</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://haolei56.github.io/2022/12192.html">http://haolei56.github.io/2022/12192.html</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">HL</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/pytorch/">
+                                    <span class="chip bg-color">pytorch</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2022/12193.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="spring注解">
+                        
+                        <span class="card-title">spring注解</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-12-19
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Spring/" class="post-category">
+                                    Spring
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/spring/">
+                        <span class="chip bg-color">spring</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/12195.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="Python基础">
+                        
+                        <span class="card-title">Python基础</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-12-19
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Python/" class="post-category">
+                                    Python
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Python/">
+                        <span class="chip bg-color">Python</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2022</span>
+            
+            <a href="/about" target="_blank">HL</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:n_056haolei@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1559823213" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1559823213" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+     <!--樱花效果-->
+    <script type="text/javascript">
+    //只在桌面版网页启用特效
+    var windowWidth = $(window).width();
+    if (windowWidth > 768) {
+        document.write('<script type="text/javascript" src="/js/sakura.js"><\/script>');
+    }
+    </script>
+</body>
+
+</html>

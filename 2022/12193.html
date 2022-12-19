@@ -1,0 +1,1620 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="spring注解, 朝暮惜">
+    <meta name="description" content="[TOC]
+spring注解@SpringBootApplication这个注解是 Spring Boot 项目的基石，创建 SpringBoot 项目之后会默认在主类加上。一般不会主动去使用它。可以把 @SpringBootApplica">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>spring注解 | 朝暮惜</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="朝暮惜" type="application/atom+xml">
+</head>
+
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">朝暮惜</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">朝暮惜</div>
+        <div class="logo-desc">
+            
+            活到老，学到老
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/16.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">spring注解</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/spring/">
+                                <span class="chip bg-color">spring</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Spring/" class="post-category">
+                                Spring
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2022-12-19
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2022-12-19
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    3.8k
+                </div>
+                
+
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>[TOC]</p>
+<h2 id="spring注解"><a href="#spring注解" class="headerlink" title="spring注解"></a>spring注解</h2><h3 id="SpringBootApplication"><a href="#SpringBootApplication" class="headerlink" title="@SpringBootApplication"></a>@SpringBootApplication</h3><p>这个注解是 Spring Boot 项目的基石，创建 SpringBoot 项目之后会默认在主类加上。一般不会主动去使用它。可以把 @SpringBootApplication看作是 @Configuration、@ComponentScan 、@EnableAutoConfiguration注解的集合。三个注解的作用分别是：</p>
+<ul>
+<li>@EnableAutoConfiguration：启用 SpringBoot 的自动配置机制</li>
+<li>@ComponentScan： 扫描被@Component (@Service,@Controller)注解的 bean，注解默认会扫描该类所在的包下所有的类。</li>
+<li>@Configuration：允许在 Spring 上下文中注册额外的 bean 或导入其他配置类</li>
+</ul>
+<h3 id="spring-bean-相关："><a href="#spring-bean-相关：" class="headerlink" title="spring bean 相关："></a>spring bean 相关：</h3><ol>
+<li><p><strong>@Autowired：</strong>自动导入对象到类中，被注入进的类同样要被 Spring 容器管理。一般使用 @Autowired 注解让 Spring 容器自动装配 bean。要想把类标识成可用于 @Autowired注解自动装配的 bean 的类,可以采用以下注解实现：</p>
+<ul>
+<li><p><strong>@Component</strong> ：通用的注解，可标注任意类为 Spring组件。如果一个 Bean 不知道属于哪个层，可以使用@Component 注解标注。</p>
+</li>
+<li><p>**@Repository **: 对应持久层即 Dao 层，主要用于数据库相关操作。</p>
+</li>
+<li><p><strong>@Service</strong> : 对应服务层，主要涉及一些复杂的逻辑，需要用到 Dao 层。</p>
+</li>
+<li><p><strong>@Controller</strong>: 对应 Spring MVC 控制层，主要用于接受用户请求并调用 Service 层返回数据给前端页面。</p>
+<pre><code class="java">@Component(&quot;c&quot;)
+public class Category &#123;
+    ....
+&#125;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(&quot;classpath:applicationContext.xml&quot;)
+public class TestSpring &#123;
+    @Autowired
+    Category c;
+    @Test
+    public void test()&#123;
+        System.out.println(c.getName());
+    &#125;
+&#125;
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p>**@RestController:**是@Controller和@ResponseBody的合集,表示这是个控制器 bean,并且是将函数的返回值直接填入 HTTP 响应体中,是 REST 风格的控制器。现在的前后端分离，基本不用@Controller。单独使用 @Controller不加 @ResponseBody的话一般是用在要返回一个视图的情况，这种情况属于比较传统的 Spring MVC 的应用，对应于前后端不分离的情况。@Controller +@ResponseBody 返回 JSON 或 XML 形式数据。</p>
+</li>
+<li><p><strong>@Scope：</strong>声明 Spring Bean 的作用域。四种常见的 Spring Bean 的作用域：</p>
+<ul>
+<li><p>singleton : 唯一 bean 实例，Spring 中的 bean 默认都是单例的。</p>
+</li>
+<li><p>prototype : 每次请求都会创建一个新的 bean 实例。</p>
+</li>
+<li><p>request : 每一次 HTTP 请求都会产生一个新的 bean，该 bean 仅在当前 HTTP request 内有效。</p>
+</li>
+<li><p>session : 每一个 HTTP Session 会产生一个新的 bean，该 bean 仅在当前 HTTP session 内有效。</p>
+<pre><code class="java">@Bean
+@Scope(&quot;singleton&quot;)
+public Person personSingleton() &#123;
+    return new Person();
+&#125;
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p><strong>@Configuration：</strong>一般用来声明配置类，可以使用 @Component注解替代，不过使用@Configuration注解声明配置类更加语义化。</p>
+</li>
+</ol>
+<h3 id="处理常见的http请求"><a href="#处理常见的http请求" class="headerlink" title="处理常见的http请求"></a>处理常见的http请求</h3><ol>
+<li><p>5 种常见的请求类型:</p>
+<ul>
+<li>GET ：请求从服务器获取特定资源。举个例子：GET &#x2F;users（获取所有学生）</li>
+<li>POST ：在服务器上创建一个新的资源。举个例子：POST &#x2F;users（创建学生）</li>
+<li>PUT ：更新服务器上的资源（客户端提供更新后的整个资源）。举个例子：PUT &#x2F;users&#x2F;12（更新编号为 12 的学生）</li>
+<li>DELETE：从服务器删除特定的资源。举个例子：DELETE &#x2F;users&#x2F;12（删除编号为 12 的学生）</li>
+<li>PATCH ：更新服务器上的资源（客户端提供更改的属性，可以看做作是部分更新），使用的比较少，这里就不举例子了。</li>
+</ul>
+</li>
+<li><p>**@GetMapping(“users”)**等价@RequestMapping(value&#x3D;”&#x2F;users”,method&#x3D;RequestMethod.GET)</p>
+<pre><code class="java">@GetMapping(&quot;/users&quot;)
+public ResponseEntity&lt;List&lt;User&gt;&gt; getAllUsers() &#123;
+ return userRepository.findAll();
+&#125;
+</code></pre>
+</li>
+<li><p>**@PostMapping(“users”) **等价@RequestMapping(value&#x3D;”&#x2F;users”,method&#x3D;RequestMethod.POST)</p>
+<pre><code class="java">@PostMapping(&quot;/users&quot;)
+public ResponseEntity&lt;User&gt; createUser(@Valid @RequestBody UserCreateRequest userCreateRequest) &#123;
+ return userRespository.save(userCreateRequest);
+&#125;
+</code></pre>
+</li>
+<li><p>**@PutMapping(“&#x2F;users&#x2F;{userId}”)**等价@RequestMapping(value&#x3D;”&#x2F;users&#x2F;{userId}”,method&#x3D;RequestMethod.PUT)</p>
+<pre><code class="java">@PutMapping(&quot;/users/&#123;userId&#125;&quot;)
+public ResponseEntity&lt;User&gt; updateUser(@PathVariable(value = &quot;userId&quot;) Long userId,
+  @Valid @RequestBody UserUpdateRequest userUpdateRequest) &#123;
+  ......
+&#125;
+</code></pre>
+</li>
+<li><p>**@DeleteMapping(“&#x2F;users&#x2F;{userId}”)**等价于@RequestMapping(value&#x3D;”&#x2F;users&#x2F;{userId}”,method&#x3D;RequestMethod.DELETE)</p>
+<pre><code class="java">@DeleteMapping(&quot;/users/&#123;userId&#125;&quot;)
+public ResponseEntity deleteUser(@PathVariable(value = &quot;userId&quot;) Long userId)&#123;
+  ......
+&#125;
+</code></pre>
+</li>
+</ol>
+<h3 id="前后端传值"><a href="#前后端传值" class="headerlink" title="前后端传值"></a>前后端传值</h3><ol>
+<li><p><strong>@PathVariable</strong>用于获取路径参数，**@RequestParam**用于获取查询参数。</p>
+<pre><code class="java">@GetMapping(&quot;/klasses/&#123;klassId&#125;/teachers&quot;)
+public List&lt;Teacher&gt; getKlassRelatedTeachers(
+         @PathVariable(&quot;klassId&quot;) Long klassId,
+         @RequestParam(value = &quot;type&quot;, required = false) String type ) &#123;
+...
+&#125;
+//如果我们请求的 url 是：/klasses/123456/teachers?type=web
+//那么我们服务获取到的数据就是：klassId=123456,type=web。
+</code></pre>
+</li>
+<li><p><strong>@RequestBody</strong>:用于读取 Request 请求（可能是 POST,PUT,DELETE,GET 请求）的 body 部分并且Content-Type 为 application&#x2F;json 格式的数据，接收到数据之后会自动将数据绑定到 Java 对象上去。系统会使用HttpMessageConverter或者自定义的HttpMessageConverter将请求的 body 中的 json 字符串转换为 java 对象。</p>
+</li>
+<li><p>一个请求方法只可以有一个@RequestBody，但是可以有多个@RequestParam和@PathVariable。 如果你的方法必须要用两个 @RequestBody来接受数据的话，大概率是你的数据库设计或者系统设计出问题了！</p>
+</li>
+</ol>
+<h3 id="读取配置信息"><a href="#读取配置信息" class="headerlink" title="读取配置信息"></a>读取配置信息</h3><p>假设配置文件application.yml如下：</p>
+<pre><code class="java">wuhan2020: 2020年初武汉爆发了新型冠状病毒，疫情严重，但是，我相信一切都会过去！武汉加油！中国加油！
+
+my-profile:
+  name: 梦溪龙游
+  email: 123456789@163.com
+
+library:
+  location: 湖北武汉加油中国加油
+  books:
+    - name: 天才基本法
+      description: 二十二岁的林朝夕在父亲确诊阿尔茨海默病这天，得知自己暗恋多年的校园男神裴之即将出国深造的消息——对方考取的学校，恰是父亲当年为她放弃的那所。
+    - name: 时间的秩序
+      description: 为什么我们记得过去，而非未来？时间“流逝”意味着什么？是我们存在于时间之内，还是时间存在于我们之中？卡洛·罗韦利用诗意的文字，邀请我们思考这一亘古难题——时间的本质。
+    - name: 了不起的我
+      description: 如何养成一个新习惯？如何让心智变得更成熟？如何拥有高质量的关系？ 如何走出人生的艰难时刻？
+</code></pre>
+<ol>
+<li><p>使用 **@Value(“${property}”) **读取比较简单的配置信息：</p>
+<pre><code class="java">@Value(&quot;$&#123;wuhan2020&#125;&quot;)
+String wuhan2020;
+</code></pre>
+</li>
+<li><p>通过**@ConfigurationProperties**读取配置信息并与 bean 绑定。可以像使用普通的 Spring bean 一样，将其注入到类中使用。</p>
+<pre><code class="java">@Component
+@ConfigurationProperties(prefix = &quot;library&quot;)
+class LibraryProperties &#123;
+    @NotEmpty
+    private String location;
+    private List&lt;Book&gt; books;
+
+    @Setter
+    @Getter
+    @ToString
+    static class Book &#123;
+        String name;
+        String description;
+    &#125;
+  省略getter/setter
+  ......
+&#125;
+</code></pre>
+</li>
+<li><p><strong>@PropertySource</strong>读取指定 properties 文件</p>
+<pre><code class="java">@Component
+@PropertySource(&quot;classpath:website.properties&quot;)
+
+class WebSite &#123;
+    @Value(&quot;$&#123;url&#125;&quot;)
+    private String url;
+
+  省略getter/setter
+  ......
+&#125;
+</code></pre>
+</li>
+</ol>
+<h3 id="参数校验"><a href="#参数校验" class="headerlink" title="参数校验"></a>参数校验</h3><p>数据的校验的重要性就不用说了，即使在前端对数据进行校验的情况下，我们还是要对传入后端的数据再进行一遍校验，避免用户绕过浏览器直接通过一些 HTTP 工具直接向后端请求一些违法数据。JSR(Java Specification Requests） 是一套 JavaBean 参数校验的标准，它定义了很多常用的校验注解，我们可以直接将这些注解加在我们 JavaBean 的属性上面，这样就可以在需要校验的时候进行校验了，非常方便！</p>
+<ol>
+<li><p>常用的字段验证的注解：</p>
+<ul>
+<li><p>@NotEmpty 被注释的字符串的不能为 null 也不能为空</p>
+</li>
+<li><p>@NotBlank被注释的字符串非 null，并且必须包含一个非空白字符</p>
+</li>
+<li><p>@Null 被注释的元素必须为 null</p>
+</li>
+<li><p>@NotNull 被注释的元素必须不为 null</p>
+</li>
+<li><p>@AssertTrue被注释的元素必须为 true</p>
+</li>
+<li><p>@AssertFalse 被注释的元素必须为 false</p>
+</li>
+<li><p>@Pattern(regex&#x3D;,flag&#x3D;)被注释的元素必须符合指定的正则表达式</p>
+</li>
+<li><p>@Email 被注释的元素必须是 Email 格式。</p>
+</li>
+<li><p>@Min(value)被注释的元素必须是一个数字，其值必须大于等于指定的最小值</p>
+</li>
+<li><p>@Max(value)被注释的元素必须是一个数字，其值必须小于等于指定的最大值</p>
+</li>
+<li><p>@DecimalMin(value)被注释的元素必须是一个数字，其值必须大于等于指定的最小值</p>
+</li>
+<li><p>@DecimalMax(value) 被注释的元素必须是一个数字，其值必须小于等于指定的最大值</p>
+</li>
+<li><p>@Size(max&#x3D;, min&#x3D;)被注释的元素的大小必须在指定的范围内</p>
+</li>
+<li><p>@Digits(integer, fraction)被注释的元素必须是一个数字，其值必须在可接受的范围内</p>
+</li>
+<li><p>@Past被注释的元素必须是一个过去的日期</p>
+</li>
+<li><p>@Future被注释的元素必须是一个将来的日期</p>
+<pre><code class="java">@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class Person &#123;
+
+    @NotNull(message = &quot;classId 不能为空&quot;)
+    private String classId;
+
+    @Size(max = 33)
+    @NotNull(message = &quot;name 不能为空&quot;)
+    private String name;
+
+    @Pattern(regexp = &quot;((^Man$|^Woman$|^UGM$))&quot;, message = &quot;sex 值不在可选范围&quot;)
+    @NotNull(message = &quot;sex 不能为空&quot;)
+    private String sex;
+
+    @Email(message = &quot;email 格式不正确&quot;)
+    @NotNull(message = &quot;email 不能为空&quot;)
+    private String email;
+
+&#125;
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p>验证请求体（@RequestBody）：在需要验证的参数上加上@Valid注解，如果验证失败，它将抛出MethodArgumentNotValidException。</p>
+<pre><code class="java">@RestController
+@RequestMapping(&quot;/api&quot;)
+public class PersonController &#123;
+
+    @PostMapping(&quot;/person&quot;)
+    public ResponseEntity&lt;Person&gt; getPerson(@RequestBody @Valid Person person) &#123;
+        return ResponseEntity.ok().body(person);
+    &#125;
+&#125;
+</code></pre>
+</li>
+<li><p>验证请求参数（Path Variables 和 Request Parameters）：一定一定不要忘记在类上加上 @Validated 注解了，这个参数可以告诉 Spring 去校验方法参数。</p>
+<pre><code class="java">@RestController
+@RequestMapping(&quot;/api&quot;)
+@Validated
+public class PersonController &#123;
+
+    @GetMapping(&quot;/person/&#123;id&#125;&quot;)
+    public ResponseEntity&lt;Integer&gt; getPersonByID(@Valid @PathVariable(&quot;id&quot;) @Max(value = 5,message = &quot;超过 id 的范围了&quot;) Integer id) &#123;
+        return ResponseEntity.ok().body(id);
+    &#125;
+&#125;
+</code></pre>
+</li>
+</ol>
+<h3 id="全局处理-Controller-层异常"><a href="#全局处理-Controller-层异常" class="headerlink" title="全局处理 Controller 层异常"></a>全局处理 Controller 层异常</h3><ol>
+<li><p><strong>@ControllerAdvice</strong> :注解定义全局异常处理类</p>
+</li>
+<li><p><strong>@ExceptionHandler</strong> :注解声明异常处理方法</p>
+<p>参数校验中。如果方法参数不对的话就会抛出MethodArgumentNotValidException，可以处理这个异常。</p>
+<pre><code class="java">@ControllerAdvice
+@ResponseBody
+public class GlobalExceptionHandler &#123;
+
+    /**
+     * 请求参数异常处理
+     */
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity&lt;?&gt; handleMethodArgumentNotValidException(MethodArgumentNotValidException ex, HttpServletRequest request) &#123;
+       ......
+    &#125;
+&#125;
+</code></pre>
+</li>
+</ol>
+<h3 id="JPA-相关"><a href="#JPA-相关" class="headerlink" title="JPA 相关"></a>JPA 相关</h3><ol>
+<li><p>创建表：**@Entity<strong>声明一个类对应一个数据库实体。</strong>@Table** 设置表名</p>
+<pre><code class="java">@Entity
+@Table(name = &quot;role&quot;)
+public class Role &#123;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String name;
+    private String description;
+    省略getter/setter......
+&#125;
+</code></pre>
+</li>
+<li><p><strong>@Id</strong> ：声明一个字段为主键。使用@Id声明之后，还需要定义主键的生成策略。可以使用 @GeneratedValue指定主键生成策略。JPA 使用枚举定义了 4 种常见的主键生成策略 TABLE(使用一个特定的数据库表格来保存主键,持久化引擎通过关系数据库的一张特定的表格来生成主键)、SEQUENCE(在某些数据库中,不支持主键自增长,比如Oracle、PostgreSQL其提供了一种叫做序列sequence的机制生成主键)、IDENTITY(主键自增长)、AUTO(把主键生成策略交给持久化引擎(persistence engine),持久化引擎会根据数据库在以上三种主键生成 策略中选择其中一种),注解默认使用的策略是AUTO。一般使用 MySQL 数据库的话，GenerationType.IDENTITY策略比较普遍</p>
+</li>
+<li><p>设置字段类型：**@Column**声明字段。</p>
+<pre><code class="java">//设置属性 userName 对应的数据库字段名为 user_name，长度为 32，非空
+@Column(name = &quot;user_name&quot;, nullable = false, length=32)
+private String userName;
+
+//设置字段类型并且加默认值，这个还是挺常用的。
+@Column(columnDefinition = &quot;tinyint(1) default 1&quot;)
+private Boolean enabled;
+</code></pre>
+</li>
+<li><p>指定不持久化特定字段:<strong>@Transient</strong> 声明不需要与数据库映射的字段，在保存的时候不需要保存进数据库 </p>
+<pre><code class="java">@Entity(name=&quot;USER&quot;)
+public class User &#123;
+    ......
+    @Transient
+    private String secrect; // not persistent because of @Transient
+&#125;
+
+//除了 @Transient关键字声明， 还可以采用下面几种方法,一般使用注解的方式比较多。
+static String secrect; // not persistent because of static
+final String secrect = &quot;Satish&quot;; // not persistent because of final
+transient String secrect; // not persistent because of transient
+</code></pre>
+</li>
+<li><p>声明大字段:<strong>@Lob</strong>声明某个字段为大字段。</p>
+<pre><code class="java">@Lob
+//指定 Lob 类型数据的获取策略， FetchType.EAGER 表示非延迟加载，而 FetchType.LAZY 表示延迟加载 ；
+@Basic(fetch = FetchType.EAGER)
+//columnDefinition 属性指定数据表对应的 Lob 字段类型
+@Column(name = &quot;content&quot;, columnDefinition = &quot;LONGTEXT NOT NULL&quot;)
+private String content;
+</code></pre>
+</li>
+<li><p>创建枚举类型的字段:可以使用枚举类型的字段，不过枚举字段要用**@Enumerated**注解修饰。</p>
+<pre><code class="java">public enum Gender &#123;
+    MALE(&quot;男性&quot;),
+    FEMALE(&quot;女性&quot;);
+
+    private String value;
+    Gender(String str)&#123;
+        value=str;
+    &#125;
+&#125;
+@Entity
+@Table(name = &quot;role&quot;)
+public class Role &#123;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String name;
+    private String description;
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
+    省略getter/setter......
+&#125;
+//数据库里面对应存储的是 MALE/FEMALE。
+</code></pre>
+</li>
+<li><p>删除&#x2F;修改数据:<strong>@Modifying</strong> 注解提示 JPA 该操作是修改操作,注意还要配合**@Transactional**注解使用。</p>
+<pre><code class="java">@Repository
+public interface UserRepository extends JpaRepository&lt;User, Integer&gt; &#123;
+
+    @Modifying
+    @Transactional(rollbackFor = Exception.class)
+    void deleteByUserName(String userName);
+&#125;
+</code></pre>
+</li>
+<li><p>关联关系</p>
+<ul>
+<li><strong>@OneToOne</strong> 声明一对一关系</li>
+<li><strong>@OneToMany</strong>声明一对多关系</li>
+<li><strong>@ManyToOne</strong> 声明多对一关系</li>
+<li><strong>@MangToMang</strong> 声明多对多关系</li>
+</ul>
+</li>
+<li></li>
+</ol>
+<h3 id="事务-Transactional"><a href="#事务-Transactional" class="headerlink" title="事务 @Transactional"></a>事务 @Transactional</h3><p>在要开启事务的方法上使用@Transactional注解即可!我们知道 Exception 分为运行时异常 RuntimeException 和非运行时异常。在@Transactional注解中如果不配置rollbackFor属性,那么事务只会在遇到RuntimeException的时候才会回滚,加上rollbackFor&#x3D;Exception.class,可以让事务在遇到非运行时异常时也回滚。@Transactional 注解一般可以作用在类或者方法上。</p>
+<ul>
+<li><p>作用于类：当把@Transactional&#96;注解放在类上时，表示所有该类的 public 方法都配置相同的事务属性信息。</p>
+</li>
+<li><p>作用于方法：当类配置了@Transactional，方法也配置了@Transactional，方法的事务会覆盖类的事务配置信息。</p>
+<pre><code class="java">@Transactional(rollbackFor = Exception.class)
+public void save() &#123;
+  ......
+&#125;
+</code></pre>
+</li>
+</ul>
+<h3 id="json-数据处理"><a href="#json-数据处理" class="headerlink" title="json 数据处理"></a>json 数据处理</h3><ol>
+<li><p>过滤 json 数据:<strong>@JsonIgnoreProperties</strong> 作用在类上用于过滤掉特定字段不返回或者不解析。**@JsonIgnore**一般用于类的属性上，作用@JsonIgnoreProperties 一样。</p>
+<pre><code class="java">//生成json时将userRoles属性过滤
+@JsonIgnoreProperties(&#123;&quot;userRoles&quot;&#125;)
+public class User &#123;
+
+    private String userName;
+    private String fullName;
+    private String password;
+    //生成json时将userRoles属性过滤
+    //@JsonIgnore
+    private List&lt;UserRole&gt; userRoles = new ArrayList&lt;&gt;();
+&#125;
+</code></pre>
+</li>
+<li><p>格式化 json 数据:<strong>@JsonFormat</strong>一般用来格式化 json 数据。</p>
+<pre><code class="java">@JsonFormat(shape=JsonFormat.Shape.STRING, pattern=&quot;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSS&#39;Z&#39;&quot;, timezone=&quot;GMT&quot;)
+private Date date;
+</code></pre>
+</li>
+<li><p>扁平化对象</p>
+<pre><code class="java">@Getter
+@Setter
+@ToString
+public class Account &#123;
+    private Location location;
+    private PersonInfo personInfo;
+
+  @Getter
+  @Setter
+  @ToString
+  public static class Location &#123;
+     private String provinceName;
+     private String countyName;
+  &#125;
+  @Getter
+  @Setter
+  @ToString
+  public static class PersonInfo &#123;
+    private String userName;
+    private String fullName;
+  &#125;
+&#125;
+//未扁平化之前：
+&#123;
+    &quot;location&quot;: &#123;
+        &quot;provinceName&quot;:&quot;湖北&quot;,
+        &quot;countyName&quot;:&quot;武汉&quot;
+    &#125;,
+    &quot;personInfo&quot;: &#123;
+        &quot;userName&quot;: &quot;coder1234&quot;,
+        &quot;fullName&quot;: &quot;shaungkou&quot;
+    &#125;
+&#125;
+
+//使用@JsonUnwrapped 扁平对象之后：
+@Getter
+@Setter
+@ToString
+public class Account &#123;
+    @JsonUnwrapped
+    private Location location;
+    @JsonUnwrapped
+    private PersonInfo personInfo;
+    ......
+&#125;
+&#123;
+  &quot;provinceName&quot;:&quot;湖北&quot;,
+  &quot;countyName&quot;:&quot;武汉&quot;,
+  &quot;userName&quot;: &quot;coder1234&quot;,
+  &quot;fullName&quot;: &quot;shaungkou&quot;
+&#125;
+</code></pre>
+</li>
+</ol>
+<h3 id="测试相关"><a href="#测试相关" class="headerlink" title="测试相关"></a>测试相关</h3><p><strong>@ActiveProfiles</strong>:一般作用于测试类上， 用于声明生效的 Spring 配置文件。</p>
+<p><strong>@Test</strong>:声明一个方法为测试方法</p>
+<p><strong>@Transactional</strong>:被声明的测试方法的数据会回滚，避免污染测试数据。</p>
+<p>**@WithMockUser **:Spring Security提供的，用来模拟一个真实用户，并且可以赋予权限。</p>
+<pre><code class="java">@SpringBootTest(webEnvironment = RANDOM_PORT)
+@ActiveProfiles(&quot;test&quot;)
+@Slf4j
+public abstract class TestBase &#123;
+  ......
+&#125;
+
+
+    @Test
+    @Transactional
+    @WithMockUser(username = &quot;user-id-18163138155&quot;, authorities = &quot;ROLE_TEACHER&quot;)
+    void should_import_student_success() throws Exception &#123;
+        ......
+    &#125;
+</code></pre>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">HL</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://haolei56.github.io/2022/12193.html">http://haolei56.github.io/2022/12193.html</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">HL</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/spring/">
+                                    <span class="chip bg-color">spring</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2022/12194.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="数据库">
+                        
+                        <span class="card-title">数据库</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-12-19
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Datebase/" class="post-category">
+                                    Datebase
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/datebase/">
+                        <span class="chip bg-color">datebase</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/12192.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="pytorch使用">
+                        
+                        <span class="card-title">pytorch使用</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-12-19
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Pytorch/" class="post-category">
+                                    Pytorch
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/pytorch/">
+                        <span class="chip bg-color">pytorch</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2022</span>
+            
+            <a href="/about" target="_blank">HL</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:n_056haolei@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1559823213" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1559823213" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+     <!--樱花效果-->
+    <script type="text/javascript">
+    //只在桌面版网页启用特效
+    var windowWidth = $(window).width();
+    if (windowWidth > 768) {
+        document.write('<script type="text/javascript" src="/js/sakura.js"><\/script>');
+    }
+    </script>
+</body>
+
+</html>

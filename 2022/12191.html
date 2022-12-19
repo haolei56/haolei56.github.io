@@ -1,0 +1,1737 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="java框架技术, 朝暮惜">
+    <meta name="description" content="[TOC]
+Mybatis
+优点：  省去JDBC中Connection, Statement, ResultSet 等辅助操作，减少了访问不同表时的代码雷同。我们只需要关注在增删改查等操作层面上，而把技术细节都封装在了我们看不见的地方。
+">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>java框架技术 | 朝暮惜</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="朝暮惜" type="application/atom+xml">
+</head>
+
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">朝暮惜</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">朝暮惜</div>
+        <div class="logo-desc">
+            
+            活到老，学到老
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">java框架技术</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/java/">
+                                <span class="chip bg-color">java</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/java/" class="post-category">
+                                java
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2022-12-19
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2022-12-19
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    6.2k
+                </div>
+                
+
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>[TOC]</p>
+<h2 id="Mybatis"><a href="#Mybatis" class="headerlink" title="Mybatis"></a>Mybatis</h2><ul>
+<li><p><strong>优点：</strong>  省去JDBC中Connection, Statement, ResultSet 等辅助操作，减少了访问不同表时的代码雷同。我们只需要关注在增删改查等操作层面上，而把技术细节都封装在了我们看不见的地方。</p>
+</li>
+<li><p><strong>原理：</strong>应用程序通过mybatis从数据库中找来数据。通过mybatis-config.xml 定位数据库，执行Category.xml对应的SQL语句，基于Category.xml把得到的数据库记录封装在Category对象或集合中返回。</p>
+</li>
+<li><p><strong>配置文件mybatis-config.xml</strong></p>
+</li>
+</ul>
+<pre><code class="java">  &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+  &lt;!DOCTYPE configuration
+          PUBLIC &quot;-//mybatis.org//DTD Config 3.0//EN&quot;
+          &quot;http://mybatis.org/dtd/mybatis-3-config.dtd&quot;&gt;
+  &lt;configuration&gt;
+      &lt;typeAliases&gt;
+          &lt;package name=&quot;bean&quot;/&gt;&lt;!--实体类所在的包名--&gt;
+      &lt;/typeAliases&gt;
+      &lt;environments default=&quot;development&quot;&gt;
+          &lt;environment id=&quot;development&quot;&gt;
+              &lt;transactionManager type=&quot;JDBC&quot;&gt;&lt;/transactionManager&gt;
+              &lt;dataSource type=&quot;POOLED&quot;&gt;
+                  &lt;property name=&quot;driver&quot; value=&quot;com.mysql.cj.jdbc.Driver&quot;/&gt;
+                  &lt;property name=&quot;url&quot; value=&quot;jdbc:mysql:///how2java?serverTimezone=Asia/Shanghai&quot;/&gt;
+                  &lt;property name=&quot;username&quot; value=&quot;个人的数据库名称&quot;/&gt;
+                  &lt;property name=&quot;password&quot; value=&quot;个人的数据库密码&quot;/&gt;
+              &lt;/dataSource&gt;
+          &lt;/environment&gt;
+      &lt;/environments&gt;
+      &lt;mappers&gt;
+          &lt;mapper resource=&quot;bean/Category.xml&quot;/&gt;&lt;!--.xml文件所在的位置，一般与对应实体类在一起--&gt;
+          &lt;mapper resource=&quot;bean/Product.xml&quot;/&gt;
+      &lt;/mappers&gt;
+  &lt;/configuration&gt;
+</code></pre>
+<p>  1.以上6-8行是别名，自动扫描bean下的类型，使得在后续配置文件Category.xml中使用resultType的时候，可以直接使用Category,而不必写全bean.Category</p>
+<ul>
+<li><p><strong>配置文件Category.xml</strong></p>
+<pre><code class="java">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE mapper
+        PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;
+        &quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;
+&lt;mapper namespace=&quot;bean&quot;&gt;&lt;!--xml文件所在包--&gt;
+    &lt;insert id=&quot;addCategory&quot; parameterType=&quot;Category&quot;&gt;
+        insert into category_ (name) value (#&#123;name&#125;)
+    &lt;/insert&gt;
+    &lt;delete id=&quot;deleteCategory&quot; parameterType=&quot;Category&quot;&gt;
+        delete from category_ where id=#&#123;id&#125;
+    &lt;/delete&gt;
+    &lt;select id=&quot;getCategory&quot; parameterType=&quot;int&quot; resultType=&quot;Category&quot;&gt;
+        select * from category_ where id=#&#123;id&#125;
+    &lt;/select&gt;
+    &lt;update id=&quot;updateCategory&quot; parameterType=&quot;Category&quot; &gt;
+        update category_ set name=#&#123;name&#125; where id=#&#123;id&#125;
+    &lt;/update&gt;
+    &lt;select id=&quot;listCategory&quot; resultType=&quot;Category&quot;&gt;
+        select * from category_
+    &lt;/select&gt;
+&lt;/mapper&gt;
+</code></pre>
+</li>
+<li><p><strong>mybatis中#{}和${}的区别：</strong></p>
+<p>#{}: 表示一个占位符号?,#{}可以有效防止SQL注入。如果parameterType传进来的是基本类型，也就是(string,long,double,int,boolean,float等)，那么#{}里面的变量名可以随意写，比如abc,xxx等等，这个名字和传进来的参数名可以不一致。如果传进来的是简单Java对象类型（pojo），那么#{}中的变量名必须是pojo的属性名，可以写成属性名,也可以写属性名.属性名，但不能写成类名.属性名。例如insert into student(name,age,score) values(#{Student.name},#{Student.age},#{Student.score})会将Student当成一个属性而报错。</p>
+<p>${}  :Statement 把 sql 语句和${}的内容拼接起来。主要用在替换表名，列名，不同列排序等操作。不能防止sql注入，mybatis中使用它相当于不做单引号任何处理，使用另外的场景也有模糊查询 like  ‘%${name}%’。</p>
+<p>#{}和${}中的值均代表一个变量时，均会取变量对应的值代替，不同的是，#{}解析之后会将String类型的数据自动加上引号，其他数据类型不会；${}解析之后是什么就是什么，他不会当做字符串处理。如：order by #{id}，传入的值为abc，解析后的SQL为order by ‘abc’。如：order by ${id}，传入的值为abc，解析后的SQL为order by abc。</p>
+</li>
+<li><p><strong>resultMap结果集：</strong>将数据库中列数据复制到对象的相应属性上，可以用于复制查询。resultMap是Mybatis最强大的元素，它可以将查询到的复杂数据（比如查询到几个表中数据）映射到一个结果集当中。</p>
+<p>使用resultType进行输出映射，只有查询出来的列名和pojo（实体bean）中的属性名一致，该列才可以映射成功。简单来说也就是数据库字段和JavaBean里的字段名称必须一致才能映射成功。</p>
+<p>当我们JavaBean中的字段名和数据库字段名称有不同的时候，或者是多表查询的时候，一般会使用resultMap </p>
+<pre><code class="java">&lt;resultMap id=&quot;唯一的标识&quot; type=&quot;映射的实体类（Category）&quot;&gt;
+     &lt;id column=&quot;数据库中的主键或者对应的别名&quot; jdbcType（可省略）=&quot;字段类型&quot; property=&quot;对      应实体类的属性名&quot;/&gt;
+     &lt;result column=&quot;数据库中表的字段或别名(可以为任意的一个字段，无顺序)&quot; jdbcType=&quot;字段类      型&quot; property=&quot;对应实体类的属性名&quot;/&gt;
+     
+     &lt;!--多对一时使用--&gt;
+     &lt;association property=&quot;实体类中对应的属性名（如category）&quot;javaType=&quot;一对应的实体类&quot;&gt;
+         &lt;id column=&quot;关联实体类对应数据库中表的主键字段或别名&quot; jdbcType=&quot;字段类型&quot;                  property=&quot;对应实体类的属性名&quot;/&gt;
+         &lt;result column=&quot;数据库中表的字段或别名(可以为任意的一个字段，无顺序)&quot; jdbcType=&quot;字          段类型&quot; property=&quot;对应实体类的属性名&quot;/&gt;
+     &lt;/association&gt;
+    
+     &lt;!--一对多时使用--&gt;
+     &lt;collection property=&quot;实体类的集合属性(Category实体类中的集合属性products)&quot;               ofType=&quot;集合中的元素类型（Product）&quot;&gt;
+          &lt;id column=&quot;集合实体对象对应的数据库中的主键或别名&quot; jdbcType=&quot;字段类型&quot;
+          property=&quot;集合实体类的对应属性&quot; /&gt;
+          &lt;result column=&quot;集合实体对象对应的数据库中表的一个字段或别名(可以为任意的一个字段)&quot;           jdbcType=&quot;字段类型&quot; property=&quot;集合实体类的对应属性&quot; /&gt;
+     &lt;/collection&gt;
+&lt;/resultMap&gt;
+</code></pre>
+<p>举例说明：</p>
+<pre><code class="java">//一对多时
+//Category类对应的属性：
+public class Category &#123;
+    private int id;
+    private String name;
+    List&lt;Product&gt; products; 
+&#125;
+//对应的resultMap:
+ &lt;resultMap id=&quot;categoryBean&quot; type=&quot;Category&quot;&gt;
+        &lt;id column=&quot;cid&quot; property=&quot;id&quot;/&gt;
+        &lt;result column=&quot;cname&quot; property=&quot;name&quot;/&gt;
+        &lt;collection property=&quot;products&quot; ofType=&quot;Product&quot;&gt;
+            &lt;id column=&quot;pid&quot; property=&quot;id&quot;/&gt;
+          &lt;result  column=&quot;pname&quot; property=&quot;name&quot;/&gt;
+            &lt;result column=&quot;price&quot; property=&quot;price&quot;/&gt;
+        &lt;/collection&gt;
+  &lt;/resultMap&gt;
+
+
+//多对一时
+//Product类对应的属性：
+public class Product &#123;
+    private int id;
+    private String name;
+    private float price;
+    private Category category;
+&#125;
+//对应的resultMap：
+ &lt;resultMap id=&quot;productBean&quot; type=&quot;Product&quot;&gt;
+        &lt;id column=&quot;pid&quot; property=&quot;id&quot;/&gt;
+        &lt;result column=&quot;pname&quot; property=&quot;name&quot;/&gt;
+        &lt;result column=&quot;price&quot; property=&quot;price&quot;/&gt;
+        &lt;association property=&quot;category&quot; javaType=&quot;Category&quot;&gt;
+            &lt;id column=&quot;cid&quot; property=&quot;id&quot;/&gt;
+            &lt;result column=&quot;cname&quot; property=&quot;name&quot;/&gt;
+        &lt;/association&gt;
+ &lt;/resultMap&gt;
+ 
+        
+//多对多时：
+//例如：一张订单里可以包含多种产品，一种产品可以出现在多张订单里。这就是多对多关系。
+//为了维系多对多关系，必须要一个中间表。这里使用订单项(OrderItem)表来作为中间表。
+//Order类对应属性：
+public class Order &#123;
+    private int id;
+    private String code;
+    List&lt;OrderItem&gt; orderItems;
+&#125;
+//OrderItem类对应属性：
+public class OrderItem &#123;
+    private int id;
+    private int number;
+    private Order order;
+    private Product product;
+&#125;
+//对应的resultMap：
+&lt;!--查询结果中id和code字段放在Order对象里，然后通过一对多的&lt;collection&gt;标签把oiid和number放在OrderItem对象里，最后把pid,pname,price放进Product对象里。--&gt;
+&lt;!--查询的结果为一个Order类型的结果集，需要通过Order对象取出对应的其他orderItems和product数据--&gt;
+    &lt;resultMap type=&quot;Order&quot; id=&quot;orderBean&quot;&gt;
+        &lt;id column=&quot;oid&quot; property=&quot;id&quot;/&gt;
+        &lt;result column=&quot;code&quot; property=&quot;code&quot;/&gt;
+
+        &lt;collection property=&quot;orderItems&quot; ofType=&quot;OrderItem&quot;&gt;
+            &lt;id column=&quot;oiid&quot; property=&quot;id&quot;/&gt;
+            &lt;result column=&quot;number&quot; property=&quot;number&quot;/&gt;
+            &lt;!--多对一，一个产品可以出现在多个不同的订单项中--&gt;
+            &lt;association property=&quot;product&quot; javaType=&quot;Product&quot;&gt;
+                &lt;id column=&quot;pid&quot; property=&quot;id&quot;/&gt;
+                &lt;result column=&quot;pname&quot; property=&quot;name&quot;/&gt;
+                &lt;result column=&quot;price&quot; property=&quot;price&quot;/&gt;
+            &lt;/association&gt;
+        &lt;/collection&gt;
+    &lt;/resultMap&gt;
+</code></pre>
+</li>
+<li><p><strong>动态SQL</strong></p>
+<p>使用Mybatis 动态SQL可以减少代码行，便于维护。</p>
+<ul>
+<li>if标签：如果没有传参数name,那么就查询所有，如果有name参数，那么就进行模糊查询。</li>
+</ul>
+<pre><code class="java">&lt;select id=&quot;listProduct&quot; resultType=&quot;Product&quot;&gt;
+    select * from product
+    &lt;if test=&quot;name!=null&quot;&gt;
+        where name like concat(&#39;%&#39;,#&#123;name&#125;,&#39;%&#39;)
+    &lt;/if&gt;             
+&lt;/select&gt;
+</code></pre>
+<ul>
+<li><p>where标签：标签会进行自动判断，如果任何条件都不成立，那么sql语句里就不会出现where关键字<br>如果有任何条件成立，会自动去掉多出来的 and 或者 or。</p>
+<pre><code class="java">&lt;select id=&quot;listProduct&quot; resultType=&quot;Product&quot;&gt;
+    select * from product
+    &lt;where&gt;
+        &lt;if test=&quot;name!=null&quot;&gt;
+            and name like concat(&#39;%&#39;,#&#123;name&#125;,&#39;%&#39;)
+        &lt;/if&gt;             
+        &lt;if test=&quot;price!=null and price!=0&quot;&gt;
+            and price &gt; #&#123;price&#125;
+        &lt;/if&gt;    
+    &lt;/where&gt;         
+&lt;/select&gt;
+</code></pre>
+</li>
+<li><p>set标签：与where标签类似的，在update语句里可以使用set对多个字段进行判断设置。</p>
+<pre><code class="java"> &lt;update id=&quot;updateProduct&quot; parameterType=&quot;Product&quot; &gt;
+        update product
+        &lt;set&gt;
+            &lt;if test=&quot;name != null&quot;&gt;name=#&#123;name&#125;,&lt;/if&gt;
+            &lt;if test=&quot;price != null&quot;&gt;price=#&#123;price&#125;&lt;/if&gt; 
+        &lt;/set&gt;
+         where id=#&#123;id&#125;   
+    &lt;/update&gt;
+</code></pre>
+</li>
+<li><p>when otherwise标签：Mybatis里面没有else标签，可以使用when otherwise标签来达到这样的效果。</p>
+<pre><code class="java">&lt;select id=&quot;listProduct&quot; resultType=&quot;Product&quot;&gt;
+              SELECT * FROM product
+              &lt;where&gt;
+                &lt;choose&gt;
+                  &lt;when test=&quot;name != null&quot;&gt;
+                    and name like concat(&#39;%&#39;,#&#123;name&#125;,&#39;%&#39;)
+                  &lt;/when&gt;          
+                  &lt;when test=&quot;price !=null and price != 0&quot;&gt;
+                    and price &gt; #&#123;price&#125;
+                  &lt;/when&gt;                
+                  &lt;otherwise&gt;
+                    and id &gt;1
+                  &lt;/otherwise&gt;
+                &lt;/choose&gt;
+              &lt;/where&gt;
+&lt;/select&gt;
+</code></pre>
+</li>
+<li><p>foreach标签：通常用于in 语法里</p>
+<pre><code class="java">&lt;select id=&quot;listProduct&quot; resultType=&quot;Product&quot;&gt;
+          SELECT * FROM product
+            WHERE ID in
+                &lt;foreach item=&quot;item&quot; index=&quot;index&quot; collection=&quot;list&quot;
+                    open=&quot;(&quot; separator=&quot;,&quot; close=&quot;)&quot;&gt;
+                    #&#123;item&#125;
+                &lt;/foreach&gt;
+&lt;/select&gt;
+</code></pre>
+</li>
+<li><p>bind标签：类似字符串拼接，方便后续使用。</p>
+<pre><code class="java">&lt;select id=&quot;listProduct&quot; resultType=&quot;Product&quot;&gt;
+            &lt;bind name=&quot;likename&quot; value=&quot;&#39;%&#39; + name + &#39;%&#39;&quot; /&gt;
+            select * from   product_  where name like #&#123;likename&#125;
+&lt;/select&gt;
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Spring"><a href="#Spring" class="headerlink" title="Spring"></a>Spring</h2><ul>
+<li><p>Spring是一个基于IOC和AOP的结构J2EE系统的框架。</p>
+</li>
+<li><p><strong>IOC(Inversion Of Control)</strong> ：反转控制是Spring的基础，简单说就是创建对象由以前的程序员自己new 构造方法来调用，变成了交由Spring创建对象。当我们需要创建一个对象的时候，只需要配置好配置文件&#x2F;注解即可，完全不用考虑对象是如何被创建出来的。DI (Dependency Inject)依赖注入. 简单地说就是拿到的对象的属性，已经被注入好相关值了(类似已经初始化了)，直接使用即可。</p>
+</li>
+<li><p>**AOP(Aspect Oriented Program)**：面向切面编程。首先，在面向切面编程的思想里面，把功能分为核心业务功能(登陆，增加数据，删除数据等)和周边功能(性能统计，日志，事务管理等)。在Spring的AOP思想里，周边功能被定义为切面。核心业务功能和切面功能分别独立进行开发，然后把切面功能和核心业务功能 “编织” 在一起，这种能够选择性的，低耦合的把切面和核心业务功能结合在一起的编程思想，就叫做切面编程</p>
+</li>
+<li><p>spring的配置文件：<strong>applicationContext.xml</strong></p>
+<pre><code class="java">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+       xmlns:aop=&quot;http://www.springframework.org/schema/aop&quot;
+       xmlns:tx=&quot;http://www.springframework.org/schema/tx&quot;
+       xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+       xsi:schemaLocation=&quot;
+   http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+   http://www.springframework.org/schema/aop
+   http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+   http://www.springframework.org/schema/tx
+   http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+   http://www.springframework.org/schema/context
+   http://www.springframework.org/schema/context/spring-context-3.0.xsd&quot;&gt;
+
+    &lt;context:annotation-config/&gt;
+    &lt;context:component-scan base-package=&quot;pojo&quot;/&gt;
+    &lt;context:component-scan base-package=&quot;aspect&quot;/&gt;
+    &lt;context:component-scan base-package=&quot;service&quot;/&gt;
+    &lt;aop:aspectj-autoproxy/&gt;
+&lt;/beans&gt;
+</code></pre>
+</li>
+</ul>
+<h2 id="Spring-mvc"><a href="#Spring-mvc" class="headerlink" title="Spring mvc"></a>Spring mvc</h2><p>mvc模型，实现网页交互。 SpringMVC会自动检测类发生的变化，但是web.xml做的改动必须重启tomcat才可以看到效果。</p>
+<ul>
+<li><p>配置文件springMvc.xml</p>
+<pre><code class="java">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:aop=&quot;http://www.springframework.org/schema/aop&quot;
+    xmlns:tx=&quot;http://www.springframework.org/schema/tx&quot; xmlns:jdbc=&quot;http://www.springframework.org/schema/jdbc&quot;
+    xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+    xmlns:mvc=&quot;http://www.springframework.org/schema/mvc&quot;
+    xsi:schemaLocation=&quot;http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd 
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd&quot;&gt;
+
+
+
+    &lt;context:annotation-config/&gt;
+    &lt;context:component-scan base-package=&quot;controller&quot;&gt;
+          &lt;context:include-filter type=&quot;annotation&quot; 
+          expression=&quot;org.springframework.stereotype.Controller&quot;/&gt;
+    &lt;/context:component-scan&gt;
+    &lt;mvc:annotation-driven /&gt;
+    &lt;mvc:default-servlet-handler /&gt;
+
+
+    &lt;bean
+        class=&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;&gt;
+        &lt;property name=&quot;viewClass&quot;
+            value=&quot;org.springframework.web.servlet.view.JstlView&quot; /&gt;
+        &lt;property name=&quot;prefix&quot; value=&quot;/WEB-INF/jsp/&quot; /&gt;
+        &lt;property name=&quot;suffix&quot; value=&quot;.jsp&quot; /&gt;
+    &lt;/bean&gt;
+&lt;/beans&gt;
+</code></pre>
+</li>
+<li><p>web.xml</p>
+<pre><code class="java">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;web-app xmlns=&quot;http://xmlns.jcp.org/xml/ns/javaee&quot;
+         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xsi:schemaLocation=&quot;http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd&quot;
+         version=&quot;4.0&quot;&gt;
+    &lt;servlet&gt;
+        &lt;servlet-name&gt;springmvc&lt;/servlet-name&gt;
+        &lt;servlet-class&gt;
+            org.springframework.web.servlet.DispatcherServlet
+        &lt;/servlet-class&gt;
+        &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
+    &lt;/servlet&gt;
+    &lt;servlet-mapping&gt;
+        &lt;servlet-name&gt;springmvc&lt;/servlet-name&gt;
+        &lt;url-pattern&gt;/&lt;/url-pattern&gt;
+    &lt;/servlet-mapping&gt;
+    &lt;filter&gt;
+        &lt;filter-name&gt;CharacterEncodingFilter&lt;/filter-name&gt;
+        &lt;filter-class&gt;org.springframework.web.filter.CharacterEncodingFilter&lt;/filter-class&gt;
+        &lt;init-param&gt;
+            &lt;param-name&gt;encoding&lt;/param-name&gt;
+            &lt;param-value&gt;utf-8&lt;/param-value&gt;
+        &lt;/init-param&gt;
+    &lt;/filter&gt;
+    &lt;filter-mapping&gt;
+        &lt;filter-name&gt;CharacterEncodingFilter&lt;/filter-name&gt;
+        &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+    &lt;/filter-mapping&gt;
+&lt;/web-app&gt;
+</code></pre>
+</li>
+<li><p>原理</p>
+<p>   1.用户访问 &#x2F;index</p>
+<ol start="2">
+<li>根据web.xml中的配置 所有的访问都会经过DispatcherServlet</li>
+<li>根据 根据配置文件springMvc.xml ，访问路径&#x2F;index会进入IndexController类</li>
+<li>在IndexController中指定跳转到页面index.jsp，并传递message数据</li>
+<li>在index.jsp中显示message信息</li>
+</ol>
+</li>
+</ul>
+<h2 id="SSM"><a href="#SSM" class="headerlink" title="SSM"></a>SSM</h2><ul>
+<li><p>由Spring, SpringMVC, Mybatis整合而成，其配置文件主要有applicationContext.xml、springMvc.xml和 web.xml</p>
+</li>
+<li><p>applicationContext.xml</p>
+<pre><code class="java">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:aop=&quot;http://www.springframework.org/schema/aop&quot;
+    xmlns:tx=&quot;http://www.springframework.org/schema/tx&quot; xmlns:jdbc=&quot;http://www.springframework.org/schema/jdbc&quot;
+    xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+    xmlns:mvc=&quot;http://www.springframework.org/schema/mvc&quot;
+    xsi:schemaLocation=&quot;
+     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+     http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
+     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+     http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd&quot;&gt;
+    
+    
+    
+
+   &lt;context:annotation-config /&gt;
+    &lt;context:component-scan base-package=&quot;service&quot; /&gt;
+
+    &lt;bean id=&quot;dataSource&quot; class=&quot;com.alibaba.druid.pool.DruidDataSource&quot; init-method=&quot;init&quot; destroy-method=&quot;close&quot;&gt;
+        &lt;!-- 基本属性 url、user、password --&gt;
+        &lt;property name=&quot;url&quot; value=&quot;jdbc:mysql://localhost:3306/how2java?serverTimezone=Asia/Shanghai&quot; /&gt;
+        &lt;property name=&quot;username&quot; value=&quot;root&quot; /&gt;
+        &lt;property name=&quot;password&quot; value=&quot;Ab711910&quot; /&gt;
+        &lt;property name=&quot;driverClassName&quot; value=&quot;com.mysql.cj.jdbc.Driver&quot; /&gt;
+
+        &lt;!-- 配置初始化大小、最小、最大 --&gt;
+        &lt;property name=&quot;initialSize&quot; value=&quot;3&quot; /&gt;
+        &lt;property name=&quot;minIdle&quot; value=&quot;3&quot; /&gt;
+        &lt;property name=&quot;maxActive&quot; value=&quot;20&quot; /&gt;
+
+        &lt;!-- 配置获取连接等待超时的时间 --&gt;
+        &lt;property name=&quot;maxWait&quot; value=&quot;60000&quot; /&gt;
+
+        &lt;!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 --&gt;
+        &lt;property name=&quot;timeBetweenEvictionRunsMillis&quot; value=&quot;60000&quot; /&gt;
+
+        &lt;!-- 配置一个连接在池中最小生存的时间，单位是毫秒 --&gt;
+        &lt;property name=&quot;minEvictableIdleTimeMillis&quot; value=&quot;300000&quot; /&gt;
+
+        &lt;property name=&quot;validationQuery&quot; value=&quot;SELECT 1&quot; /&gt;
+        &lt;property name=&quot;testWhileIdle&quot; value=&quot;true&quot; /&gt;
+        &lt;property name=&quot;testOnBorrow&quot; value=&quot;false&quot; /&gt;
+        &lt;property name=&quot;testOnReturn&quot; value=&quot;false&quot; /&gt;
+
+        &lt;!-- 打开PSCache，并且指定每个连接上PSCache的大小 --&gt;
+        &lt;property name=&quot;poolPreparedStatements&quot; value=&quot;true&quot; /&gt;
+        &lt;property name=&quot;maxPoolPreparedStatementPerConnectionSize&quot; value=&quot;20&quot; /&gt;
+    &lt;/bean&gt;
+
+    &lt;!--     &lt;bean id=&quot;dataSource&quot; class=&quot;org.springframework.jdbc.datasource.DriverManagerDataSource&quot;&gt;   --&gt;
+    &lt;!--       &lt;property name=&quot;driverClassName&quot;&gt;   --&gt;
+    &lt;!--           &lt;value&gt;com.mysql.jdbc.Driver&lt;/value&gt;   --&gt;
+    &lt;!--       &lt;/property&gt;   --&gt;
+    &lt;!--       &lt;property name=&quot;url&quot;&gt;   --&gt;
+    &lt;!--           &lt;value&gt;jdbc:mysql://localhost:3306/how2java?characterEncoding=UTF-8&lt;/value&gt;   --&gt;
+
+    &lt;!--       &lt;/property&gt;   --&gt;
+    &lt;!--       &lt;property name=&quot;username&quot;&gt;   --&gt;
+    &lt;!--           &lt;value&gt;root&lt;/value&gt;   --&gt;
+    &lt;!--       &lt;/property&gt;   --&gt;
+    &lt;!--       &lt;property name=&quot;password&quot;&gt;   --&gt;
+    &lt;!--           &lt;value&gt;Ab711910&lt;/value&gt;   --&gt;
+    &lt;!--       &lt;/property&gt;      --&gt;
+    &lt;!--     &lt;/bean&gt;    --&gt;
+
+
+    &lt;bean id=&quot;sqlSession&quot; class=&quot;org.mybatis.spring.SqlSessionFactoryBean&quot;&gt;
+        &lt;property name=&quot;typeAliasesPackage&quot; value=&quot;pojo&quot; /&gt;
+        &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;/&gt;
+        &lt;property name=&quot;mapperLocations&quot; value=&quot;classpath:mapper/Category.xml&quot;/&gt;
+        &lt;property name=&quot;plugins&quot;&gt;
+            &lt;array&gt;
+                &lt;bean class=&quot;com.github.pagehelper.PageInterceptor&quot;&gt;
+                    &lt;property name=&quot;properties&quot;&gt;
+                        &lt;!--使用下面的方式配置参数，一行配置一个 --&gt;
+                        &lt;value&gt;
+                        &lt;/value&gt;
+                    &lt;/property&gt;
+                &lt;/bean&gt;
+            &lt;/array&gt;
+        &lt;/property&gt;
+    &lt;/bean&gt;
+
+    &lt;bean class=&quot;org.mybatis.spring.mapper.MapperScannerConfigurer&quot;&gt;
+        &lt;property name=&quot;basePackage&quot; value=&quot;mapper&quot;/&gt;
+    &lt;/bean&gt;
+
+
+&lt;/beans&gt;
+</code></pre>
+</li>
+<li><p>原理：</p>
+<ol>
+<li><p>首先浏览器上访问路径 &#x2F;listCategory</p>
+</li>
+<li><p>tomcat根据web.xml上的配置信息，拦截到了&#x2F;listCategory，并将其交由DispatcherServlet处理。</p>
+</li>
+<li><p>DispatcherServlet 根据springMVC的配置，将这次请求交由CategoryController类进行处理，在该类的方法中会调用service目录下CategoryService类的相关方法，例如list方法。</p>
+</li>
+<li><p>调用对应的CategoryService方法时会调用impl目录下的CategoryServiceImpl。 </p>
+</li>
+<li><p>调用CategoryServiceImpl的时候，又会调用mapper目录下的CategoryMapper</p>
+</li>
+<li><p>根据ApplicationContext.xml中的配置信息，将CategoryMapper和Category.xml关联起来了。于是就会调用.xml文件进行SQL操作，最后返回数据</p>
+</li>
+<li><p>获取数据，并把数据放在”cs”上，接着服务端跳转到listCategory.jsp去</p>
+</li>
+<li><p>最后在listCategory.jsp 中显示数据</p>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="SpringBoot"><a href="#SpringBoot" class="headerlink" title="SpringBoot"></a>SpringBoot</h2><p>在SSM(H)中，需要做大量的配置工作，其实很多配置行为本身只是手段，并不是目的。 基于这个考虑，把该简化的简化，该省略的省略，开发人员只用关心提供业务功能就行了，这就是 SpringBoot。换言之，SpringBoot可以简单地看成简化了的、按照约定开发的SSM(H)。 开发速度大大提升。</p>
+<ul>
+<li><p>热部署：当发生了任何修改之后，必须关闭后再启动Application类才能够生效，显得略微麻烦。 Springboot提供了热部署的方式，当发现任何类发生了改变，马上通过JVM类加载的方式，加载最新的类到虚拟机中。 这样就不需要重新启动也能看到修改后的效果了</p>
+</li>
+<li><p>配置文件application.properties</p>
+<pre><code class="java">#server
+server.port=8080
+#project path
+ContextPathserver.context-path=/
+#encoding
+server.tomcat.uri-encoding=UTF-8
+#view prefix
+spring.mvc.view.prefix=/WEB-INF/jsp/
+#view suffix
+spring.mvc.view.suffix=.jsp
+#灵活地切换使用环境
+spring.profiles.active=pro
+#jdbc
+spring.datasource.url=jdbc:mysql://localhost:3306/how2java?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false&amp;zeroDateTimeBehavior=convertToNull&amp;allowMultiQueries=true&amp;serverTimezone=UTC
+spring.datasource.username=root
+spring.datasource.password=Ab711910
+spring.datasource.driver-class-name=com.mysql.jdbc.Driver
+#mybatis
+mybatis.mapper-locations=classpath:mapper/*.xml
+mybatis.type-aliases-package=com.csust.vo
+</code></pre>
+</li>
+<li><p>对应的yml类型的配置文件application.yml（二选一即可）</p>
+<pre><code class="java">
+spring:
+    mvc:
+        view:
+            prefix: /WEB-INF/jsp/
+            suffix: .jsp
+server:
+    port: 8888
+    context-path: /test
+</code></pre>
+</li>
+<li><p>多配置文件：例如<br>核心配置文件：application.properties<br>开发环境用的配置文件：application-dev.properties<br>生产环境用的配置文件：application-pro.properties<br>可以通过application.properties里的spring.profiles.active 灵活地来切换使用环境</p>
+</li>
+<li><p>持久层支持：JPA(Java Persistence API)是Sun官方提出的Java持久化规范，用来方便大家操作数据库。<br>真正干活的可能是Hibernate,TopLink等等实现了JPA规范的不同厂商,默认是Hibernate。JPA 条件查询方式很特别，是不需要写 SQL 语句的，只需要在 dao 接口里按照规范的命名定义对应的方法名，及可达到查询相应字段的效果。</p>
+</li>
+<li><p>Restful风格：大在做Web开发的过程中，method常用的值是get和post. 可事实上，method值还可以是put和delete等等其他值。既然method值如此丰富，那么就可以考虑使用同一个url，但是约定不同的method来实施不同的业务，这就是Restful的基本考虑。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>传统风格</th>
+<th></th>
+<th>Restful风格</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td>url</td>
+<td>method</td>
+<td>url</td>
+<td>method</td>
+</tr>
+<tr>
+<td>增加</td>
+<td>&#x2F;addCategory?name&#x3D;xxx</td>
+<td>POST</td>
+<td>&#x2F;categories</td>
+<td>POST</td>
+</tr>
+<tr>
+<td>删除</td>
+<td>&#x2F;deleteCategory?id&#x3D;123</td>
+<td>GET</td>
+<td>&#x2F;categories&#x2F;123</td>
+<td>DELETE</td>
+</tr>
+<tr>
+<td>修改</td>
+<td>&#x2F;updateCategory?id&#x3D;123&amp;name&#x3D;yyy</td>
+<td>POST</td>
+<td>&#x2F;categories&#x2F;123</td>
+<td>PUT</td>
+</tr>
+<tr>
+<td>获取</td>
+<td>&#x2F;getCategory?id&#x3D;123</td>
+<td>GET</td>
+<td>&#x2F;categories&#x2F;123</td>
+<td>GET</td>
+</tr>
+<tr>
+<td>查询</td>
+<td>&#x2F;listCategory</td>
+<td>GET</td>
+<td>&#x2F;categories</td>
+<td>GET</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>thymeleaf：thymeleaf 跟 JSP 一样，运行之后，就得到纯 HTML了。 区别在与，不运行之前， thymeleaf 也是纯 html 。所以 thymeleaf 不需要服务端的支持，就能够以 html 的方式打开，这样方便前端人员独立设计与调试, jsp 则不行，不启动服务器 jsp 没法运行出结果。thymeleaf 可以配合 Servlet 运行，但是比较常见的是配合 springboot 来运行。 当然本质上也是配合springboot 里的 springmvc 来运行的。</p>
+</li>
+</ul>
+<h2 id="SpringCloud"><a href="#SpringCloud" class="headerlink" title="SpringCloud"></a>SpringCloud</h2><ul>
+<li><p>单体架构系统：所谓的单体架构就是所有功能都放在一个应用里。单体架构系统有其好处，如便于开发，测试，部署也很方便（直接打成一个 jar 或者 war）。不过单体架构也有其弊端，最主要体现在高访问，高并发的上限是固定的。 比如一个单体架构，能够承受 1000次访问&#x2F;秒。 但是访问量达到 2000次&#x2F;秒的时候，就会非常卡顿，严重影响业务，并且仅仅依靠单体架构本身，很难突破这个瓶颈。 解决办法通常就是采用分布式和集群来做。</p>
+</li>
+<li><p>微服务：简单说，一个 springboot 就是一个 微服务，并且这个 springboot 做的事情很单纯。</p>
+</li>
+<li><p>微服务注册中心( eureka server)：管理微服务以及微服务之间的通信。在 springcloud中，微服务注册中心叫做 eureka server, 通过它把就可以把微服务注册起来，以供将来调用。</p>
+<p>例如，在业务逻辑上， 视图微服务需要数据微服务的数据，所以就存在一个微服务访问另一个微服务的需要。而这俩微服务已经被注册中心管理起来了，所以视图微服务就可以通过注册中心定位并访问数据微服务了。原来是在一个 springboot里就完成的事情，现在分布在多个 springboot里做，这就是初步具备分布式雏形了。<br>分布式的好处：</p>
+<ol>
+<li>如果更新数据微服务，视图微服务是不受影响的</li>
+<li>可以让不同的团队开发不同的微服务，他们之间只要约定好接口，彼此之间是低耦合的。</li>
+<li>如果视图微服务挂了，数据微服务依然可以继续使用</li>
+</ol>
+</li>
+<li><p>集群：原来数据微服务只有这一个springboot, 现在做同样数据微服务的，有两个 springboot, 他们提供的功能一模一样，只是端口不一样，这样就形成了集群。<br>集群的好处：</p>
+<ol>
+<li>比起一个 springboot, 两个springboot 可以分别部署在两个不同的机器上，那么理论上来说，能够承受的负载就是 x 2. 这样系统就具备通过横向扩展而提高性能的机制。</li>
+<li>如果 8001 挂了，还有 8002 继续提供微服务，这就叫做高可用 。</li>
+</ol>
+<p><img src="https://how2j.cn/img/site/step/9321.png" alt="img"></p>
+</li>
+<li><p>SpringCloud 就是一套工具，通过它可以很容易地搭建出一个集群和分布式的架子出来。springcloud 是由多个微服务组成的，即多个springboot项目组成。 而这些 springboot 之间又是围绕一个共同目的而存在的。</p>
+</li>
+</ul>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">HL</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://haolei56.github.io/2022/12191.html">http://haolei56.github.io/2022/12191.html</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">HL</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/java/">
+                                    <span class="chip bg-color">java</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2022/12195.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="Python基础">
+                        
+                        <span class="card-title">Python基础</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-12-19
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Python/" class="post-category">
+                                    Python
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Python/">
+                        <span class="chip bg-color">Python</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/121916107.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="Hexo发布">
+                        
+                        <span class="card-title">Hexo发布</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-12-19
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/" class="post-category">
+                                    使用说明
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Hexo/">
+                        <span class="chip bg-color">Hexo</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2022</span>
+            
+            <a href="/about" target="_blank">HL</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:n_056haolei@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1559823213" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1559823213" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+     <!--樱花效果-->
+    <script type="text/javascript">
+    //只在桌面版网页启用特效
+    var windowWidth = $(window).width();
+    if (windowWidth > 768) {
+        document.write('<script type="text/javascript" src="/js/sakura.js"><\/script>');
+    }
+    </script>
+</body>
+
+</html>
