@@ -133,13 +133,6 @@
   </url>
   
   <url>
-    <loc>http://haolei56.github.io/tags/Python/</loc>
-    <lastmod>2022-12-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://haolei56.github.io/tags/java/</loc>
     <lastmod>2022-12-19</lastmod>
     <changefreq>weekly</changefreq>
@@ -167,17 +160,17 @@
     <priority>0.2</priority>
   </url>
   
-
-  
   <url>
-    <loc>http://haolei56.github.io/categories/%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/</loc>
+    <loc>http://haolei56.github.io/tags/Python/</loc>
     <lastmod>2022-12-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
+
+  
   <url>
-    <loc>http://haolei56.github.io/categories/Python/</loc>
+    <loc>http://haolei56.github.io/categories/%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/</loc>
     <lastmod>2022-12-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -206,6 +199,13 @@
   
   <url>
     <loc>http://haolei56.github.io/categories/Pytorch/</loc>
+    <lastmod>2022-12-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://haolei56.github.io/categories/Python/</loc>
     <lastmod>2022-12-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
