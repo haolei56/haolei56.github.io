@@ -16,6 +16,17 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
+<script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', '');
+</script>
+
 
     <title>关于 | 朝暮惜</title>
     <link rel="icon" type="image/png" href="/favicon.png">
@@ -516,7 +527,7 @@
                 type: 'pie',
                 radius: '50%',
                 color: ['#6772e5', '#ff9e0f', '#fa755a', '#3ecf8e', '#82d3f4', '#ab47bc', '#525f7f', '#f51c47', '#26A69A'],
-                data: [{"name":"使用说明","value":2},{"name":"java","value":1},{"name":"Spring","value":1},{"name":"Datebase","value":1},{"name":"Pytorch","value":1},{"name":"Python","value":1}],
+                data: [{"name":"使用说明","value":2},{"name":"Pytorch","value":1},{"name":"Spring","value":1},{"name":"Datebase","value":1},{"name":"Python","value":1},{"name":"java","value":1}],
                 itemStyle: {
                     emphasis: {
                         shadowBlur: 10,
@@ -540,7 +551,7 @@
         xAxis: [
             {
                 type: 'category',
-                data: ["Hexo","Markdown","java","spring","datebase","pytorch","Python"]
+                data: ["Hexo","pytorch","spring","datebase","Markdown","Python","java"]
             }
         ],
         yAxis: [
@@ -729,14 +740,8 @@
             
             
             
-            <a href="/tags/Markdown/">
-                <span class="chip center-align waves-effect waves-light chip-default">Markdown</span>
-            </a>
-            
-            
-            
-            <a href="/tags/java/">
-                <span class="chip center-align waves-effect waves-light chip-default">java</span>
+            <a href="/tags/pytorch/">
+                <span class="chip center-align waves-effect waves-light chip-default">pytorch</span>
             </a>
             
             
@@ -753,14 +758,20 @@
             
             
             
-            <a href="/tags/pytorch/">
-                <span class="chip center-align waves-effect waves-light chip-default">pytorch</span>
+            <a href="/tags/Markdown/">
+                <span class="chip center-align waves-effect waves-light chip-default">Markdown</span>
             </a>
             
             
             
             <a href="/tags/Python/">
                 <span class="chip center-align waves-effect waves-light chip-default">Python</span>
+            </a>
+            
+            
+            
+            <a href="/tags/java/">
+                <span class="chip center-align waves-effect waves-light chip-default">java</span>
             </a>
             
             

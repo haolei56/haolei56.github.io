@@ -26,6 +26,17 @@ System.out.println(a);
     <meta name="referrer" content="no-referrer-when-downgrade">
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
+<script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', '');
+</script>
+
 
     <title>Markdown入门 | 朝暮惜</title>
     <link rel="icon" type="image/png" href="/favicon.png">
@@ -436,6 +447,11 @@ System.out.println(a);
         
 
         
+        <!-- 代码块折行 -->
+        <style type="text/css">
+            code[class*="language-"], pre[class*="language-"] { white-space: pre-wrap !important; }
+        </style>
+        
 
         <div class="card-content article-card-content">
             <div id="articleContent">
@@ -697,28 +713,6 @@ System.out.println(a);
     
 
     
-    <div class="livere-card card" data-aos="fade-up">
-    <!-- 来必力City版安装代码 -->
-    <div id="lv-container" class="card-content" data-id="city" data-uid="">
-        <script type="text/javascript">
-            (function (d, s) {
-                let j, e = d.getElementsByTagName(s)[0];
-                if (typeof LivereTower === 'function') {
-                    return;
-                }
-
-                j = d.createElement(s);
-                j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-                j.async = true;
-
-                e.parentNode.insertBefore(j, e);
-            })(document, 'script');
-        </script>
-        <noscript>为正常使用来必力评论功能请激活JavaScript。</noscript>
-    </div>
-    <!-- City版安装代码已完成 -->
-</div>
-    
 
     
 
@@ -839,7 +833,7 @@ System.out.println(a);
 
 
 
-<!-- 代码块功能依赖 -->
+<<!-- 代码块功能依赖 -->
 <script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
 <!-- 代码语言 -->
@@ -855,6 +849,9 @@ System.out.println(a);
 <!-- 代码块收缩 -->
 
 <script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
 
 
     </div>
