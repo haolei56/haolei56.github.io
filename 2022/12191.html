@@ -5,10 +5,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="java框架技术, 朝暮惜">
-    <meta name="description" content="[TOC]
-Mybatis
+    <meta name="description" content="Mybatis
 优点：  省去JDBC中Connection, Statement, ResultSet 等辅助操作，减少了访问不同表时的代码雷同。我们只需要关注在增删改查等操作层面上，而把技术细节都封装在了我们看不见的地方。
-">
+
+原理：应用">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -45,7 +45,8 @@ Mybatis
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
 <meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="朝暮惜" type="application/atom+xml">
-</head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
 
@@ -394,8 +395,8 @@ Mybatis
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/java/" class="post-category">
-                                java
+                            <a href="/categories/Java/" class="post-category">
+                                Java
                             </a>
                         
                     </div>
@@ -414,14 +415,14 @@ Mybatis
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-12-19
+                    2023-05-21
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    6.2k
+                    5.4k
                 </div>
                 
 
@@ -448,8 +449,7 @@ Mybatis
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>[TOC]</p>
-<h2 id="Mybatis"><a href="#Mybatis" class="headerlink" title="Mybatis"></a>Mybatis</h2><ul>
+                <h2 id="Mybatis"><a href="#Mybatis" class="headerlink" title="Mybatis"></a>Mybatis</h2><ul>
 <li><p><strong>优点：</strong>  省去JDBC中Connection, Statement, ResultSet 等辅助操作，减少了访问不同表时的代码雷同。我们只需要关注在增删改查等操作层面上，而把技术细节都封装在了我们看不见的地方。</p>
 </li>
 <li><p><strong>原理：</strong>应用程序通过mybatis从数据库中找来数据。通过mybatis-config.xml 定位数据库，执行Category.xml对应的SQL语句，基于Category.xml把得到的数据库记录封装在Category对象或集合中返回。</p>
@@ -457,56 +457,56 @@ Mybatis
 <li><p><strong>配置文件mybatis-config.xml</strong></p>
 </li>
 </ul>
-<pre><code class="java">  &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
-  &lt;!DOCTYPE configuration
-          PUBLIC &quot;-//mybatis.org//DTD Config 3.0//EN&quot;
-          &quot;http://mybatis.org/dtd/mybatis-3-config.dtd&quot;&gt;
-  &lt;configuration&gt;
-      &lt;typeAliases&gt;
-          &lt;package name=&quot;bean&quot;/&gt;&lt;!--实体类所在的包名--&gt;
-      &lt;/typeAliases&gt;
-      &lt;environments default=&quot;development&quot;&gt;
-          &lt;environment id=&quot;development&quot;&gt;
-              &lt;transactionManager type=&quot;JDBC&quot;&gt;&lt;/transactionManager&gt;
-              &lt;dataSource type=&quot;POOLED&quot;&gt;
-                  &lt;property name=&quot;driver&quot; value=&quot;com.mysql.cj.jdbc.Driver&quot;/&gt;
-                  &lt;property name=&quot;url&quot; value=&quot;jdbc:mysql:///how2java?serverTimezone=Asia/Shanghai&quot;/&gt;
-                  &lt;property name=&quot;username&quot; value=&quot;个人的数据库名称&quot;/&gt;
-                  &lt;property name=&quot;password&quot; value=&quot;个人的数据库密码&quot;/&gt;
-              &lt;/dataSource&gt;
-          &lt;/environment&gt;
-      &lt;/environments&gt;
-      &lt;mappers&gt;
-          &lt;mapper resource=&quot;bean/Category.xml&quot;/&gt;&lt;!--.xml文件所在的位置，一般与对应实体类在一起--&gt;
-          &lt;mapper resource=&quot;bean/Product.xml&quot;/&gt;
-      &lt;/mappers&gt;
-  &lt;/configuration&gt;
-</code></pre>
+<pre class="line-numbers language-java"><code class="language-java">  <span class="token operator">&lt;</span><span class="token operator">?</span>xml version<span class="token operator">=</span><span class="token string">"1.0"</span> encoding<span class="token operator">=</span><span class="token string">"UTF-8"</span> <span class="token operator">?</span><span class="token operator">></span>
+  <span class="token operator">&lt;</span><span class="token operator">!</span>DOCTYPE configuration
+          PUBLIC <span class="token string">"-//mybatis.org//DTD Config 3.0//EN"</span>
+          <span class="token string">"http://mybatis.org/dtd/mybatis-3-config.dtd"</span><span class="token operator">></span>
+  <span class="token operator">&lt;</span>configuration<span class="token operator">></span>
+      <span class="token operator">&lt;</span>typeAliases<span class="token operator">></span>
+          <span class="token operator">&lt;</span><span class="token keyword">package</span> name<span class="token operator">=</span><span class="token string">"bean"</span><span class="token operator">/</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span>实体类所在的包名<span class="token operator">--</span><span class="token operator">></span>
+      <span class="token operator">&lt;</span><span class="token operator">/</span>typeAliases<span class="token operator">></span>
+      <span class="token operator">&lt;</span>environments <span class="token keyword">default</span><span class="token operator">=</span><span class="token string">"development"</span><span class="token operator">></span>
+          <span class="token operator">&lt;</span>environment id<span class="token operator">=</span><span class="token string">"development"</span><span class="token operator">></span>
+              <span class="token operator">&lt;</span>transactionManager type<span class="token operator">=</span><span class="token string">"JDBC"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>transactionManager<span class="token operator">></span>
+              <span class="token operator">&lt;</span>dataSource type<span class="token operator">=</span><span class="token string">"POOLED"</span><span class="token operator">></span>
+                  <span class="token operator">&lt;</span>property name<span class="token operator">=</span><span class="token string">"driver"</span> value<span class="token operator">=</span><span class="token string">"com.mysql.cj.jdbc.Driver"</span><span class="token operator">/</span><span class="token operator">></span>
+                  <span class="token operator">&lt;</span>property name<span class="token operator">=</span><span class="token string">"url"</span> value<span class="token operator">=</span><span class="token string">"jdbc:mysql:///how2java?serverTimezone=Asia/Shanghai"</span><span class="token operator">/</span><span class="token operator">></span>
+                  <span class="token operator">&lt;</span>property name<span class="token operator">=</span><span class="token string">"username"</span> value<span class="token operator">=</span><span class="token string">"个人的数据库名称"</span><span class="token operator">/</span><span class="token operator">></span>
+                  <span class="token operator">&lt;</span>property name<span class="token operator">=</span><span class="token string">"password"</span> value<span class="token operator">=</span><span class="token string">"个人的数据库密码"</span><span class="token operator">/</span><span class="token operator">></span>
+              <span class="token operator">&lt;</span><span class="token operator">/</span>dataSource<span class="token operator">></span>
+          <span class="token operator">&lt;</span><span class="token operator">/</span>environment<span class="token operator">></span>
+      <span class="token operator">&lt;</span><span class="token operator">/</span>environments<span class="token operator">></span>
+      <span class="token operator">&lt;</span>mappers<span class="token operator">></span>
+          <span class="token operator">&lt;</span>mapper resource<span class="token operator">=</span><span class="token string">"bean/Category.xml"</span><span class="token operator">/</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span><span class="token punctuation">.</span>xml文件所在的位置，一般与对应实体类在一起<span class="token operator">--</span><span class="token operator">></span>
+          <span class="token operator">&lt;</span>mapper resource<span class="token operator">=</span><span class="token string">"bean/Product.xml"</span><span class="token operator">/</span><span class="token operator">></span>
+      <span class="token operator">&lt;</span><span class="token operator">/</span>mappers<span class="token operator">></span>
+  <span class="token operator">&lt;</span><span class="token operator">/</span>configuration<span class="token operator">></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>  1.以上6-8行是别名，自动扫描bean下的类型，使得在后续配置文件Category.xml中使用resultType的时候，可以直接使用Category,而不必写全bean.Category</p>
 <ul>
 <li><p><strong>配置文件Category.xml</strong></p>
-<pre><code class="java">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;!DOCTYPE mapper
-        PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;
-        &quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;
-&lt;mapper namespace=&quot;bean&quot;&gt;&lt;!--xml文件所在包--&gt;
-    &lt;insert id=&quot;addCategory&quot; parameterType=&quot;Category&quot;&gt;
-        insert into category_ (name) value (#&#123;name&#125;)
-    &lt;/insert&gt;
-    &lt;delete id=&quot;deleteCategory&quot; parameterType=&quot;Category&quot;&gt;
-        delete from category_ where id=#&#123;id&#125;
-    &lt;/delete&gt;
-    &lt;select id=&quot;getCategory&quot; parameterType=&quot;int&quot; resultType=&quot;Category&quot;&gt;
-        select * from category_ where id=#&#123;id&#125;
-    &lt;/select&gt;
-    &lt;update id=&quot;updateCategory&quot; parameterType=&quot;Category&quot; &gt;
-        update category_ set name=#&#123;name&#125; where id=#&#123;id&#125;
-    &lt;/update&gt;
-    &lt;select id=&quot;listCategory&quot; resultType=&quot;Category&quot;&gt;
-        select * from category_
-    &lt;/select&gt;
-&lt;/mapper&gt;
-</code></pre>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token operator">&lt;</span><span class="token operator">?</span>xml version<span class="token operator">=</span><span class="token string">"1.0"</span> encoding<span class="token operator">=</span><span class="token string">"UTF-8"</span><span class="token operator">?</span><span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">!</span>DOCTYPE mapper
+        PUBLIC <span class="token string">"-//mybatis.org//DTD Mapper 3.0//EN"</span>
+        <span class="token string">"http://mybatis.org/dtd/mybatis-3-mapper.dtd"</span><span class="token operator">></span>
+<span class="token operator">&lt;</span>mapper namespace<span class="token operator">=</span><span class="token string">"bean"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span>xml文件所在包<span class="token operator">--</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span>insert id<span class="token operator">=</span><span class="token string">"addCategory"</span> parameterType<span class="token operator">=</span><span class="token string">"Category"</span><span class="token operator">></span>
+        insert into <span class="token function">category_</span> <span class="token punctuation">(</span>name<span class="token punctuation">)</span> <span class="token function">value</span> <span class="token punctuation">(</span>#<span class="token punctuation">{</span>name<span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>insert<span class="token operator">></span>
+    <span class="token operator">&lt;</span>delete id<span class="token operator">=</span><span class="token string">"deleteCategory"</span> parameterType<span class="token operator">=</span><span class="token string">"Category"</span><span class="token operator">></span>
+        delete from category_ where id<span class="token operator">=</span>#<span class="token punctuation">{</span>id<span class="token punctuation">}</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>delete<span class="token operator">></span>
+    <span class="token operator">&lt;</span>select id<span class="token operator">=</span><span class="token string">"getCategory"</span> parameterType<span class="token operator">=</span><span class="token string">"int"</span> resultType<span class="token operator">=</span><span class="token string">"Category"</span><span class="token operator">></span>
+        select <span class="token operator">*</span> from category_ where id<span class="token operator">=</span>#<span class="token punctuation">{</span>id<span class="token punctuation">}</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>select<span class="token operator">></span>
+    <span class="token operator">&lt;</span>update id<span class="token operator">=</span><span class="token string">"updateCategory"</span> parameterType<span class="token operator">=</span><span class="token string">"Category"</span> <span class="token operator">></span>
+        update category_ set name<span class="token operator">=</span>#<span class="token punctuation">{</span>name<span class="token punctuation">}</span> where id<span class="token operator">=</span>#<span class="token punctuation">{</span>id<span class="token punctuation">}</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>update<span class="token operator">></span>
+    <span class="token operator">&lt;</span>select id<span class="token operator">=</span><span class="token string">"listCategory"</span> resultType<span class="token operator">=</span><span class="token string">"Category"</span><span class="token operator">></span>
+        select <span class="token operator">*</span> from category_
+    <span class="token operator">&lt;</span><span class="token operator">/</span>select<span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>mapper<span class="token operator">></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 <li><p><strong>mybatis中#{}和${}的区别：</strong></p>
 <p>#{}: 表示一个占位符号?,#{}可以有效防止SQL注入。如果parameterType传进来的是基本类型，也就是(string,long,double,int,boolean,float等)，那么#{}里面的变量名可以随意写，比如abc,xxx等等，这个名字和传进来的参数名可以不一致。如果传进来的是简单Java对象类型（pojo），那么#{}中的变量名必须是pojo的属性名，可以写成属性名,也可以写属性名.属性名，但不能写成类名.属性名。例如insert into student(name,age,score) values(#{Student.name},#{Student.age},#{Student.score})会将Student当成一个属性而报错。</p>
@@ -516,174 +516,174 @@ Mybatis
 <li><p><strong>resultMap结果集：</strong>将数据库中列数据复制到对象的相应属性上，可以用于复制查询。resultMap是Mybatis最强大的元素，它可以将查询到的复杂数据（比如查询到几个表中数据）映射到一个结果集当中。</p>
 <p>使用resultType进行输出映射，只有查询出来的列名和pojo（实体bean）中的属性名一致，该列才可以映射成功。简单来说也就是数据库字段和JavaBean里的字段名称必须一致才能映射成功。</p>
 <p>当我们JavaBean中的字段名和数据库字段名称有不同的时候，或者是多表查询的时候，一般会使用resultMap </p>
-<pre><code class="java">&lt;resultMap id=&quot;唯一的标识&quot; type=&quot;映射的实体类（Category）&quot;&gt;
-     &lt;id column=&quot;数据库中的主键或者对应的别名&quot; jdbcType（可省略）=&quot;字段类型&quot; property=&quot;对      应实体类的属性名&quot;/&gt;
-     &lt;result column=&quot;数据库中表的字段或别名(可以为任意的一个字段，无顺序)&quot; jdbcType=&quot;字段类      型&quot; property=&quot;对应实体类的属性名&quot;/&gt;
+<pre class="line-numbers language-java"><code class="language-java"><span class="token operator">&lt;</span>resultMap id<span class="token operator">=</span><span class="token string">"唯一的标识"</span> type<span class="token operator">=</span><span class="token string">"映射的实体类（Category）"</span><span class="token operator">></span>
+     <span class="token operator">&lt;</span>id column<span class="token operator">=</span><span class="token string">"数据库中的主键或者对应的别名"</span> jdbcType（可省略）<span class="token operator">=</span><span class="token string">"字段类型"</span> property<span class="token operator">=</span><span class="token string">"对      应实体类的属性名"</span><span class="token operator">/</span><span class="token operator">></span>
+     <span class="token operator">&lt;</span>result column<span class="token operator">=</span><span class="token string">"数据库中表的字段或别名(可以为任意的一个字段，无顺序)"</span> jdbcType<span class="token operator">=</span><span class="token string">"字段类      型"</span> property<span class="token operator">=</span><span class="token string">"对应实体类的属性名"</span><span class="token operator">/</span><span class="token operator">></span>
      
-     &lt;!--多对一时使用--&gt;
-     &lt;association property=&quot;实体类中对应的属性名（如category）&quot;javaType=&quot;一对应的实体类&quot;&gt;
-         &lt;id column=&quot;关联实体类对应数据库中表的主键字段或别名&quot; jdbcType=&quot;字段类型&quot;                  property=&quot;对应实体类的属性名&quot;/&gt;
-         &lt;result column=&quot;数据库中表的字段或别名(可以为任意的一个字段，无顺序)&quot; jdbcType=&quot;字          段类型&quot; property=&quot;对应实体类的属性名&quot;/&gt;
-     &lt;/association&gt;
+     <span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span>多对一时使用<span class="token operator">--</span><span class="token operator">></span>
+     <span class="token operator">&lt;</span>association property<span class="token operator">=</span><span class="token string">"实体类中对应的属性名（如category）"</span>javaType<span class="token operator">=</span><span class="token string">"一对应的实体类"</span><span class="token operator">></span>
+         <span class="token operator">&lt;</span>id column<span class="token operator">=</span><span class="token string">"关联实体类对应数据库中表的主键字段或别名"</span> jdbcType<span class="token operator">=</span><span class="token string">"字段类型"</span>                  property<span class="token operator">=</span><span class="token string">"对应实体类的属性名"</span><span class="token operator">/</span><span class="token operator">></span>
+         <span class="token operator">&lt;</span>result column<span class="token operator">=</span><span class="token string">"数据库中表的字段或别名(可以为任意的一个字段，无顺序)"</span> jdbcType<span class="token operator">=</span><span class="token string">"字          段类型"</span> property<span class="token operator">=</span><span class="token string">"对应实体类的属性名"</span><span class="token operator">/</span><span class="token operator">></span>
+     <span class="token operator">&lt;</span><span class="token operator">/</span>association<span class="token operator">></span>
     
-     &lt;!--一对多时使用--&gt;
-     &lt;collection property=&quot;实体类的集合属性(Category实体类中的集合属性products)&quot;               ofType=&quot;集合中的元素类型（Product）&quot;&gt;
-          &lt;id column=&quot;集合实体对象对应的数据库中的主键或别名&quot; jdbcType=&quot;字段类型&quot;
-          property=&quot;集合实体类的对应属性&quot; /&gt;
-          &lt;result column=&quot;集合实体对象对应的数据库中表的一个字段或别名(可以为任意的一个字段)&quot;           jdbcType=&quot;字段类型&quot; property=&quot;集合实体类的对应属性&quot; /&gt;
-     &lt;/collection&gt;
-&lt;/resultMap&gt;
-</code></pre>
+     <span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span>一对多时使用<span class="token operator">--</span><span class="token operator">></span>
+     <span class="token operator">&lt;</span>collection property<span class="token operator">=</span><span class="token string">"实体类的集合属性(Category实体类中的集合属性products)"</span>               ofType<span class="token operator">=</span><span class="token string">"集合中的元素类型（Product）"</span><span class="token operator">></span>
+          <span class="token operator">&lt;</span>id column<span class="token operator">=</span><span class="token string">"集合实体对象对应的数据库中的主键或别名"</span> jdbcType<span class="token operator">=</span><span class="token string">"字段类型"</span>
+          property<span class="token operator">=</span><span class="token string">"集合实体类的对应属性"</span> <span class="token operator">/</span><span class="token operator">></span>
+          <span class="token operator">&lt;</span>result column<span class="token operator">=</span><span class="token string">"集合实体对象对应的数据库中表的一个字段或别名(可以为任意的一个字段)"</span>           jdbcType<span class="token operator">=</span><span class="token string">"字段类型"</span> property<span class="token operator">=</span><span class="token string">"集合实体类的对应属性"</span> <span class="token operator">/</span><span class="token operator">></span>
+     <span class="token operator">&lt;</span><span class="token operator">/</span>collection<span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>resultMap<span class="token operator">></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>举例说明：</p>
-<pre><code class="java">//一对多时
-//Category类对应的属性：
-public class Category &#123;
-    private int id;
-    private String name;
-    List&lt;Product&gt; products; 
-&#125;
-//对应的resultMap:
- &lt;resultMap id=&quot;categoryBean&quot; type=&quot;Category&quot;&gt;
-        &lt;id column=&quot;cid&quot; property=&quot;id&quot;/&gt;
-        &lt;result column=&quot;cname&quot; property=&quot;name&quot;/&gt;
-        &lt;collection property=&quot;products&quot; ofType=&quot;Product&quot;&gt;
-            &lt;id column=&quot;pid&quot; property=&quot;id&quot;/&gt;
-          &lt;result  column=&quot;pname&quot; property=&quot;name&quot;/&gt;
-            &lt;result column=&quot;price&quot; property=&quot;price&quot;/&gt;
-        &lt;/collection&gt;
-  &lt;/resultMap&gt;
+<pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">//一对多时</span>
+<span class="token comment" spellcheck="true">//Category类对应的属性：</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Category</span> <span class="token punctuation">{</span>
+    <span class="token keyword">private</span> <span class="token keyword">int</span> id<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> String name<span class="token punctuation">;</span>
+    List<span class="token operator">&lt;</span>Product<span class="token operator">></span> products<span class="token punctuation">;</span> 
+<span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">//对应的resultMap:</span>
+ <span class="token operator">&lt;</span>resultMap id<span class="token operator">=</span><span class="token string">"categoryBean"</span> type<span class="token operator">=</span><span class="token string">"Category"</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>id column<span class="token operator">=</span><span class="token string">"cid"</span> property<span class="token operator">=</span><span class="token string">"id"</span><span class="token operator">/</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>result column<span class="token operator">=</span><span class="token string">"cname"</span> property<span class="token operator">=</span><span class="token string">"name"</span><span class="token operator">/</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>collection property<span class="token operator">=</span><span class="token string">"products"</span> ofType<span class="token operator">=</span><span class="token string">"Product"</span><span class="token operator">></span>
+            <span class="token operator">&lt;</span>id column<span class="token operator">=</span><span class="token string">"pid"</span> property<span class="token operator">=</span><span class="token string">"id"</span><span class="token operator">/</span><span class="token operator">></span>
+          <span class="token operator">&lt;</span>result  column<span class="token operator">=</span><span class="token string">"pname"</span> property<span class="token operator">=</span><span class="token string">"name"</span><span class="token operator">/</span><span class="token operator">></span>
+            <span class="token operator">&lt;</span>result column<span class="token operator">=</span><span class="token string">"price"</span> property<span class="token operator">=</span><span class="token string">"price"</span><span class="token operator">/</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span><span class="token operator">/</span>collection<span class="token operator">></span>
+  <span class="token operator">&lt;</span><span class="token operator">/</span>resultMap<span class="token operator">></span>
 
 
-//多对一时
-//Product类对应的属性：
-public class Product &#123;
-    private int id;
-    private String name;
-    private float price;
-    private Category category;
-&#125;
-//对应的resultMap：
- &lt;resultMap id=&quot;productBean&quot; type=&quot;Product&quot;&gt;
-        &lt;id column=&quot;pid&quot; property=&quot;id&quot;/&gt;
-        &lt;result column=&quot;pname&quot; property=&quot;name&quot;/&gt;
-        &lt;result column=&quot;price&quot; property=&quot;price&quot;/&gt;
-        &lt;association property=&quot;category&quot; javaType=&quot;Category&quot;&gt;
-            &lt;id column=&quot;cid&quot; property=&quot;id&quot;/&gt;
-            &lt;result column=&quot;cname&quot; property=&quot;name&quot;/&gt;
-        &lt;/association&gt;
- &lt;/resultMap&gt;
+<span class="token comment" spellcheck="true">//多对一时</span>
+<span class="token comment" spellcheck="true">//Product类对应的属性：</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Product</span> <span class="token punctuation">{</span>
+    <span class="token keyword">private</span> <span class="token keyword">int</span> id<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> String name<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">float</span> price<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> Category category<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">//对应的resultMap：</span>
+ <span class="token operator">&lt;</span>resultMap id<span class="token operator">=</span><span class="token string">"productBean"</span> type<span class="token operator">=</span><span class="token string">"Product"</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>id column<span class="token operator">=</span><span class="token string">"pid"</span> property<span class="token operator">=</span><span class="token string">"id"</span><span class="token operator">/</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>result column<span class="token operator">=</span><span class="token string">"pname"</span> property<span class="token operator">=</span><span class="token string">"name"</span><span class="token operator">/</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>result column<span class="token operator">=</span><span class="token string">"price"</span> property<span class="token operator">=</span><span class="token string">"price"</span><span class="token operator">/</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>association property<span class="token operator">=</span><span class="token string">"category"</span> javaType<span class="token operator">=</span><span class="token string">"Category"</span><span class="token operator">></span>
+            <span class="token operator">&lt;</span>id column<span class="token operator">=</span><span class="token string">"cid"</span> property<span class="token operator">=</span><span class="token string">"id"</span><span class="token operator">/</span><span class="token operator">></span>
+            <span class="token operator">&lt;</span>result column<span class="token operator">=</span><span class="token string">"cname"</span> property<span class="token operator">=</span><span class="token string">"name"</span><span class="token operator">/</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span><span class="token operator">/</span>association<span class="token operator">></span>
+ <span class="token operator">&lt;</span><span class="token operator">/</span>resultMap<span class="token operator">></span>
  
         
-//多对多时：
-//例如：一张订单里可以包含多种产品，一种产品可以出现在多张订单里。这就是多对多关系。
-//为了维系多对多关系，必须要一个中间表。这里使用订单项(OrderItem)表来作为中间表。
-//Order类对应属性：
-public class Order &#123;
-    private int id;
-    private String code;
-    List&lt;OrderItem&gt; orderItems;
-&#125;
-//OrderItem类对应属性：
-public class OrderItem &#123;
-    private int id;
-    private int number;
-    private Order order;
-    private Product product;
-&#125;
-//对应的resultMap：
-&lt;!--查询结果中id和code字段放在Order对象里，然后通过一对多的&lt;collection&gt;标签把oiid和number放在OrderItem对象里，最后把pid,pname,price放进Product对象里。--&gt;
-&lt;!--查询的结果为一个Order类型的结果集，需要通过Order对象取出对应的其他orderItems和product数据--&gt;
-    &lt;resultMap type=&quot;Order&quot; id=&quot;orderBean&quot;&gt;
-        &lt;id column=&quot;oid&quot; property=&quot;id&quot;/&gt;
-        &lt;result column=&quot;code&quot; property=&quot;code&quot;/&gt;
+<span class="token comment" spellcheck="true">//多对多时：</span>
+<span class="token comment" spellcheck="true">//例如：一张订单里可以包含多种产品，一种产品可以出现在多张订单里。这就是多对多关系。</span>
+<span class="token comment" spellcheck="true">//为了维系多对多关系，必须要一个中间表。这里使用订单项(OrderItem)表来作为中间表。</span>
+<span class="token comment" spellcheck="true">//Order类对应属性：</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Order</span> <span class="token punctuation">{</span>
+    <span class="token keyword">private</span> <span class="token keyword">int</span> id<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> String code<span class="token punctuation">;</span>
+    List<span class="token operator">&lt;</span>OrderItem<span class="token operator">></span> orderItems<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">//OrderItem类对应属性：</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">OrderItem</span> <span class="token punctuation">{</span>
+    <span class="token keyword">private</span> <span class="token keyword">int</span> id<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">int</span> number<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> Order order<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> Product product<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">//对应的resultMap：</span>
+<span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span>查询结果中id和code字段放在Order对象里，然后通过一对多的<span class="token operator">&lt;</span>collection<span class="token operator">></span>标签把oiid和number放在OrderItem对象里，最后把pid<span class="token punctuation">,</span>pname<span class="token punctuation">,</span>price放进Product对象里。<span class="token operator">--</span><span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span>查询的结果为一个Order类型的结果集，需要通过Order对象取出对应的其他orderItems和product数据<span class="token operator">--</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span>resultMap type<span class="token operator">=</span><span class="token string">"Order"</span> id<span class="token operator">=</span><span class="token string">"orderBean"</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>id column<span class="token operator">=</span><span class="token string">"oid"</span> property<span class="token operator">=</span><span class="token string">"id"</span><span class="token operator">/</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>result column<span class="token operator">=</span><span class="token string">"code"</span> property<span class="token operator">=</span><span class="token string">"code"</span><span class="token operator">/</span><span class="token operator">></span>
 
-        &lt;collection property=&quot;orderItems&quot; ofType=&quot;OrderItem&quot;&gt;
-            &lt;id column=&quot;oiid&quot; property=&quot;id&quot;/&gt;
-            &lt;result column=&quot;number&quot; property=&quot;number&quot;/&gt;
-            &lt;!--多对一，一个产品可以出现在多个不同的订单项中--&gt;
-            &lt;association property=&quot;product&quot; javaType=&quot;Product&quot;&gt;
-                &lt;id column=&quot;pid&quot; property=&quot;id&quot;/&gt;
-                &lt;result column=&quot;pname&quot; property=&quot;name&quot;/&gt;
-                &lt;result column=&quot;price&quot; property=&quot;price&quot;/&gt;
-            &lt;/association&gt;
-        &lt;/collection&gt;
-    &lt;/resultMap&gt;
-</code></pre>
+        <span class="token operator">&lt;</span>collection property<span class="token operator">=</span><span class="token string">"orderItems"</span> ofType<span class="token operator">=</span><span class="token string">"OrderItem"</span><span class="token operator">></span>
+            <span class="token operator">&lt;</span>id column<span class="token operator">=</span><span class="token string">"oiid"</span> property<span class="token operator">=</span><span class="token string">"id"</span><span class="token operator">/</span><span class="token operator">></span>
+            <span class="token operator">&lt;</span>result column<span class="token operator">=</span><span class="token string">"number"</span> property<span class="token operator">=</span><span class="token string">"number"</span><span class="token operator">/</span><span class="token operator">></span>
+            <span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span>多对一，一个产品可以出现在多个不同的订单项中<span class="token operator">--</span><span class="token operator">></span>
+            <span class="token operator">&lt;</span>association property<span class="token operator">=</span><span class="token string">"product"</span> javaType<span class="token operator">=</span><span class="token string">"Product"</span><span class="token operator">></span>
+                <span class="token operator">&lt;</span>id column<span class="token operator">=</span><span class="token string">"pid"</span> property<span class="token operator">=</span><span class="token string">"id"</span><span class="token operator">/</span><span class="token operator">></span>
+                <span class="token operator">&lt;</span>result column<span class="token operator">=</span><span class="token string">"pname"</span> property<span class="token operator">=</span><span class="token string">"name"</span><span class="token operator">/</span><span class="token operator">></span>
+                <span class="token operator">&lt;</span>result column<span class="token operator">=</span><span class="token string">"price"</span> property<span class="token operator">=</span><span class="token string">"price"</span><span class="token operator">/</span><span class="token operator">></span>
+            <span class="token operator">&lt;</span><span class="token operator">/</span>association<span class="token operator">></span>
+        <span class="token operator">&lt;</span><span class="token operator">/</span>collection<span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>resultMap<span class="token operator">></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 <li><p><strong>动态SQL</strong></p>
 <p>使用Mybatis 动态SQL可以减少代码行，便于维护。</p>
 <ul>
 <li>if标签：如果没有传参数name,那么就查询所有，如果有name参数，那么就进行模糊查询。</li>
 </ul>
-<pre><code class="java">&lt;select id=&quot;listProduct&quot; resultType=&quot;Product&quot;&gt;
-    select * from product
-    &lt;if test=&quot;name!=null&quot;&gt;
-        where name like concat(&#39;%&#39;,#&#123;name&#125;,&#39;%&#39;)
-    &lt;/if&gt;             
-&lt;/select&gt;
-</code></pre>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token operator">&lt;</span>select id<span class="token operator">=</span><span class="token string">"listProduct"</span> resultType<span class="token operator">=</span><span class="token string">"Product"</span><span class="token operator">></span>
+    select <span class="token operator">*</span> from product
+    <span class="token operator">&lt;</span><span class="token keyword">if</span> test<span class="token operator">=</span><span class="token string">"name!=null"</span><span class="token operator">></span>
+        where name like <span class="token function">concat</span><span class="token punctuation">(</span><span class="token string">'%'</span><span class="token punctuation">,</span>#<span class="token punctuation">{</span>name<span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token string">'%'</span><span class="token punctuation">)</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span><span class="token keyword">if</span><span class="token operator">></span>             
+<span class="token operator">&lt;</span><span class="token operator">/</span>select<span class="token operator">></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li><p>where标签：标签会进行自动判断，如果任何条件都不成立，那么sql语句里就不会出现where关键字<br>如果有任何条件成立，会自动去掉多出来的 and 或者 or。</p>
-<pre><code class="java">&lt;select id=&quot;listProduct&quot; resultType=&quot;Product&quot;&gt;
-    select * from product
-    &lt;where&gt;
-        &lt;if test=&quot;name!=null&quot;&gt;
-            and name like concat(&#39;%&#39;,#&#123;name&#125;,&#39;%&#39;)
-        &lt;/if&gt;             
-        &lt;if test=&quot;price!=null and price!=0&quot;&gt;
-            and price &gt; #&#123;price&#125;
-        &lt;/if&gt;    
-    &lt;/where&gt;         
-&lt;/select&gt;
-</code></pre>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token operator">&lt;</span>select id<span class="token operator">=</span><span class="token string">"listProduct"</span> resultType<span class="token operator">=</span><span class="token string">"Product"</span><span class="token operator">></span>
+    select <span class="token operator">*</span> from product
+    <span class="token operator">&lt;</span>where<span class="token operator">></span>
+        <span class="token operator">&lt;</span><span class="token keyword">if</span> test<span class="token operator">=</span><span class="token string">"name!=null"</span><span class="token operator">></span>
+            and name like <span class="token function">concat</span><span class="token punctuation">(</span><span class="token string">'%'</span><span class="token punctuation">,</span>#<span class="token punctuation">{</span>name<span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token string">'%'</span><span class="token punctuation">)</span>
+        <span class="token operator">&lt;</span><span class="token operator">/</span><span class="token keyword">if</span><span class="token operator">></span>             
+        <span class="token operator">&lt;</span><span class="token keyword">if</span> test<span class="token operator">=</span><span class="token string">"price!=null and price!=0"</span><span class="token operator">></span>
+            and price <span class="token operator">></span> #<span class="token punctuation">{</span>price<span class="token punctuation">}</span>
+        <span class="token operator">&lt;</span><span class="token operator">/</span><span class="token keyword">if</span><span class="token operator">></span>    
+    <span class="token operator">&lt;</span><span class="token operator">/</span>where<span class="token operator">></span>         
+<span class="token operator">&lt;</span><span class="token operator">/</span>select<span class="token operator">></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 <li><p>set标签：与where标签类似的，在update语句里可以使用set对多个字段进行判断设置。</p>
-<pre><code class="java"> &lt;update id=&quot;updateProduct&quot; parameterType=&quot;Product&quot; &gt;
+<pre class="line-numbers language-java"><code class="language-java"> <span class="token operator">&lt;</span>update id<span class="token operator">=</span><span class="token string">"updateProduct"</span> parameterType<span class="token operator">=</span><span class="token string">"Product"</span> <span class="token operator">></span>
         update product
-        &lt;set&gt;
-            &lt;if test=&quot;name != null&quot;&gt;name=#&#123;name&#125;,&lt;/if&gt;
-            &lt;if test=&quot;price != null&quot;&gt;price=#&#123;price&#125;&lt;/if&gt; 
-        &lt;/set&gt;
-         where id=#&#123;id&#125;   
-    &lt;/update&gt;
-</code></pre>
+        <span class="token operator">&lt;</span>set<span class="token operator">></span>
+            <span class="token operator">&lt;</span><span class="token keyword">if</span> test<span class="token operator">=</span><span class="token string">"name != null"</span><span class="token operator">></span>name<span class="token operator">=</span>#<span class="token punctuation">{</span>name<span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token operator">&lt;</span><span class="token operator">/</span><span class="token keyword">if</span><span class="token operator">></span>
+            <span class="token operator">&lt;</span><span class="token keyword">if</span> test<span class="token operator">=</span><span class="token string">"price != null"</span><span class="token operator">></span>price<span class="token operator">=</span>#<span class="token punctuation">{</span>price<span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span><span class="token keyword">if</span><span class="token operator">></span> 
+        <span class="token operator">&lt;</span><span class="token operator">/</span>set<span class="token operator">></span>
+         where id<span class="token operator">=</span>#<span class="token punctuation">{</span>id<span class="token punctuation">}</span>   
+    <span class="token operator">&lt;</span><span class="token operator">/</span>update<span class="token operator">></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 <li><p>when otherwise标签：Mybatis里面没有else标签，可以使用when otherwise标签来达到这样的效果。</p>
-<pre><code class="java">&lt;select id=&quot;listProduct&quot; resultType=&quot;Product&quot;&gt;
-              SELECT * FROM product
-              &lt;where&gt;
-                &lt;choose&gt;
-                  &lt;when test=&quot;name != null&quot;&gt;
-                    and name like concat(&#39;%&#39;,#&#123;name&#125;,&#39;%&#39;)
-                  &lt;/when&gt;          
-                  &lt;when test=&quot;price !=null and price != 0&quot;&gt;
-                    and price &gt; #&#123;price&#125;
-                  &lt;/when&gt;                
-                  &lt;otherwise&gt;
-                    and id &gt;1
-                  &lt;/otherwise&gt;
-                &lt;/choose&gt;
-              &lt;/where&gt;
-&lt;/select&gt;
-</code></pre>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token operator">&lt;</span>select id<span class="token operator">=</span><span class="token string">"listProduct"</span> resultType<span class="token operator">=</span><span class="token string">"Product"</span><span class="token operator">></span>
+              SELECT <span class="token operator">*</span> FROM product
+              <span class="token operator">&lt;</span>where<span class="token operator">></span>
+                <span class="token operator">&lt;</span>choose<span class="token operator">></span>
+                  <span class="token operator">&lt;</span>when test<span class="token operator">=</span><span class="token string">"name != null"</span><span class="token operator">></span>
+                    and name like <span class="token function">concat</span><span class="token punctuation">(</span><span class="token string">'%'</span><span class="token punctuation">,</span>#<span class="token punctuation">{</span>name<span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token string">'%'</span><span class="token punctuation">)</span>
+                  <span class="token operator">&lt;</span><span class="token operator">/</span>when<span class="token operator">></span>          
+                  <span class="token operator">&lt;</span>when test<span class="token operator">=</span><span class="token string">"price !=null and price != 0"</span><span class="token operator">></span>
+                    and price <span class="token operator">></span> #<span class="token punctuation">{</span>price<span class="token punctuation">}</span>
+                  <span class="token operator">&lt;</span><span class="token operator">/</span>when<span class="token operator">></span>                
+                  <span class="token operator">&lt;</span>otherwise<span class="token operator">></span>
+                    and id <span class="token operator">></span><span class="token number">1</span>
+                  <span class="token operator">&lt;</span><span class="token operator">/</span>otherwise<span class="token operator">></span>
+                <span class="token operator">&lt;</span><span class="token operator">/</span>choose<span class="token operator">></span>
+              <span class="token operator">&lt;</span><span class="token operator">/</span>where<span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>select<span class="token operator">></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 <li><p>foreach标签：通常用于in 语法里</p>
-<pre><code class="java">&lt;select id=&quot;listProduct&quot; resultType=&quot;Product&quot;&gt;
-          SELECT * FROM product
+<pre class="line-numbers language-java"><code class="language-java"><span class="token operator">&lt;</span>select id<span class="token operator">=</span><span class="token string">"listProduct"</span> resultType<span class="token operator">=</span><span class="token string">"Product"</span><span class="token operator">></span>
+          SELECT <span class="token operator">*</span> FROM product
             WHERE ID in
-                &lt;foreach item=&quot;item&quot; index=&quot;index&quot; collection=&quot;list&quot;
-                    open=&quot;(&quot; separator=&quot;,&quot; close=&quot;)&quot;&gt;
-                    #&#123;item&#125;
-                &lt;/foreach&gt;
-&lt;/select&gt;
-</code></pre>
+                <span class="token operator">&lt;</span>foreach item<span class="token operator">=</span><span class="token string">"item"</span> index<span class="token operator">=</span><span class="token string">"index"</span> collection<span class="token operator">=</span><span class="token string">"list"</span>
+                    open<span class="token operator">=</span><span class="token string">"("</span> separator<span class="token operator">=</span><span class="token string">","</span> close<span class="token operator">=</span><span class="token string">")"</span><span class="token operator">></span>
+                    #<span class="token punctuation">{</span>item<span class="token punctuation">}</span>
+                <span class="token operator">&lt;</span><span class="token operator">/</span>foreach<span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>select<span class="token operator">></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 <li><p>bind标签：类似字符串拼接，方便后续使用。</p>
-<pre><code class="java">&lt;select id=&quot;listProduct&quot; resultType=&quot;Product&quot;&gt;
-            &lt;bind name=&quot;likename&quot; value=&quot;&#39;%&#39; + name + &#39;%&#39;&quot; /&gt;
-            select * from   product_  where name like #&#123;likename&#125;
-&lt;/select&gt;
-</code></pre>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token operator">&lt;</span>select id<span class="token operator">=</span><span class="token string">"listProduct"</span> resultType<span class="token operator">=</span><span class="token string">"Product"</span><span class="token operator">></span>
+            <span class="token operator">&lt;</span>bind name<span class="token operator">=</span><span class="token string">"likename"</span> value<span class="token operator">=</span><span class="token string">"'%' + name + '%'"</span> <span class="token operator">/</span><span class="token operator">></span>
+            select <span class="token operator">*</span> from   product_  where name like #<span class="token punctuation">{</span>likename<span class="token punctuation">}</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>select<span class="token operator">></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 </ul>
 </li>
@@ -696,99 +696,99 @@ public class OrderItem &#123;
 <li><p>**AOP(Aspect Oriented Program)**：面向切面编程。首先，在面向切面编程的思想里面，把功能分为核心业务功能(登陆，增加数据，删除数据等)和周边功能(性能统计，日志，事务管理等)。在Spring的AOP思想里，周边功能被定义为切面。核心业务功能和切面功能分别独立进行开发，然后把切面功能和核心业务功能 “编织” 在一起，这种能够选择性的，低耦合的把切面和核心业务功能结合在一起的编程思想，就叫做切面编程</p>
 </li>
 <li><p>spring的配置文件：<strong>applicationContext.xml</strong></p>
-<pre><code class="java">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
-       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
-       xmlns:aop=&quot;http://www.springframework.org/schema/aop&quot;
-       xmlns:tx=&quot;http://www.springframework.org/schema/tx&quot;
-       xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
-       xsi:schemaLocation=&quot;
-   http://www.springframework.org/schema/beans
-   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-   http://www.springframework.org/schema/aop
-   http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
-   http://www.springframework.org/schema/tx
-   http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
-   http://www.springframework.org/schema/context
-   http://www.springframework.org/schema/context/spring-context-3.0.xsd&quot;&gt;
+<pre class="line-numbers language-java"><code class="language-java"><span class="token operator">&lt;</span><span class="token operator">?</span>xml version<span class="token operator">=</span><span class="token string">"1.0"</span> encoding<span class="token operator">=</span><span class="token string">"UTF-8"</span><span class="token operator">?</span><span class="token operator">></span>
+<span class="token operator">&lt;</span>beans xmlns<span class="token operator">=</span><span class="token string">"http://www.springframework.org/schema/beans"</span>
+       xmlns<span class="token operator">:</span>xsi<span class="token operator">=</span><span class="token string">"http://www.w3.org/2001/XMLSchema-instance"</span>
+       xmlns<span class="token operator">:</span>aop<span class="token operator">=</span><span class="token string">"http://www.springframework.org/schema/aop"</span>
+       xmlns<span class="token operator">:</span>tx<span class="token operator">=</span><span class="token string">"http://www.springframework.org/schema/tx"</span>
+       xmlns<span class="token operator">:</span>context<span class="token operator">=</span><span class="token string">"http://www.springframework.org/schema/context"</span>
+       xsi<span class="token operator">:</span>schemaLocation<span class="token operator">=</span>"
+   http<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>www<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>org<span class="token operator">/</span>schema<span class="token operator">/</span>beans
+   http<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>www<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>org<span class="token operator">/</span>schema<span class="token operator">/</span>beans<span class="token operator">/</span>spring<span class="token operator">-</span>beans<span class="token operator">-</span><span class="token number">3.0</span><span class="token punctuation">.</span>xsd
+   http<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>www<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>org<span class="token operator">/</span>schema<span class="token operator">/</span>aop
+   http<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>www<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>org<span class="token operator">/</span>schema<span class="token operator">/</span>aop<span class="token operator">/</span>spring<span class="token operator">-</span>aop<span class="token operator">-</span><span class="token number">3.0</span><span class="token punctuation">.</span>xsd
+   http<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>www<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>org<span class="token operator">/</span>schema<span class="token operator">/</span>tx
+   http<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>www<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>org<span class="token operator">/</span>schema<span class="token operator">/</span>tx<span class="token operator">/</span>spring<span class="token operator">-</span>tx<span class="token operator">-</span><span class="token number">3.0</span><span class="token punctuation">.</span>xsd
+   http<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>www<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>org<span class="token operator">/</span>schema<span class="token operator">/</span>context
+   http<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>www<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>org<span class="token operator">/</span>schema<span class="token operator">/</span>context<span class="token operator">/</span>spring<span class="token operator">-</span>context<span class="token operator">-</span><span class="token number">3.0</span><span class="token punctuation">.</span>xsd"<span class="token operator">></span>
 
-    &lt;context:annotation-config/&gt;
-    &lt;context:component-scan base-package=&quot;pojo&quot;/&gt;
-    &lt;context:component-scan base-package=&quot;aspect&quot;/&gt;
-    &lt;context:component-scan base-package=&quot;service&quot;/&gt;
-    &lt;aop:aspectj-autoproxy/&gt;
-&lt;/beans&gt;
-</code></pre>
+    <span class="token operator">&lt;</span>context<span class="token operator">:</span>annotation<span class="token operator">-</span>config<span class="token operator">/</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span>context<span class="token operator">:</span>component<span class="token operator">-</span>scan base<span class="token operator">-</span><span class="token keyword">package</span><span class="token operator">=</span><span class="token string">"pojo"</span><span class="token operator">/</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span>context<span class="token operator">:</span>component<span class="token operator">-</span>scan base<span class="token operator">-</span><span class="token keyword">package</span><span class="token operator">=</span><span class="token string">"aspect"</span><span class="token operator">/</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span>context<span class="token operator">:</span>component<span class="token operator">-</span>scan base<span class="token operator">-</span><span class="token keyword">package</span><span class="token operator">=</span><span class="token string">"service"</span><span class="token operator">/</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span>aop<span class="token operator">:</span>aspectj<span class="token operator">-</span>autoproxy<span class="token operator">/</span><span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>beans<span class="token operator">></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 </ul>
 <h2 id="Spring-mvc"><a href="#Spring-mvc" class="headerlink" title="Spring mvc"></a>Spring mvc</h2><p>mvc模型，实现网页交互。 SpringMVC会自动检测类发生的变化，但是web.xml做的改动必须重启tomcat才可以看到效果。</p>
 <ul>
 <li><p>配置文件springMvc.xml</p>
-<pre><code class="java">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
-    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:aop=&quot;http://www.springframework.org/schema/aop&quot;
-    xmlns:tx=&quot;http://www.springframework.org/schema/tx&quot; xmlns:jdbc=&quot;http://www.springframework.org/schema/jdbc&quot;
-    xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
-    xmlns:mvc=&quot;http://www.springframework.org/schema/mvc&quot;
-    xsi:schemaLocation=&quot;http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
-        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
-        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
-        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd 
-        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd&quot;&gt;
+<pre class="line-numbers language-java"><code class="language-java"><span class="token operator">&lt;</span><span class="token operator">?</span>xml version<span class="token operator">=</span><span class="token string">"1.0"</span> encoding<span class="token operator">=</span><span class="token string">"UTF-8"</span><span class="token operator">?</span><span class="token operator">></span>
+<span class="token operator">&lt;</span>beans xmlns<span class="token operator">=</span><span class="token string">"http://www.springframework.org/schema/beans"</span>
+    xmlns<span class="token operator">:</span>xsi<span class="token operator">=</span><span class="token string">"http://www.w3.org/2001/XMLSchema-instance"</span> xmlns<span class="token operator">:</span>aop<span class="token operator">=</span><span class="token string">"http://www.springframework.org/schema/aop"</span>
+    xmlns<span class="token operator">:</span>tx<span class="token operator">=</span><span class="token string">"http://www.springframework.org/schema/tx"</span> xmlns<span class="token operator">:</span>jdbc<span class="token operator">=</span><span class="token string">"http://www.springframework.org/schema/jdbc"</span>
+    xmlns<span class="token operator">:</span>context<span class="token operator">=</span><span class="token string">"http://www.springframework.org/schema/context"</span>
+    xmlns<span class="token operator">:</span>mvc<span class="token operator">=</span><span class="token string">"http://www.springframework.org/schema/mvc"</span>
+    xsi<span class="token operator">:</span>schemaLocation<span class="token operator">=</span>"http<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>www<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>org<span class="token operator">/</span>schema<span class="token operator">/</span>jdbc http<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>www<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>org<span class="token operator">/</span>schema<span class="token operator">/</span>jdbc<span class="token operator">/</span>spring<span class="token operator">-</span>jdbc<span class="token operator">-</span><span class="token number">3.0</span><span class="token punctuation">.</span>xsd
+        http<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>www<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>org<span class="token operator">/</span>schema<span class="token operator">/</span>aop http<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>www<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>org<span class="token operator">/</span>schema<span class="token operator">/</span>aop<span class="token operator">/</span>spring<span class="token operator">-</span>aop<span class="token operator">-</span><span class="token number">3.0</span><span class="token punctuation">.</span>xsd
+        http<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>www<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>org<span class="token operator">/</span>schema<span class="token operator">/</span>beans http<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>www<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>org<span class="token operator">/</span>schema<span class="token operator">/</span>beans<span class="token operator">/</span>spring<span class="token operator">-</span>beans<span class="token operator">-</span><span class="token number">3.0</span><span class="token punctuation">.</span>xsd
+        http<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>www<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>org<span class="token operator">/</span>schema<span class="token operator">/</span>context http<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>www<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>org<span class="token operator">/</span>schema<span class="token operator">/</span>context<span class="token operator">/</span>spring<span class="token operator">-</span>context<span class="token operator">-</span><span class="token number">3.0</span><span class="token punctuation">.</span>xsd
+        http<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>www<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>org<span class="token operator">/</span>schema<span class="token operator">/</span>tx http<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>www<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>org<span class="token operator">/</span>schema<span class="token operator">/</span>tx<span class="token operator">/</span>spring<span class="token operator">-</span>tx<span class="token operator">-</span><span class="token number">3.0</span><span class="token punctuation">.</span>xsd 
+        http<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>www<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>org<span class="token operator">/</span>schema<span class="token operator">/</span>mvc http<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>www<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>org<span class="token operator">/</span>schema<span class="token operator">/</span>mvc<span class="token operator">/</span>spring<span class="token operator">-</span>mvc<span class="token operator">-</span><span class="token number">3.2</span><span class="token punctuation">.</span>xsd"<span class="token operator">></span>
 
 
 
-    &lt;context:annotation-config/&gt;
-    &lt;context:component-scan base-package=&quot;controller&quot;&gt;
-          &lt;context:include-filter type=&quot;annotation&quot; 
-          expression=&quot;org.springframework.stereotype.Controller&quot;/&gt;
-    &lt;/context:component-scan&gt;
-    &lt;mvc:annotation-driven /&gt;
-    &lt;mvc:default-servlet-handler /&gt;
+    <span class="token operator">&lt;</span>context<span class="token operator">:</span>annotation<span class="token operator">-</span>config<span class="token operator">/</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span>context<span class="token operator">:</span>component<span class="token operator">-</span>scan base<span class="token operator">-</span><span class="token keyword">package</span><span class="token operator">=</span><span class="token string">"controller"</span><span class="token operator">></span>
+          <span class="token operator">&lt;</span>context<span class="token operator">:</span>include<span class="token operator">-</span>filter type<span class="token operator">=</span><span class="token string">"annotation"</span> 
+          expression<span class="token operator">=</span><span class="token string">"org.springframework.stereotype.Controller"</span><span class="token operator">/</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>context<span class="token operator">:</span>component<span class="token operator">-</span>scan<span class="token operator">></span>
+    <span class="token operator">&lt;</span>mvc<span class="token operator">:</span>annotation<span class="token operator">-</span>driven <span class="token operator">/</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span>mvc<span class="token operator">:</span><span class="token keyword">default</span><span class="token operator">-</span>servlet<span class="token operator">-</span>handler <span class="token operator">/</span><span class="token operator">></span>
 
 
-    &lt;bean
-        class=&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;&gt;
-        &lt;property name=&quot;viewClass&quot;
-            value=&quot;org.springframework.web.servlet.view.JstlView&quot; /&gt;
-        &lt;property name=&quot;prefix&quot; value=&quot;/WEB-INF/jsp/&quot; /&gt;
-        &lt;property name=&quot;suffix&quot; value=&quot;.jsp&quot; /&gt;
-    &lt;/bean&gt;
-&lt;/beans&gt;
-</code></pre>
+    <span class="token operator">&lt;</span>bean
+        <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"org.springframework.web.servlet.view.InternalResourceViewResolver"</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>property name<span class="token operator">=</span><span class="token string">"viewClass"</span>
+            value<span class="token operator">=</span><span class="token string">"org.springframework.web.servlet.view.JstlView"</span> <span class="token operator">/</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>property name<span class="token operator">=</span><span class="token string">"prefix"</span> value<span class="token operator">=</span><span class="token string">"/WEB-INF/jsp/"</span> <span class="token operator">/</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>property name<span class="token operator">=</span><span class="token string">"suffix"</span> value<span class="token operator">=</span><span class="token string">".jsp"</span> <span class="token operator">/</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>bean<span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>beans<span class="token operator">></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 <li><p>web.xml</p>
-<pre><code class="java">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;web-app xmlns=&quot;http://xmlns.jcp.org/xml/ns/javaee&quot;
-         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
-         xsi:schemaLocation=&quot;http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd&quot;
-         version=&quot;4.0&quot;&gt;
-    &lt;servlet&gt;
-        &lt;servlet-name&gt;springmvc&lt;/servlet-name&gt;
-        &lt;servlet-class&gt;
-            org.springframework.web.servlet.DispatcherServlet
-        &lt;/servlet-class&gt;
-        &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
-    &lt;/servlet&gt;
-    &lt;servlet-mapping&gt;
-        &lt;servlet-name&gt;springmvc&lt;/servlet-name&gt;
-        &lt;url-pattern&gt;/&lt;/url-pattern&gt;
-    &lt;/servlet-mapping&gt;
-    &lt;filter&gt;
-        &lt;filter-name&gt;CharacterEncodingFilter&lt;/filter-name&gt;
-        &lt;filter-class&gt;org.springframework.web.filter.CharacterEncodingFilter&lt;/filter-class&gt;
-        &lt;init-param&gt;
-            &lt;param-name&gt;encoding&lt;/param-name&gt;
-            &lt;param-value&gt;utf-8&lt;/param-value&gt;
-        &lt;/init-param&gt;
-    &lt;/filter&gt;
-    &lt;filter-mapping&gt;
-        &lt;filter-name&gt;CharacterEncodingFilter&lt;/filter-name&gt;
-        &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
-    &lt;/filter-mapping&gt;
-&lt;/web-app&gt;
-</code></pre>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token operator">&lt;</span><span class="token operator">?</span>xml version<span class="token operator">=</span><span class="token string">"1.0"</span> encoding<span class="token operator">=</span><span class="token string">"UTF-8"</span><span class="token operator">?</span><span class="token operator">></span>
+<span class="token operator">&lt;</span>web<span class="token operator">-</span>app xmlns<span class="token operator">=</span><span class="token string">"http://xmlns.jcp.org/xml/ns/javaee"</span>
+         xmlns<span class="token operator">:</span>xsi<span class="token operator">=</span><span class="token string">"http://www.w3.org/2001/XMLSchema-instance"</span>
+         xsi<span class="token operator">:</span>schemaLocation<span class="token operator">=</span><span class="token string">"http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"</span>
+         version<span class="token operator">=</span><span class="token string">"4.0"</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span>servlet<span class="token operator">></span>
+        <span class="token operator">&lt;</span>servlet<span class="token operator">-</span>name<span class="token operator">></span>springmvc<span class="token operator">&lt;</span><span class="token operator">/</span>servlet<span class="token operator">-</span>name<span class="token operator">></span>
+        <span class="token operator">&lt;</span>servlet<span class="token operator">-</span><span class="token keyword">class</span><span class="token operator">></span>
+            org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>web<span class="token punctuation">.</span>servlet<span class="token punctuation">.</span>DispatcherServlet
+        <span class="token operator">&lt;</span><span class="token operator">/</span>servlet<span class="token operator">-</span><span class="token keyword">class</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>load<span class="token operator">-</span>on<span class="token operator">-</span>startup<span class="token operator">></span><span class="token number">1</span><span class="token operator">&lt;</span><span class="token operator">/</span>load<span class="token operator">-</span>on<span class="token operator">-</span>startup<span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>servlet<span class="token operator">></span>
+    <span class="token operator">&lt;</span>servlet<span class="token operator">-</span>mapping<span class="token operator">></span>
+        <span class="token operator">&lt;</span>servlet<span class="token operator">-</span>name<span class="token operator">></span>springmvc<span class="token operator">&lt;</span><span class="token operator">/</span>servlet<span class="token operator">-</span>name<span class="token operator">></span>
+        <span class="token operator">&lt;</span>url<span class="token operator">-</span>pattern<span class="token operator">></span><span class="token operator">/</span><span class="token operator">&lt;</span><span class="token operator">/</span>url<span class="token operator">-</span>pattern<span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>servlet<span class="token operator">-</span>mapping<span class="token operator">></span>
+    <span class="token operator">&lt;</span>filter<span class="token operator">></span>
+        <span class="token operator">&lt;</span>filter<span class="token operator">-</span>name<span class="token operator">></span>CharacterEncodingFilter<span class="token operator">&lt;</span><span class="token operator">/</span>filter<span class="token operator">-</span>name<span class="token operator">></span>
+        <span class="token operator">&lt;</span>filter<span class="token operator">-</span><span class="token keyword">class</span><span class="token operator">></span>org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>web<span class="token punctuation">.</span>filter<span class="token punctuation">.</span>CharacterEncodingFilter<span class="token operator">&lt;</span><span class="token operator">/</span>filter<span class="token operator">-</span><span class="token keyword">class</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>init<span class="token operator">-</span>param<span class="token operator">></span>
+            <span class="token operator">&lt;</span>param<span class="token operator">-</span>name<span class="token operator">></span>encoding<span class="token operator">&lt;</span><span class="token operator">/</span>param<span class="token operator">-</span>name<span class="token operator">></span>
+            <span class="token operator">&lt;</span>param<span class="token operator">-</span>value<span class="token operator">></span>utf<span class="token operator">-</span><span class="token number">8</span><span class="token operator">&lt;</span><span class="token operator">/</span>param<span class="token operator">-</span>value<span class="token operator">></span>
+        <span class="token operator">&lt;</span><span class="token operator">/</span>init<span class="token operator">-</span>param<span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>filter<span class="token operator">></span>
+    <span class="token operator">&lt;</span>filter<span class="token operator">-</span>mapping<span class="token operator">></span>
+        <span class="token operator">&lt;</span>filter<span class="token operator">-</span>name<span class="token operator">></span>CharacterEncodingFilter<span class="token operator">&lt;</span><span class="token operator">/</span>filter<span class="token operator">-</span>name<span class="token operator">></span>
+        <span class="token operator">&lt;</span>url<span class="token operator">-</span>pattern<span class="token operator">></span><span class="token operator">/</span><span class="token operator">*</span><span class="token operator">&lt;</span><span class="token operator">/</span>url<span class="token operator">-</span>pattern<span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>filter<span class="token operator">-</span>mapping<span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>web<span class="token operator">-</span>app<span class="token operator">></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 <li><p>原理</p>
 <p>   1.用户访问 &#x2F;index</p>
@@ -804,98 +804,98 @@ public class OrderItem &#123;
 <li><p>由Spring, SpringMVC, Mybatis整合而成，其配置文件主要有applicationContext.xml、springMvc.xml和 web.xml</p>
 </li>
 <li><p>applicationContext.xml</p>
-<pre><code class="java">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
-    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:aop=&quot;http://www.springframework.org/schema/aop&quot;
-    xmlns:tx=&quot;http://www.springframework.org/schema/tx&quot; xmlns:jdbc=&quot;http://www.springframework.org/schema/jdbc&quot;
-    xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
-    xmlns:mvc=&quot;http://www.springframework.org/schema/mvc&quot;
-    xsi:schemaLocation=&quot;
-     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
-     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-     http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
-     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
-     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
-     http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd&quot;&gt;
+<pre class="line-numbers language-java"><code class="language-java"><span class="token operator">&lt;</span><span class="token operator">?</span>xml version<span class="token operator">=</span><span class="token string">"1.0"</span> encoding<span class="token operator">=</span><span class="token string">"UTF-8"</span><span class="token operator">?</span><span class="token operator">></span>
+<span class="token operator">&lt;</span>beans xmlns<span class="token operator">=</span><span class="token string">"http://www.springframework.org/schema/beans"</span>
+    xmlns<span class="token operator">:</span>xsi<span class="token operator">=</span><span class="token string">"http://www.w3.org/2001/XMLSchema-instance"</span> xmlns<span class="token operator">:</span>aop<span class="token operator">=</span><span class="token string">"http://www.springframework.org/schema/aop"</span>
+    xmlns<span class="token operator">:</span>tx<span class="token operator">=</span><span class="token string">"http://www.springframework.org/schema/tx"</span> xmlns<span class="token operator">:</span>jdbc<span class="token operator">=</span><span class="token string">"http://www.springframework.org/schema/jdbc"</span>
+    xmlns<span class="token operator">:</span>context<span class="token operator">=</span><span class="token string">"http://www.springframework.org/schema/context"</span>
+    xmlns<span class="token operator">:</span>mvc<span class="token operator">=</span><span class="token string">"http://www.springframework.org/schema/mvc"</span>
+    xsi<span class="token operator">:</span>schemaLocation<span class="token operator">=</span>"
+     http<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>www<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>org<span class="token operator">/</span>schema<span class="token operator">/</span>context http<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>www<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>org<span class="token operator">/</span>schema<span class="token operator">/</span>context<span class="token operator">/</span>spring<span class="token operator">-</span>context<span class="token operator">-</span><span class="token number">3.0</span><span class="token punctuation">.</span>xsd
+     http<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>www<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>org<span class="token operator">/</span>schema<span class="token operator">/</span>beans http<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>www<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>org<span class="token operator">/</span>schema<span class="token operator">/</span>beans<span class="token operator">/</span>spring<span class="token operator">-</span>beans<span class="token operator">-</span><span class="token number">3.0</span><span class="token punctuation">.</span>xsd
+     http<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>www<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>org<span class="token operator">/</span>schema<span class="token operator">/</span>jdbc http<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>www<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>org<span class="token operator">/</span>schema<span class="token operator">/</span>jdbc<span class="token operator">/</span>spring<span class="token operator">-</span>jdbc<span class="token operator">-</span><span class="token number">3.0</span><span class="token punctuation">.</span>xsd
+     http<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>www<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>org<span class="token operator">/</span>schema<span class="token operator">/</span>tx http<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>www<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>org<span class="token operator">/</span>schema<span class="token operator">/</span>tx<span class="token operator">/</span>spring<span class="token operator">-</span>tx<span class="token operator">-</span><span class="token number">3.0</span><span class="token punctuation">.</span>xsd
+     http<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>www<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>org<span class="token operator">/</span>schema<span class="token operator">/</span>aop http<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>www<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>org<span class="token operator">/</span>schema<span class="token operator">/</span>aop<span class="token operator">/</span>spring<span class="token operator">-</span>aop<span class="token operator">-</span><span class="token number">3.0</span><span class="token punctuation">.</span>xsd
+     http<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>www<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>org<span class="token operator">/</span>schema<span class="token operator">/</span>mvc http<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>www<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>org<span class="token operator">/</span>schema<span class="token operator">/</span>mvc<span class="token operator">/</span>spring<span class="token operator">-</span>mvc<span class="token punctuation">.</span>xsd"<span class="token operator">></span>
     
     
     
 
-   &lt;context:annotation-config /&gt;
-    &lt;context:component-scan base-package=&quot;service&quot; /&gt;
+   <span class="token operator">&lt;</span>context<span class="token operator">:</span>annotation<span class="token operator">-</span>config <span class="token operator">/</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span>context<span class="token operator">:</span>component<span class="token operator">-</span>scan base<span class="token operator">-</span><span class="token keyword">package</span><span class="token operator">=</span><span class="token string">"service"</span> <span class="token operator">/</span><span class="token operator">></span>
 
-    &lt;bean id=&quot;dataSource&quot; class=&quot;com.alibaba.druid.pool.DruidDataSource&quot; init-method=&quot;init&quot; destroy-method=&quot;close&quot;&gt;
-        &lt;!-- 基本属性 url、user、password --&gt;
-        &lt;property name=&quot;url&quot; value=&quot;jdbc:mysql://localhost:3306/how2java?serverTimezone=Asia/Shanghai&quot; /&gt;
-        &lt;property name=&quot;username&quot; value=&quot;root&quot; /&gt;
-        &lt;property name=&quot;password&quot; value=&quot;Ab711910&quot; /&gt;
-        &lt;property name=&quot;driverClassName&quot; value=&quot;com.mysql.cj.jdbc.Driver&quot; /&gt;
+    <span class="token operator">&lt;</span>bean id<span class="token operator">=</span><span class="token string">"dataSource"</span> <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"com.alibaba.druid.pool.DruidDataSource"</span> init<span class="token operator">-</span>method<span class="token operator">=</span><span class="token string">"init"</span> destroy<span class="token operator">-</span>method<span class="token operator">=</span><span class="token string">"close"</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span> 基本属性 url、user、password <span class="token operator">--</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>property name<span class="token operator">=</span><span class="token string">"url"</span> value<span class="token operator">=</span><span class="token string">"jdbc:mysql://localhost:3306/how2java?serverTimezone=Asia/Shanghai"</span> <span class="token operator">/</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>property name<span class="token operator">=</span><span class="token string">"username"</span> value<span class="token operator">=</span><span class="token string">"root"</span> <span class="token operator">/</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>property name<span class="token operator">=</span><span class="token string">"password"</span> value<span class="token operator">=</span><span class="token string">"Ab711910"</span> <span class="token operator">/</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>property name<span class="token operator">=</span><span class="token string">"driverClassName"</span> value<span class="token operator">=</span><span class="token string">"com.mysql.cj.jdbc.Driver"</span> <span class="token operator">/</span><span class="token operator">></span>
 
-        &lt;!-- 配置初始化大小、最小、最大 --&gt;
-        &lt;property name=&quot;initialSize&quot; value=&quot;3&quot; /&gt;
-        &lt;property name=&quot;minIdle&quot; value=&quot;3&quot; /&gt;
-        &lt;property name=&quot;maxActive&quot; value=&quot;20&quot; /&gt;
+        <span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span> 配置初始化大小、最小、最大 <span class="token operator">--</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>property name<span class="token operator">=</span><span class="token string">"initialSize"</span> value<span class="token operator">=</span><span class="token string">"3"</span> <span class="token operator">/</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>property name<span class="token operator">=</span><span class="token string">"minIdle"</span> value<span class="token operator">=</span><span class="token string">"3"</span> <span class="token operator">/</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>property name<span class="token operator">=</span><span class="token string">"maxActive"</span> value<span class="token operator">=</span><span class="token string">"20"</span> <span class="token operator">/</span><span class="token operator">></span>
 
-        &lt;!-- 配置获取连接等待超时的时间 --&gt;
-        &lt;property name=&quot;maxWait&quot; value=&quot;60000&quot; /&gt;
+        <span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span> 配置获取连接等待超时的时间 <span class="token operator">--</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>property name<span class="token operator">=</span><span class="token string">"maxWait"</span> value<span class="token operator">=</span><span class="token string">"60000"</span> <span class="token operator">/</span><span class="token operator">></span>
 
-        &lt;!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 --&gt;
-        &lt;property name=&quot;timeBetweenEvictionRunsMillis&quot; value=&quot;60000&quot; /&gt;
+        <span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span> 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 <span class="token operator">--</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>property name<span class="token operator">=</span><span class="token string">"timeBetweenEvictionRunsMillis"</span> value<span class="token operator">=</span><span class="token string">"60000"</span> <span class="token operator">/</span><span class="token operator">></span>
 
-        &lt;!-- 配置一个连接在池中最小生存的时间，单位是毫秒 --&gt;
-        &lt;property name=&quot;minEvictableIdleTimeMillis&quot; value=&quot;300000&quot; /&gt;
+        <span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span> 配置一个连接在池中最小生存的时间，单位是毫秒 <span class="token operator">--</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>property name<span class="token operator">=</span><span class="token string">"minEvictableIdleTimeMillis"</span> value<span class="token operator">=</span><span class="token string">"300000"</span> <span class="token operator">/</span><span class="token operator">></span>
 
-        &lt;property name=&quot;validationQuery&quot; value=&quot;SELECT 1&quot; /&gt;
-        &lt;property name=&quot;testWhileIdle&quot; value=&quot;true&quot; /&gt;
-        &lt;property name=&quot;testOnBorrow&quot; value=&quot;false&quot; /&gt;
-        &lt;property name=&quot;testOnReturn&quot; value=&quot;false&quot; /&gt;
+        <span class="token operator">&lt;</span>property name<span class="token operator">=</span><span class="token string">"validationQuery"</span> value<span class="token operator">=</span><span class="token string">"SELECT 1"</span> <span class="token operator">/</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>property name<span class="token operator">=</span><span class="token string">"testWhileIdle"</span> value<span class="token operator">=</span><span class="token string">"true"</span> <span class="token operator">/</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>property name<span class="token operator">=</span><span class="token string">"testOnBorrow"</span> value<span class="token operator">=</span><span class="token string">"false"</span> <span class="token operator">/</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>property name<span class="token operator">=</span><span class="token string">"testOnReturn"</span> value<span class="token operator">=</span><span class="token string">"false"</span> <span class="token operator">/</span><span class="token operator">></span>
 
-        &lt;!-- 打开PSCache，并且指定每个连接上PSCache的大小 --&gt;
-        &lt;property name=&quot;poolPreparedStatements&quot; value=&quot;true&quot; /&gt;
-        &lt;property name=&quot;maxPoolPreparedStatementPerConnectionSize&quot; value=&quot;20&quot; /&gt;
-    &lt;/bean&gt;
+        <span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span> 打开PSCache，并且指定每个连接上PSCache的大小 <span class="token operator">--</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>property name<span class="token operator">=</span><span class="token string">"poolPreparedStatements"</span> value<span class="token operator">=</span><span class="token string">"true"</span> <span class="token operator">/</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>property name<span class="token operator">=</span><span class="token string">"maxPoolPreparedStatementPerConnectionSize"</span> value<span class="token operator">=</span><span class="token string">"20"</span> <span class="token operator">/</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>bean<span class="token operator">></span>
 
-    &lt;!--     &lt;bean id=&quot;dataSource&quot; class=&quot;org.springframework.jdbc.datasource.DriverManagerDataSource&quot;&gt;   --&gt;
-    &lt;!--       &lt;property name=&quot;driverClassName&quot;&gt;   --&gt;
-    &lt;!--           &lt;value&gt;com.mysql.jdbc.Driver&lt;/value&gt;   --&gt;
-    &lt;!--       &lt;/property&gt;   --&gt;
-    &lt;!--       &lt;property name=&quot;url&quot;&gt;   --&gt;
-    &lt;!--           &lt;value&gt;jdbc:mysql://localhost:3306/how2java?characterEncoding=UTF-8&lt;/value&gt;   --&gt;
+    <span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span>     <span class="token operator">&lt;</span>bean id<span class="token operator">=</span><span class="token string">"dataSource"</span> <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"org.springframework.jdbc.datasource.DriverManagerDataSource"</span><span class="token operator">></span>   <span class="token operator">--</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span>       <span class="token operator">&lt;</span>property name<span class="token operator">=</span><span class="token string">"driverClassName"</span><span class="token operator">></span>   <span class="token operator">--</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span>           <span class="token operator">&lt;</span>value<span class="token operator">></span>com<span class="token punctuation">.</span>mysql<span class="token punctuation">.</span>jdbc<span class="token punctuation">.</span>Driver<span class="token operator">&lt;</span><span class="token operator">/</span>value<span class="token operator">></span>   <span class="token operator">--</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span>       <span class="token operator">&lt;</span><span class="token operator">/</span>property<span class="token operator">></span>   <span class="token operator">--</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span>       <span class="token operator">&lt;</span>property name<span class="token operator">=</span><span class="token string">"url"</span><span class="token operator">></span>   <span class="token operator">--</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span>           <span class="token operator">&lt;</span>value<span class="token operator">></span>jdbc<span class="token operator">:</span>mysql<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>localhost<span class="token operator">:</span><span class="token number">3306</span><span class="token operator">/</span>how2java<span class="token operator">?</span>characterEncoding<span class="token operator">=</span>UTF<span class="token operator">-</span><span class="token number">8</span><span class="token operator">&lt;</span><span class="token operator">/</span>value<span class="token operator">></span>   <span class="token operator">--</span><span class="token operator">></span>
 
-    &lt;!--       &lt;/property&gt;   --&gt;
-    &lt;!--       &lt;property name=&quot;username&quot;&gt;   --&gt;
-    &lt;!--           &lt;value&gt;root&lt;/value&gt;   --&gt;
-    &lt;!--       &lt;/property&gt;   --&gt;
-    &lt;!--       &lt;property name=&quot;password&quot;&gt;   --&gt;
-    &lt;!--           &lt;value&gt;Ab711910&lt;/value&gt;   --&gt;
-    &lt;!--       &lt;/property&gt;      --&gt;
-    &lt;!--     &lt;/bean&gt;    --&gt;
-
-
-    &lt;bean id=&quot;sqlSession&quot; class=&quot;org.mybatis.spring.SqlSessionFactoryBean&quot;&gt;
-        &lt;property name=&quot;typeAliasesPackage&quot; value=&quot;pojo&quot; /&gt;
-        &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;/&gt;
-        &lt;property name=&quot;mapperLocations&quot; value=&quot;classpath:mapper/Category.xml&quot;/&gt;
-        &lt;property name=&quot;plugins&quot;&gt;
-            &lt;array&gt;
-                &lt;bean class=&quot;com.github.pagehelper.PageInterceptor&quot;&gt;
-                    &lt;property name=&quot;properties&quot;&gt;
-                        &lt;!--使用下面的方式配置参数，一行配置一个 --&gt;
-                        &lt;value&gt;
-                        &lt;/value&gt;
-                    &lt;/property&gt;
-                &lt;/bean&gt;
-            &lt;/array&gt;
-        &lt;/property&gt;
-    &lt;/bean&gt;
-
-    &lt;bean class=&quot;org.mybatis.spring.mapper.MapperScannerConfigurer&quot;&gt;
-        &lt;property name=&quot;basePackage&quot; value=&quot;mapper&quot;/&gt;
-    &lt;/bean&gt;
+    <span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span>       <span class="token operator">&lt;</span><span class="token operator">/</span>property<span class="token operator">></span>   <span class="token operator">--</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span>       <span class="token operator">&lt;</span>property name<span class="token operator">=</span><span class="token string">"username"</span><span class="token operator">></span>   <span class="token operator">--</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span>           <span class="token operator">&lt;</span>value<span class="token operator">></span>root<span class="token operator">&lt;</span><span class="token operator">/</span>value<span class="token operator">></span>   <span class="token operator">--</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span>       <span class="token operator">&lt;</span><span class="token operator">/</span>property<span class="token operator">></span>   <span class="token operator">--</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span>       <span class="token operator">&lt;</span>property name<span class="token operator">=</span><span class="token string">"password"</span><span class="token operator">></span>   <span class="token operator">--</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span>           <span class="token operator">&lt;</span>value<span class="token operator">></span>Ab711910<span class="token operator">&lt;</span><span class="token operator">/</span>value<span class="token operator">></span>   <span class="token operator">--</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span>       <span class="token operator">&lt;</span><span class="token operator">/</span>property<span class="token operator">></span>      <span class="token operator">--</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span>     <span class="token operator">&lt;</span><span class="token operator">/</span>bean<span class="token operator">></span>    <span class="token operator">--</span><span class="token operator">></span>
 
 
-&lt;/beans&gt;
-</code></pre>
+    <span class="token operator">&lt;</span>bean id<span class="token operator">=</span><span class="token string">"sqlSession"</span> <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"org.mybatis.spring.SqlSessionFactoryBean"</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>property name<span class="token operator">=</span><span class="token string">"typeAliasesPackage"</span> value<span class="token operator">=</span><span class="token string">"pojo"</span> <span class="token operator">/</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>property name<span class="token operator">=</span><span class="token string">"dataSource"</span> ref<span class="token operator">=</span><span class="token string">"dataSource"</span><span class="token operator">/</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>property name<span class="token operator">=</span><span class="token string">"mapperLocations"</span> value<span class="token operator">=</span><span class="token string">"classpath:mapper/Category.xml"</span><span class="token operator">/</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>property name<span class="token operator">=</span><span class="token string">"plugins"</span><span class="token operator">></span>
+            <span class="token operator">&lt;</span>array<span class="token operator">></span>
+                <span class="token operator">&lt;</span>bean <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"com.github.pagehelper.PageInterceptor"</span><span class="token operator">></span>
+                    <span class="token operator">&lt;</span>property name<span class="token operator">=</span><span class="token string">"properties"</span><span class="token operator">></span>
+                        <span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span>使用下面的方式配置参数，一行配置一个 <span class="token operator">--</span><span class="token operator">></span>
+                        <span class="token operator">&lt;</span>value<span class="token operator">></span>
+                        <span class="token operator">&lt;</span><span class="token operator">/</span>value<span class="token operator">></span>
+                    <span class="token operator">&lt;</span><span class="token operator">/</span>property<span class="token operator">></span>
+                <span class="token operator">&lt;</span><span class="token operator">/</span>bean<span class="token operator">></span>
+            <span class="token operator">&lt;</span><span class="token operator">/</span>array<span class="token operator">></span>
+        <span class="token operator">&lt;</span><span class="token operator">/</span>property<span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>bean<span class="token operator">></span>
+
+    <span class="token operator">&lt;</span>bean <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"org.mybatis.spring.mapper.MapperScannerConfigurer"</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>property name<span class="token operator">=</span><span class="token string">"basePackage"</span> value<span class="token operator">=</span><span class="token string">"mapper"</span><span class="token operator">/</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>bean<span class="token operator">></span>
+
+
+<span class="token operator">&lt;</span><span class="token operator">/</span>beans<span class="token operator">></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 <li><p>原理：</p>
 <ol>
@@ -923,39 +923,39 @@ public class OrderItem &#123;
 <li><p>热部署：当发生了任何修改之后，必须关闭后再启动Application类才能够生效，显得略微麻烦。 Springboot提供了热部署的方式，当发现任何类发生了改变，马上通过JVM类加载的方式，加载最新的类到虚拟机中。 这样就不需要重新启动也能看到修改后的效果了</p>
 </li>
 <li><p>配置文件application.properties</p>
-<pre><code class="java">#server
-server.port=8080
+<pre class="line-numbers language-java"><code class="language-java">#server
+server<span class="token punctuation">.</span>port<span class="token operator">=</span><span class="token number">8080</span>
 #project path
-ContextPathserver.context-path=/
+ContextPathserver<span class="token punctuation">.</span>context<span class="token operator">-</span>path<span class="token operator">=</span><span class="token operator">/</span>
 #encoding
-server.tomcat.uri-encoding=UTF-8
+server<span class="token punctuation">.</span>tomcat<span class="token punctuation">.</span>uri<span class="token operator">-</span>encoding<span class="token operator">=</span>UTF<span class="token operator">-</span><span class="token number">8</span>
 #view prefix
-spring.mvc.view.prefix=/WEB-INF/jsp/
+spring<span class="token punctuation">.</span>mvc<span class="token punctuation">.</span>view<span class="token punctuation">.</span>prefix<span class="token operator">=</span><span class="token operator">/</span>WEB<span class="token operator">-</span>INF<span class="token operator">/</span>jsp<span class="token operator">/</span>
 #view suffix
-spring.mvc.view.suffix=.jsp
+spring<span class="token punctuation">.</span>mvc<span class="token punctuation">.</span>view<span class="token punctuation">.</span>suffix<span class="token operator">=</span><span class="token punctuation">.</span>jsp
 #灵活地切换使用环境
-spring.profiles.active=pro
+spring<span class="token punctuation">.</span>profiles<span class="token punctuation">.</span>active<span class="token operator">=</span>pro
 #jdbc
-spring.datasource.url=jdbc:mysql://localhost:3306/how2java?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false&amp;zeroDateTimeBehavior=convertToNull&amp;allowMultiQueries=true&amp;serverTimezone=UTC
-spring.datasource.username=root
-spring.datasource.password=Ab711910
-spring.datasource.driver-class-name=com.mysql.jdbc.Driver
+spring<span class="token punctuation">.</span>datasource<span class="token punctuation">.</span>url<span class="token operator">=</span>jdbc<span class="token operator">:</span>mysql<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>localhost<span class="token operator">:</span><span class="token number">3306</span><span class="token operator">/</span>how2java<span class="token operator">?</span>useUnicode<span class="token operator">=</span><span class="token boolean">true</span><span class="token operator">&amp;</span>characterEncoding<span class="token operator">=</span>utf<span class="token operator">-</span><span class="token number">8</span><span class="token operator">&amp;</span>useSSL<span class="token operator">=</span><span class="token boolean">false</span><span class="token operator">&amp;</span>zeroDateTimeBehavior<span class="token operator">=</span>convertToNull<span class="token operator">&amp;</span>allowMultiQueries<span class="token operator">=</span><span class="token boolean">true</span><span class="token operator">&amp;</span>serverTimezone<span class="token operator">=</span>UTC
+spring<span class="token punctuation">.</span>datasource<span class="token punctuation">.</span>username<span class="token operator">=</span>root
+spring<span class="token punctuation">.</span>datasource<span class="token punctuation">.</span>password<span class="token operator">=</span>Ab711910
+spring<span class="token punctuation">.</span>datasource<span class="token punctuation">.</span>driver<span class="token operator">-</span><span class="token keyword">class</span><span class="token operator">-</span>name<span class="token operator">=</span>com<span class="token punctuation">.</span>mysql<span class="token punctuation">.</span>jdbc<span class="token punctuation">.</span>Driver
 #mybatis
-mybatis.mapper-locations=classpath:mapper/*.xml
-mybatis.type-aliases-package=com.csust.vo
-</code></pre>
+mybatis<span class="token punctuation">.</span>mapper<span class="token operator">-</span>locations<span class="token operator">=</span>classpath<span class="token operator">:</span>mapper<span class="token operator">/</span><span class="token operator">*</span><span class="token punctuation">.</span>xml
+mybatis<span class="token punctuation">.</span>type<span class="token operator">-</span>aliases<span class="token operator">-</span><span class="token keyword">package</span><span class="token operator">=</span>com<span class="token punctuation">.</span>csust<span class="token punctuation">.</span>vo
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 <li><p>对应的yml类型的配置文件application.yml（二选一即可）</p>
-<pre><code class="java">
-spring:
-    mvc:
-        view:
-            prefix: /WEB-INF/jsp/
-            suffix: .jsp
-server:
-    port: 8888
-    context-path: /test
-</code></pre>
+<pre class="line-numbers language-java"><code class="language-java">
+spring<span class="token operator">:</span>
+    mvc<span class="token operator">:</span>
+        view<span class="token operator">:</span>
+            prefix<span class="token operator">:</span> <span class="token operator">/</span>WEB<span class="token operator">-</span>INF<span class="token operator">/</span>jsp<span class="token operator">/</span>
+            suffix<span class="token operator">:</span> <span class="token punctuation">.</span>jsp
+server<span class="token operator">:</span>
+    port<span class="token operator">:</span> <span class="token number">8888</span>
+    context<span class="token operator">-</span>path<span class="token operator">:</span> <span class="token operator">/</span>test
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 <li><p>多配置文件：例如<br>核心配置文件：application.properties<br>开发环境用的配置文件：application-dev.properties<br>生产环境用的配置文件：application-pro.properties<br>可以通过application.properties里的spring.profiles.active 灵活地来切换使用环境</p>
 </li>
@@ -1338,9 +1338,9 @@ server:
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="Hexo发布">
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="Hexo发布博客命令">
                         
-                        <span class="card-title">Hexo发布</span>
+                        <span class="card-title">Hexo发布博客命令</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1357,8 +1357,8 @@ server:
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/" class="post-category">
-                                    使用说明
+                            <a href="/categories/Instructions/" class="post-category">
+                                    Instructions
                                 </a>
                             
                             
@@ -1501,7 +1501,7 @@ server:
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2022</span>
+                <span id="year">2022-2023</span>
             
             <a href="/about" target="_blank">HL</a>
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>

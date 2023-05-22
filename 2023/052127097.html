@@ -1,0 +1,1757 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Linux教程, 朝暮惜">
+    <meta name="description" content="Linux简介Linux 是一套免费使用和自由传播的类 Unix 操作系统，是一个基于 POSIX 和 UNIX 的多用户、多任务、支持多线程和多 CPU 的操作系统。Linux 能运行主要的 UNIX 工具软件、应用程序和网络协议。它支持">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', '');
+</script>
+
+
+    <title>Linux教程 | 朝暮惜</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="朝暮惜" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">朝暮惜</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">朝暮惜</div>
+        <div class="logo-desc">
+            
+            活到老，学到老
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/22.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Linux教程</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Linux/">
+                                <span class="chip bg-color">Linux</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Linux/" class="post-category">
+                                Linux
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-05-21
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2023-05-21
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    12.4k
+                </div>
+                
+
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+        <!-- 代码块折行 -->
+        <style type="text/css">
+            code[class*="language-"], pre[class*="language-"] { white-space: pre-wrap !important; }
+        </style>
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="Linux简介"><a href="#Linux简介" class="headerlink" title="Linux简介"></a>Linux简介</h2><p>Linux 是一套免费使用和自由传播的类 Unix 操作系统，是一个基于 POSIX 和 UNIX 的多用户、多任务、支持多线程和多 CPU 的操作系统。Linux 能运行主要的 UNIX 工具软件、应用程序和网络协议。它支持 32 位和 64 位硬件。Linux 继承了 Unix 以网络为核心的设计思想，是一个性能稳定的多用户网络操作系统。目前国内 Linux 更多的是应用于服务器上，通常服务器使用 LAMP（Linux + Apache + MySQL + PHP）或 LNMP（Linux + Nginx+ MySQL + PHP）组合。</p>
+<hr>
+<h2 id="Linux系统启动过程及关机"><a href="#Linux系统启动过程及关机" class="headerlink" title="Linux系统启动过程及关机"></a>Linux系统启动过程及关机</h2><ul>
+<li>启动过程<br><img src="https://s2.loli.net/2023/05/21/YwberPAk91Cms8R.png" alt="Linux系统启动过程"></li>
+<li>关机<br>linux大多用在服务器上，很少遇到关机的操作。毕竟服务器上跑一个服务是永无止境的，除非特殊情况下，不得已才会关机。正确的关机流程为：sync &gt; shutdown &gt; reboot &gt; halt。关机指令为：shutdown 。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>sync</td>
+<td>将数据由内存同步到硬盘中。</td>
+</tr>
+<tr>
+<td>shutdown</td>
+<td>关机指令，你可以man shutdown 来看一下帮助文档。</td>
+</tr>
+<tr>
+<td>shutdown –h 10 ‘This server will shutdown after 10 mins’</td>
+<td>这个命令告诉大家，计算机将在10分钟后关机，并且会显示在登陆用户的当前屏幕中。</td>
+</tr>
+<tr>
+<td>shutdown –h now</td>
+<td>立马关机</td>
+</tr>
+<tr>
+<td>shutdown –h 20:25</td>
+<td>系统会在今天20:25关机</td>
+</tr>
+<tr>
+<td>shutdown –h +10</td>
+<td>十分钟后关机</td>
+</tr>
+<tr>
+<td>shutdown –r now</td>
+<td>系统立马重启</td>
+</tr>
+<tr>
+<td>shutdown –r +10</td>
+<td>系统十分钟后重启</td>
+</tr>
+<tr>
+<td>reboot</td>
+<td>就是重启，等同于 shutdown –r now</td>
+</tr>
+<tr>
+<td>halt</td>
+<td>关闭系统，等同于shutdown –h now 和 poweroff</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="Linux系统目录结构"><a href="#Linux系统目录结构" class="headerlink" title="Linux系统目录结构"></a>Linux系统目录结构</h2><p><img src="https://s2.loli.net/2023/05/21/mifOeHSNupYarwF.png" alt="Linux系统目录结构"><strong>&#x2F;bin</strong>：<br>bin 是 Binaries (二进制文件) 的缩写, 这个目录存放着最经常使用的命令。</p>
+<ul>
+<li><p><strong>&#x2F;boot：</strong><br>这里存放的是启动 Linux 时使用的一些核心文件，包括一些连接文件以及镜像文件。</p>
+</li>
+<li><p><strong>&#x2F;dev ：</strong><br>dev 是 Device(设备) 的缩写, 该目录下存放的是 Linux 的外部设备，在 Linux 中访问设备的方式和访问文件的方式是相同的。</p>
+</li>
+<li><p><strong>&#x2F;etc：</strong><br>etc 是 Etcetera(等等) 的缩写,这个目录用来存放所有的系统管理所需要的配置文件和子目录。</p>
+</li>
+<li><p><strong>&#x2F;home</strong>：<br>用户的主目录，在 Linux 中，每个用户都有一个自己的目录，一般该目录名是以用户的账号命名的，如上图中的 alice、bob 和 eve。</p>
+</li>
+<li><p><strong>&#x2F;lib</strong>：<br>lib 是 Library(库) 的缩写这个目录里存放着系统最基本的动态连接共享库，其作用类似于 Windows 里的 DLL 文件。几乎所有的应用程序都需要用到这些共享库。</p>
+</li>
+<li><p><strong>&#x2F;lost+found</strong>：<br>这个目录一般情况下是空的，当系统非法关机后，这里就存放了一些文件。</p>
+</li>
+<li><p><strong>&#x2F;media</strong>：<br>linux 系统会自动识别一些设备，例如U盘、光驱等等，当识别后，Linux 会把识别的设备挂载到这个目录下。</p>
+</li>
+<li><p><strong>&#x2F;mnt</strong>：<br>系统提供该目录是为了让用户临时挂载别的文件系统的，例如将光驱挂载在 &#x2F;mnt&#x2F; 上，然后进入该目录就可以查看光驱里的内容了。</p>
+</li>
+<li><p><strong>&#x2F;opt</strong>：<br>opt 是 optional(可选) 的缩写，这是给主机额外安装软件所摆放的目录。比如安装一个ORACLE数据库则就可以放到这个目录下。默认是空的。</p>
+</li>
+<li><p><strong>&#x2F;proc</strong>：<br>proc 是 Processes(进程) 的缩写，&#x2F;proc 是一种伪文件系统（也即虚拟文件系统），存储的是当前内核运行状态的一系列特殊文件，这个目录是一个虚拟的目录，它是系统内存的映射，我们可以通过直接访问这个目录来获取系统信息。  这个目录的内容不在硬盘上而是在内存里，可以直接修改里面的某些文件</p>
+</li>
+<li><p><strong>&#x2F;root</strong>：<br>该目录为系统管理员，也称作超级权限者的用户主目录。</p>
+</li>
+<li><p><strong>&#x2F;sbin</strong>：<br>s 就是 Super User 的意思，是 Superuser Binaries (超级用户的二进制文件) 的缩写，这里存放的是系统管理员使用的系统管理程序。</p>
+</li>
+<li><p><strong>&#x2F;selinux</strong>：<br> 这个目录是 Redhat&#x2F;CentOS 所特有的目录，Selinux 是一个安全机制，类似于 windows 的防火墙，但是这套机制比较复杂，这个目录就是存放selinux相关的文件的。</p>
+</li>
+<li><p><strong>&#x2F;srv</strong>：<br> 该目录存放一些服务启动之后需要提取的数据。</p>
+</li>
+<li><p><strong>&#x2F;sys</strong>：<br>这是 Linux2.6 内核的一个很大的变化。该目录下安装了 2.6 内核中新出现的一个文件系统 sysfs 。sysfs 文件系统集成了下面3种文件系统的信息：针对进程信息的 proc 文件系统、针对设备的 devfs 文件系统以及针对伪终端的 devpts 文件系统。 该文件系统是内核设备树的一个直观反映。当一个内核对象被创建的时候，对应的文件和目录也在内核对象子系统中被创建。</p>
+</li>
+<li><p><strong>&#x2F;tmp</strong>：<br>tmp 是 temporary(临时) 的缩写这个目录是用来存放一些临时文件的。</p>
+</li>
+<li><p><strong>&#x2F;usr</strong>：<br> usr 是 unix shared resources(共享资源) 的缩写，这是一个非常重要的目录，用户的很多应用程序和文件都放在这个目录下，类似于 windows 下的 program files 目录。</p>
+</li>
+<li><p><strong>&#x2F;usr&#x2F;bin：</strong><br>系统用户使用的应用程序。</p>
+</li>
+<li><p><strong>&#x2F;usr&#x2F;sbin：</strong><br>超级用户使用的比较高级的管理程序和系统守护程序。</p>
+</li>
+<li><p><strong>&#x2F;usr&#x2F;src：</strong><br>内核源代码默认的放置目录。</p>
+</li>
+<li><p><strong>&#x2F;var</strong>：<br>var 是 variable(变量) 的缩写，这个目录中存放着在不断扩充着的东西，习惯上将那些经常被修改的目录放在这个目录下。包括各种日志文件。</p>
+</li>
+<li><p><strong>&#x2F;run</strong>：<br>是一个临时文件系统，存储系统启动以来的信息。当系统重启时，这个目录下的文件应该被删掉或清除。如果你的系统上有 &#x2F;var&#x2F;run 目录，应该让它指向 run。</p>
+</li>
+</ul>
+<p>在 Linux 系统中，有几个目录是比较重要的，平时需要注意不要误删除或者随意更改内部文件。</p>
+<p><strong>&#x2F;etc</strong>： 上边也提到了，这个是系统中的配置文件，如果你更改了该目录下的某个文件可能会导致系统不能启动。<br><strong>&#x2F;bin, &#x2F;sbin, &#x2F;usr&#x2F;bin, &#x2F;usr&#x2F;sbin</strong>: 这是系统预设的执行文件的放置目录，比如 ls 就是在 &#x2F;bin&#x2F;ls目录下的。其中 &#x2F;bin、&#x2F;usr&#x2F;bin 是给系统用户使用的指令（除 root 外的通用用户），而&#x2F;sbin, &#x2F;usr&#x2F;sbin 则是给 root 使用的指令。<br><strong>&#x2F;var</strong>： 这是一个非常重要的目录，系统上跑了很多程序，那么每个程序都会有相应的日志产生，而这些日志就被记录到这个目录下，具体在 &#x2F;var&#x2F;log 目录下，另外 mail 的预设放置也是在这里。</p>
+<h2 id="Linux内存和CPU管理"><a href="#Linux内存和CPU管理" class="headerlink" title="Linux内存和CPU管理"></a>Linux内存和CPU管理</h2><p>常用命令：</p>
+<ul>
+<li><p>free：命令显示系统内存的使用情况，包括物理内存、交换内存(swap)和内核缓冲区内存。</p>
+</li>
+<li><p>ping：用于检测主机。使用ICMP传输协议，发出要求回应的信息。</p>
+</li>
+<li><p>vmstat：(VirtualMeomoryStatistics）虚拟内存统计</p>
+</li>
+<li><p><strong>iostat：</strong>用于报告中央处理器（CPU）统计信息和整个系统、适配器、tty 设备、磁盘和 CD-ROM 的输入&#x2F;输出统计信息</p>
+</li>
+<li><p><strong>dstat ：</strong>显示了cpu使用情况，磁盘io情况，网络发包情况和换页情况，输出是彩色的，可读性较强，相对于vmstat和iostat的输入更加详细且较为直观。</p>
+</li>
+<li><p><strong>pidstat ：</strong>主要用于监控全部或指定进程占用系统资源的情况,如CPU,内存、设备IO、任务切换、线程等。</p>
+</li>
+<li><p><strong>top：</strong> 命令的汇总区域显示了五个方面的系统性能信息：负载、进程状态、cpu使用率、内存使用、交换分区。</p>
+</li>
+<li><p><strong>iotop：</strong> LINUX进程实时监控工具，界面风格类似top命令</p>
+</li>
+<li><p><strong>htop：</strong> 是Linux系统中的一个互动的进程查看器,一个文本模式的应用程序(在控制台或者X终端中),需要ncurses。</p>
+</li>
+<li><p><strong>mpstat：</strong> Report processors related statistics. 报告CPU的统计信息。</p>
+</li>
+<li><p><strong>netstat：</strong> 用于显示与IP、TCP、UDP和ICMP协议相关的统计数据，一般用于检验本机各端口的网络连接情况。</p>
+</li>
+<li><p><strong>ps：</strong> 显示当前进程的状态</p>
+</li>
+<li><p><strong>strace：</strong> Trace system calls and signals。跟踪程序执行过程中产生的系统调用及接收到的信号，帮助分析程序或命令执行中遇到的异常情况。</p>
+</li>
+<li><p>ltrace： A library call tracer 跟踪进程调用库函数的情况</p>
+</li>
+<li><p><strong>uptime：</strong> 能够打印系统总共运行了多长时间和系统的平均负载，uptime命令最后输出的三个数字的含义分别是1分钟，5分钟，15分钟内系统的平均负荷</p>
+</li>
+<li><p><strong>lsof：</strong> (list open files)是一个列出当前系统打开文件的工具。</p>
+</li>
+<li><p><strong>perf：</strong> 是Linux kernel自带的系统性能优化工具。优势在于与Linux Kernel的紧密结合，它可以最先应用到加入Kernel的new feature，用于查看热点函数，查看cashe miss的比率，从而帮助开发者来优化程序性能。</p>
+</li>
+<li><p>tcpdump：可以将网络中传送的数据包完全截获下来以供分析。</p>
+</li>
+<li><p>sar：（System Activity Reporter系统活动情况报告）是目前 Linux 上最为全面的系统性能分析工具之一，可以从多方面对系统的活动进行报告，包括：文件的读写情况、系统调用的使用情况、磁盘I&#x2F;O、CPU效率、内存使用状况、进程活动及IPC有关的活动等。</p>
+</li>
+<li><p>blktrace：记录一个IO进入block layer后的各个步骤。可以通过各个步骤的时间统计进行IO性能问题的调查。</p>
+</li>
+<li><p><strong>grep：</strong> 命令用于在文件中执行关键词搜索，并显示匹配的效果。</p>
+<blockquote>
+<p>-c 仅显示找到的行数<br>-i 忽略大小写<br>-n 显示行号<br>-v 反向选择 – 仅列出没有关键词的行。v 是 invert 的缩写。<br>-r 递归搜索文件目录<br>-C n 打印匹配行的前后n行</p>
+</blockquote>
+</li>
+<li><p><strong>find：</strong>通过文件名查找文件的所在位置，文件名查找支持模糊匹配。<code>find [指定查找目录] [查找规则] [查找完后执行的action]</code></p>
+</li>
+<li><p>wc：（Word Count）用于计算字数。 利用wc指令我们可以计算文件的Byte数、字数、或是列数，若不指定文件名称、或是所给予的文件名为”-“，则wc指令会从标准输入设备读取数据。</p>
+<blockquote>
+<p>-c或–bytes或–chars 只显示Bytes数。<br>-l或–lines 只显示行数。<br>-w或–words 只显示字数。</p>
+</blockquote>
+</li>
+<li><p><strong>ulimit：</strong>Linux系统对每个登录的用户都限制其最大进程数和打开的最大文件句柄数。为了提高性能，可以根据硬件资源的具体情况设置各个用户的最大进程数和打开的最大文件句柄数。可以用ulimit -a来显示当前的各种系统对用户使用资源的限制</p>
+</li>
+<li><p><strong>curl：</strong>是一个利用URL规则在命令行下工作的文件传输工具，可以说是一款很强大的http命令行工具。它支持文件的上传和下载，是综合传输工具，由于当前的线上服务较多地使用了RESTful风格的API，所以集成测试就需要进行HTTP调用，查看返回的结果是否符合预期，curl命令是首选的测试方法。</p>
+</li>
+<li><p><strong>scp：</strong>远程拷贝secure copy的缩写, scp是linux系统下基于ssh登陆进行安全的远程文件拷贝命令。scp命令是Linux系统中功能强大的文件传输命令，可以实现从本地到远程，以及从远程到本地的双向文件传输，用起来非常方便，常用来在线上定位问题时将线上的一些文件下载到本地进行详查，或者将本地的修改上传到服务器上。</p>
+</li>
+<li><p>dos2unix和unix2dos：用于转换Windows和UNIX的换行符，通常在Windows系统h开发的脚本和配置，UNIX系统下都需要转换。</p>
+</li>
+<li><p><strong>sed：</strong>常用于匹配模式，也可以用来批量修改文本内容的，比如批量替换配置中的某个ip。sed命令在处理时，会先读取一行，把当前处理的行存储在临时缓冲区中，处理完缓冲区中的内容后，打印到屏幕上。然后再读入下一行，执行下一个循环。不断的重复，直到文件末尾。</p>
+<blockquote>
+<p>匹配模式：<code>sed -n &#39;2,5 p&#39; sed1.cpp</code></p>
+<p>一个简单的sed命令包含三个主要部分： 参数、范围、操作。要操作的文件，可以直接挂在命令行的最后。-n 这个参数是–quiet 或者–silent 的意思。表明忽略执行过程的输出，只输出我们的结果即可。2,5 表示找到文件中,2,3,4,5行的内容。最常用的操作就是p ，意思就是打印。</p>
+<p>替换模式：</p>
+<p>命令格式1：sed ‘s&#x2F;原字符串&#x2F;新字符串&#x2F;‘ 文件<br>命令格式2：sed ‘s&#x2F;原字符串&#x2F;新字符串&#x2F;g’ 文件<br>这两种命令格式的区别在于是否有个“g”。没有“g”表示只替换第一个匹配到的字符串，有“g”表示替换所有能匹配到的字符串，“g”可以认为是“global”（全局的）的缩写，没有“全局的”结尾就不要替换全部。</p>
+</blockquote>
+</li>
+<li><p><strong>awk：</strong> 同sed 命令类似，只不过sed 擅长取行， awk 命令擅长取列。一般是遍历一个文件中的每一行，然后分别对文件的每一行进行处理。用法:<code>awk [可选的命令行选项] &#39;BEGIN&#123;命令 &#125; pattern&#123; 命令 &#125; END&#123; 命令 &#125;&#39; 文件名</code></p>
+<p><img src="https://s2.loli.net/2023/05/21/JCly5SObZViKFwp.jpg" alt="Linux系统CPU性能查看命"></p>
+</li>
+</ul>
+<p><strong>内存性能监控</strong></p>
+<p>一个进程运行时都会得到4G的虚拟内存。这个虚拟内存你可以认为，每个进程都认为自己拥有4G的空间，这只是每个进程认为的，但是实际上，在虚拟内存对应的物理内存上，可能只对应的一点点的物理内存，实际用了多少内存，就会对应多少物理内存。<br>进程得到的这4G虚拟内存是一个连续的地址空间（这也只是进程认为），而实际上，它通常是被分隔成多个物理内存碎片，还有一部分存储在外部磁盘存储器上，在需要时进行数据交换。</p>
+<p>当每个进程创建的时候，内核会为进程分配4G的虚拟内存，当进程还没有开始运行时，这只是一个内存布局。实际上并不立即就把虚拟内存对应位置的程序数据和代码（比如.text .data段）拷贝到物理内存中，只是建立好虚拟内存和磁盘文件之间的映射就好（叫做存储器映射）。这个时候数据和代码还是在磁盘上的。当运行到对应的程序时，进程去寻找页表，发现页表中地址没有存放在物理内存上，而是在磁盘上，于是发生缺页异常，于是将磁盘上的数据拷贝到物理内存中。<br>另外在进程运行过程中，要通过malloc来动态分配内存时，也只是分配了虚拟内存，即为这块虚拟内存对应的页表项做相应设置，当进程真正访问到此数据时，才引发缺页异常。可以认为虚拟空间都被映射到了磁盘空间中（事实上也是按需要映射到磁盘空间上，通过mmap，mmap是用来建立虚拟空间和磁盘空间的映射关系的）</p>
+<h2 id="Linux文件管理"><a href="#Linux文件管理" class="headerlink" title="Linux文件管理"></a>Linux文件管理</h2><h4 id="基本属性"><a href="#基本属性" class="headerlink" title="基本属性"></a>基本属性</h4><p>在 Linux 中我们可以使用<code> ll </code>或者 <code>ls –l </code>命令来显示一个文件的属性以及文件所属的用户和组，如：</p>
+<p><img src="https://s2.loli.net/2023/05/21/l5KJhOiwZFnocRd.png" alt="Linux文件基本属性1"></p>
+<p>各部分含义如下：</p>
+<p><img src="https://s2.loli.net/2023/05/21/XQgmMkTo4E15pvr.png" alt="Linux文件基本属性2"></p>
+<p>实例中，在 Linux 中第一个字符代表这个文件是目录、文件或链接文件等等。</p>
+<ul>
+<li>当为 d 则是目录</li>
+<li>当为 - 则是文件；</li>
+<li>若是 l 则表示为链接文档(link file)；</li>
+<li>若是 b 则表示为装置文件里面的可供储存的接口设备(可随机存取装置)；</li>
+<li>若是 c 则表示为装置文件里面的串行端口设备，例如键盘、鼠标(一次性读取装置)。</li>
+</ul>
+<p>接下来的字符中，以三个为一组，且均为 rwx 的三个参数的组合。其中， r 代表可读(read)、 w 代表可写(write)、 x 代表可执行(execute)。 要注意的是，这三个权限的位置不会改变，如果没有权限，用减号 - 代替。每个文件的属性由左边第一部分的 10 个字符来确定（如下图）。</p>
+<p><img src="https://s2.loli.net/2023/05/21/QvwqyxenbrVk5G9.png" alt="Linux文件基本属性3"></p>
+<hr>
+<h4 id="文件属主和属组"><a href="#文件属主和属组" class="headerlink" title="文件属主和属组"></a>文件属主和属组</h4><p>在Linux系统中，用户是按组分类的，一个用户属于一个或多个组。因此，Linux系统按文件所有者、文件所有者同组用户和其他用户来规定了不同的文件访问权限。对于 root 用户来说，一般情况下，文件的权限对其不起作用。</p>
+<hr>
+<h4 id="更改文件属性"><a href="#更改文件属性" class="headerlink" title="更改文件属性"></a>更改文件属性</h4><ol>
+<li><p>更改文件属组：<br> <code>chgrp [-R] 属组名 文件名</code><br>其中：-R递归更改文件属组，在更改某个目录文件的属组时，如果加上-R的参数，那么该目录下的所有文件的属组都会更改。</p>
+</li>
+<li><p>更改文件属主，也可以同时更改文件属组：<br><code>chown [–R] 属主名 文件名</code><br><code>chown [-R] 属主名：属组名 文件名</code></p>
+</li>
+<li><p>更改文件9个属性:Linux文件属性有两种设置方法，一种是数字，一种是符号。Linux 文件的基本权限就有九个，分别是  -rwxrwxrwx ， 这九个权限是三个三个一组的！可以使用数字来代表各个权限，各权限的分数对照表如下：r:4、w:2、x:1。每种身份**(owner&#x2F;group&#x2F;others)**各自的三个权限(r&#x2F;w&#x2F;x)分数是需要累加的，例如当权限为： -rwxrwx— 分数则是：770。</p>
+</li>
+</ol>
+<ul>
+<li><p>数字类型变更权限的指令：<br>  <code>chmod [-R] xyz 文件或目录</code><br>  其中：<br>  xyz : 数字类型的权限属性，为 rwx属性数值的相加。<br>  -R : 进行递归(recursive)的持续变更，以及连同次目录下的所有文件都会变更</p>
+</li>
+<li><p>符号类型变更权限：可以使用 u, g, o来代表三种身份 user：用户、group：组、others：其他的权限。此外， a则代表 all，即全部的身份。读写的权限可以写成 r, w, x。如果需要将文件权限设置为 rwxr-xr–，可以使用<code> chmod u=rwx,g=rx,o=r 文件名 </code>来设定。如果是要将权限去掉而不改变其他已存在的权限，例如要拿掉全部人的可执行权限，则可以使用<code>chmod  a-x 文件名</code>来设定。</p>
+<p>  <img src="https://s2.loli.net/2023/05/21/xBgOw1VbvmaFLrS.png" alt="Linux文件1"></p>
+</li>
+</ul>
+<h4 id="文件与目录管理"><a href="#文件与目录管理" class="headerlink" title="文件与目录管理"></a>文件与目录管理</h4><ol>
+<li><p><strong>绝对和相对路径</strong>：Linux的目录结构为树状结构，最顶级的目录为根目录 &#x2F;。其他目录通过挂载可以将它们添加到树中，通过解除挂载可以移除它们。</p>
+<ul>
+<li>绝对路径：由根目录 &#x2F; 写起，例如： &#x2F;usr&#x2F;share&#x2F;doc 这个目录。</li>
+<li>相对路径：不是由 &#x2F; 写起，例如由 &#x2F;usr&#x2F;share&#x2F;doc 要到 &#x2F;usr&#x2F;share&#x2F;man 底下时，可以写成： cd ..&#x2F;man 这就是相对路径的写法。</li>
+</ul>
+</li>
+<li><p><strong>处理目录的常用命令</strong>：</p>
+</li>
+</ol>
+<ul>
+<li>ls（list files）: 列出目录及文件名</li>
+<li>cd（change directory）：切换目录</li>
+<li>pwd（print work directory）：显示目前的目录</li>
+<li>mkdir（make directory）：创建一个新的目录</li>
+<li>rmdir（remove directory）：删除一个空的目录</li>
+<li>cp（copy file）: 复制文件或目录</li>
+<li>rm（remove）: 删除文件或目录</li>
+<li>mv（move file）: 移动文件与目录，或修改文件与目录的名称</li>
+</ul>
+<p> **ls **：在Linux系统当中， ls 命令可能是最常被运行的。<br>     可选参数：<br>        -a ：全部的文件，连同隐藏文件( 开头为 . 的文件) 一起列出来(常用)<br>        -d ：仅列出目录本身，而不是列出目录内的文件数据(常用)<br>        -l ：长数据串列出，包含文件的属性与权限等等数据；(常用)<br>    例如：将家目录下的所有文件列出来(含属性与隐藏档)：<code>[root@www ~]# ls -al ~</code></p>
+<p>**cd **：<code>cd [相对路径或绝对路径]</code><br>    例如:回到自己的家目录，亦即是 &#x2F;root 这个目录：<code>[root@www test]# cd ~</code><br>    回到目前的上一级目录，:<code>[root@www ~]# cd ..</code>，其中.表示当前目录</p>
+<p><strong>pwd</strong> ：<code>pwd [-p]</code><br>    可选参数：-P ：显示出确实的路径，而非使用连结 (link) 路径。</p>
+<p><strong>mkdir</strong>：<code>mkdir [-mp] 目录名称</code><br>    可选参数：<br>    -m ：配置文件的权限。如果没有加上 -m 来强制配置属性，系统会使用默认属性。例<code>mkdir -m 711 test2</code><br>    -p ：帮助你直接将所需要的目录(包含上一级目录)递归创建起来！例<code>[root@www tmp]# mkdir -p test1/test2/test3/test4</code></p>
+<p> **rmdir **：<code>rmdir [-p] 目录名称</code><br>     可选参数：  -p ：从该目录起，一次删除多级空目录<br>     不过要注意的是，这个 rmdir 仅能删除空的目录，删除非空目录可以使用 rm 命令。</p>
+<p> **cp **:<code>cp [-adfilprsu] 来源档(source) 目标档(destination)</code>–&gt;<code>cp [options] source1 source2 source3 .... directory</code><br>    可选参数：<br>    -a：相当于 -pdr 的意思，至于 pdr 请参考下列说明；(常用)<br>    -d：若来源档为连结档的属性(link file)，则复制连结档属性而非文件本身；<br>    -f：为强制(force)的意思，若目标文件已经存在且无法开启，则移除后再尝试一次；<br>    -i：若目标档(destination)已经存在时，在覆盖时会先询问动作的进行(常用)<br>    -l：进行硬式连结(hard link)的连结档创建，而非复制文件本身；<br>    -p：连同文件的属性一起复制过去，而非使用默认属性(备份常用)；<br>    -r：递归持续复制，用于目录的复制行为；(常用)<br>    -s：复制成为符号连结档 (symbolic link)，亦即『捷径』文件；<br>    -u：若 destination 比 source 旧才升级 destination ！</p>
+<p>**rm **：<code>rm [-fir] 文件或目录</code><br>    可选参数：<br>    -f ：就是 force 的意思，忽略不存在的文件，不会出现警告信息；<br>    -i ：互动模式，在删除前会询问使用者是否动作<br>    -r ：递归删除啊！最常用在目录的删除了！这是非常危险的选项！！！</p>
+<p><strong>mv</strong> ：&#96;&#96;mv [-fiu] source destination<code>--&gt;</code>mv [options] source1 source2 source3 …. directory&#96;<br>    可选参数：<br>    -f ：force 强制的意思，如果目标文件已经存在，不会询问而直接覆盖；<br>    -i ：若目标文件 (destination) 已经存在时，就会询问是否覆盖！<br>    -u ：若目标文件已经存在，且 source 比较新，才会升级 (update)</p>
+<h4 id="Linux-文件内容查看"><a href="#Linux-文件内容查看" class="headerlink" title="Linux 文件内容查看"></a>Linux 文件内容查看</h4><p>Linux系统中使用以下命令来查看文件的内容：</p>
+<ul>
+<li>cat  由第一行开始显示文件内容</li>
+<li>tac  从最后一行开始显示，可以看出 tac 是 cat 的倒着写！</li>
+<li>nl   显示的时候，输出行号！</li>
+<li>more 一页一页的显示文件内容</li>
+<li>less 与 more 类似，但是比 more 更好的是，他可以往前翻页！</li>
+<li>head 只看头几行</li>
+<li>tail 只看尾巴几行</li>
+</ul>
+<p><strong>cat</strong>：<code>cat [-AbEnTv]</code><br>    选项与参数：<br>    -A ：相当于 -vET 的整合选项，可列出一些特殊字符而不是空白而已；<br>    -b ：列出行号，仅针对非空白行做行号显示，空白行不标行号！<br>    -E ：将结尾的断行字节 $ 显示出来；<br>    -n ：列出行号，连同空白行也会有行号，与 -b 的选项不同；<br>    -T ：将 [tab] 按键以 ^I 显示出来；<br>    -v ：列出一些看不出来的特殊字符</p>
+<p><strong>nl</strong>：<code>nl [-bnw] 文件</code><br>    可选参数：<br>    -b ：指定行号指定的方式，主要有两种：<br>    -b a ：表示不论是否为空行，也同样列出行号(类似 cat -n)；<br>    -b t ：如果有空行，空的那一行不显示行号(默认值)；<br>    -n ：列出行号表示的方法，主要有三种：<br>    -n ln ：行号在荧幕的最左方显示；<br>    -n rn ：行号在自己栏位的最右方显示，且不加 0 ；<br>    -n rz ：行号在自己栏位的最右方显示，且加 0 ；<br>    -w ：行号栏位的占用的位数。</p>
+<p> <strong>more</strong>：<code>more /etc/man_db.config </code><br>    在 more 运行过程中，你有几个按键可以按的：<br>    空白键 (space)：代表向下翻一页；<br>    Enter ：代表向下翻『一行』；<br>    &#x2F;字串 ：代表在这个显示的内容当中，向下搜寻『字串』这个关键字；<br>    :f ：立刻显示出档名以及目前显示的行数；<br>    q ：代表立刻离开 more ，不再显示该文件内容。<br>    b 或 [ctrl]-b ：代表往回翻页，不过这动作只对文件有用，对管线无用。</p>
+<p><strong>less</strong>:<code>less /etc/man.config</code><br>    less运行时可以输入的命令有：<br>    空白键    ：向下翻动一页；<br>    [pagedown]：向下翻动一页；<br>    [pageup]  ：向上翻动一页；<br>    &#x2F;字串     ：向下搜寻『字串』的功能；<br>    ?字串     ：向上搜寻『字串』的功能；<br>    n         ：重复前一个搜寻 (与 &#x2F; 或 ? 有关！)<br>    N         ：反向的重复前一个搜寻 (与 &#x2F; 或 ? 有关！)<br>    q         ：离开 less 这个程序；</p>
+<p> <strong>head</strong>：<code>head [-n number] 文件 </code><br>    可选参数：<br>    -n ：后面接数字，代表显示几行的意思<br>    默认的情况中，显示前面 10 行！</p>
+<p><strong>tail</strong>：<code>tail [-n number] 文件</code><br>    可选参数：<br>    -n ：后面接数字，代表显示几行的意思<br>    -f ：表示持续侦测后面所接的档名，要等到按下[ctrl]-c才会结束tail的侦测<br>    默认的情况中，显示最后的十行！</p>
+<hr>
+<h2 id="Linux用户管理"><a href="#Linux用户管理" class="headerlink" title="Linux用户管理"></a>Linux用户管理</h2><p>Linux系统是一个多用户多任务的分时操作系统，任何一个要使用系统资源的用户，都必须首先向系统管理员申请一个账号，每个用户账号都拥有一个唯一的用户名和各自的口令。用户在登录时键入正确的用户名和口令后，就能够进入系统和自己的主目录。</p>
+<h4 id="用户账号的管理"><a href="#用户账号的管理" class="headerlink" title="用户账号的管理"></a>用户账号的管理</h4><p>用户账号的管理工作主要涉及到用户账号的添加、修改和删除。添加用户账号就是在系统中创建一个新账号，然后为新账号分配用户号、用户组、主目录和登录Shell等资源。刚添加的账号是被锁定的，无法使用。</p>
+<ol>
+<li>添加新的用户账号：<code>useradd 参数 用户名</code><br> 可选参数：<ul>
+<li>-c comment 指定一段注释性描述。</li>
+<li>-d 目录 指定用户主目录，如果此目录不存在，则同时使用-m选项，可以创建主目录。</li>
+<li>-g 用户组 指定用户所属的用户组。</li>
+<li>-G 用户组，指定用户所属的附加组。</li>
+<li>-s Shell文件 指定用户的登录Shell。</li>
+<li>-u 用户号 指定用户的用户号，如果同时有-o选项，则可以重复使用其他用户的标识号。</li>
+</ul>
+</li>
+</ol>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">//例1</span>
+useradd –d  <span class="token operator">/</span>home<span class="token operator">/</span>sam <span class="token operator">-</span>m sam
+<span class="token comment" spellcheck="true">//此命令创建了一个用户sam，其中-d和-m选项用来为登录名sam产生一个主目录 /home/sam（/home为默认的用户主目录所在的父目录）。</span>
+
+<span class="token comment" spellcheck="true">//例2</span>
+#useradd <span class="token operator">-</span>s <span class="token operator">/</span>bin<span class="token operator">/</span>sh <span class="token operator">-</span>g group –G adm<span class="token punctuation">,</span>root gem
+<span class="token comment" spellcheck="true">//此命令新建了一个用户gem，该用户的登录Shell是 `/bin/sh`，它属于group用户组，同时又属于adm和root用户组，其中group用户组是其主组。这里可能新建组：`#groupadd group及groupadd adm`</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ol start="2">
+<li>添加批量用户<br> 添加和删除用户对每位Linux系统管理员都是轻而易举的事，比较棘手的是添加几十个、上百个甚至上千个用户Linux系统提供了创建大量用户的工具，可以让您立即创建大量用户，方法如下：</li>
+</ol>
+<ul>
+<li><p>先编辑一个文本用户文件。<br>每一列按照&#x2F;etc&#x2F;passwd密码文件的格式书写，要注意每个用户的用户名、UID、宿主目录都不可以相同，其中密码栏可以留做空白或输入x号。一个范例文件user.txt内容如下：<br>user001::600:100:user:&#x2F;home&#x2F;user001:&#x2F;bin&#x2F;bash<br>user002::601:100:user:&#x2F;home&#x2F;user002:&#x2F;bin&#x2F;bash<br>user003::602:100:user:&#x2F;home&#x2F;user003:&#x2F;bin&#x2F;bash<br>user004::603:100:user:&#x2F;home&#x2F;user004:&#x2F;bin&#x2F;bash<br>user005::604:100:user:&#x2F;home&#x2F;user005:&#x2F;bin&#x2F;bash<br>user006::605:100:user:&#x2F;home&#x2F;user006:&#x2F;bin&#x2F;bash</p>
+</li>
+<li><p>以root身份执行命令 &#x2F;usr&#x2F;sbin&#x2F;newusers，从刚创建的用户文件user.txt中导入数据，创建用户：newusers &lt; user.txt。然后可以执行命令 vipw 或 vi &#x2F;etc&#x2F;passwd 检查 &#x2F;etc&#x2F;passwd文件是否已经出现这些用户的数据，并且用户的宿主目录是否已经创建。</p>
+</li>
+<li><p>执行命令&#x2F;usr&#x2F;sbin&#x2F;pwunconv。将 &#x2F;etc&#x2F;shadow产生的 shadow 密码解码，然后回写到 &#x2F;etc&#x2F;passwd中，并将&#x2F;etc&#x2F;shadow的shadow密码栏删掉。这是为了方便下一步的密码转换工作，即先取消 shadow password功能。</p>
+</li>
+<li><p>编辑每个用户的密码对照文件。格式为：用户名:密码实例文件 passwd.txt内容如下：<br>user001:123456<br>user002:123456<br>user003:123456<br>user004:123456<br>user005:123456<br>user006:123456</p>
+</li>
+<li><p>以 root 身份执行命令 &#x2F;usr&#x2F;sbin&#x2F;chpasswd。创建用户密码，chpasswd会将经过 &#x2F;usr&#x2F;bin&#x2F;passwd命令编码过的密码写入 &#x2F;etc&#x2F;passwd的密码栏。chpasswd &lt; passwd.txt</p>
+</li>
+<li><p>确定密码经编码写入&#x2F;etc&#x2F;passwd的密码栏后。执行命令 &#x2F;usr&#x2F;sbin&#x2F;pwconv将密码编码为 shadow password，并将结果写入 &#x2F;etc&#x2F;shadow。</p>
+</li>
+</ul>
+<ol start="3">
+<li><p>删除帐号:<code>userdel 参数 用户名</code><br>常用的可选参数是 -r，它的作用是把用户的主目录一起删除。</p>
+</li>
+<li><p>修改帐号:<code>usermod 参数 用户名</code><br>常用的可选参数包括-c, -d, -m, -g, -G, -s, -u以及-o等，这些选项的意义与useradd命令中的选项一样，可以为用户指定新的资源值。另外，有些系统可以使用选项：-l 新用户名。这个参数指定一个新的账号，即将原来的用户名改为新的用户名。</p>
+</li>
+<li><p>用户口令的管理<br>用户账号刚创建时没有口令，被系统锁定，无法使用，必须为其指定口令后才可以使用，即使是指定空口令。超级用户可以为自己和其他用户指定口令，普通用户只能用它修改自己的口令。<br>指定和修改用户口令：<code>passwd 参数 用户名</code><br>可选参数：<br>-l 锁定口令，即禁用账号。<br>-u 口令解锁。<br>-d 使账号无口令。<br>-f 强迫用户下次登录时修改口令。</p>
+</li>
+</ol>
+<h4 id="用户组的管理"><a href="#用户组的管理" class="headerlink" title="用户组的管理"></a>用户组的管理</h4><ol>
+<li>增加一个新的用户组：<code>groupadd 参数 用户组</code><br> 可选参数：<ul>
+<li>-g GID 指定新用户组的组标识号（GID）。</li>
+<li>-o 一般与-g选项同时使用，表示新用户组的GID可以与系统已有用户组的GID相同。</li>
+</ul>
+</li>
+</ol>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">//例1：</span>
+groupadd group1
+<span class="token comment" spellcheck="true">//此命令向系统中增加了一个新组group1，新组的组标识号是在当前已有的最大组标识号的基础上加1。</span>
+
+<span class="token comment" spellcheck="true">//例2：</span>
+groupadd <span class="token operator">-</span>g <span class="token number">101</span> group2
+
+<span class="token comment" spellcheck="true">//此命令向系统中增加了一个新组group2，同时指定新组的组标识号是101。</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ol start="2">
+<li><p>删除已有的用户组：<code>groupdel 用户组</code></p>
+</li>
+<li><p>修改用户组的属性：<code>groupmod 参数 用户组</code><br>可选参数：</p>
+<ul>
+<li>-g GID 为用户组指定新的组标识号。</li>
+<li>-o 与-g选项同时使用，用户组的新GID可以与系统已有用户组的GID相同。</li>
+<li>-n新用户组  将用户组的名字改为新名字</li>
+</ul>
+</li>
+<li><p>如果一个用户同时属于多个用户组，那么用户可以在用户组之间切换，以便具有其他用户组的权限。用户可以在登录后，使用命令newgrp切换到其他用户组，例如：&#96;&#96;$ newgrp root&#96;</p>
+</li>
+</ol>
+<h4 id="与用户账号有关的系统文件"><a href="#与用户账号有关的系统文件" class="headerlink" title="与用户账号有关的系统文件"></a>与用户账号有关的系统文件</h4><p>完成用户管理的工作有许多种方法，但是每一种方法实际上都是对有关的系统文件进行修改。与用户和用户组相关的信息都存放在一些系统文件中，这些文件包括&#x2F;etc&#x2F;passwd, &#x2F;etc&#x2F;shadow, &#x2F;etc&#x2F;group等。</p>
+<ol>
+<li><strong>&#x2F;etc&#x2F;passwd文件</strong>是用户管理工作涉及的最重要的一个文件。Linux系统中的每个用户都在&#x2F;etc&#x2F;passwd文件中有一个对应的记录行，每行记录又被冒号(:)分隔为7个字段，其格式和具体含义如下：用户名:口令:用户标识号:组标识号:注释性描述:主目录:登录Shell。它记录了这个用户的一些基本属性。这个文件对所有用户都是可读的。它的内容类似下图：<br><img src="https://s2.loli.net/2023/05/21/WK7ChiURV3BbYsf.png" alt="用户管理1.png"></li>
+</ol>
+<ul>
+<li><p>用户名：是代表用户账号的字符串。通常长度不超过8个字符，并且由大小写字母和&#x2F;或数字组成。登录名中不能有冒号(:)，因为冒号在这里是分隔符。为了兼容起见，登录名中最好不要包含点字符(.)，并且不使用连字符(-)和加号(+)开头。</p>
+</li>
+<li><p>口令：一些系统中，存放着加密后的用户口令字。虽然这个字段存放的只是用户口令的加密串，不是明文，但是由于&#x2F;etc&#x2F;passwd文件对所有用户都可读，所以这仍是一个安全隐患。因此，现在许多Linux 系统把真正的加密后的用户口令字存放到&#x2F;etc&#x2F;shadow文件中，而在&#x2F;etc&#x2F;passwd文件的口令字段中只存放一个特殊的字符，例如“x”或者“*”。</p>
+</li>
+<li><p>用户标识号：是一个整数，系统内部用它来标识用户。一般情况下它与用户名是一一对应的。如果几个用户名对应的用户标识号是一样的，系统内部将把它们视为同一个用户，但是它们可以有不同的口令、不同的主目录以及不同的登录Shell等。通常用户标识号的取值范围是0～65 535。0是超级用户root的标识号，1～99由系统保留，作为管理账号，普通用户的标识号从100开始。在Linux系统中，这个界限是500。</p>
+</li>
+<li><p>组标识号：字段记录的是用户所属的用户组。它对应着&#x2F;etc&#x2F;group文件中的一条记录。</p>
+</li>
+<li><p>注释性描述：字段记录着用户的一些个人情况。例如用户的真实姓名、电话、地址等，这个字段并没有什么实际的用途。在不同的Linux 系统中，这个字段的格式并没有统一。在许多Linux系统中，这个字段存放的是一段任意的注释性描述文字，用做finger命令的输出。</p>
+</li>
+<li><p>主目录：也就是用户的起始工作目录。它是用户在登录到系统之后所处的目录。在大多数系统中，各用户的主目录都被组织在同一个特定的目录下，而用户主目录的名称就是该用户的登录名。各用户对自己的主目录有读、写、执行（搜索）权限，其他用户对此目录的访问权限则根据具体情况设置。</p>
+</li>
+<li><p>用户登录后，要启动一个进程，负责将用户的操作传给内核，这个进程是用户登录到系统后运行的命令解释器或某个特定的程序，即Shell。Shell是用户与Linux系统之间的接口。Linux的Shell有许多种，每种都有不同的特点。常用的有sh(Bourne Shell), csh(C Shell), ksh(Korn Shell), tcsh(TENEX&#x2F;TOPS-20 type C Shell), bash(Bourne Again Shell)等。系统管理员可以根据系统情况和用户习惯为用户指定某个Shell。如果不指定Shell，那么系统使用sh为默认的登录Shell，即这个字段的值为&#x2F;bin&#x2F;sh。用户的登录Shell也可以指定为某个特定的程序（此程序不是一个命令解释器）。利用这一特点，我们可以限制用户只能运行指定的应用程序，在该应用程序运行结束后，用户就自动退出了系统。有些Linux 系统要求只有那些在系统中登记了的程序才能出现在这个字段中。</p>
+</li>
+<li><p>系统中有一类用户称为伪用户（pseudo users）。这些用户在&#x2F;etc&#x2F;passwd文件中也占有一条记录，但是不能登录，因为它们的登录Shell为空。它们的存在主要是方便系统管理，满足相应的系统进程对文件属主的要求。除了下面列出的伪用户外，还有许多标准的伪用户，例如：audit, cron, mail, usenet等，它们也都各自为相关的进程和文件所需要。<br>常见的伪用户如下所示：</p>
+<table>
+<thead>
+<tr>
+<th>伪 用 户</th>
+<th>含 义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>bin</td>
+<td>拥有可执行的用户命令文件</td>
+</tr>
+<tr>
+<td>sys</td>
+<td>拥有系统文件</td>
+</tr>
+<tr>
+<td>adm</td>
+<td>拥有帐户文件</td>
+</tr>
+<tr>
+<td>uucp</td>
+<td>UUCP使用</td>
+</tr>
+<tr>
+<td>lp</td>
+<td>lp或lpd子系统使用</td>
+</tr>
+<tr>
+<td>nobody</td>
+<td>NFS使用</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<ol start="2">
+<li><strong>&#x2F;etc&#x2F;shadow</strong>中的记录行与&#x2F;etc&#x2F;passwd中的一一对应。它的文件格式与&#x2F;etc&#x2F;passwd类似，由若干个字段组成，字段之间用”:”隔开。这些字段是：登录名:加密口令:最后一次修改时间:最小时间间隔:最大时间间隔:警告时间:不活动时间:失效时间:标志</li>
+</ol>
+<ul>
+<li>登录名：是与&#x2F;etc&#x2F;passwd文件中的登录名相一致的用户账号</li>
+<li>口令：存放的是加密后的用户口令字，长度为13个字符。如果为空，则对应用户没有口令，登录时不需要口令；如果含有不属于集合 { .&#x2F;0-9A-Za-z }中的字符，则对应的用户不能登录。</li>
+<li>最后一次修改时间：表示的是从某个时刻起，到用户最后一次修改口令时的天数。时间起点对不同的系统可能不一样。例如在SCO Linux 中，这个时间起点是1970年1月1日。</li>
+<li>最小时间间隔：指的是两次修改口令之间所需的最小天数。</li>
+<li>最大时间间隔：指的是口令保持有效的最大天数。</li>
+<li>警告时间：表示的是从系统开始警告用户到用户密码正式失效之间的天数。</li>
+<li>不活动时间：表示的是用户没有登录活动但账号仍能保持有效的最大天数。</li>
+<li>失效时间：给出的是一个绝对的天数，如果使用了这个字段，那么就给出相应账号的生存期。期满后，该账号就不再是一个合法的账号，也就不能再用来登录了。</li>
+</ul>
+<ol start="3">
+<li><strong>&#x2F;etc&#x2F;group</strong>文件存放着用户组的所有信息。当一个用户同时是多个组中的成员时，在&#x2F;etc&#x2F;passwd文件中记录的是用户所属的主组，也就是登录时所属的默认组，而其他组称为附加组。用户要访问属于附加组的文件时，必须首先使用newgrp命令使自己成为所要访问的组中的成员。用户组的所有信息都存放在&#x2F;etc&#x2F;group文件中。此文件的格式也类似于&#x2F;etc&#x2F;passwd文件，由冒号(:)隔开若干个字段，这些字段有：组名:口令:组标识号:组内用户列表</li>
+</ol>
+<ul>
+<li>组名：是用户组的名称，由字母或数字构成。与&#x2F;etc&#x2F;passwd中的登录名一样，组名不应重复。</li>
+<li>口令字段：存放的是用户组加密后的口令字。一般Linux 系统的用户组都没有口令，即这个字段一般为空，或者是*。</li>
+<li>组标识号：与用户标识号类似，也是一个整数，被系统内部用来标识组。</li>
+<li>组内用户列表：是属于这个组的所有用户的列表，不同用户之间用逗号(,)分隔。这个用户组可能是用户的主组，也可能是附加组。</li>
+</ul>
+<hr>
+<h2 id="Linux-磁盘管理"><a href="#Linux-磁盘管理" class="headerlink" title="Linux 磁盘管理"></a>Linux 磁盘管理</h2><p>Linux 磁盘管理好坏直接关系到整个系统的性能问题。Linux 磁盘管理常用三个命令为 df、du 和 fdisk。</p>
+<ul>
+<li><strong>df</strong>（英文全称：disk free）：列出文件系统的整体磁盘使用量</li>
+<li><strong>du</strong>（英文全称：disk used）：检查磁盘空间使用量</li>
+<li><strong>fdisk</strong>：用于磁盘分区</li>
+</ul>
+<ol>
+<li><p>df命令参数功能：检查文件系统的磁盘空间占用情况。可以利用该命令来获取硬盘被占用了多少空间，目前还剩下多少空间等信息。语法：<code>df [-ahikHTm] [目录或文件名]</code><br> 选项与参数：</p>
+<ul>
+<li>-a ：列出所有的文件系统，包括系统特有的 &#x2F;proc 等文件系统；</li>
+<li>-k ：以 KBytes 的容量显示各文件系统；</li>
+<li>-m ：以 MBytes 的容量显示各文件系统；</li>
+<li>-h ：以人们较易阅读的 GBytes, MBytes, KBytes 等格式自行显示；</li>
+<li>-H ：以 M&#x3D;1000K 取代 M&#x3D;1024K 的进位方式；</li>
+<li>-T ：显示文件系统类型, 连同该 partition 的 filesystem 名称也列出；</li>
+<li>-i ：不用硬盘容量，而以 inode 的数量来显示</li>
+</ul>
+</li>
+<li><p>du 命令也是查看使用空间的，但是与 df 命令不同的是 du 命令是对文件和目录磁盘使用的空间的查看，还是和df命令有一些区别的，语法：<code>du [-ahskm] 文件或目录名称</code><br> 选项与参数：</p>
+<ul>
+<li>-a ：列出所有的文件与目录容量，因为默认仅统计目录底下的文件量而已。</li>
+<li>-h ：以人们较易读的容量格式 (G&#x2F;M) 显示；</li>
+<li>-s ：列出总量而已，而不列出每个各别的目录占用容量；</li>
+<li>-S ：不包括子目录下的总计，与 -s 有点差别。</li>
+<li>-k ：以 KBytes 列出容量显示；</li>
+<li>-m ：以 MBytes 列出容量显示；</li>
+</ul>
+</li>
+<li><p>fdisk 是 Linux 的磁盘分区表操作工具。语法：<code>fdisk [-l] 装置名称</code><br> 选项与参数：</p>
+<ul>
+<li>-l ：输出后面接的装置所有的分区内容。若仅有 fdisk -l 时， 则系统将会把整个系统内能够搜寻到的装置的分区均列出来。</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li><p>磁盘格式化<br>磁盘分割完毕后自然就是要进行文件系统的格式化，格式化的命令非常的简单，使用 <code>mkfs</code>（make filesystem） 命令。语法：<code>mkfs [-t 文件系统格式] 装置文件名</code><br> 选项与参数：</p>
+<ul>
+<li>-t ：可以接文件系统格式，例如 ext3, ext2, vfat 等(系统有支持才会生效)</li>
+</ul>
+</li>
+<li><p>磁盘检验<br>fsck（file system check）用来检查和维护不一致的文件系统。若系统掉电或磁盘发生问题，可利用fsck命令对文件系统进行检查。语法：<code>fsck [-t 文件系统] [-ACay] 装置名称</code><br> 选项与参数：</p>
+<ul>
+<li>-t : 给定档案系统的型式，若在 &#x2F;etc&#x2F;fstab 中已有定义或 kernel 本身已支援的则不需加上此参数</li>
+<li>-s : 依序一个一个地执行 fsck 的指令来检查</li>
+<li>-A : 对&#x2F;etc&#x2F;fstab 中所有列出来的 分区（partition）做检查</li>
+<li>-C : 显示完整的检查进度</li>
+<li>-d : 打印出 e2fsck 的 debug 结果</li>
+<li>-p : 同时有 -A 条件时，同时有多个 fsck 的检查一起执行</li>
+<li>-R : 同时有 -A 条件时，省略 &#x2F; 不检查</li>
+<li>-V : 详细显示模式</li>
+<li>-a : 如果检查有错则自动修复</li>
+<li>-r : 如果检查有错则由使用者回答是否修复</li>
+<li>-y : 选项指定检测每个文件是自动输入yes，在不确定那些是不正常的时候，可以执行 # fsck -y 全部检查修复。</li>
+</ul>
+</li>
+<li><p>磁盘挂载与卸除<br> Linux 的磁盘挂载使用 mount 命令，卸载使用 umount命令。磁盘挂载语法：<code>mount [-t 文件系统] [-L Label名] [-o 额外选项] [-n]  装置文件名  挂载点</code><br> 磁盘卸载语法：<code>umount [-fn] 装置文件名或挂载点</code><br> 选项与参数：</p>
+<ul>
+<li>-f ：强制卸除！可用在类似网络文件系统 (NFS) 无法读取到的情况下；</li>
+<li>-n ：不升级 &#x2F;etc&#x2F;mtab 情况下卸除。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="Linux-vi-x2F-vim"><a href="#Linux-vi-x2F-vim" class="headerlink" title="Linux vi&#x2F;vim"></a>Linux vi&#x2F;vim</h2><p>所有的 Unix Like 系统都会内建 vi 文书编辑器，其他的文书编辑器则不一定会存在。但是目前使用比较多的是 vim 编辑器。Vim 是从 vi 发展出来的一个文本编辑器。代码补全、编译及错误跳转等方便编程的功能特别丰富，在程序员中被广泛使用。</p>
+<h4 id="vi-x2F-vim-的使用"><a href="#vi-x2F-vim-的使用" class="headerlink" title="vi&#x2F;vim 的使用"></a>vi&#x2F;vim 的使用</h4><p>基本上 vi&#x2F;vim 共分为三种模式，分别是<strong>命令模式（Command mode）</strong>，<strong>输入模式（Insert mode）</strong>和<strong>底线命令模式（Last line mode）</strong>。 这三种模式的作用分别是：</p>
+<ol>
+<li>命令模式：<br>用户刚刚启动 vi&#x2F;vim，便进入了命令模式。<br>此状态下敲击键盘动作会被Vim识别为命令，而非输入字符。比如我们此时按下i，并不会输入一个字符，i被当作了一个命令。<br>以下是常用的几个命令：</li>
+</ol>
+<ul>
+<li><strong>i</strong> 切换到输入模式，以输入字符。</li>
+<li><strong>x</strong> 删除当前光标所在处的字符。</li>
+<li><strong>:</strong> 切换到底线命令模式，以在最底一行输入命令。<br>若想要编辑文本：启动Vim，进入了命令模式，按下i，切换到输入模式。<br>命令模式只有一些最基本的命令，因此仍要依靠底线命令模式输入更多命令。</li>
+</ul>
+<ol start="2">
+<li>输入模式<br>在命令模式下按下i就进入了输入模式。<br>在输入模式中，可以使用以下按键：</li>
+</ol>
+<ul>
+<li><strong>字符按键以及Shift组合</strong>，输入字符</li>
+<li><strong>ENTER</strong>，回车键，换行</li>
+<li><strong>BACK SPACE</strong>，退格键，删除光标前一个字符</li>
+<li><strong>DEL</strong>，删除键，删除光标后一个字符</li>
+<li><strong>方向键</strong>，在文本中移动光标</li>
+<li><strong>HOME</strong>&#x2F;<strong>END</strong>，移动光标到行首&#x2F;行尾</li>
+<li><strong>Page Up</strong>&#x2F;<strong>Page Down</strong>，上&#x2F;下翻页</li>
+<li><strong>Insert</strong>，切换光标为输入&#x2F;替换模式，光标将变成竖线&#x2F;下划线</li>
+<li><strong>ESC</strong>，退出输入模式，切换到命令模式</li>
+</ul>
+<ol start="3">
+<li>底线命令模式<br>在命令模式下按下:（英文冒号）就进入了底线命令模式。<br>底线命令模式可以输入单个或多个字符的命令，可用的命令非常多。<br>在底线命令模式中，基本的命令有（已经省略了冒号）：</li>
+</ol>
+<ul>
+<li>q 退出程序</li>
+<li>w 保存文件<br>按ESC键可随时退出底线命令模式。</li>
+</ul>
+<hr>
+<h2 id="Linux-yum-命令"><a href="#Linux-yum-命令" class="headerlink" title="Linux yum 命令"></a>Linux yum 命令</h2><p>yum（ Yellow dog Updater, Modified）是一个在 Fedora 和 RedHat 以及 SUSE 中的 Shell 前端软件包管理器。基于 RPM 包管理，能够从指定的服务器自动下载 RPM 包并且安装，可以自动处理依赖性关系，并且一次安装所有依赖的软件包，无须繁琐地一次次下载、安装。yum 提供了查找、安装、删除某一个、一组甚至全部软件包的命令。</p>
+<ol>
+<li>yum 语法:<code>yum [options] [command] [package ...]</code></li>
+</ol>
+<ul>
+<li><strong>options：</strong>可选，选项包括-h（帮助），-y（当安装过程提示选择全部为 “yes”），-q（不显示安装的过程）等等。</li>
+<li><strong>command：</strong>要进行的操作。</li>
+<li><strong>package：</strong>安装的包名。</li>
+</ul>
+<ol start="2">
+<li>yum常用命令</li>
+</ol>
+<ul>
+<li><ol>
+<li>列出所有可更新的软件清单命令：yum check-update</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>更新所有软件命令：yum update</li>
+</ol>
+</li>
+<li><ol start="3">
+<li>仅安装指定的软件命令：yum install <package_name></li>
+</ol>
+</li>
+<li><ol start="4">
+<li>仅更新指定的软件命令：yum update <package_name></li>
+</ol>
+</li>
+<li><ol start="5">
+<li>列出所有可安裝的软件清单命令：yum list</li>
+</ol>
+</li>
+<li><ol start="6">
+<li>删除软件包命令：yum remove <package_name></li>
+</ol>
+</li>
+<li><ol start="7">
+<li>查找软件包命令：yum search &lt;关键词&gt;</li>
+</ol>
+</li>
+<li><ol start="8">
+<li>清除缓存命令:</li>
+</ol>
+<ul>
+<li>yum clean packages: 清除缓存目录下的软件包</li>
+<li>yum clean headers: 清除缓存目录下的 headers</li>
+<li>yum clean oldheaders: 清除缓存目录下旧的 headers</li>
+<li>yum clean, yum clean all (&#x3D; yum clean packages; yum clean oldheaders) :清除缓存目录下的软件包及旧的 headers</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="Linux-apt-命令"><a href="#Linux-apt-命令" class="headerlink" title="Linux apt 命令"></a>Linux apt 命令</h2><p>apt（Advanced Packaging Tool）是一个在 Debian 和 Ubuntu 中的 Shell 前端软件包管理器。<br>apt 命令提供了查找、安装、升级、删除某一个、一组甚至全部软件包的命令。apt 命令执行需要超级管理员权限(root)。</p>
+<ol>
+<li>apt 语法：<code> apt [options] [command] [package ...]</code></li>
+</ol>
+<ul>
+<li><strong>options：</strong>可选，选项包括 -h（帮助），-y（当安装过程提示选择全部为”yes”），-q（不显示安装的过程）等等。</li>
+<li><strong>command：</strong>要进行的操作。</li>
+<li><strong>package</strong>：安装的包名。</li>
+</ul>
+<ol start="2">
+<li>apt 常用命令</li>
+</ol>
+<ul>
+<li><p>列出所有可更新的软件清单命令：sudo apt update</p>
+</li>
+<li><p>升级软件包：sudo apt upgrade</p>
+<p>列出可更新的软件包及版本信息：apt list –upgradeable</p>
+<p>升级软件包，升级前先删除需要更新软件包：sudo apt full-upgrade</p>
+</li>
+<li><p>安装指定的软件命令：sudo apt install <package_name></p>
+<p>安装多个软件包：sudo apt install <package_1> <package_2> <package_3></p>
+</li>
+<li><p>更新指定的软件命令：sudo apt update <package_name></p>
+</li>
+<li><p>显示软件包具体信息,例如：版本号，安装大小，依赖关系等等：sudo apt show <package_name></p>
+</li>
+<li><p>删除软件包命令：sudo apt remove <package_name></p>
+</li>
+<li><p>清理不再使用的依赖和库文件: sudo apt autoremove</p>
+</li>
+<li><p>移除软件包及配置文件: sudo apt purge <package_name></p>
+</li>
+<li><p>查找软件包命令： sudo apt search &lt;关键词&gt;</p>
+</li>
+<li><p>列出所有已安装的包：apt list –installed</p>
+</li>
+<li><p>列出所有已安装的包的版本信息：apt list –all-versions</p>
+</li>
+</ul>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">HL</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://haolei56.github.io/2023/052127097.html">http://haolei56.github.io/2023/052127097.html</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">HL</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/Linux/">
+                                    <span class="chip bg-color">Linux</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2023/052112042.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="Shell教程">
+                        
+                        <span class="card-title">Shell教程</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-05-21
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Linux/" class="post-category">
+                                    Linux
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Shell/">
+                        <span class="chip bg-color">Shell</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/12194.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="Mysql基础">
+                        
+                        <span class="card-title">Mysql基础</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-12-19
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Datebase/" class="post-category">
+                                    Datebase
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Mysql/">
+                        <span class="chip bg-color">Mysql</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2022-2023</span>
+            
+            <a href="/about" target="_blank">HL</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:n_056haolei@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1559823213" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1559823213" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+     <!--樱花效果-->
+    <script type="text/javascript">
+    //只在桌面版网页启用特效
+    var windowWidth = $(window).width();
+    if (windowWidth > 768) {
+        document.write('<script type="text/javascript" src="/js/sakura.js"><\/script>');
+    }
+    </script>
+</body>
+
+</html>

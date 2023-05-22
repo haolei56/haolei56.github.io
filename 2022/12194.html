@@ -4,14 +4,11 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="数据库, 朝暮惜">
-    <meta name="description" content="使用前的相关操作
-连接mysql：mysql -h 主机名 -p 端口 -u 用户名 -p密码   
-注意密码前没有空格，-h主机名和-p端口可以省略，省略是默认为本机和3306
+    <meta name="keywords" content="Mysql基础, 朝暮惜">
+    <meta name="description" content="数据库简介数据库开发分为两类：
 
-查看所有数据库：show databases;
-
-使用某个">
+OLTP(online transaction processing)：翻译为联机事务处理；主要对数据库增删改查；对应后端开发
+OLAP（On-Line Analytical Processing）翻译为联">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -34,7 +31,7 @@
 </script>
 
 
-    <title>数据库 | 朝暮惜</title>
+    <title>Mysql基础 | 朝暮惜</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -48,7 +45,8 @@
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
 <meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="朝暮惜" type="application/atom+xml">
-</head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
 
@@ -264,12 +262,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/21.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">数据库</h1>
+                    <h1 class="description center-align post-title">Mysql基础</h1>
                 </div>
             </div>
         </div>
@@ -385,8 +383,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/datebase/">
-                                <span class="chip bg-color">datebase</span>
+                            <a href="/tags/Mysql/">
+                                <span class="chip bg-color">Mysql</span>
                             </a>
                         
                     </div>
@@ -417,14 +415,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-12-19
+                    2023-05-21
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.1k
+                    2.7k
                 </div>
                 
 
@@ -451,7 +449,35 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="使用前的相关操作"><a href="#使用前的相关操作" class="headerlink" title="使用前的相关操作"></a>使用前的相关操作</h3><ul>
+                <h2 id="数据库简介"><a href="#数据库简介" class="headerlink" title="数据库简介"></a>数据库简介</h2><p>数据库开发分为两类：</p>
+<ol>
+<li>OLTP(online transaction processing)：翻译为联机事务处理；主要对数据库增删改查；对应后端开发</li>
+<li>OLAP（On-Line Analytical Processing）翻译为联机分析处理；主要对数据进行分析，对应后台开发</li>
+</ol>
+<h3 id="MySQL体系结构"><a href="#MySQL体系结构" class="headerlink" title="MySQL体系结构"></a>MySQL体系结构</h3><p><img src="https://s2.loli.net/2023/05/21/LbcO2B7rnHmNIFR.jpg" alt="MySQL结构体系"></p>
+<p>MySQL由以下几部分组成：连接池组件、管理服务和工具组件、SQL接口组件、查询分析器组件、优化器组件、缓冲组件、插件式存储引擎、物理文件。</p>
+<ul>
+<li>管理服务和工具组件：系统管理和控制工具，例如备份恢复、Mysql复制、集群等；</li>
+<li>SQL接口组件：将SQL语句解析生成相应对象；DML，DDL，存储过程，视图，触发器等；</li>
+<li>查询分析器组件：将SQL对象交由解析器验证和解析，并生成语法树；</li>
+<li>优化器组件：SQL语句执行前使用查询优化器进行优化；</li>
+<li>缓冲组件：是一块内存区域，用来弥补磁盘速度较慢对数据库性能的影响；缓冲池缓存的数据类型有：索引页、数据页、以及与存储引擎缓存相关的数据（比如innodb引擎：undo页、插入缓冲、自适应hash索引、innodb相关锁信息、数据字典信息等）；</li>
+</ul>
+<h3 id="数据库设计三范式"><a href="#数据库设计三范式" class="headerlink" title="数据库设计三范式"></a>数据库设计三范式</h3><ol>
+<li><p>范式一：确保每列保持原子性；数据库表中的所有字段都是不可分解的原子值；</p>
+</li>
+<li><p>范式二：确保表中的每列都和主键相关，而不能只与主键的某一部分相关（组合索引）；</p>
+</li>
+<li><p>范式三：确保每列都和主键直接相关，而不是间接相关；减少数据冗余；</p>
+<p>反范式：范式可以避免数据冗余，减少数据库的空间，减小维护数据完整性的麻烦；但是采用数据库范式化设计，可能导致数据库业务涉及的表变多，并且造成更多的联表查询，将导致整个系统的性能降低；因此处于性能考虑，可能需要进行反范式设计；</p>
+</li>
+</ol>
+<blockquote>
+<p> 复合键：或称组合键；将多个列作为一个索引键；</p>
+<p> 索引：用于快速访问数据表的数据；索引是对表中的一列或者多列的值进行排序的一种结构；</p>
+</blockquote>
+<h2 id="SQL操作"><a href="#SQL操作" class="headerlink" title="SQL操作"></a>SQL操作</h2><p>SQL命令包括：DQL(数据查询语言)、DML(数据操作语言:增删改)、DDL(数据定义语言)、DCL(数据控制语言：权限)以及TCL(事务控制语言)；</p>
+<h3 id="使用前的相关操作"><a href="#使用前的相关操作" class="headerlink" title="使用前的相关操作"></a>使用前的相关操作</h3><ul>
 <li><p>连接mysql：mysql -h 主机名 -p 端口 -u 用户名 -p密码   </p>
 <p>注意密码前没有空格，-h主机名和-p端口可以省略，省略是默认为本机和3306</p>
 </li>
@@ -489,6 +515,12 @@
 <li><p>查看所有列：desc 表名;</p>
 </li>
 <li><p>修改表名：rename table 表名 to 新表名;</p>
+</li>
+<li><p>清空数据表：</p>
+<ol>
+<li>TRUNCATE TABLE `表名&#96;; &#x2F;&#x2F;截断表 以页为单位（至少有两行数据），有自增索引的话，从初始值开始累加</li>
+<li>DELETE TABLE `表名&#96;;  &#x2F;&#x2F;逐行删除，有自增索引的话，从之前值继续累加</li>
+</ol>
 </li>
 </ul>
 <h3 id="CRUD-create-read-update-delete"><a href="#CRUD-create-read-update-delete" class="headerlink" title="CRUD(create,read,update,delete)"></a>CRUD(create,read,update,delete)</h3><ul>
@@ -545,6 +577,7 @@
 </tbody></table>
 </li>
 <li><p>多表查询：</p>
+<p><img src="https://s2.loli.net/2023/05/21/gLfCY2yRwU7QuFP.jpg" alt="联合查询"></p>
 <ol>
 <li>笛卡尔集：在默认情况下，当两个表查询时，从第一张表中取出一行和第二张表的每一行进行组合，一共返回的记录数是两表的行数的乘积，这种多表查询默认返回结果称为笛卡尔积。</li>
 <li>解决笛卡尔集的关键要写出正确的过滤条件where，且多表查询的条件不能少于表数减一。</li>
@@ -553,37 +586,246 @@
 </li>
 <li><p>子查询：又叫嵌套查询。是指嵌入在其它sql语句中的select语句。</p>
 <ol>
-<li>单行子查询：只返回一行数据的子查询语句。</li>
-<li>多行子查询：返回多行数据的子查询语句，使用关键字in。</li>
-<li>多行子查询：返回多行数据的子查询。…where (字段1，字段2….) &#x3D; (select 字段1,字段2…)</li>
+<li><p>单行子查询：只返回一行数据的子查询语句。</p>
+</li>
+<li><p>多行子查询：返回多行数据的子查询语句。</p>
+<blockquote>
+<p>IN 关键字：运算符可以检测结果集中是否存在某个特定的值，如果检测成功就执行外部的查询。<br>EXISTS 关键字：内层查询语句不返回查询的记录。而是返回一个真假值。如果内层查询语句查询到满足条件的记录，就返回一个真值（true），否则，将返回一个假值（false）。当返回的值为true时，外层查询语句将进行查询；当返回的为false时，外层查询语句不进行查询或者查询不出任何记录。<br>ALL 关键字：表示满足所有条件。使用ALL关键字时，只有满足内层查询语句返回的所有结果，才可以执行外层查询语句。<br>ANY 关键字：允许创建一个表达式，对子查询的返回值列表，进行比较，只要满足内层子查询中的，任意一个比较条件，就返回一个结果作为外层查询条件。<br>在 FROM 子句中使用子查询：子查询出现在from子句中，这种情况下将子查询当做一个临时表使用。</p>
+</blockquote>
+</li>
+<li><p>多行子查询：返回多行数据的子查询。…where (字段1，字段2….) &#x3D; (select 字段1,字段2…)</p>
+</li>
 </ol>
 </li>
 <li><p>合并查询：合并多个select语句的结果。union(去重)，union all(不去重)</p>
 </li>
 <li><p>外连接：</p>
 <ol>
-<li>左外连接：即使左表与右表有不匹配的信息，也会把左表的信息显示出来。select … from 左表 left join 右表 on 条件</li>
-<li>右外连接：类比左外连接。</li>
+<li><p>左外连接：即使左表与右表有不匹配的信息，也会把左表的信息显示出来。select … from 左表 left join 右表 on 条件</p>
+</li>
+<li><p>右外连接：类比左外连接。</p>
+</li>
 </ol>
 </li>
 </ul>
 </li>
 </ul>
-<h3 id="应用相关"><a href="#应用相关" class="headerlink" title="应用相关"></a>应用相关</h3><ul>
-<li><p>主键：不能重复且不为空，但可以为复合主键（即把几个字段合起来作为一个主键）。</p>
-</li>
-<li><p>外键：</p>
+<h3 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h3><p>是一个虚拟表，其内容由查询定义，同真实表一样，视图包含列，其数据来自对应的真实表（基表）。</p>
 <ol>
-<li>外键指向的表的字段，要求是主键或者是unique</li>
-<li>外键字段的值，必须在另一个表中对应主键中出现过或者为空（前提是外键字段允许为空）</li>
-<li>一旦建立了外键约束关系，数据就不能随意删除了，没有任何一条记录指向主表中的记录时则可以删除主表中的该记录。</li>
-<li>外键在其他表中为普通字段。</li>
+<li>通过视图可以修改基表的数据，基表的改变也会影响视图的显示。</li>
+<li>创建视图后，到数据库去看，只有一个视图结构文件，没有数据文件。</li>
+<li>视图可以再使用视图，数据仍然来自基表。</li>
+<li>一些数据表有些信息是保密的，不让用户直接看到，这时就可以创建一个视图。</li>
+</ol>
+<p>优点</p>
+<blockquote>
+<p>简单：使用视图的用户完全不需要关心后面对应的表的结构、关联条件和筛选条件，对用户来说已经是过滤好的复合条件的结果集。<br>安全：使用视图的用户只能访问他们被允许查询的结果集，对表的权限管理并不能限制到某个行某个列，但是通过视图就可以简单的实现。<br>数据独立：一旦视图的结构确定了，可以屏蔽表结构变化对用户的影响，源表增加列对视图没有影响；源表修改列名，则可以通过修改视图来解决，不会造成对访问者的影响。</p>
+</blockquote>
+<p>语法：CREATE VIEW  &lt;视图名&gt; AS &lt;SELECT语句&gt;</p>
+<p>作用：</p>
+<ol>
+<li><p>可复用，减少重复语句书写；类似程序中函数的作用；</p>
+</li>
+<li><p>重构利器</p>
+<blockquote>
+<p>假如因为某种需求，需要将user拆分为表usera和表userb；如果应用程序使用sql语句：select * from user 那就会提示该表不存在；若此时创建视图create view user as select a.name,a.age,b.sex from usera as a, userb as b where a.name&#x3D;b.name; ，则只需要更改数据库结构，而不需要更改应用程序；</p>
+</blockquote>
+</li>
+<li><p>逻辑更清晰，屏蔽查询细节，关注数据返回；</p>
+</li>
+<li><p>权限控制，某些表对用户屏蔽，但是可以给该用户通过视图来对该表操作；</p>
+</li>
+</ol>
+<h3 id="流程控制"><a href="#流程控制" class="headerlink" title="流程控制"></a>流程控制</h3><ul>
+<li><p>IF</p>
+<pre class="line-numbers language-MySQL"><code class="language-MySQL">IF condition THEN
+...
+ELSEIF condition THEN
+...
+ELSE
+...
+END IF
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>case</p>
+<pre class="line-numbers language-MySQL"><code class="language-MySQL">-- 相当于switch语句
+CASE value
+    WHEN value THEN ...
+    WHEN value THEN ...
+    ELSE ...
+END CASE
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>while</p>
+<pre class="line-numbers language-mysql"><code class="language-mysql">WHILE condition DO
+...
+END WHILE;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>leave</p>
+<pre class="line-numbers language-mysql"><code class="language-mysql">-- 相当于break
+LEAVE label;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+<li><p>loop</p>
+<pre class="line-numbers language-mysql"><code class="language-mysql">-- 相当于 while(true) {...}
+LOOP
+    ...
+END LOOP
+-- 可以通过LEAVE语句退出循环
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>iterate</p>
+<pre class="line-numbers language-mysql"><code class="language-mysql">-- 相当于 continue
+ITERATE label
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+<li><p>repeat</p>
+<pre class="line-numbers language-mysql"><code class="language-mysql">-- 相当于 do .. while(condition)
+REPEAT
+    ...
+    UNTIL condition
+END REPEAT    
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>示例：</p>
+<pre class="line-numbers language-mysql"><code class="language-mysql">-- LEAVE语句退出循环或程序块，只能和BEGIN ... END，LOOP，REPEAT，WHILE语句配合使用
+-- 创建存储过程
+DELIMITER //
+CREATE PROCEDURE example_leave(OUT sum INT)
+BEGIN
+    DECLARE i INT DEFAULT 1;
+    DECLARE s INT DEFAULT 0;
+    while_label:WHILE i<=100 DO
+        SET s = s+i;
+        SET i = i+1;
+        IF i=50 THEN
+            -- 退出WHILE循环
+            LEAVE while_label;
+        END IF;
+    END WHILE;
+    SET sum = s;
+END
+//
+
+DELIMITER ;
+-- 调用存储过程
+CALL example_leave(@sum);
+SELECT @sum;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+</ul>
+<h3 id="触发器"><a href="#触发器" class="headerlink" title="触发器"></a>触发器</h3><p>触发器（trigger）是MySQL提供给程序员和数据分析员来保证数据完整性的一种方法，它是与表事件相关的特殊的存储过程，它的执行不是由程序调用，也不是手工启动，而是由事件来触发，比如当对一个表进行DML操作（ insert ， delete ， update ）时就会激活它执行。</p>
+<ul>
+<li><p>4要素</p>
+<blockquote>
+<p>监视对象： table<br>监视事件： insert 、update 、delete<br>触发时间： before ， after<br>触发事件： insert 、update 、delete</p>
+</blockquote>
+</li>
+<li><p>语法</p>
+<pre class="line-numbers language-mysql"><code class="language-mysql">CREATE TRIGGER trigger_name
+trigger_time trigger_event
+ON tbl_name FOR EACH ROW
+　　[trigger_order]
+trigger_body -- 此处写执行语句
+
+-- trigger_body: 可以一个语句，也可以是多个语句；多个语句写在 BEGIN ... END 间
+-- trigger_time: { BEFORE | AFTER }
+-- trigger_event: { INSERT | UPDATE | DELETE }
+-- trigger_order: { FOLLOWS | PRECEDES } other_trigger_name
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>NEW 和 OLD</p>
+<blockquote>
+<p>在 INSERT 型触发器中， NEW 用来表示将要（ BEFORE ）或已经（ AFTER ）插入的新数据；<br>在 DELETE 型触发器中， OLD 用来表示将要或已经被删除的原数据；<br>在 UPDATE 型触发器中， OLD 用来表示将要或已经被修改的原数据， NEW 用来表示将要或已经修改为的新数据；</p>
+<pre class="line-numbers language-mysql"><code class="language-mysql">NEW.columnName （columnName为相应数据表某一列名）
+OLD.columnName （columnName为相应数据表某一列名）
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</blockquote>
+</li>
+</ul>
+<h3 id="游标"><a href="#游标" class="headerlink" title="游标"></a>游标</h3><p>游标是针对行操作的，对从数据库中 select 查询得到的结果集的每一行可以进行分开的独立的相同或者不相同的操作。对于取出多行数据集，需要针对每行操作；可以使用游标；游标常用于存储过程、函数、触发器、事件；游标相当于迭代器</p>
+<ul>
+<li><p>语法</p>
+<pre class="line-numbers language-MySQL"><code class="language-MySQL">//定义游标
+DECLARE cursor_name CURSOR FOR  select_statement;
+
+//打开游标
+OPEN cursor_name;
+
+//取游标数据
+FETCH cursor_name INTO var_name[,var_name,......]
+
+//关闭游标
+CLOSE curso_name;
+
+//释放
+DEALLOCATE cursor_name;
+
+//设置游标结束标志
+DECLARE done INT DEFAULT 0;
+DECLARE CONTINUE HANDLER FOR NOT FOUND
+SET done = 1; -- done 为标记为
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+</ul>
+<h3 id="权限管理"><a href="#权限管理" class="headerlink" title="权限管理"></a>权限管理</h3><p>语法：</p>
+<pre class="line-numbers language-mysql"><code class="language-mysql">GRANT privileges ON databasename.tablename TO 'username'@'host' WITH GRANT
+OPTION;
+
+//对视图授权
+GRANT select, SHOW VIEW ON `databasename`.`tablename` to 'username'@'host';
+
+//刷新权限
+-- 修改权限后需要刷新权限
+FLUSH PRIVILEGES;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p>privileges ：用户的操作权限，如SELECT ， INSERT ， UPDATE 等，如果要授予所的权限则使用ALL；<br>databasename.tablename 如果是 <em>.</em> 表示任意数据库以及任意表；<br>WITH GRANT OPTION 这个选项表示该用户可以将自己拥有的权限授权给别人。注意：经常有人在创建操作用户的时候不指定 WITH GRANT OPTION 选项导致后来该用户不能使用 GRANT 命令创建用户或者给其它用户授权。如果不想这个用户有这个 grant 的权限，则不要加该 WITH GRANT OPTION 选项；</p>
+</blockquote>
+<h3 id="远程连接"><a href="#远程连接" class="headerlink" title="远程连接"></a>远程连接</h3><p>注释 mysqld.cnf 中 bind-address ，修改 mysql.user 表，然后重启 mysql</p>
+<pre class="line-numbers language-mysql"><code class="language-mysql">-- mysqld.cnf
+#bind-address=127.0.0.1
+
+-- 修改user表
+select `user`, `host` from `mysql`.`user`;
+update user set host='%' where user='root';
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="索引及优化"><a href="#索引及优化" class="headerlink" title="索引及优化"></a>索引及优化</h2><h3 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h3><ul>
+<li><p>索引分类：主键索引、唯一（unique）索引、普通索引、组合索引、全文索引（elasticsearch）</p>
+<ol>
+<li><p>主键索引(PRIMARY KEY)：非空唯一索引，一个表只有一个主键索引； innodb 中，主键索引的 B+ 树包含表数据息；</p>
+<blockquote>
+<p>innodb 中表是索引组织表，每张表有且仅有一个主键；</p>
+<ol>
+<li>如果显示设置 PRIMARY KEY ，则该设置的key为该表的主键；</li>
+<li>如果没有显示设置，则从非空唯一索引中选择；</li>
+<li>只有一个非空唯一索引，则选择该索引为主键；</li>
+<li>有多个非空唯一索引，则选择声明的第一个为主键；</li>
+<li>没有非空唯一索引，则自动生成一个 6 字节的 _rowid 作为主键；</li>
+</ol>
+</blockquote>
+</li>
+<li><p>唯一索引(UNIQUE)：不可以出现相同的值，可以有NULL值但也唯一；</p>
+</li>
+<li><p>普通索引(INDEX OR KEY)：允许出现相同的索引内容；</p>
+</li>
+<li><p>组合索引：对表上的多个列进行索引</p>
+</li>
+<li><p>全文索引：将存储在数据库当中的整本书和整篇文章中的任意内容信息查找出来的技术；关键词 FULLTEXT;在短字符串中用 LIKE % ；在全文索引中用 match 和 against ；</p>
+</li>
 </ol>
 </li>
-<li><p>索引：主键自动为索引、唯一（unique）索引、普通索引、全文索引</p>
-<p>​    创建索引：create index 索引号 on 表名 （列名）;或者alter table 表名 add index  索引名（列名）;</p>
-<p>​     删除索引：drop index 索引名 on 表名;</p>
-<p>​     查询索引：show index from 表名;</p>
+<li><p>语法</p>
+<pre class="line-numbers language-mysql"><code class="language-mysql">//创建索引
+create index 索引号 on 表名 （列名）;或者alter table 表名 add index  索引名（列名）;
+
+ //删除索引
+ drop index 索引名 on 表名;
+
+ //查询索引
+ show index from 表名;
+ 
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ol>
 <li>能够提高数据库的性能，查询速度能到极大提升，但会占用磁盘空间（以空间换时间）</li>
 <li>没有索引时，查询时会对全表进行扫描，比较慢，使用索引后，会形成一个索引的数据结构（比如二叉树），极大提高查询速度</li>
@@ -591,79 +833,818 @@
 <li>比较频繁的作为查询条件的字段合适使用索引，唯一性太差、更新操作频繁，不会出现在where子句中的字段不适合创建索引。</li>
 </ol>
 </li>
-<li><p>事务：用于保证数据的一致性，它是由一组相关的dml（增删改）语句组成，该组dml语句要么全部成功，要么全部失败。</p>
-<p>相关操作：set autocommit&#x3D;off  start transaction   savepoint  rollback to  rollback  commit</p>
-<ol>
-<li>当执行事务操作时，mysql会在表上加锁，防止其他用户修改表的数据。</li>
-<li>保存点是事务中的点，用于取消部分事务，当事务结束时（commit），会自动删除该事务所定义的所有保存点。</li>
-<li>当执行commit语句后，会确认事务变化，结束事务，释放锁，数据生效。</li>
-<li>事务的ACID特性：原子性（Atomicity）、一致性（Consistency）、隔离性（Isolation）、持久性（Durability）</li>
-</ol>
-</li>
-<li><p>隔离级别：当多个连接开启事务操作数据库中的数据时，为保证数据的准确性，数据库系统要负责隔离操作。</p>
-<ol>
-<li><p>如果不考虑隔离性，可能引发脏读、不可重复读、幻读。</p>
-<ul>
-<li>脏读：当一个事务读取另一个事务尚未提交的改变时，会产生脏读。</li>
-<li>不可重复读：同一查询在同一事务中多次进行，由于其他提交事务所做的修改或删除，每次返回不同的结果集。</li>
-<li>幻读：同一查询在同一事务中多次进行，由于其他提交事务所做的插入操作，每次返回不同的结果集。</li>
 </ul>
+<h3 id="约束"><a href="#约束" class="headerlink" title="约束"></a>约束</h3><p>为了实现数据的完整性，对于innodb，提供了以下几种约束：primary key，unique key，foreign key， default, not null；</p>
+<ul>
+<li>外键约束（事务性）：外键用来关联两个表，来保证参照完整性；MyISAM存储引擎本身并不支持外键，只起到注释作用；而innodb完整支持外键；</li>
+<li>约束与索引的区别：创建主键索引或者唯一索引的时候同时创建了相应的约束；但是约束是逻辑上的概念；索引是一个数据结构既包含逻辑的概念也包含物理的存储方式；</li>
+</ul>
+<h3 id="索引实现"><a href="#索引实现" class="headerlink" title="索引实现"></a>索引实现</h3><p><strong>索引存储：</strong>innodb由段、区、页组成；段分为数据段、索引段、回滚段等；区大小为 1 MB（一个区由64个连续页构成）；页的默认值为16k；页为逻辑页，磁盘物理页大小一般为 4K 或者 8K；为了保证区中的页的连续，存储引擎一般一次从磁盘中申请 4~5 个区；</p>
+<p><img src="https://s2.loli.net/2023/05/21/3LZJoHOVQkWTR6v.jpg" alt="索引存储"></p>
+<p><strong>页：</strong>页是 innodb 磁盘管理的最小单位；默认16k，可通过 innodb_page_size 参数来修改；B+ 树的一个节点的大小就是该页的值；</p>
+<p><strong>B+树</strong></p>
+<blockquote>
+<p>全称：多路平衡搜索树，减少磁盘访问次数；用来组织磁盘数据，以页为单位，物理磁盘页一般为4K，innodb 默认页大小为 16K；对页的访问是一次磁盘io，缓存中会缓存常访问的页；<br>特征：非叶子节点只存储索引信息，叶子节点存储具体数据信息；叶子节点之间互相连接，方便范围查询；<br>每个索引对应着一个 B+ 树；</p>
+<p>B+树的一个节点对应一个数据页；B+树的层越高，那么要读取到内存的数据页越多，io次数越多；</p>
+</blockquote>
+<p><img src="https://s2.loli.net/2023/05/21/LUroQynd2CSVepv.jpg" alt="页B+树"></p>
+<p><strong>关于自增id</strong>：超过类型最大值会报错；类型 bigint 范围：（$-2^{63},2^{63}$） ;</p>
+<p><strong>聚集索引</strong>：按照主键构造的 B+ 树；叶子节点中存放数据页；数据也是索引的一部分；</p>
+<p><img src="https://s2.loli.net/2023/05/21/iROnXD786HWZYQr.jpg" alt="聚集索引.jpg"></p>
+<p><strong>辅助索引：</strong>非主键索引构建的B+树，叶子节点不包含行记录的全部数据；辅助索引的叶子节点中，除了用来排序的 key 还包含一个bookmark ；该书签存储了聚集索引的 key，会进行回表查询。</p>
+<p><img src="https://s2.loli.net/2023/05/21/oeAOiaNpuXc6wU5.jpg" alt="辅助索引"></p>
+<p><strong>innodb 体系结构</strong></p>
+<p><img src="https://s2.loli.net/2023/05/21/U9g3mwCFkWxi6od.jpg" alt="innodb体系结构"></p>
+<ul>
+<li><p>Buffer pool：缓存表和索引数据；采用 LRU 算法（原理如下图）让 Buffer pool 只缓存比较热的数据 ；</p>
+<p><img src="https://s2.loli.net/2023/05/21/A1i9XBnZtxLeGFY.jpg" alt="Buffer pool"></p>
 </li>
-<li><p>隔离级别跟事务相关。隔离的四种级别：</p>
+<li><p>Change buffer：缓存非唯一索引的数据变更（DML操作），Change buffer 中的数据将会异步merge 到磁盘当中；</p>
+<p><img src="https://s2.loli.net/2023/05/21/JCsGOP2nSzAyEZN.jpg" alt="Change buffer"></p>
+</li>
+</ul>
+<p><strong>最左匹配原则：</strong>对于组合索引，从左到右依次匹配，遇到 &gt; &lt; between like 就停止匹配；</p>
+<p><strong>覆盖索引：</strong>从辅助索引中就能找到数据，而不需通过聚集索引查找；利用辅助索引树高度一般低于聚集索引树；较少磁盘 io；</p>
+<h3 id="索引失效（无法进行key值比较）"><a href="#索引失效（无法进行key值比较）" class="headerlink" title="索引失效（无法进行key值比较）"></a>索引失效（无法进行key值比较）</h3><ul>
+<li>select … where A and B 若 A 和 B 中有一个不包含索引，则索引失效；</li>
+<li>索引字段参与运算，则索引失效；例如： from_unixtime(idx) &#x3D; ‘2021-04-30’;</li>
+<li>索引字段发生隐式转换，则索引失效；例如： ‘1’ 隐式转换为 1 ；</li>
+<li>LIKE 模糊查询，通配符 % 开头，则索引失效；例如： select * from user where name like<br>‘%Mark’;</li>
+<li>在索引字段上使用 NOT &lt;&gt; !&#x3D; 索引失效；如果判断 id &lt;&gt; 0 则修改为idx &gt; 0 or idx &lt; 0 ；</li>
+<li>组合索引中，没使用第一列索引，索引失效；</li>
+<li>in + or 索引失效；单独的in 是不会失效的；not in 肯定失效的；</li>
+</ul>
+<h3 id="索引原则"><a href="#索引原则" class="headerlink" title="索引原则"></a>索引原则</h3><ul>
+<li><p>查询频次较高且数据量大的表建立索引；索引选择使用频次较高，过滤效果好的列或者组合；</p>
+</li>
+<li><p>使用短索引；B+树节点包含的信息多，较少磁盘io操作；比如：smallint，tinyint；</p>
+</li>
+<li><p>对于很长的动态字符串，考虑使用前缀索引；</p>
+<blockquote>
+<p>有时候需要索引很长的字符串，这会让索引变的大且慢，通常情况下可以使用某个列开始的部分字符串，这样大大的节约索引空间，从而提高索引效率，但这会降低索引的区分度，索引的区分度是指不重复的索引值和数据表记录总数的比值。索引的区分度越高则查询效率越高，因为区分度更高的索引可以让mysql在查找的时候过滤掉更多的行。对于BLOB , TEXT ,VARCHAR 类型的列，必要时使用前缀索引，因为mysql 不允许索引这些列的完整长度，使用该方法的诀窍在于要选择足够长的前缀以保证较高的区分度。</p>
+</blockquote>
+</li>
+</ul>
+<pre class="line-numbers language-mysql"><code class="language-mysql">select count(distinct left(name,3))/count(*) as sel3,
+count(distinct left(name,4))/count(*) as sel4,
+count(distinct left(name,5))/count(*) as sel5,
+count(distinct left(name,6))/count(*) as sel6,
+from user;
+alter table user add key(name(4));
+-- 注意：前缀索引不能做 order by 和 group by
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li>对于组合索引，考虑最左侧匹配原则和覆盖索引；</li>
+<li>尽量选择区分度高的列作为索引；该列的值相同的越少越好；</li>
+</ul>
+<pre class="line-numbers language-mysql"><code class="language-mysql">select count(distinct idx) / count(*) from table_name;
+-- 或者
+show index from student;
+*************************** 1. row ***************************
+Table: student
+Non_unique: 0
+Key_name: PRIMARY
+Seq_in_index: 1
+Column_name: id
+Collation: A
+Cardinality: 7
+Sub_part: NULL
+Packed: NULL
+Null:
+Index_type: BTREE
+Comment:
+Index_comment:
+1 row in set (0.00 sec)
+-- Cardinality 这个值代表 select count(distinct idx) / count(*) from table_name;
+-- 该值决定了优化器的执行计划的选择；
+-- 立马更新 Cardinality 值
+analyze table student;
+-- 在非高峰时间段，对数据库中几张核心表做 analyze table 操作，这能使优化器和索引更
+好的为你工作；
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li>尽量扩展索引，在现有索引的基础上，添加复合索引；最多6个索引</li>
+<li>不要 select * ； 尽量只列出需要的列字段；方便使用覆盖索引；</li>
+<li>索引列，列尽量设置为非空；</li>
+<li>可选：开启自适应 hash 索引或者调整 change buffer；</li>
+</ul>
+<pre class="line-numbers language-mysql"><code class="language-mysql">select @@innodb_adaptive_hash_index;
+set global innodb_adaptive_hash_index=1; -- 默认是开启的
+select @@innodb_change_buffer_max_size;
+-- 默认值为25 表示最多使用1/4的缓冲池内存空间 最大值为50
+set global innodb_change_buffer_max_size=30；
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="优化器成本分析"><a href="#优化器成本分析" class="headerlink" title="优化器成本分析"></a>优化器成本分析</h3><p>mysql 优化器主要针对 IO 和 CPU 会计算语句的成本；可能不会按照分析的原理来执行语句；</p>
+<p><strong>成本分析步骤</strong></p>
+<ul>
+<li>找出所有可能需要使用到的索引；</li>
+<li>计算全表扫描的代价；</li>
+<li>计算不同索引执行查询的代价；</li>
+<li>对比找出代价最小的执行方案；</li>
+</ul>
+<h3 id="SQL优化"><a href="#SQL优化" class="headerlink" title="SQL优化"></a>SQL优化</h3><h3 id="EXPLAIN"><a href="#EXPLAIN" class="headerlink" title="EXPLAIN"></a>EXPLAIN</h3><p>用来查看SQL语句的具体执行过程。<br>原理：模拟优化器执行 SQL 查询语句，从而知道 mysql 是如何处理 sql 语句的。</p>
 <table>
 <thead>
 <tr>
-<th align="center">级别</th>
-<th align="center">脏读</th>
-<th align="center">不可重复读</th>
-<th align="center">幻读</th>
-<th align="center">加锁</th>
+<th align="center">Column</th>
+<th align="center">Meaning</th>
 </tr>
 </thead>
 <tbody><tr>
-<td align="center">读未提交</td>
-<td align="center">会</td>
-<td align="center">会</td>
-<td align="center">会</td>
-<td align="center">不加</td>
+<td align="center">id</td>
+<td align="center">The SELECT identifier （查询id）</td>
 </tr>
 <tr>
-<td align="center">读已提交</td>
-<td align="center">不会</td>
-<td align="center">会</td>
-<td align="center">会</td>
-<td align="center">不加</td>
+<td align="center">select_type</td>
+<td align="center">The SELECT type （查询类型）</td>
 </tr>
 <tr>
-<td align="center">可重复读（默认）</td>
-<td align="center">不会</td>
-<td align="center">不会</td>
-<td align="center">不会</td>
-<td align="center">不加</td>
+<td align="center">table</td>
+<td align="center">The table for the output row （输出结果集的表）</td>
 </tr>
 <tr>
-<td align="center">可串行化</td>
-<td align="center">不会</td>
-<td align="center">不会</td>
-<td align="center">不会</td>
-<td align="center">加</td>
+<td align="center">partitions</td>
+<td align="center">The matching partitions （匹配的分区）</td>
+</tr>
+<tr>
+<td align="center">type</td>
+<td align="center">The join type （表的连接类型）</td>
+</tr>
+<tr>
+<td align="center">possible_keys</td>
+<td align="center">The possible indexes to choose（可能使用的索引）</td>
+</tr>
+<tr>
+<td align="center">key</td>
+<td align="center">The index actually chosen （实际使用的索引）</td>
+</tr>
+<tr>
+<td align="center">key_len</td>
+<td align="center">The length of the chosen key （索引字段的长度）</td>
+</tr>
+<tr>
+<td align="center">ref</td>
+<td align="center">The columns compared to the index （列与索引的比较）</td>
+</tr>
+<tr>
+<td align="center">rows</td>
+<td align="center">Estimate of rows to be examined （预估扫描行数）</td>
+</tr>
+<tr>
+<td align="center">filtered</td>
+<td align="center">Percentage of rows filtered by table condition （按表条件过滤的行百分比）</td>
+</tr>
+<tr>
+<td align="center">extra</td>
+<td align="center">Additional information （额外信息，如是否使用索引覆盖）</td>
 </tr>
 </tbody></table>
-</li>
+<p><strong>id</strong></p>
+<blockquote>
+<p>select 查询的序列号，包含一组数字，表示查询中执行 select 子句或者操作表的顺序；<br>id 号分为三种情况：</p>
+<ol>
+<li>id 相同，那么执行顺序从上到下；</li>
+<li>id 不同，id 越大越先执行；</li>
+<li>id 有相同的也有不同的，id 相同的按 1 执行，id 不同的按 2 执行；</li>
 </ol>
-</li>
-</ul>
-<p>​             </p>
+</blockquote>
+<p><strong>select_type</strong></p>
+<blockquote>
+<p>主要用来分辨查询的类型，是普通查询还是联合查询还是子查询</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>select_type Value</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SIMPLE</td>
+<td>Simple SELECT (not using UNION or subqueries) （简单查询-没有联合查询和子查询）</td>
+</tr>
+<tr>
+<td>PRIMARY</td>
+<td>Outermost SELECT (最外层select)</td>
+</tr>
+<tr>
+<td>UNION</td>
+<td>Second or later SELECT statement in a UNION （若第二个select出现在union之后，则被标记为union）</td>
+</tr>
+<tr>
+<td>DEPENDENT UNION</td>
+<td>Second or later SELECT statement in a UNION, dependent on outer query（union或union all联合而成的结果会受外部表影响）</td>
+</tr>
+<tr>
+<td>UNION RESULT</td>
+<td>Result of a UNION. （从union表获取结果的select）</td>
+</tr>
+<tr>
+<td>SUBQUERY</td>
+<td>First SELECT in subquery （在select或者where列表中包含子查询）</td>
+</tr>
+<tr>
+<td>DEPENDENT SUBQUERY</td>
+<td>First SELECT in subquery, dependent on outer query（subquery的子查询要受到外部表查询的影响）</td>
+</tr>
+<tr>
+<td>DERIVED</td>
+<td>Derived table（ from子句中出现的子查询，也叫做派生表）</td>
+</tr>
+<tr>
+<td>UNCACHEABLE SUBQUERY</td>
+<td>A subquery for which the result cannot be cached and must be reevaluated for each row of the outer query（表示使用子查询的结果不能被缓存）</td>
+</tr>
+<tr>
+<td>UNCACHEABLE UNION</td>
+<td>The second or later select in a UNION that belongs to an uncacheable subquery (see UNCACHEABLE SUBQUERY)（表示union的查询结果不能被缓存：sql语句未验证）</td>
+</tr>
+</tbody></table>
+<p><strong>table</strong></p>
+<blockquote>
+<p>对应行正在访问哪一个表，表名或者别名，可能是临时表或者union合并结果集;</p>
+<ol>
+<li>具体表名或者表的别名，从具体的物理表中获取数据；</li>
+<li>表明为derivedN的形式，表示 id 为 N 的查询产生的衍生表；</li>
+<li>当有union result的时候，表名是union n1,n2等的形式，n1,n2表示参与union的id;</li>
+</ol>
+</blockquote>
+<p><strong>type</strong></p>
+<blockquote>
+<p>type 显示访问类型；采用怎么样的方式来访问数据；效率从好到坏依次为：<br>system &gt; const &gt; eq_ref &gt; ref &gt; fulltext &gt; ref_or_null &gt; index_merge &gt; unique_subquery &gt;<br>index_subquery &gt; range &gt; index &gt; ALL</p>
+<p>ALL ： 全表扫描；如果数据量大则需要进行优化；</p>
+<p>index ：全索引扫描这个比 ALL 的效率要好，主要有两种情况，一种是当前的查询时覆盖索引，即我们需要的数据在索引中就可以索取，或者是使用了索引进行排序，这样就避免数据的重排序；</p>
+<p>range ：表示利用索引查询的时候限制了范围，在指定范围内进行查询，这样避免了 index 的全索引扫描，适用的操作符： &#x3D; , &lt;&gt; , &gt; , &gt;&#x3D; , &lt; , &lt;&#x3D; , IS NULL , BETWEEN , LIKE , or IN()</p>
+<p>index_subquery ：利用索引来关联子查询，不再扫描全表；</p>
+<p>unique_subquery ：该连接类型类似与 index_subquery ，使用的是唯一索引；</p>
+<p>index_merge ：在查询过程中需要多个索引组合使用；</p>
+<p>ref_or_null ：对于某个字段即需要关联条件，也需要 null 值的情况下，查询优化器会选择这种访问方式；</p>
+<p>ref ：使用了非唯一性索引进行数据的查找；</p>
+<p>eq_ref ：使用唯一性索引进行数据查找；</p>
+<p>const ：这个表至多有一个匹配行；</p>
+<p>system ：表只有一行记录（等于系统表），这是 const 类型的特例；</p>
+</blockquote>
+<p><strong>possible_keys</strong></p>
+<blockquote>
+<p>查询涉及到字段的索引，则这些索引都会列举出来，但是不一定采纳；</p>
+</blockquote>
+<p><strong>key</strong></p>
+<blockquote>
+<p>实际使用的索引，如果为 NULL ，则没有使用索引</p>
+</blockquote>
+<p><strong>key_len</strong></p>
+<blockquote>
+<p>表示索引中使用的字节数；查询中使用的索引长度；在不损失精度的情况下长度越短越好。</p>
+</blockquote>
+<p><strong>ref</strong></p>
+<blockquote>
+<p>显示索引的哪一列被使用了，如果可能的话，是一个常数；</p>
+</blockquote>
+<p><strong>rows</strong></p>
+<blockquote>
+<p>大致估算出找出所需记录需要读取的行数，反映了sql找了多少条数据，该值越小越好。</p>
+</blockquote>
+<p><strong>extra</strong></p>
+<blockquote>
+<p>额外信息；</p>
+<p>using filesort ：使用了文件排序；<br>using temporary ：建立临时表来保存中间结果，查询完成之后把临时表删除；<br>using index ：采用覆盖索引，直接从索引中读取数据，而不用访问数据表。如果同时出现using where 表明索引被用来执行索引键值的查找；如果没有，表明索引被用来读取数据，而不是真的查找；<br>using index condition ：采用索引下推，减少回表次数；<br>using where ：使用where进行条件过滤；<br>using join buffer ：使用连接缓存；<br>impossible where ： where 语句的结果总是 false ;</p>
+</blockquote>
 <ul>
-<li>视图：是一个虚拟表，其内容由查询定义，同真实表一样，视图包含列，其数据来自对应的真实表（基表）。<ol>
-<li>通过视图可以修改基表的数据，基表的改变也会影响视图的显示。</li>
-<li>创建视图后，到数据库去看，只有一个视图结构文件，没有数据文件。</li>
-<li>视图可以再使用视图，数据仍然来自基表。</li>
-<li>一些数据表有些信息是保密的，不让用户直接看到，这时就可以创建一个视图。</li>
-</ol>
+<li><p>优化器选择过程<br>优化器根据解析树可能会生成多个执行计划，然后选择最优的的执行计划；</p>
+<pre class="line-numbers language-mysql"><code class="language-mysql">SHOW VARIABLES LIKE 'optimizer_trace';
+-- 启用优化器的追踪
+SET optimizer_trace='enabled=on';
+-- 执行一条查询语句
+SELECT * FROM information_schema.optimizer_trace;
+-- 用完关闭
+SET optimizer_trace="enabled=off";
+SHOW VARIABLES LIKE 'optimizer_trace';
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 </ul>
+<h3 id="慢日志查询"><a href="#慢日志查询" class="headerlink" title="慢日志查询"></a>慢日志查询</h3><p>开启</p>
+<blockquote>
+<p>查看</p>
+<pre class="line-numbers language-mysql"><code class="language-mysql">SHOW GLOBAL VARIABLES LIKE 'slow_query%';
+SHOW GLOBAL VARIABLES LIKE 'long_query%';
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>设置</p>
+<pre class="line-numbers language-mysql"><code class="language-mysql">SET GLOBAL slow_query_log = ON; -- on 开启 off 关闭
+SET GLOBAL long_query_time = 4; -- 单位秒；默认10s；此时设置为4s
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>或者修改配置</p>
+<pre class="line-numbers language-mysql"><code class="language-mysql">slow_query_log = ON
+long_query_time = 4
+slow_query_log_file = D:/mysql/mysql57-slow.log
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</blockquote>
+<p>mysqldumpslow</p>
+<blockquote>
+<p>查找最近10条慢查询日志</p>
+<pre class="line-numbers language-mysql"><code class="language-mysql">mysqldumpslow -s t -t 10 -g 'select' D:/mysql/1 mysql57-slow.log
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</blockquote>
+<p>SHOW PROFILE</p>
+<pre class="line-numbers language-mysql"><code class="language-mysql"># 查看是否开启
+SELECT @@profiling;
+# 设置开启
+SET profiling = 1;
+# 查看所有 profiles
+show profiles;
+# 查看query id 为 10 那条查询
+show profile for query 10;
+# 查看最后一条查询
+show profile;
+# 最后关闭
+SET profiling = 0;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>SHOW PROCESSLIST</p>
+<blockquote>
+<p>查看连接线程；可以查看此时线上运行的 sql 语句；<br>如果要查看完整的SQL语句：SHOW FULL PROCESSLIST; 然后优化该语句；</p>
+</blockquote>
+<h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><p>事务：用于保证数据的一致性，事务可由一条非常简单的SQL语句组成，也可以由一组复杂的SQL语句组成；</p>
+<p><strong>特征：</strong></p>
+<blockquote>
+<p>在数据库提交事务时，可以确保要么所有修改都已经保存，要么所有修改都不保存；<br>事务是访问并更新数据库各种数据项的一个程序执行单元。<br>在 MySQL innodb 下，每一条语句都是事务；可以通过 set autocommit &#x3D; 0; 设置当前会话手<br>动提交；</p>
+</blockquote>
+<p><strong>事务控制语句</strong></p>
+<pre class="line-numbers language-mysql"><code class="language-mysql">-- 显示开启事务
+START TRANSACTION | BEGIN
+
+-- 提交事务，并使得已对数据库做的所有修改持久化
+COMMIT
+
+-- 回滚事务，结束用户的事务，并撤销正在进行的所有未提交的修改
+ROLLBACK
+
+-- 创建一个保存点，一个事务可以有多个保存点
+SAVEPOINT identifier
+
+-- 删除一个保存点
+RELEASE SAVEPOINT identifier
+
+-- 事务回滚到保存点
+ROLLBACK TO [SAVEPOINT] identifier
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="ACID特性"><a href="#ACID特性" class="headerlink" title="ACID特性"></a>ACID特性</h3><p><strong>原子性（A）</strong></p>
+<blockquote>
+<p>事务操作要么都做（提交），要么都不做（回滚）；事务是访问并更新数据库各种数据项的一个程序执行单元，是不可分割的工作单位；通过 undolog 来实现回滚操作。undolog 记录的是事务每步具体操作，当回滚时，回放事务具体操作的逆运算；</p>
+</blockquote>
+<p><strong>隔离性（I）</strong></p>
+<blockquote>
+<p>事务的隔离性要求每个读写事务的对象对其他事务的操作对象能相互分离，并发事务之间不会相互影响，设定了不同程度的隔离级别，通过适度破环一致性，得以提高性能；通过 MVCC 和 锁来实现；MVCC 是多版本并发控制，主要解决一致性非锁定读，通过记录和获取行版本，而不是使用锁来限制读操作，从而实现高效并发读性能。锁用来处理并发 DML 操作；数据库中提供粒度锁的策略，针对表（聚集索引B+树）、页（聚集索引B+树叶子节点）、行（叶子节点当中某一段记录行）三种粒度加锁；</p>
+</blockquote>
+<p><strong>持久性（D）</strong></p>
+<blockquote>
+<p>事务提交后，事务DML操作将会持久化（写入 redolog 磁盘文件 哪一个页 页偏移值 具体数据）；即使发生宕机等故障，数据库也能将数据恢复。redolog 记录的是物理日志；</p>
+</blockquote>
+<p><strong>一致性（C）</strong></p>
+<blockquote>
+<p>一致性指事务将数据库从一种一致性状态转变为下一种一致性的状态，在事务执行前后，数据库完整性约束没有被破坏；一个事务单元需要提交之后才会被其他事务可见。例如：一个表的姓名是唯一键，如果一个事务对姓名进行修改，但是在事务提交或事务回滚后，表中的姓名变得不唯一了，这样就破坏了一致性；一致性由原子性、隔离性以及持久性共同来维护的。</p>
+</blockquote>
+<h3 id="隔离级别"><a href="#隔离级别" class="headerlink" title="隔离级别"></a>隔离级别</h3><p>当多个连接开启事务操作数据库中的数据时，为保证数据的准确性，数据库系统要负责隔离操作；MySQL innodb默认支持的隔离级别是 REPEATABLE READ；</p>
+<p><strong>READ UNCOMMITTED</strong></p>
+<blockquote>
+<p>读未提交；该级别下读不加锁，写加排他锁，写锁在事务提交或回滚后释放锁；</p>
+</blockquote>
+<p><strong>READ COMMITTED</strong></p>
+<blockquote>
+<p>读已提交（RC）；从该级别后支持 MVCC (多版本并发控制)，也就是提供一致性非锁定读；此时读取操作读取历史快照数据；该隔离级别下读取历史版本的最新数据，所以读取的是已提交的数据；</p>
+</blockquote>
+<p><strong>REPEATABLE READ</strong></p>
+<blockquote>
+<p>可重复读（RR）；该级别下也支持 MVCC，此时读取操作读取事务开始时的版本数据；</p>
+</blockquote>
+<p><strong>SERIALIZABLE</strong></p>
+<blockquote>
+<p>可串行化；该级别下给读加了共享锁；所以事务都是串行化的执行；此时隔离级别最严苛；</p>
+</blockquote>
+<pre class="line-numbers language-mysql"><code class="language-mysql">-- 设置隔离级别
+SET [GLOBAL | SESSION] TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+-- 或者采用下面的方式设置隔离级别
+SET @@tx_isolation = 'REPEATABLE READ';
+SET @@global.tx_isolation = 'REPEATABLE READ';
+-- 查看全局隔离级别
+SELECT @@global.tx_isolation;
+-- 查看当前会话隔离级别
+SELECT @@session.tx_isolation;
+SELECT @@tx_isolation;
+-- 手动给读加 S 锁
+SELECT ... LOCK IN SHARE MODE;
+-- 手动给读加 X 锁
+SELECT ... FOR UPDATE;
+-- 查看当前锁信息
+SELECT * FROM information_schema.innodb_locks;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h3><p>锁机制用于管理对共享资源的并发访问；用来实现事务的隔离级别 ；</p>
+<p><strong>锁类型</strong></p>
+<blockquote>
+<p>共享锁和排他锁都是行级锁；MySQL当中事务采用的是粒度锁；针对表（B+树）、页（B+树叶子节点）、行（B+树叶子节点当中某一段记录行）三种粒度加锁；</p>
+</blockquote>
+<ul>
+<li><p>共享锁（S）</p>
+<blockquote>
+<p>事务读操作加的锁；对某一行加锁；<br>在 SERIALIZABLE 隔离级别下，默认帮读操作加共享锁；<br>在 REPEATABLE READ 隔离级别下，需手动加共享锁，可解决幻读问题；<br>在 READ COMMITTED 隔离级别下，没必要加共享锁，采用的是 MVCC；<br>在 READ UNCOMMITTED 隔离级别下，既没有加锁也没有使用 MVCC；</p>
+</blockquote>
+</li>
+<li><p>排他锁（X）</p>
+<blockquote>
+<p>事务删除或更新加的锁；对某一行加锁；<br>在4种隔离级别下，都添加了排他锁，事务提交或事务回滚后释放锁；</p>
+</blockquote>
+</li>
+<li><p>意向共享锁（IS）</p>
+<blockquote>
+<p>对一张表中某几行加的共享锁；</p>
+</blockquote>
+</li>
+<li><p>意向排他锁（IX）</p>
+<blockquote>
+<p>对一张表中某几行加的排他锁；<br>目的：为了告诉其他事务，此时这条表被一个事务在访问；作用：排除表级别读写锁 （全面扫描<br>加锁）；</p>
+</blockquote>
+</li>
+<li><p>AUTO-INC Lock（AI锁）</p>
+<blockquote>
+<p>自增锁，是一种特殊的表级锁，发生在 AUTO_INCREMENT 约束下的插入操作；采用的一种特殊的表锁机制（较低概率造成B+树分裂）；完成对自增长值插入的SQL语句后立即释放；在大数据量的插入会影响插入性能，因为另一个事务中的插入会被阻塞；从MySQL 5.1.22开始提供一种轻量级互斥量的自增长实现机制，该机制提高了自增长值插入的性能；</p>
+</blockquote>
+</li>
+</ul>
+<p>锁的兼容性</p>
+<table>
+<thead>
+<tr>
+<th>锁</th>
+<th>S</th>
+<th>X</th>
+<th>IS</th>
+<th>IX</th>
+<th>AI</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>S</td>
+<td>兼容</td>
+<td>冲突</td>
+<td>兼容</td>
+<td>冲突</td>
+<td>冲突</td>
+</tr>
+<tr>
+<td>X</td>
+<td>冲突</td>
+<td>冲突</td>
+<td>冲突</td>
+<td>冲突</td>
+<td>冲突</td>
+</tr>
+<tr>
+<td>IS</td>
+<td>兼容</td>
+<td>冲突</td>
+<td>兼容</td>
+<td>兼容</td>
+<td>兼容</td>
+</tr>
+<tr>
+<td>IX</td>
+<td>冲突</td>
+<td>冲突</td>
+<td>兼容</td>
+<td>兼容</td>
+<td>兼容</td>
+</tr>
+<tr>
+<td>AI</td>
+<td>冲突</td>
+<td>冲突</td>
+<td>兼容</td>
+<td>兼容</td>
+<td>冲突</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>由于innodb支持的是行级别的锁，意向锁并不会阻塞除了全表扫描以外的任何请求；<br>意向锁之间是互相兼容的；<br>IS 只对排他锁不兼容；<br>当想为某一行添加 S 锁，先自动为所在的页和表添加意向锁 IS，再为该行添加 S 锁；<br>当想为某一行添加 X 锁，先自动为所在的页和表添加意向锁 IX，再为该行添加 X 锁；<br>当事务试图读或写某一条记录时，会先在表上加上意向锁，然后才在要操作的记录上加上读锁或写锁这样判断表中是否有记录加锁就很简单了，只要看下表上是否有意向锁就行了。意向锁之间是不会产生冲突的，也不和 AUTO_INC 表锁冲突，它只会阻塞表级读锁或表级写锁，另外，意向锁也不会和行锁冲突，行锁只会和行锁冲突。</p>
+</blockquote>
+<p><strong>锁算法</strong></p>
+<ul>
+<li><p>Record Lock</p>
+<blockquote>
+<p>记录锁，单个行记录上的锁；</p>
+</blockquote>
+</li>
+<li><p>Gap Lock（重点）</p>
+<blockquote>
+<p>间隙锁，锁定一个范围，但不包含记录本身；全开区间；REPEATABLE READ级别及以上支持间隙<br>锁；<br>如果 REPEATABLE READ 修改 innodb_locks_unsafe_for_binlog &#x3D; 0 ，那么隔离级别相当于<br>退化为 READ COMMITTED；</p>
+</blockquote>
+<pre class="line-numbers language-mysql"><code class="language-mysql">-- 查看是否支持间隙锁，默认支持，也就是 innodb_locks_unsafe_for_binlog = 0;
+SELECT @@innodb_locks_unsafe_for_binlog;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+<li><p>Next-Key Lock</p>
+<blockquote>
+<p>记录锁+间隙锁，锁定一个范围，并且锁住记录本身；左开右闭区间；</p>
+</blockquote>
+</li>
+<li><p>Insert Intention Lock</p>
+<blockquote>
+<p>插入意向锁，insert操作的时候产生；在多事务同时写入不同数据至同一索引间隙的时候，并不需要等待其他事务完成，不会发生锁等待。<br>假设有一个记录索引包含键值4和7，两个不同的事务分别插入5和6，每个事务都会产生一个加在<br>4-7之间的插入意向锁，获取在插入行上的排它锁，但是不会被互相锁住，因为数据行并不冲突。</p>
+</blockquote>
+</li>
+</ul>
+<p><strong>锁兼容</strong></p>
+<table>
+<thead>
+<tr>
+<th>锁</th>
+<th>GAP（持有）</th>
+<th>Insert Intention（持有）</th>
+<th>Record（持有）</th>
+<th>Next-key（持有）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>GAP（请求）</td>
+<td>兼容</td>
+<td>兼容</td>
+<td>兼容</td>
+<td>兼容</td>
+</tr>
+<tr>
+<td>Insert Intention（请求）</td>
+<td>冲突</td>
+<td>兼容</td>
+<td>兼容</td>
+<td>冲突</td>
+</tr>
+<tr>
+<td>Record（请求）</td>
+<td>兼容</td>
+<td>兼容</td>
+<td>冲突</td>
+<td>冲突</td>
+</tr>
+<tr>
+<td>Next-key（请求）</td>
+<td>兼容</td>
+<td>兼容</td>
+<td>冲突</td>
+<td>冲突</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>横向：表示已经持有的锁；纵向：表示正在请求的锁；<br>一个事务已经获取了插入意向锁，对其他事务是没有任何影响的；<br>一个事务想要获取插入意向锁，如果有其他事务已经加了 gap lock 或 Next-key lock 则会阻塞；<br>这个是重点，死锁之源；</p>
+</blockquote>
+<p><strong>锁的对象</strong></p>
+<blockquote>
+<p>行级锁是针对表的索引加锁；索引包括聚集索引和辅助索引；<br>表级锁是针对页或表进行加锁；<br>重点考虑 InnoDB 在 read committed 和 repeatable read 级别下锁的情况；<br>如下图 students 表作为实例，其中 id 为主键，no（学号）为辅助唯一索引，name（姓名）和<br>age（年龄）为二级非唯一索引，score（学分）无索引。</p>
+</blockquote>
+<p><img src="https://s2.loli.net/2023/05/21/hduJ7iBQtMkm5Wl.png" alt="锁1"></p>
+<p><img src="https://s2.loli.net/2023/05/21/QL6KzSVXmeotBdP.png" alt="锁2"></p>
+<p><img src="https://s2.loli.net/2023/05/21/v7ApB5I6OeFMcxj.png" alt="锁3"></p>
+<p><img src="https://s2.loli.net/2023/05/21/3DyviBxa6UIcdZH.png" alt="锁4"></p>
+<p><img src="https://s2.loli.net/2023/05/21/7elusOAoZGtMSNK.png" alt="锁5"></p>
+<p><strong>MVCC</strong></p>
+<blockquote>
+<p>多版本并发控制；用来实现一致性的非锁定读；非锁定读是指不需要等待访问的行上X锁的释放；在 read committed 和 repeatable read下，innodb使用MVCC；然后对于快照数据的定义不同；在 read committed 隔离级别下，对于快照数据总是读取被锁定行的最新一份快照数据；而在repeatable read 隔离级别下，对于快照数据总是读取事务开始时的行数据版本；思考：为什么读取快照数据不需要上锁？因为没有事务需要对历史的数据进行修改操作；</p>
+</blockquote>
+<p><strong>redo</strong></p>
+<blockquote>
+<p>redo 日志用来实现事务的持久性；内存中包含 redo log buffer，磁盘中包含 redo log file；当事务提交时，必须先将该事务的所有日志写入到重做日志文件进行持久化，待事务的commit操作完成才完成了事务的提交；redo log 顺序写，记录的是对每个页的修改（页、页偏移量、以及修改的内容）；在数据库运行时不需要对 redo log 的文件进行读取操作；只有发生宕机的时候，才会拿redo log进行恢复；</p>
+</blockquote>
+<p><strong>undo</strong></p>
+<blockquote>
+<p>undo 日志用来帮助事务回滚以及 MVCC 的功能；存储在共享表空间中；undo 是逻辑日志，回滚时将数据库逻辑地恢复到原来的样子，根据 undo log 的记录，做之前的逆运算；比如事务中有insert 操作，那么执行 delete 操作；对于 update 操作执行相反的 update 操作；</p>
+</blockquote>
+<h3 id="并发读异常"><a href="#并发读异常" class="headerlink" title="并发读异常"></a>并发读异常</h3><p> <strong>脏读</strong></p>
+<blockquote>
+<p>事务（A）可以读到另外一个事务（B）中未提交的数据；也就是事务A读到脏数据；</p>
+</blockquote>
+<p><strong>不可重复读</strong></p>
+<blockquote>
+<p>事务（A) 可以读到另外一个事务（B）中提交的数据；通常发生在一个事务中两次读到的数据是不一样的情况；不可重复读在隔离级别 READ COMMITTED 存在。一般而言，不可重复读的问题是可以接受的，因为读到已经提交的数据，一般不会带来很大的问题，所以很多厂商（如Oracle、SQL Server）默认隔离级别就是READ COMMITTED；</p>
+</blockquote>
+<p><strong>幻读</strong></p>
+<blockquote>
+<p>两次读取同一个范围内的记录得到的结果集不一样；例如：以 name 为唯一键的表，一个事务中查询 select * from t where name &#x3D; ‘mark’; 不存在，接下来 insert into t(name)values (‘mark’); 出现错误，此时另外一个事务也执行了insert 操作；幻读在隔离级别REPEATABLE READ 及以下存在；但是可以在 REPEATABLE READ 级别下通过读加锁（使用nextkeylocking）解决；</p>
+</blockquote>
+<p><strong>丢失更新</strong></p>
+<blockquote>
+<p>脏读、不可重复读、幻读都是一个事务写，一个事务读，由于一个事务的写导致另一个事务读到了不该读的数据；丢失更新是两个事务都是写；丢失更新分为提交覆盖和回滚覆盖；回滚覆盖数据库拒绝不可能产生，重点关注提交覆盖；</p>
+</blockquote>
+<p><strong>区别</strong></p>
+<blockquote>
+<p>脏读和不可重复读的区别在于，脏读是读取了另一个事务未提交的数据，而不可重复读是读取了另一个事务提交之后的修改；本质上都是其他事务的修改影响了本事务的读取；不可重复读和幻读比较类似；不可重复读是两次读取同一条记录，得到不一样的结果；而幻读是两次读取同一个范围内的记录得到的结果集不一样（可能不同个数，也可能相同个数内容不一样，比如删除一行后又添加新行）；不可重复读是因为其他事务进行了 update 操作，幻读是因为其他事务进行了 insert 或者 delete 操作。</p>
+</blockquote>
+<p><strong>隔离级别下并发读异常</strong></p>
+<table>
+<thead>
+<tr>
+<th>隔离级别</th>
+<th>回滚覆盖</th>
+<th>脏读</th>
+<th>不可重复读</th>
+<th>幻读</th>
+<th>提交覆盖</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>READ UNCOMMITTED</td>
+<td>不存在</td>
+<td>存在</td>
+<td>存在</td>
+<td>存在</td>
+<td>存在</td>
+</tr>
+<tr>
+<td>READ COMMITTED</td>
+<td>不存在</td>
+<td>不存在</td>
+<td>存在</td>
+<td>存在</td>
+<td>存在</td>
+</tr>
+<tr>
+<td>REPEATABLE READ</td>
+<td>不存在</td>
+<td>不存在</td>
+<td>不存在</td>
+<td>存在（手动加锁）</td>
+<td>存在（手动加锁）</td>
+</tr>
+<tr>
+<td>SERIALIZABLE</td>
+<td>不存在</td>
+<td>不存在</td>
+<td>不存在</td>
+<td>不存在</td>
+<td>不存在</td>
+</tr>
+</tbody></table>
+<h3 id="并发死锁"><a href="#并发死锁" class="headerlink" title="并发死锁"></a>并发死锁</h3><blockquote>
+<p>死锁：两个或两个以上的事务在执行过程中，因争夺锁资源而造成的一种互相等待的现象；<br>MySQL 中采用 wait-for graph （等待图-采用非递归深度优先的图算法实现）的方式来进行死锁检测；<br>异常报错：deadlock found when trying to get lock;</p>
+</blockquote>
+<p><strong>相反加锁顺序死锁</strong></p>
+<blockquote>
+<p>不同表的加锁顺序相反或者相同表不同行加锁顺序相反造成死锁；其中相同表不同行加锁顺序相反造成死锁有很多变种，其中容易忽略的是给辅助索引行加锁的时候，同时会给聚集索引行加锁；同时还可能出现在外键索引时，给父表加锁，同时隐含给子表加锁；触发器同样如此，这些都需要视情况分析；</p>
+<p>调整加锁顺序；</p>
+</blockquote>
+<p><strong>锁冲突死锁</strong></p>
+<blockquote>
+<p>innodb 在 RR 隔离级别下，最常见的是插入意向锁与 gap 锁冲突造成死锁；主要原理为：一个事<br>务想要获取插入意向锁，如果有其他事务已经加了 gap lock 或 Next-key lock 则会阻塞；</p>
+</blockquote>
+<p><strong>查看死锁</strong></p>
+<pre class="line-numbers language-mysql"><code class="language-mysql">-- 开启标准监控
+CREATE TABLE innodb_monitor (a INT) ENGINE=INNODB;
+
+-- 关闭标准监控
+DROP TABLE innodb_monitor;
+
+-- 开启锁监控
+CREATE TABLE innodb_lock_monitor (a INT) ENGINE=INNODB;
+
+-- 关闭锁监控
+DROP TABLE innodb_lock_monitor
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>系统参数</strong></p>
+<pre class="line-numbers language-mysql"><code class="language-mysql">-- 开启标准监控
+set GLOBAL innodb_status_output=ON;
+-- 关闭标准监控
+set GLOBAL innodb_status_output=OFF;
+-- 开启锁监控
+set GLOBAL innodb_status_output_locks=ON;
+-- 关闭锁监控
+set GLOBAL innodb_status_output_locks=OFF;
+-- 将死锁信息记录在错误日志中
+set GLOBAL innodb_print_all_deadlocks=ON;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>命令</strong></p>
+<pre class="line-numbers language-mysql"><code class="language-mysql">-- 查看事务
+select * from information_schema.INNODB_TRX;
+-- 查看锁
+select * from information_schema.INNODB_LOCKS;
+-- 查看锁等待
+select * from information_schema.INNODB_LOCK_WAITS;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>死锁解决</strong></p>
+<blockquote>
+<p>对于顺序相反型，调整执行顺序；<br>对于锁冲突型，更换语句或者降低隔离级别；</p>
+</blockquote>
+<p><strong>如何避免死锁</strong></p>
+<blockquote>
+<p>尽可能以相同顺序来访问索引记录和表；<br>如果能确定幻读和不可重复读对应用影响不大，考虑将隔离级别降低为RC；<br>添加合理的索引，不走索引将会为每一行记录加锁，死锁概率非常大；<br>尽量在一个事务中锁定所需要的所有资源，减小死锁概率；<br>避免大事务，将大事务分拆成多个小事务；大事务占用资源多，耗时长，冲突概率变高；<br>避免同一时间点运行多个对同一表进行读写的概率；</p>
+</blockquote>
+<h3 id="事务总结"><a href="#事务总结" class="headerlink" title="事务总结"></a>事务总结</h3><p><img src="https://s2.loli.net/2023/05/21/EwOol3b4VYL8udB.png" alt="事务"></p>
+<h2 id="mysql与缓存"><a href="#mysql与缓存" class="headerlink" title="mysql与缓存"></a>mysql与缓存</h2><h3 id="mysql主从复制"><a href="#mysql主从复制" class="headerlink" title="mysql主从复制"></a>mysql主从复制</h3><p><img src="https://s2.loli.net/2023/05/21/Wi15GAduqmhMZzn.jpg" alt="mysql主从复制"></p>
+<p>​             </p>
+<blockquote>
+<p>此图来源网络</p>
+<ol>
+<li><p>主库更新事件(update、insert、delete)通过 io-thread 写到binlog；</p>
+</li>
+<li><p>从库请求读取 binlog，通过 io-thread 写入（write）从库本地 relay log（中继日志）；</p>
+</li>
+<li><p>从库通过sql-thread读取（read） relay log，并把更新事件在从库中执行（replay）一遍；</p>
+</li>
+</ol>
+<p>复制流程：</p>
+<ol start="4">
+<li><p>Slave上面的IO进程连接上Master，并请求从指定日志文件的指定位置（或者从最开始的日志）之后的日志内容。</p>
+</li>
+<li><p>Master接收到来自Slave的IO进程的请求后，负责复制的IO进程会根据请求信息读取日志指定位置之后的日志信息，返回给Slave的 IO进程。返回信息中除了日志所包含的信息之外，还包括本次返回的信息已经到Master端的bin-log文件的名称以及bin-log的位置。</p>
+</li>
+<li><p>Slave的IO进程接收到信息后，将接收到的日志内容依次添加到Slave端的relay-log文件的最末端，并将读取到的Master端的 bin-log的文件名和位置记录到master-info文件中，以便在下一次读取的时候能够清楚的告诉Master从何处开始读取日志。</p>
+</li>
+<li><p>Slave的Sql进程检测到relay-log中新增加了内容后，会马上解析relay-log的内容成为在Master端真实执行时候的那些可执行的内容，并在自身执行。</p>
+</li>
+</ol>
+</blockquote>
 <p>​                                 </p>
+<h3 id="读写分离"><a href="#读写分离" class="headerlink" title="读写分离"></a>读写分离</h3><p><img src="https://s2.loli.net/2023/05/21/yjwmJ3LoOpxkcu6.jpg" alt="读写分离"></p>
+<h3 id="为什么需要缓冲层？"><a href="#为什么需要缓冲层？" class="headerlink" title="为什么需要缓冲层？"></a>为什么需要缓冲层？</h3><p>前提：读多写少，单个主节点能支撑项目数据量；数据的主要依据是 mysql；<br><strong>mysql</strong></p>
+<blockquote>
+<p><u>mysql 有缓冲层，它的作用也是用来缓存热点数据，这些数据包括数据文件、索引文件等</u>；mysql缓冲层是从自身出发，<u>跟具体的业务无关</u>；这里的缓冲策略主要是 lru，当然是经过优化的 lru；mysql数据主要存储在磁盘当中，<u>适合大量重要数据的存储</u>；磁盘当中的数据一般是远大于内存当中的数据；一般业务场景关系型数据库（mysql）作为主要数据库；</p>
+</blockquote>
+<p><strong>缓冲层</strong></p>
+<blockquote>
+<p>缓存数据库可以选用redis，memcached；它们所有数据都存储在内存当中，当然也可以将内存当中的数据持久化到磁盘当中；内存的数据和磁盘的数据是一比一的；</p>
+</blockquote>
+<p><img src="https://s2.loli.net/2023/05/21/UFpCDyQaIdtm4o6.jpg" alt="mysql和Redis内存比较"></p>
+<p><strong>总结</strong></p>
+<blockquote>
+<ol>
+<li>由于mysql的缓冲层不由用户来控制，也就是不能由用户来控制缓存具体数据；</li>
+<li>访问磁盘的速度比较慢，尽量获取数据从内存中获取；</li>
+<li>主要解决读的性能；因为写没必要优化，必须让数据正确的落盘；如果写性能出现问题，那么请使用横向扩展集群方式来解决；</li>
+<li>项目中需要存储的数据应该远大于内存的容量，同时需要进行数据统计分析，所以数据存储获取的依据应该是关系型数据库；</li>
+<li><u>缓存数据库可以存储用户自定义的热点数据</u>；以下的讨论都是基于热点数据的同步问题；</li>
+</ol>
+</blockquote>
+<h3 id="为什么有同步的问题？"><a href="#为什么有同步的问题？" class="headerlink" title="为什么有同步的问题？"></a>为什么有同步的问题？</h3><blockquote>
+<p>没有缓冲层之前，我们对数据的读写都是基于 mysql；所以不存在同步问题；这句话也不是必然，比如读写分离就存在同步问题（数据一致性问题）；<br>引入缓冲层后，我们对数据的获取需要分别操作缓存数据库和 mysql；那么这个时候数据可能存<br>在几个状态？</p>
+<ol>
+<li>mysql有，缓存无</li>
+<li>mysql无，缓存有</li>
+<li>都有，但数据不一致</li>
+<li>都有，数据一致</li>
+<li>都没有<br>4和5显然是没问题的，我们现在需要考虑1、2以及3；<br>首先明确一点：我们获取数据的主要依据是mysql，所以mysql数据正确就万事大吉，只需要将mysql的数据正确同步到缓存数据库就可以了；同理，缓存有，mysql没有，这比较危险，此时我们可以认为该数据为脏数据；所以我们需要在同步策略中避免该情况发生；同时可能存在mysql和缓存都有数据，但是数据不一致，这种也需要在同步策略中避免；缓存不可用的话，我们整个系统应该要保持正常工作；mysql不可用的话，应该停止对外提供服务；另外可以将问题 3 转化为问题 1；</li>
+</ol>
+</blockquote>
+<h3 id="尝试解决同步（一致性）"><a href="#尝试解决同步（一致性）" class="headerlink" title="尝试解决同步（一致性）"></a>尝试解决同步（一致性）</h3><p><strong>写</strong></p>
+<blockquote>
+<p>主要数据存储在mysql当中，所以先写mysql，如果mysql不可用，直接返回；mysql写成功后，再将数据同步给redis就行了，如果此时redis不可用，应该怎么做？</p>
+</blockquote>
+<p><strong>读</strong></p>
+<blockquote>
+<p>先从redis当中获取数据，如果redis不可用，直接去mysql获取；如果redis有，直接返回；如果redis没有，转而向mysql请求，如果mysql没有，直接返回；如果MySQL有，则返回并将数据回写到redis当中；</p>
+</blockquote>
+<p><strong>总结</strong></p>
+<blockquote>
+<ol>
+<li>业务层引入了两个变化方向，尽量减少redis的流程；</li>
+<li>业务层控制热数据流程；回写流程控制热数据流程；</li>
+<li>热数据不是总是热数据；需要将热数据设置超时时间；</li>
+</ol>
+</blockquote>
+<h3 id="解决数据同步问题"><a href="#解决数据同步问题" class="headerlink" title="解决数据同步问题"></a>解决数据同步问题</h3><p><strong>一致性问题</strong></p>
+<ul>
+<li><p>强一致性</p>
+<blockquote>
+<p>同步是否成功的依据来源于mysql是否同步到redis，即使没有同步成功，也没关系；<br>写流程：先删除缓存，再写mysql，后面数据的同步交由go-mysql-transfer；<br>先删除缓存，为了避免其他服务读取旧的数据；也是告知系统这个数据已经不是最新，建议从mysql获取数据；</p>
+</blockquote>
+</li>
+<li><p>最终一致性</p>
+<blockquote>
+<p>读写分离，主库将数据同步到从库，是需要时间，那么在同步期间，主从之间数据有差异；<br>这里有写两种方案：<br>第一种：直接写mysql，等待mysql同步数据到redis；<br>第二种：先写redis，设置key的过期时间为200ms（经验值），等待mysql回写redis，覆盖key，设置更长的过期时间；<br>200ms 默认的是 写mysql到mysql同步到redis的时长；这个需要根据实际环境进行设置</p>
+</blockquote>
+</li>
+</ul>
+<p>方案一：</p>
+<p><img src="https://s2.loli.net/2023/05/21/mnAFMTXLlw42KcH.jpg" alt="数据同步1"></p>
+<p>方案二：</p>
+<p><img src="https://s2.loli.net/2023/05/21/PBpzMVft52bXCDH.jpg" alt="数据同步2"></p>
+<h3 id="缓存穿透"><a href="#缓存穿透" class="headerlink" title="缓存穿透"></a>缓存穿透</h3><p>假设某个数据redis不存在，mysql也不存在，而且一直尝试读怎么办？缓存穿透，数据最终压力依然堆积在mysql，可能造成mysql不堪重负而崩溃;<br><strong>解决</strong></p>
+<blockquote>
+<ol>
+<li>发现mysql不存在，将redis设置为 &lt;key, nil&gt; 设置过期时间 下次访问key的时候 不再访问mysql 容易造成redis缓存很多无效数据；</li>
+<li>布隆过滤器，将mysql当中已经存在的key，写入布隆过滤器，不存在的直接pass掉；</li>
+</ol>
+</blockquote>
+<h3 id="缓存击穿"><a href="#缓存击穿" class="headerlink" title="缓存击穿"></a>缓存击穿</h3><p>缓存击穿 某些数据redis没有，但是mysql有；此时当大量这类数据的并发请求，同样造成mysql过大；</p>
+<p><strong>解决</strong></p>
+<blockquote>
+<ol>
+<li>加锁<br>请求数据的时候获取锁，如果获取成功，则操作，获取失败，则休眠一段时间（200ms）再去获<br>取；获取成功，则释放锁<br>首先读redis，不存在，读mysql，存在，写redis key的锁，整个流程走完，才让后面的服务器访问</li>
+<li>将很热的key，设置不过期</li>
+</ol>
+</blockquote>
+<h3 id="缓存雪崩"><a href="#缓存雪崩" class="headerlink" title="缓存雪崩"></a>缓存雪崩</h3><p>表示一段时间内，缓存集中失效(redis无 mysql 有)，导致请求全部走mysql，有可能搞垮数据库，使整个服务失效；<br><strong>解决</strong></p>
+<blockquote>
+<p>缓存数据库在整个系统不是必须的，也就是缓存宕机不会影响整个系统提供服务；</p>
+<ol>
+<li>如果因为缓存数据库宕机，造成所有数据涌向mysql；采用高可用的集群方案，如哨兵模式、cluster模式；</li>
+<li>如果因为设置了相同的过期时间，造成缓存集中失效；设置随机过期值或者其他机制错开失效时间；</li>
+<li>如果因为系统重启的时候，造成缓存数据消失；重启时间短，redis开启持久化（过期信息也会持久化）就行了； 重启时间长提前将热数据导入redis当中；</li>
+</ol>
+</blockquote>
 
                 
             </div>
@@ -728,8 +1709,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/datebase/">
-                                    <span class="chip bg-color">datebase</span>
+                                <a href="/tags/Mysql/">
+                                    <span class="chip bg-color">Mysql</span>
                                 </a>
                             
                         </div>
@@ -903,18 +1884,17 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2022/12194.html">
+                <a href="/2023/052127097.html">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="数据库">
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="Linux教程">
                         
-                        <span class="card-title">数据库</span>
+                        <span class="card-title">Linux教程</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -924,27 +1904,26 @@
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-12-19
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-05-21
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Datebase/" class="post-category">
-                                    Datebase
+                            <a href="/categories/Linux/" class="post-category">
+                                    Linux
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/datebase/">
-                        <span class="chip bg-color">datebase</span>
+                    <a href="/tags/Linux/">
+                        <span class="chip bg-color">Linux</span>
                     </a>
                     
                 </div>
@@ -981,8 +1960,8 @@
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Spring/" class="post-category">
-                                    Spring
+                            <a href="/categories/Java/" class="post-category">
+                                    Java
                                 </a>
                             
                             
@@ -1125,7 +2104,7 @@
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2022</span>
+                <span id="year">2022-2023</span>
             
             <a href="/about" target="_blank">HL</a>
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>

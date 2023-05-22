@@ -1,0 +1,2090 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Redis教程, 朝暮惜">
+    <meta name="description" content="redis简介Redis 是Remote Dictionary Service 的简称；也是远程字典服务；Redis 是内存数据库，KV 数据库，数据结构数据库；
+Redis数据类型5种常见数据类型：String（字符串）、List（列表）">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', '');
+</script>
+
+
+    <title>Redis教程 | 朝暮惜</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="朝暮惜" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">朝暮惜</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">朝暮惜</div>
+        <div class="logo-desc">
+            
+            活到老，学到老
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Redis教程</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/reids/">
+                                <span class="chip bg-color">reids</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Datebase/" class="post-category">
+                                Datebase
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-05-21
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2023-05-21
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    3.6k
+                </div>
+                
+
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+        <!-- 代码块折行 -->
+        <style type="text/css">
+            code[class*="language-"], pre[class*="language-"] { white-space: pre-wrap !important; }
+        </style>
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="redis简介"><a href="#redis简介" class="headerlink" title="redis简介"></a>redis简介</h2><p>Redis 是Remote Dictionary Service 的简称；也是远程字典服务；<br>Redis 是内存数据库，KV 数据库，数据结构数据库；</p>
+<h2 id="Redis数据类型"><a href="#Redis数据类型" class="headerlink" title="Redis数据类型"></a>Redis数据类型</h2><p>5种常见数据类型：String（字符串）、List（列表）、Hash（字典）、Set（集合）、ZSet（有序集合）</p>
+<p><img src="https://s2.loli.net/2023/05/21/XjacQ2fMm3DGFPL.jpg" alt="Redis存储结构1"></p>
+<p><img src="https://s2.loli.net/2023/05/21/LH2rVGBUPFJWaNj.jpg" alt="Redis存储结构2"></p>
+<p><img src="https://s2.loli.net/2023/05/21/MZOgYB8n6D4TFu5.jpg" alt="Redis中value编码"></p>
+<h3 id="String"><a href="#String" class="headerlink" title="String"></a>String</h3><blockquote>
+<p>字符数组，该字符串是动态字符串 raw，字符串长度小于1M 时，加倍扩容；超过 1M 每次只多扩1M；字符串最大长度为 512M；<br>注意：redis 字符串是二进制安全字符串(不会被\0截断)；可以存储图片，二进制协议等二进制数据；</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>set key value</td>
+<td>设置key&#x3D;value</td>
+</tr>
+<tr>
+<td>get key</td>
+<td>获得键key对应的值</td>
+</tr>
+<tr>
+<td>getrange key start end</td>
+<td>得到字符串的子字符串存放在一个键</td>
+</tr>
+<tr>
+<td>getset key value</td>
+<td>设置键的字符串值，并返回旧值</td>
+</tr>
+<tr>
+<td>getbit key offset</td>
+<td>返回存储在键位值的字符串值的偏移</td>
+</tr>
+<tr>
+<td>mget key1 [key2..]</td>
+<td>得到所有的给定键的值</td>
+</tr>
+<tr>
+<td>setbit key offset value</td>
+<td>设置或清除该位在存储在键的字符串值偏移</td>
+</tr>
+<tr>
+<td>setex key seconds value</td>
+<td>键到期时设置值</td>
+</tr>
+<tr>
+<td>setnx key value</td>
+<td>设置键的值，只有当该键不存在</td>
+</tr>
+<tr>
+<td>setrange key offset value</td>
+<td>覆盖字符串的一部分从指定键的偏移</td>
+</tr>
+<tr>
+<td>strlen key</td>
+<td>得到存储在键的值的长度</td>
+</tr>
+<tr>
+<td>mset key value [key value…]</td>
+<td>设置多个键和多个值</td>
+</tr>
+<tr>
+<td>msetnx key value [key value…]</td>
+<td>设置多个键多个值，只有在当没有按键的存在时</td>
+</tr>
+<tr>
+<td>psetex key milliseconds value</td>
+<td>设置键的毫秒值和到期时间</td>
+</tr>
+<tr>
+<td>incr key</td>
+<td>增加键的整数值一次</td>
+</tr>
+<tr>
+<td>incrby key increment</td>
+<td>由给定的数量递增键的整数值</td>
+</tr>
+<tr>
+<td>incrbyfloat key increment</td>
+<td>由给定的数量递增键的浮点值</td>
+</tr>
+<tr>
+<td>decr key</td>
+<td>递减键一次的整数值</td>
+</tr>
+<tr>
+<td>decrby key decrement</td>
+<td>由给定数目递减键的整数值</td>
+</tr>
+<tr>
+<td>append key value</td>
+<td>追加值到一个键</td>
+</tr>
+<tr>
+<td>del key</td>
+<td>如果存在删除键</td>
+</tr>
+<tr>
+<td>dump key</td>
+<td>返回存储在指定键的值的序列化版本</td>
+</tr>
+<tr>
+<td>exists key</td>
+<td>此命令检查该键是否存在</td>
+</tr>
+<tr>
+<td>expire key seconds</td>
+<td>指定键的过期时间</td>
+</tr>
+<tr>
+<td>expireat key timestamp</td>
+<td>指定的键过期时间。在这里，时间是在Unix时间戳格式</td>
+</tr>
+<tr>
+<td>pexpire key milliseconds</td>
+<td>设置键以毫秒为单位到期</td>
+</tr>
+<tr>
+<td>pexpireat key milliseconds-timestamp</td>
+<td>设置键在Unix时间戳指定为毫秒到期</td>
+</tr>
+<tr>
+<td>keys pattern</td>
+<td>查找与指定模式匹配的所有键</td>
+</tr>
+<tr>
+<td>move key db</td>
+<td>移动键到另一个数据库</td>
+</tr>
+<tr>
+<td>persist key</td>
+<td>移除过期的键</td>
+</tr>
+<tr>
+<td>pttl key</td>
+<td>以毫秒为单位获取剩余时间的到期键</td>
+</tr>
+<tr>
+<td>ttl key</td>
+<td>获取键到期的剩余时间。</td>
+</tr>
+<tr>
+<td>randomkey</td>
+<td>从Redis返回随机键</td>
+</tr>
+<tr>
+<td>rename key newkey</td>
+<td>更改键的名称</td>
+</tr>
+<tr>
+<td>renamenx key newkey</td>
+<td>重命名键，如果新的键不存在</td>
+</tr>
+<tr>
+<td>type key</td>
+<td>返回存储在键的数据类型的值。</td>
+</tr>
+</tbody></table>
+<h3 id="List"><a href="#List" class="headerlink" title="List"></a>List</h3><blockquote>
+<p>双向链表实现，列表首尾操作（删除和增加）时间复杂度O(1) ；查找中间元素时间复杂度为O(n)；<br>列表中数据是否压缩的依据：</p>
+<ol>
+<li>元素长度小于 48，不压缩；</li>
+<li>元素压缩前后长度差不超过 8，不压缩；</li>
+</ol>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>blpop key1 [key2 ] timeout</td>
+<td>取出并获取列表中的第一个元素，或阻塞，直到有可用</td>
+</tr>
+<tr>
+<td>brpop key1 [key2 ] timeout</td>
+<td>取出并获取列表中的最后一个元素，或阻塞，直到有可用</td>
+</tr>
+<tr>
+<td>brpoplpush source destination timeout</td>
+<td>从列表中弹出一个值，它推到另一个列表并返回它;或阻塞，直到有可用</td>
+</tr>
+<tr>
+<td>lindex key index</td>
+<td>从一个列表其索引获取对应的元素</td>
+</tr>
+<tr>
+<td>linsertT key brfore | after pivot value</td>
+<td>在列表中的其他元素之后或之前插入一个元素</td>
+</tr>
+<tr>
+<td>llen key</td>
+<td>获取列表的长度</td>
+</tr>
+<tr>
+<td>lpop key</td>
+<td>获取并取出列表中的第一个元素</td>
+</tr>
+<tr>
+<td>lpush key value1 [value2]</td>
+<td>在前面加上一个或多个值的列表</td>
+</tr>
+<tr>
+<td>lpushx key value</td>
+<td>在前面加上一个值列表，仅当列表中存在</td>
+</tr>
+<tr>
+<td>lrenge key start stop</td>
+<td>从一个列表获取各种元素</td>
+</tr>
+<tr>
+<td>lrem key count value</td>
+<td>从列表中删除元素</td>
+</tr>
+<tr>
+<td>lset key index value</td>
+<td>在列表中的索引设置一个元素的值</td>
+</tr>
+<tr>
+<td>ltrim key start stop</td>
+<td>修剪列表到指定的范围内</td>
+</tr>
+<tr>
+<td>rpop key</td>
+<td>取出并获取列表中的最后一个元素</td>
+</tr>
+<tr>
+<td>rpoplPUSH source destination</td>
+<td>删除最后一个元素的列表，将其附加到另一个列表并返回它</td>
+</tr>
+<tr>
+<td>rpush key value1 [value2]</td>
+<td>添加一个或多个值到列表</td>
+</tr>
+<tr>
+<td>rpushx key value</td>
+<td>添加一个值列表，仅当列表中存在</td>
+</tr>
+</tbody></table>
+<h3 id="Hash"><a href="#Hash" class="headerlink" title="Hash"></a>Hash</h3><blockquote>
+<p>散列表，在很多高级语言当中包含这种数据结构；c++ unordered_map 通过 key 快速索引<br>value；</p>
+<p>节点数量大于 512（hash-max-ziplist-entries） 或所有字符串长度大于 64（hash-max-ziplistvalue），则使用 dict 实现；<br>节点数量小于等于 512 且有一个字符串长度小于 64，则使用 ziplist 实现；</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>hdel key field[field…]</td>
+<td>删除对象的一个或几个属性域，不存在的属性将被忽略</td>
+</tr>
+<tr>
+<td>hexists key field</td>
+<td>查看对象是否存在该属性域</td>
+</tr>
+<tr>
+<td>hget key field</td>
+<td>获取对象中该field属性域的值</td>
+</tr>
+<tr>
+<td>hgetall key</td>
+<td>获取对象的所有属性域和值</td>
+</tr>
+<tr>
+<td>hincrby key field value</td>
+<td>将该对象中指定域的值增加给定的value，原子自增操作，只能是integer的属性值可以使用</td>
+</tr>
+<tr>
+<td>hincrbyfloat key field increment</td>
+<td>将该对象中指定域的值增加给定的浮点数</td>
+</tr>
+<tr>
+<td>hkeys key</td>
+<td>获取对象的所有属性字段</td>
+</tr>
+<tr>
+<td>hvals key</td>
+<td>获取对象的所有属性值</td>
+</tr>
+<tr>
+<td>hlen key</td>
+<td>获取对象的所有属性字段的总数</td>
+</tr>
+<tr>
+<td>hmget key field[field…]</td>
+<td>获取对象的一个或多个指定字段的值</td>
+</tr>
+<tr>
+<td>hset key field value</td>
+<td>设置对象指定字段的值</td>
+</tr>
+<tr>
+<td>hmset key field value [field value …]</td>
+<td>同时设置对象中一个或多个字段的值</td>
+</tr>
+<tr>
+<td>hsetnx key field value</td>
+<td>只在对象不存在指定的字段时才设置字段的值</td>
+</tr>
+<tr>
+<td>hstrlen key field</td>
+<td>返回对象指定field的value的字符串长度，如果该对象或者field不存在，返回0.</td>
+</tr>
+<tr>
+<td>hscan key cursor [MATCH pattern] [COUNT count]</td>
+<td>类似SCAN命令</td>
+</tr>
+</tbody></table>
+<h3 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h3><blockquote>
+<p>集合；用来存储唯一性字段，不要求有序；</p>
+<p>元素都为整数且节点数量小于等于 512（set-max-intset-entries），则使用整数数组存储；<br>元素当中有一个不是整数或者节点数量大于 512，则使用字典存储；</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>sadd key member [member …]</td>
+<td>添加一个或者多个元素到集合(set)里</td>
+</tr>
+<tr>
+<td>scard key</td>
+<td>获取集合里面的元素数量</td>
+</tr>
+<tr>
+<td>sdiff key [key …]</td>
+<td>返回一个集合与给定集合的差集的元素</td>
+</tr>
+<tr>
+<td>sdiffstore destination key [key …]</td>
+<td>获得队列不存在的元素，并存储在一个关键的结果集</td>
+</tr>
+<tr>
+<td>sinter key [key …]</td>
+<td>返回指定所有的集合的成员的交集</td>
+</tr>
+<tr>
+<td>sinterstore destination key [key …]</td>
+<td>获得两个集合的交集，并存储在一个集合中</td>
+</tr>
+<tr>
+<td>sismember key member</td>
+<td>确定一个给定的值是一个集合的成员</td>
+</tr>
+<tr>
+<td>smembers key</td>
+<td>获取集合里面的所有key</td>
+</tr>
+<tr>
+<td>smove source destination member</td>
+<td>移动集合里面的一个key到另一个集合</td>
+</tr>
+<tr>
+<td>spop key [count]</td>
+<td>获取并删除一个集合里面的元素</td>
+</tr>
+<tr>
+<td>srandmember key [count]</td>
+<td>从集合里面随机获取一个元素</td>
+</tr>
+<tr>
+<td>srem key member [member …]</td>
+<td>从集合里删除一个或多个元素，不存在的元素会被忽略</td>
+</tr>
+<tr>
+<td>sunion key [key …]</td>
+<td>返回给定的多个集合的并集中的所有成员</td>
+</tr>
+<tr>
+<td>sunionstore destination key [key …]</td>
+<td>合并set元素，并将结果存入新的set里面</td>
+</tr>
+<tr>
+<td>sscan key cursor [MATCH pattern] [COUNT count]</td>
+<td>迭代set里面的元素</td>
+</tr>
+</tbody></table>
+<h3 id="ZSet"><a href="#ZSet" class="headerlink" title="ZSet"></a>ZSet</h3><blockquote>
+<p>有序集合；用来实现排行榜；它是一个有序唯一；member用来表示唯一，score用来表示有序</p>
+<p>节点数量大于 128或者有一个字符串长度大于64，则使用跳表（skiplist）；<br>节点数量小于等于128（zset-max-ziplist-entries）且所有字符串长度小于等于64（zset-maxziplist-value），则使用 ziplist 存储；<br>数据少的时候，节省空间； O(n)<br>数量多的时候，访问性能；O（1） o(logn)</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>zadd key score1 member1 [score2 member2]</td>
+<td>添加一个或多个成员到有序集合，或者如果它已经存在更新其分数</td>
+</tr>
+<tr>
+<td>zcard key</td>
+<td>得到的有序集合成员的数量</td>
+</tr>
+<tr>
+<td>zcount key min max</td>
+<td>计算一个有序集合成员与给定值范围内的分数</td>
+</tr>
+<tr>
+<td>zincrby key increment member</td>
+<td>在有序集合增加成员的分数</td>
+</tr>
+<tr>
+<td>zinterstore destination numkeys key [key …]</td>
+<td>多重交叉排序集合，并存储生成一个新的键有序集合。</td>
+</tr>
+<tr>
+<td>zlexcount key min max</td>
+<td>计算一个给定的字典范围之间的有序集合成员的数量</td>
+</tr>
+<tr>
+<td>zrange key start stop [WITHSCORES]</td>
+<td>由索引返回一个成员范围的有序集合（从低到高）</td>
+</tr>
+<tr>
+<td>zrangebylex key min max [LIMIT offset count]</td>
+<td>返回一个成员范围的有序集合（由字典范围）</td>
+</tr>
+<tr>
+<td>zrangebyscore key min max [WITHSCORES] [LIMIT]</td>
+<td>返回有序集key中，所有 score 值介于 min 和 max 之间(包括等于 min 或 max )的成员，有序集成员按 score 值递增(从小到大)次序排列</td>
+</tr>
+<tr>
+<td>zrank key member</td>
+<td>确定成员的索引中有序集合</td>
+</tr>
+<tr>
+<td>zrem key member [member …]</td>
+<td>从有序集合中删除一个或多个成员，不存在的成员将被忽略</td>
+</tr>
+<tr>
+<td>zremrangebylex key min max</td>
+<td>删除所有成员在给定的字典范围之间的有序集合</td>
+</tr>
+<tr>
+<td>zremrangebyrank key start stop</td>
+<td>在给定的索引之内删除所有成员的有序集合</td>
+</tr>
+<tr>
+<td>zremrangebyscore key min max</td>
+<td>在给定的分数之内删除所有成员的有序集合</td>
+</tr>
+<tr>
+<td>zrevrange key start stop [WITHSCORES]</td>
+<td>返回一个成员范围的有序集合，通过索引，以分数排序，从高分到低分</td>
+</tr>
+<tr>
+<td>zrevrangebyscore key max min [WITHSCORES]</td>
+<td>返回一个成员范围的有序集合，以socre排序从高到低</td>
+</tr>
+<tr>
+<td>zrevrank key member</td>
+<td>确定一个有序集合成员的索引，以分数排序，从高分到低分</td>
+</tr>
+<tr>
+<td>zscore key member</td>
+<td>获取给定成员相关联的分数在一个有序集合</td>
+</tr>
+<tr>
+<td>zunionstore destination numkeys key [key …]</td>
+<td>添加多个集排序，所得排序集合存储在一个新的键</td>
+</tr>
+<tr>
+<td>zscan key cursor [MATCH pattern] [COUNT count]</td>
+<td>增量迭代排序元素集和相关的分数</td>
+</tr>
+</tbody></table>
+<p>注：<a href="%5Bhttp://www.redis.cn/commands.html%5D(http://www.redis.cn/commands.html)">详细用法请参考Redis官方命令手册</a></p>
+<h2 id="Redis协议与异步方式"><a href="#Redis协议与异步方式" class="headerlink" title="Redis协议与异步方式"></a>Redis协议与异步方式</h2><h3 id="redis-网络层"><a href="#redis-网络层" class="headerlink" title="redis 网络层"></a>redis 网络层</h3><blockquote>
+<p>对于所有连接的数据处理，redis 并发执行的；对于单条连接的数据处理，redis 串行执行的；</p>
+</blockquote>
+<p> <img src="https://s2.loli.net/2023/05/21/SpwcvRtrufEQ7bj.jpg" alt="redis 网络层"></p>
+<h3 id="redis-pipeline"><a href="#redis-pipeline" class="headerlink" title="redis pipeline"></a>redis pipeline</h3><blockquote>
+<p> redis pipeline 是一个客户端提供的，而不是服务端提供的；对于request操作，只是将数据写到fd对应的写缓冲区，时间非常快，真正耗时操作在读取response；</p>
+</blockquote>
+<p><img src="https://s2.loli.net/2023/05/21/gMuCs7QX9xOpGwf.png" alt="Redis pipeline"></p>
+<h3 id="redis事务"><a href="#redis事务" class="headerlink" title="redis事务"></a>redis事务</h3><blockquote>
+<p>MULTI 开启事务，事务执行过程中，单个命令是入队列操作，直到调用 EXEC 才会一起执行；<br>MULTI：开启事务，相当于mysql的begin &#x2F; start transaction<br>EXEC：提交事务，相当于mysql的commit</p>
+<p>DISCARD：取消事务，相当于mysql的rollback<br>WATCH：检测 key 的变动，若在事务执行中，key 变动则取消事务；在事务开启前调用，乐观锁实现（cas）;若被取消则事务返回 nil ;</p>
+</blockquote>
+<h3 id="lua-脚本"><a href="#lua-脚本" class="headerlink" title="lua 脚本"></a>lua 脚本</h3><blockquote>
+<p>lua 脚本实现原子性；<br>redis中加载了一个 lua 虚拟机；用来执行 redis lua 脚本；redis lua 脚本的执行是原子性的；当<br>某个脚本正在执行的时候，不会有其他命令或者脚本被执行；lua 脚本当中的命令会直接修改数据状态；<br>注意：如果项目中使用了 lua 脚本，不需要使用上面的事务命令；</p>
+</blockquote>
+<h3 id="ACID特性分析"><a href="#ACID特性分析" class="headerlink" title="ACID特性分析"></a>ACID特性分析</h3><blockquote>
+<p>A 原子性；事务是一个不可分割的工作单位，事务中的操作要么全部成功，要么全部失败；redis<br>不支持回滚；即使事务队列中的某个命令在执行期间出现了错误，整个事务也会继续执行下去，直<br>到将事务队列中的所有命令都执行完毕为止。<br>C 一致性；事务使数据库从一个一致性状态到另外一个一致性状态；这里的一致性是指预期的一<br>致性而不是异常后的一致性；所以redis也不满足；这个争议很大：redis 能确保事务执行前后的数<br>据的完整约束；但是并不满足传统意义上的一致性；比如转账功能，一个扣钱一个加钱；可能出现<br>扣钱执行错误，加钱执行正确，那么最终还是会加钱成功；系统凭空多了钱；<br>I 隔离性；事务的操作不被其他用户操作所打断；redis 是单线程执行，天然具备隔离性；<br>D 持久性；redis只有在 aof 持久化策略的时候，并且需要在 redis.conf 中appendfsync&#x3D;always 才具备持久性；实际项目中几乎不会使用 aof 持久化策略；</p>
+</blockquote>
+<h3 id="redis-发布订阅"><a href="#redis-发布订阅" class="headerlink" title="redis 发布订阅"></a>redis 发布订阅</h3><blockquote>
+<p>为了支持消息的多播机制，redis 引入了发布订阅模块；</p>
+<p>发布订阅功能一般要重新开启一个连接；因为命令连接严格遵循请求回应模式；而pubsub能收到redis主动推送的内容；所以实际项目中如果支持pubsub的话，需要另开一条连接用于处理发布订阅；</p>
+<p>发布订阅的生产者传递过来一个消息，redis会直接找到相应的消费者并传递过去；假如没有消费<br>者，消息直接丢弃；假如开始有2个消费者，一个消费者突然挂掉了，另外一个消费者依然能收到<br>消息，但是如果刚挂掉的消费者重新连上后，在断开连接期间的消息对于该消费者来说彻底丢失<br>了；另外，redis停机重启，pubsub的消息是不会持久化的，所有的消息被直接丢弃；</p>
+</blockquote>
+<pre class="line-numbers language-Redis"><code class="language-Redis"># 订阅频道
+subscribe 频道
+# 订阅模式频道
+psubscribe 频道
+# 取消订阅频道
+unsubscribe 频道
+# 取消订阅模式频道
+punsubscribe 频道
+# 发布具体频道或模式频道的内容
+publish 频道 内容
+# 客户端收到具体频道内容
+message 具体频道 内容
+# 客户端收到模式频道内容
+pmessage 模式频道 具体频道 内容
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="redis-存储结构"><a href="#redis-存储结构" class="headerlink" title="redis 存储结构"></a>redis 存储结构</h2><h3 id="字典实现"><a href="#字典实现" class="headerlink" title="字典实现"></a>字典实现</h3><blockquote>
+<p>redis DB KV组织是通过字典来实现的；hash结构当节点超过 512 个或者单个字符串长度大于<br>64 时，hash结构采用字典实现；</p>
+</blockquote>
+<pre class="line-numbers language-c++"><code class="language-c++">typedef struct dictEntry {
+    void *key;
+    union {
+        void *val;
+        uint64_t u64;
+        int64_t s64;
+        double d;
+    } v;
+    struct dictEntry *next;
+} dictEntry;
+
+typedef struct dictht {
+    dictEntry **table;
+    unsigned long size;// 数组长度
+    unsigned long sizemask; //size-1
+    unsigned long used;//当前数组当中包含的元素
+} dictht;
+
+typedef struct dict {
+    dictType *type;
+    void *privdata;
+    dictht ht[2];
+    long rehashidx; /* rehashing not in progress if rehashidx == -1 */
+    int16_t pauserehash; /* If >0 rehashing is paused (<0 indicates coding
+error) 用于安全遍历*/
+} dict;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<ol>
+<li>字符串经过hash函数运算得到64位整数；</li>
+<li>相同字符串多次通过hash函数得到相同的64位整数；</li>
+<li>整数对2的n次幂取余可以转化为位运算；</li>
+</ol>
+</blockquote>
+<p> <img src="https://s2.loli.net/2023/05/21/lzPTjdm4HXpwb5O.jpg" alt="Redis数据冲突"></p>
+<h3 id="冲突"><a href="#冲突" class="headerlink" title="冲突"></a>冲突</h3><p><strong>负载因子</strong></p>
+<blockquote>
+<p>负载因子 &#x3D; used &#x2F; size ； used 是数组存储元素的个数， size 是数组的长度；<br>负载因子越小，冲突越小；负载因子越大，冲突越大；<br>redis的负载因子是 1 ；</p>
+</blockquote>
+<p> <strong>扩容</strong></p>
+<blockquote>
+<p>如果负载因子 &gt; 1 ，则会发生扩容；扩容的规则是翻倍；<br>如果正在 fork （在rdb、aof复写以及rdb-aof混用情况下）时，会阻止扩容；但是此时若负载因<br>子 &gt; 5 ，索引效率大大降低， 则马上扩容；这里涉及到写时复制原理；</p>
+<p>写时复制核心思想：只有在不得不复制数据内容时才去复制数据内容；</p>
+</blockquote>
+<p> <strong>缩容</strong></p>
+<blockquote>
+<p>如果负载因子 &lt; 0.1 ，则会发生缩容；缩容的规则是恰好包含 used 的 ；<br>恰好的理解：假如此时数组存储元素个数为 9，恰好包含该元素的就是 ，也就是 16；</p>
+</blockquote>
+<p> <strong>渐进式rehash</strong></p>
+<blockquote>
+<p>当 hashtable 中的元素过多的时候，不能一次性 rehash 到 ht[1] ；这样会长期占用 redis ，<br>其他命令得不到响应；所以需要使用渐进式 rehash ；<br>rehash步骤：<br>将 ht[0] 中的元素重新经过hash函数生成64位整数，再对 ht[1] 长度进行取余，从而映射到<br>ht[1] ；<br>渐进式规则：</p>
+<ol>
+<li>分治的思想，将 rehash 分到之后的每步增删改查的操作当中；</li>
+<li>在定时器中，最大执行一毫秒 rehash ；每次步长 100 个数组槽位；<br>面试：<br>处于渐进式rehash阶段时，是否会发生扩容缩容？不会！</li>
+</ol>
+</blockquote>
+<p><strong>expire机制</strong></p>
+<pre class="line-numbers language-c++"><code class="language-c++"># 只支持对最外层key过期；
+expire key seconds
+pexpire key milliseconds
+ttl key
+pttl key
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>惰性删除</strong></p>
+<blockquote>
+<p>分布在每一个命令操作时检查 key 是否过期；若过期删除 key ，再进行命令操作；</p>
+</blockquote>
+<p><strong>定时删除</strong></p>
+<p><strong>大KEY</strong></p>
+<blockquote>
+<p>在 redis 实例中形成了很大的对象，比如一个很大的 hash 或很大的 zset，这样的对象在扩容的时<br>候，会一次性申请更大的一块内存，这会导致卡顿；如果这个大 key 被删除，内存会一次性回<br>收，卡顿现象会再次产生；<br>如果观察到 redis 的内存大起大落，极有可能因为大 key 导致的；</p>
+</blockquote>
+<h3 id="跳表"><a href="#跳表" class="headerlink" title="跳表"></a>跳表</h3><blockquote>
+<p>假如我们要查询值为19的节点，我们从索引层开始遍历，当遍历到16时，下个节点的值为23，所以，19一定在这两个节点之间。我们通过16节点的down指针来到原始链表，将继续遍历，直到找到值为19的节点。</p>
+<p>从节约内存出发，redis 考虑牺牲一点时间复杂度让跳表结构更加变扁平，就像二叉堆改成四叉堆<br>结构；并且redis 还限制了跳表的最高层级为 32 ；<br>节点数量大于 128 或者有一个字符串长度大于 64 ，则使用跳表（ skiplist ）；</p>
+</blockquote>
+<p> <img src="https://s2.loli.net/2023/05/21/waVq1kt2p4LGyFY.png" alt="跳表"></p>
+<p>redis跳表结构</p>
+<p><img src="https://s2.loli.net/2023/05/21/QRerZP3OUjnysg6.jpg" alt="redis跳表结构"></p>
+<h2 id="Redis主从同步"><a href="#Redis主从同步" class="headerlink" title="Redis主从同步"></a>Redis主从同步</h2><h3 id="Redis-持久化"><a href="#Redis-持久化" class="headerlink" title="Redis 持久化"></a>Redis 持久化</h3><p>redis 的数据全部在内存中，如果突然宕机，数据就会全部丢失，因此需要持久化来保证 Redis 的<br>数据不会因为故障而丢失，redis 重启的时候可以重新加载持久化文件来恢复数据；</p>
+<p>Redis持久化相关的配置</p>
+<pre class="line-numbers language-c++"><code class="language-c++">###### aof ######
+# redis.cnf
+appendonly no
+appendfilename "appendonly.aof"
+# appendfsync always
+appendfsync everysec
+# appendfsync no
+# auto-aof-rewrite-percentage 为 0 则关闭 aof 复写
+auto-aof-rewrite-percentage 100
+auto-aof-rewrite-min-size 64mb
+# yes 如果 aof 数据不完整，尽量读取最多的格式正确的数据；
+# no 如果 aof 数据不完整 报错，可以通过 redis-check-aof 来修复 aof 文件；
+aof-load-truncated yes
+# 开启混合持久化
+aof-use-rdb-preamble yes
+###### rdb ######
+# save ""
+# save 3600 1
+# save 300 100
+# save 60 10000
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p>默认配置下，只开启 rdb 持久化；</p>
+</blockquote>
+<h4 id="aof"><a href="#aof" class="headerlink" title="aof"></a>aof</h4><blockquote>
+<p>append only file<br>aof 日志存储的是 Redis 服务器的顺序指令序列，aof 日志只记录对内存修改的指令记录；</p>
+</blockquote>
+<p> <strong>恢复</strong></p>
+<blockquote>
+<p>通过重放（replay）aof 日志中指令序列来恢复 Redis 当前实例的内存数据结构的状态；</p>
+</blockquote>
+<p> <strong>配置</strong>                              </p>
+<pre class="line-numbers language-C++"><code class="language-C++">set key val
+# 开启 aof
+appendonly yes
+# 关闭 aof复写
+auto-aof-rewrite-percentage 0
+# 关闭 混合持久化
+aof-use-rdb-preamble no
+# 关闭 rdb
+save ""
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>策略</strong></p>
+<pre class="line-numbers language-C++"><code class="language-C++"># 1. 每条命令刷盘 redis 事务才具备持久性
+# appendfsync always
+# 2. 每秒刷盘
+appendfsync everysec
+# 3. 交由系统刷盘
+# appendfsync no
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>缺点</strong></p>
+<blockquote>
+<p>随着时间越长，aof 日志会越来越长，如果 redis 重启，重放整个 aof 日志会非常耗时，导致<br>redis 长时间无法对外提供服务；</p>
+</blockquote>
+<h4 id="aof-rewrite"><a href="#aof-rewrite" class="headerlink" title="aof rewrite"></a>aof rewrite</h4><blockquote>
+<p>aof 持久化策略会持久化所有修改命令；里面的很多命令其实可以合并或者删除；<br>aof rewrite 在 aof 的基础上，满足一定策略则 fork 进程，根据当前内存状态，转换成一系列的 redis 命令，序列化成一个新的 aof 日志文件中，序列化完毕后再将操作期间发生的增量 aof 日志追加到新的 aof 日志文件，追加完毕后替换旧的 aof 日志文件；以此达到对 aof 日志瘦身的目的；<br>注意：aof rewrite 开启的前提是开启 aof；</p>
+</blockquote>
+<pre class="line-numbers language-C++"><code class="language-C++">lpush list mark
+lpush list king
+lpush list darren
+bgrewriteaof
+# 此时会将上面三个命令进行合并成为一个命令
+# 合并策略：会先检测键所包含的元素数量，如果超过 64 个会使用多个命令来记录键的值；
+    
+hset hash mark 10001
+hset hash darren 10002
+hset hash king 10003
+hdel hash mark
+bgrewriteaof
+# 此时aof中不会出现mark，设置mark跟删除mark变得像从来没操作过
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>配置</strong></p>
+<pre class="line-numbers language-C++"><code class="language-C++"># 开启 aof
+appendonly yes
+# 开启 aof复写
+auto-aof-rewrite-percentage 100
+auto-aof-rewrite-min-size 64mb
+# 关闭 混合持久化
+aof-use-rdb-preamble no
+# 关闭 rdb
+save ""
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>策略</strong></p>
+<pre class="line-numbers language-C++"><code class="language-C++"># 1. redis 会记录上次aof复写时的size，如果之后累计超过了原来的size，则会发生aof复写；
+auto-aof-rewrite-percentage 100
+# 2. 为了避免策略1中，小数据量时产生多次发生aof复写，策略2在满足策略1的前提下需要超过 64mb
+才会发生aof复写；
+auto-aof-rewrite-min-size 64mb
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>缺点</strong></p>
+<blockquote>
+<p>aof复写在 aof 基础上实现了瘦身，但是 aof 复写的数据量仍然很大；加载会非常慢</p>
+</blockquote>
+<h4 id="rdb"><a href="#rdb" class="headerlink" title="rdb"></a>rdb</h4><blockquote>
+<p>基于 aof 或 aof 复写文件大的缺点，rdb 是一种快照持久化；它通过 fork 主进程，在子进程中将<br>内存当中的数据键值对按照存储方式持久化到 rdb 文件中；rdb 存储的是经过压缩的二进制数据；</p>
+</blockquote>
+<p><strong>策略</strong></p>
+<pre class="line-numbers language-C++"><code class="language-C++"># redis 默认策略如下：
+# 注意：写了多个 save 策略，只需要满足一个则开启rdb持久化
+# 3600 秒内有以1次修改
+save 3600 1
+# 300 秒内有100次修改
+save 300 100
+# 60 秒内有10000次修改
+save 60 10000
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>缺点</strong></p>
+<blockquote>
+<p>若采用 rdb 持久化，一旦 redis 宕机，redis 将丢失一段时间的数据；<br>RDB 需要经常 fork 子进程来保存数据集到硬盘上，当数据集比较大的时候，fork 的过程是非常耗时的，可能会导致 Redis 在一些毫秒级内不能响应客户端的请求。如果数据集巨大并且 CPU 性能不是很好的情况下，这种情况会持续1秒，AOF 也需要 fork，但是你可以调节重写日志文件的频率来提高数据集的耐久度。</p>
+</blockquote>
+<h4 id="混合持久化"><a href="#混合持久化" class="headerlink" title="混合持久化"></a>混合持久化</h4><blockquote>
+<p>从上面知道，rdb 文件小且加载快但丢失多，aof 文件大且加载慢但丢失少；混合持久化是吸取<br>rdb 和 aof 两者优点的一种持久化方案；aof 复写的时候实际持久化的内容是 rdb，等持久化后，<br>持久化期间修改的数据以 aof 的形式附加到文件的尾部；<br>混合持久化实际上是在 aof rewrite 基础上进行优化；所以需要先开启 aof rewrite；</p>
+</blockquote>
+<p>配置</p>
+<pre class="line-numbers language-C++"><code class="language-C++"># 开启 aof
+appendonly yes
+# 开启 aof复写
+auto-aof-rewrite-percentage 100
+auto-aof-rewrite-min-size 64mb
+# 开启 混合持久化
+aof-use-rdb-preamble yes
+# 关闭 rdb
+save ""
+# save 3600 1
+# save 300 100
+# save 60 10000
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h4><ol>
+<li>MySQL 缓存方案中，redis 不开启持久化，redis 只存储热点数据，数据的依据来源于<br> MySQL；若某些数据经常访问需要开启持久化，此时可以选择 rdb 持久化方案，也就是允许<br> 丢失一段时间数据；</li>
+<li>对数据可靠性要求高，在机器性能，内存也安全 (fork 写时复制 最差的情况下 96G)的情况<br> 下，可以让 redis 同时开启 aof 和 rdb，注意此时不是混合持久化；redis 重启优先从 aof 加<br> 载数据，理论上 aof 包含更多最新数据；如果只开启一种，那么使用混合持久化；</li>
+<li>在允许丢失的情况下，亦可采用主redis不持久化（96G 90G），从redis进行持久化；</li>
+<li>伪装从库；</li>
+</ol>
+<h3 id="Redis-主从复制"><a href="#Redis-主从复制" class="headerlink" title="Redis 主从复制"></a>Redis 主从复制</h3><blockquote>
+<p>主要用来实现 redis 数据的可靠性；防止主 redis 所在磁盘损坏，造成数据永久丢失；<br>主从之间采用异步复制的方式；</p>
+</blockquote>
+<p><strong>全量数据同步</strong></p>
+<p><img src="https://s2.loli.net/2023/05/21/JsMtx1uP59oVyZd.jpg" alt="Redis主从同步1"></p>
+<p><strong>增量数据同步</strong></p>
+<p><img src="https://s2.loli.net/2023/05/21/Pk563oZLDwdXJ4W.jpg" alt="Redis主从同步2"></p>
+<p><strong>服务器 RUN ID</strong></p>
+<blockquote>
+<p>无论主库还是从库都有自己的 RUN ID，RUN ID 启动时自动产生，RUN ID 由40个随机的十六进<br>制字符组成；<br>当从库对主库初次复制时，主库将自身的 RUN ID 传送给从库，从库会将 RUN ID 保存；<br>当从库断线重连主库时，从库将向主库发送之前保存的 RUN ID；</p>
+<ul>
+<li>从库 RUN ID 和主库 RUN ID 一致，说明从库断线前复制的就是当前的主库；主库尝试执行<br>增量同步操作；</li>
+<li>若不一致，说明从库断线前复制的主库并不时当前的主库，则主库将对从库执行全量同步操<br>作；</li>
+</ul>
+</blockquote>
+<p><strong>复制偏移量 offset</strong></p>
+<blockquote>
+<p>主从都会维护一个复制偏移量；<br>主库向从库发送N个字节的数据时，将自己的复制偏移量上加N；<br>从库接收到主库发送的N个字节数据时，将自己的复制偏移量加上N；<br>通过比较主从偏移量得知主从之间数据是否一致；偏移量相同则数据一致；偏移量不同则数据不一<br>致；</p>
+</blockquote>
+<p><strong>环形缓冲区（复制积压缓冲区）</strong></p>
+<blockquote>
+<p>本质：固定长度先进先出队列；<br>存储内容：如下图；<br>当因某些原因（网络抖动或从库宕机）从库与主库断开连接，避免重新连接后开始全量同步，在主<br>库设置了一个环形缓冲区；该缓冲区会在从库失联期间累计主库的写操作；当从库重连，会发送自<br>身的复制偏移量到主库，主库会比较主从的复制偏移量：若从库offset还在复制积压缓冲区中，则进行增量同步；否则，主库将对从库执行全量同步；</p>
+</blockquote>
+<pre class="line-numbers language-C++"><code class="language-C++"># redis.conf
+repl-backlog-size 1mb
+# 如果所有从库断开连接 3600 秒后没有从库连接，则释放环形缓冲区
+repl-backlog-ttl 3600
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p>大小确定： disconnect_time * write_size_per_second<br>disconnect_time ：从库断线后重连主库所需的平均时间（以秒为单位）；<br>write_size_per_second ：主库平均每秒产生的写命令数据量；</p>
+</blockquote>
+<p><img src="https://s2.loli.net/2023/05/21/Yj7FSZVbkxMDuga.jpg" alt="Redis主从同步3"></p>
+<h3 id="Redis-哨兵模式"><a href="#Redis-哨兵模式" class="headerlink" title="Redis 哨兵模式"></a>Redis 哨兵模式</h3><blockquote>
+<p>哨兵模式是Redis可用性的解决方案；它由一个或多个 sentinel 实例构成 sentinel 系统；该系统可<br>以监视任意多个主库以及这些主库所属的从库；当主库处于下线状态，自动将该主库所属的某个从<br>库升级为新的主库；<br>客户端来连接集群时，会首先连接 sentinel，通过 sentinel 来查询主节点的地址，然后再连接主<br>节点进行数据交互。当主节点发生故障时，客户端会重新向 sentinel 索要主库地址，sentinel 会<br>将最新的主库地址告诉客户端。通过这样客户端无须重启即可自动完成节点切换。<br>哨兵模式当中涉及多个选举流程采用的是 Raft 算法的领头选举方法的实现；</p>
+</blockquote>
+<p><img src="https://s2.loli.net/2023/05/21/JtuLxQKrnDCHGoq.jpg" alt="Redis哨兵模式"></p>
+<p>配置</p>
+<pre class="line-numbers language-C++"><code class="language-C++"># sentinel.cnf
+# sentinel 只需指定检测主节点就行了，通过主节点自动发现从节点
+sentinel monitor mymaster 127.0.0.1 6379 2
+# 判断主观下线时长
+sentinel down-after-milliseconds mymaster 30000
+# 指定可以有多少个Redis服务同步新的主机，一般而言，这个数字越小同步时间越长，而越大，则对网
+络资源要求越高
+sentinel parallel-syncs mymaster 1
+# 指定故障切换允许的毫秒数，超过这个时间，就认为故障切换失败，默认为3分钟
+sentinel failover-timeout mymaster 180000
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>检测异常</strong></p>
+<ul>
+<li><p>主观下线<br>sentinel 会以每秒一次的频率向所有节点（其他sentinel、主节点、以及从节点）发送 ping 消<br>息，然后通过接收返回判断该节点是否下线；如果在配置指定 down-after-milliseconds 时间内<br>则被判断为主观下线；</p>
+</li>
+<li><p>客观下线<br>当一个 sentinel 节点将一个主节点判断为主观下线之后，为了确认这个主节点是否真的下线，它会向其他sentinel 节点进行询问，如果收到一定数量的已下线回复，sentinel 会将主节点判定为客观下线，并通过领头 sentinel 节点对主节点执行故障转移；</p>
+</li>
+<li><p>故障转移<br>主节点被判定为客观下线后，开始领头 sentinel 选举，需要一半以上的 sentinel 支持，选举领头sentinel后，开始执行对主节点故障转移；</p>
+<ol>
+<li>从从节点中选举一个从节点作为新的主节点</li>
+<li>通知其他从节点复制连接新的主节点</li>
+<li>若故障主节点重新连接，将作为新的主节点的从节点</li>
+</ol>
+</li>
+<li><p>使用</p>
+<ol>
+<li>连接一个哨兵节点，并且获取主节点信息；<br>SENTINEL GET-MASTER-ADDR-BY-NAME <master-name></li>
+<li>验证当前获取的主节点；<br>ROLE 或者 INFO REPLICATION</li>
+<li>为当前连接的哨兵节点，添加发布订阅（ PUB&#x2F;SUB ）连接，并且订阅 +switch-master 频<br>道；</li>
+</ol>
+</li>
+</ul>
+<p><strong>缺点</strong></p>
+<blockquote>
+<p>redis 采用异步复制的方式，意味着当主节点挂掉时，从节点可能没有收到全部的同步消息，这部<br>分未同步的消息将丢失。如果主从延迟特别大，那么丢失可能会特别多。sentinel 无法保证消息完全不丢失，但是可以通过配置来尽量保证少丢失。同时，它的致命缺点是不能进行横向扩展；</p>
+<pre class="line-numbers language-C++"><code class="language-C++"># 主库必须有一个从节点在进行正常复制，否则主库就停止对外写服务，此时丧失了可用性
+min-slaves-to-write 1
+# 这个参数用来定义什么是正常复制，该参数表示如果在10s内没有收到从库反馈，就意味着从库
+同步不正常；
+min-slaves-max-lag 10
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</blockquote>
+<h3 id="Codis-集群"><a href="#Codis-集群" class="headerlink" title="Codis 集群"></a>Codis 集群</h3><blockquote>
+<p>codis 由国内团队开发，由于有诸多限制（事务不支持，更新延迟），现在几乎很少有团队使用；<br>图中可开启多个 codis 实例，client 与 codis 之间通过 redis 协议进行交互；用户可不感知 codis<br>的存在；</p>
+</blockquote>
+<p><img src="https://s2.loli.net/2023/05/21/hx19A5TbD7uiSar.jpg" alt="Codis 集群"></p>
+<h3 id="Redis-cluster集群"><a href="#Redis-cluster集群" class="headerlink" title="Redis cluster集群"></a>Redis cluster集群</h3><blockquote>
+<p>Redis cluster 将所有数据划分为 16384（ 2^14）个槽位，每个 redis 节点负责其中一部分槽位。cluster 集群是一种去中心化的集群方式；<br>如图，该集群由三个 redis 节点组成，每个节点负责整个集群的一部分数据，每个节点负责的数据<br>多少可能不一样。这三个节点相互连接组成一个对等的集群，它们之间通过一种特殊的二进制协议<br>交互集群信息；<br>当 redis cluster 的客户端来连接集群时，会得到一份集群的槽位配置信息。这样当客户端要查找<br>某个 key时，可以直接定位到目标节点。<br>客户端为了可以直接定位（对 key 通过 crc16 进行 hash 再对2^14取余）某个具体的 key 所在节<br>点，需要缓存槽位相关信息，这样才可以准确快速地定位到相应的节点。同时因为可能会存在客户<br>端与服务器存储槽位的信息不一致的情况，还需要纠正机制（通过返回 -MOVED 3999<br>127.0.0.1:6479 ，客户端收到后需要立即纠正本地的槽位映射表）来实现槽位信息的校验调整。<br>另外，redis cluster 的每个节点会将集群的配置信息持久化到配置文件中，这就要求确保配置文件是可写的，而且尽量不要依靠人工修改配置文件；</p>
+</blockquote>
+<p><img src="https://s2.loli.net/2023/05/21/dqDzcpyn7wu1W5B.jpg" alt="Redis cluster集群1"></p>
+<p><strong>数据迁移</strong></p>
+<blockquote>
+<p>redis cluster 提供了工具 redis-trib 可以让运维人员手动调整槽位的分配情况，它采用 ruby 语言<br>开发，通过组合原生的 redis cluster 指令来实现。图中：A 为待迁移的源节点，B 为待迁移的目<br>标节点；</p>
+</blockquote>
+<p><img src="https://s2.loli.net/2023/05/21/gJn9uXOskTyoCva.jpg" alt="Redis cluster集群2"></p>
+<p><strong>过程</strong></p>
+<blockquote>
+<p>如上图：redis 迁移的单位是槽，redis 是一个槽一个槽地进行迁移，当一个槽位正在迁移时，这<br>个槽就处于中间过渡状态。这个槽再源节点的状态为 migrating ，在目标节点的状态为importing ，表示此时数据正在从源节点流向目标节点。<br>迁移工具 redis-trib 首先在源节点和目标节点设置好中间过渡状态，然后一次性获取源节点槽位的<br>所有或者部分的 key 列表，再依次将 key 进行迁移。源节点对当前的 key 执行 dump 指令得到序<br>列化内容，然后向目标节点发送 restore 指令，目标节点将源节点的序列化内容进行反序列化并将<br>内容应用到目标节点的内容中，然后返回 +ok 给源节点，源节点收到后删除该 key；按照这些步<br>骤将所有待迁移的 key 进行迁移；<br>注意：迁移过程是同步的，迁移过程中源节点的主线程处于阻塞状态，直到key被删除；如果迁移<br>过程中源节点出现网络故障，这两个节点依然处于中间状态，重启后，redis-trib可继续迁移；<br>所以，redis-trib 迁移的过程是一个一个 key 来进行，如果这个 key 对应 val 内容很大，将会影响到客户端的正常访问；</p>
+</blockquote>
+<p><strong>复制以及故障转移</strong></p>
+<blockquote>
+<p>cluster 集群中节点分为主节点和从节点，其中主节点用于处理槽，而从节点则用于复制该主节<br>点，并在主节点下线时，代替主节点继续处理命令请求；</p>
+</blockquote>
+<p><strong>故障检测</strong></p>
+<blockquote>
+<p>集群中每个节点都会定期地向集群中的其他节点发送 ping 消息，如果接收 ping 消息的节点没有<br>在规定时间内回复 pong 消息，那么这个没有回复 pong 消息的节点会被标记为 PFAIL（probable fail）;<br>集群中各个节点会通过互相发送消息的方式来交换集群中各个节点的状态信息；如果在一个集群<br>中，半数以上负责处理槽的主节点都将某个主节点 A 报告为疑似下线，那么这个主节点A将被标记<br>为下线（FAIL)；标记主节点 A 为下线状态的主节点会广播这条消息，其他节点（包括A节点的从<br>节点）也会将A节点标识为 FAIL；</p>
+</blockquote>
+<p><strong>故障转移</strong></p>
+<blockquote>
+<p>当从节点发现自己的主节点进入FAIL状态，从节点将开始对下线主节点进行故障转移；</p>
+<ul>
+<li>从数据最新的从节点中选举为主节点；</li>
+<li>该从节点会执行 replica no one 命令，称为新的主节点；</li>
+<li>新的主节点会撤销所有对已下线主节点的槽指派，并将这些槽全部指派给自己；</li>
+<li>新的主节点向集群广播一条 pong 消息，这条 pong 消息可以让集群中的其他节点立即知道</li>
+<li>这个节点已经由从节点变成主节点，并且这个主节点已经接管了之前下线的主节点；</li>
+<li>新的主节点开始接收和自己负责处理的槽有关的命令请求，故障转移结束；</li>
+</ul>
+</blockquote>
+<p><strong>集群配置</strong></p>
+<ul>
+<li><p>创建文件夹</p>
+<pre class="line-numbers language-C++"><code class="language-C++"># 创建 6 个文件夹
+mkdir -p 7001 7002 7003 7004 7005 7006
+cd 7001
+vi 7001.conf
+# 7001.conf 中的内容如下
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>编辑 7001.conf</p>
+<pre class="line-numbers language-C++"><code class="language-C++">pidfile "/home/mark/redis-data/7001/7001.pid"
+logfile "/home/mark/redis-data/7001/7001.log"
+dir /home/mark/redis-data/7001/
+port 7001
+daemonize yes
+cluster-enabled yes
+cluster-config-file nodes-7001.conf
+cluster-node-timeout 15000
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>复制配置</p>
+<pre class="line-numbers language-C++"><code class="language-C++">cp 7001/7001.conf 7002/7002.conf
+cp 7001/7001.conf 7003/7003.conf
+cp 7001/7001.conf 7004/7004.conf
+cp 7001/7001.conf 7005/7005.conf
+cp 7001/7001.conf 7006/7006.conf
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>修改配置</p>
+<pre class="line-numbers language-C++"><code class="language-C++">sed -i 's/7001/7002/g' 7002/7002.conf
+sed -i 's/7001/7003/g' 7003/7003.conf
+sed -i 's/7001/7004/g' 7004/7004.conf
+sed -i 's/7001/7005/g' 7005/7005.conf
+sed -i 's/7001/7006/g' 7006/7006.conf
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>创建启动配置</p>
+<pre class="line-numbers language-C++"><code class="language-C++">#!/bin/bash
+redis-server 7001/7001.conf
+redis-server 7002/7002.conf
+redis-server 7003/7003.conf
+redis-server 7004/7004.conf
+redis-server 7005/7005.conf
+redis-server 7006/7006.conf
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>手动创建集群</p>
+<pre class="line-numbers language-C++"><code class="language-C++"># 节点会面
+cluster meet ip port
+# 分配槽位
+cluster addslots slot
+# 分配主从
+cluster replicate node-id
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>智能创建集群</p>
+<pre class="line-numbers language-C++"><code class="language-C++">redis-cli --cluster help
+# --cluster-replicas 后面对应的参数 为 一主对应几个从数据库
+redis-cli --cluster create host1:port1 ... hostN:portN --cluster-replicas
+<arg>
+redis-cli --cluster create 127.0.0.1:7001 127.0.0.1:7002 127.0.0.1:7003
+127.0.0.1:7004 127.0.0.1:7005 127.0.0.1:7006 --cluster-replicas 1
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>测试集群</p>
+<pre class="line-numbers language-C++"><code class="language-C++">#设置值
+redis-cli -c -p 7001
+set name mark  
+    
+# 主节点宕机
+redis-cli -p 7001 shutdown
+    
+#主节点重启
+redis-server 7001/7001.conf
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+</ul>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">HL</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://haolei56.github.io/2023/052118364.html">http://haolei56.github.io/2023/052118364.html</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">HL</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/reids/">
+                                    <span class="chip bg-color">reids</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2023/052138880.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="MongoDB基础">
+                        
+                        <span class="card-title">MongoDB基础</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-05-21
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Datebase/" class="post-category">
+                                    Datebase
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/MongoDB/">
+                        <span class="chip bg-color">MongoDB</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/052112042.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="Shell教程">
+                        
+                        <span class="card-title">Shell教程</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-05-21
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Linux/" class="post-category">
+                                    Linux
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Shell/">
+                        <span class="chip bg-color">Shell</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2022-2023</span>
+            
+            <a href="/about" target="_blank">HL</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:n_056haolei@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1559823213" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1559823213" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+     <!--樱花效果-->
+    <script type="text/javascript">
+    //只在桌面版网页启用特效
+    var windowWidth = $(window).width();
+    if (windowWidth > 768) {
+        document.write('<script type="text/javascript" src="/js/sakura.js"><\/script>');
+    }
+    </script>
+</body>
+
+</html>

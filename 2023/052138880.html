@@ -1,0 +1,1511 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="MongoDB基础, 朝暮惜">
+    <meta name="description" content="MongoDB简介关系型数据库，例如 SQL Server、 MySQL、 Oracle 等，具有大数据处理能力差、程序产出效率低、数据结构变动困难等缺陷
+为了解决这些存在的问题，一个更好的数据库方案NoSQL数据库应运而生。 所谓 NoS">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', '');
+</script>
+
+
+    <title>MongoDB基础 | 朝暮惜</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="朝暮惜" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">朝暮惜</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">朝暮惜</div>
+        <div class="logo-desc">
+            
+            活到老，学到老
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/16.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">MongoDB基础</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/MongoDB/">
+                                <span class="chip bg-color">MongoDB</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Datebase/" class="post-category">
+                                Datebase
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-05-21
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2023-05-21
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    5.7k
+                </div>
+                
+
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+        <!-- 代码块折行 -->
+        <style type="text/css">
+            code[class*="language-"], pre[class*="language-"] { white-space: pre-wrap !important; }
+        </style>
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="MongoDB简介"><a href="#MongoDB简介" class="headerlink" title="MongoDB简介"></a>MongoDB简介</h2><p>关系型数据库，例如 SQL Server、 MySQL、 Oracle 等，具有大数据处理能力差、程序产出效率低、数据结构变动困难等缺陷</p>
+<p>为了解决这些存在的问题，一个更好的数据库方案NoSQL数据库应运而生。 所谓 NoSQL ，并不是指没有 SQL ，而是指 Not Only SQL ”，即非传统关系型数据库。这类数库的主要特点包括非关系型、水平可扩展、分布式与开源；另外它还具有模式自由、 最终一致性 。 NoSQL 常用的存储模式有key-value存储、文档存储、列存储、 图形存储、 XML存储等， MongoDB正是文档数据库的典型代表。</p>
+<p>MongoDB可以在不受任何表格 schema模式的约束下工作。数据以类似 JSON的格式存储，并且可以包含不同类型的数据结构。</p>
+<p>原则上 Oracle和 MySQL能做的事情， MongoDB都能做（包括 ACID事务 )。<strong>MongoDB数据库具有以下优点</strong>：</p>
+<ul>
+<li>横向扩展能力，数据量或并发量增加时候架构可以自动扩展</li>
+<li>灵活模型，适合迭代开发，数据模型多变场景</li>
+<li>JSON数据结构，适合微服务 &#x2F;REST API</li>
+</ul>
+<p><strong>MongoDB支持：</strong>亿级以上数据量、灵活表结构、高并发读、高并发写、跨地区集群、分片集群、地理位置查询、聚合计算、异构数据、大宽(字段比较多的数据库表)</p>
+<p><strong>MongoDB的适用场景</strong></p>
+<ul>
+<li>移动 应用（ App、小程序）</li>
+<li>电商</li>
+<li>内容管理</li>
+<li>物联网</li>
+<li>Saas应用</li>
+<li>主机分流</li>
+<li>关系型迁移</li>
+</ul>
+<p>与传统的RDBMS关系型数据库不同 MongoDB并没有表 Table，行 row和列 column的概念。它将数据存储在集合 collections，文档 documents和字段 fields中。下图说明了与 RDBMS类比的结构之间的关系：</p>
+<p><img src="https://s2.loli.net/2023/05/21/kzl2WrgMXpncEVD.jpg" alt="MongoDB与RDBMS的对应关系"></p>
+<h2 id="MongoDB-原理"><a href="#MongoDB-原理" class="headerlink" title="MongoDB 原理"></a>MongoDB 原理</h2><p>MongoDB存取读写速度快，甚至可以用来当作缓存数据库。但是在使用过程中会发现 MongoDB 服务非常占内存，几乎是服务器有多少内存就会占用多少内存。MongoDB在存取工作流程上有一个非常酷的设计决策， MongoDB的所有数据实际上是存放在硬盘的， 然后把部分或者全部要操作的数据通过内存映射存储引擎映射到内存中 。 即是： 虚拟内存+持久化的存储方式。</p>
+<p><img src="https://s2.loli.net/2023/05/21/1gjyZq3OP4i5Ufz.jpg" alt="MongoDB原理"></p>
+<p>如果是读操作，直接从内存中取数据，如果是写操作，就会修改内存中对应的数据，然后就不需要管了。操作系统的虚拟内存管理器会定时把数据刷新保存到硬盘中。 内存中的数据什么时候写到硬盘中，则是操作系统的事情了。</p>
+<p>MongoDB 的存取工作流程区别于一般硬盘数据库在于两点：</p>
+<ul>
+<li>读：一般硬盘数据库在需要数据时才去硬盘中读取请求数据， MongoDB 则是尽可能地放入内存中。</li>
+<li>写：一般硬盘数据库在有数据需要修改时会马上写入刷新到硬盘， MongoDB只是修改内存中的数据就不管了，写入的数据会排队等待操作系统的定时刷新保存到硬盘。</li>
+</ul>
+<h2 id="MongoDB存储引擎-WiredTiger"><a href="#MongoDB存储引擎-WiredTiger" class="headerlink" title="MongoDB存储引擎- WiredTiger"></a>MongoDB存储引擎- WiredTiger</h2><p>MongoDB目前支持的MMAP、MMAPV1、WiredTiger 以及 In-Memory 存储引擎。 主要关注 WiredTiger </p>
+<p>WiredTiger（3.2以上版本默认）（B+树）</p>
+<ul>
+<li>采用文档型锁，吞吐量相对高许多 </li>
+<li>相比MMAPV1存储索引时WiredTiger使用前缀压缩,更节省对内存空间的损耗 </li>
+<li>提供压缩算法,可以大大降低对硬盘资源的消耗,节省约60%以上的硬盘资源； </li>
+<li>支持snappy（默认）和zlib两种压缩模式 </li>
+<li>默认每分钟一次checkpoint，及数据持久化</li>
+</ul>
+<h2 id="MongoDB基本概念"><a href="#MongoDB基本概念" class="headerlink" title="MongoDB基本概念"></a>MongoDB基本概念</h2><p><img src="https://s2.loli.net/2023/05/21/1EaFmrNiGgjVzT3.jpg" alt="MongoDB层级结构"></p>
+<p><strong>数据库</strong><br>一个mongodb中可以建立多个数据库。 MongoDB的默认数据库为 “db”，该数据库存储在 data目录中。 MongoDB的单个实例可以容纳多个独立的数据库，每一个都有自己的集合和权限，不同的数据库也放置在不同的文件中。<code>show dbs</code>命令可以显示所有数据的列表。</p>
+<p><strong>文档(Document)</strong><br>文档是一组键值(key-value)对 (即 BSON)。 MongoDB的文档不需要设置相同的字段，并且相同的字段不需要相同的数据类型，这与关系型数据库有很大的区别，也是 MongoDB 非常突出的特点。一个</p>
+<p>需要注意的是：</p>
+<ul>
+<li>文档中的键 &#x2F;值对是有序的。</li>
+<li>文档中的值不仅可以是在双引号里面的字符串，还可以是其他几种数据类型（甚至可以是整个嵌入的文档)</li>
+<li>MongoDB区分类型和大小写。</li>
+<li>MongoDB的文档不能有重复的键。</li>
+<li>文档的键是字符串。除了少数例外情况，键可以使用任意 UTF-8字符。</li>
+<li>文档对应于许多编程语言中的本机数据类型</li>
+<li>嵌入式文档和数组减少了对连接的需求</li>
+<li>动态模式支持流畅的多态性文档</li>
+</ul>
+<p>文档键命名规范：</p>
+<ul>
+<li>键不能含有 \0 (空字符 )。这个字符用来表示键的结尾。</li>
+<li>.和 $有特别的意义，只有在特定环境下才能使用。</li>
+<li>以下划线 “_”开头的键是保留的 (不是严格要求的 )。</li>
+</ul>
+<p><strong>集合</strong><br>集合就是MongoDB 文档组，类似于 RDBMS 中的表格。集合存在于数据库中，集合没有固定的结构，这意味着集合可以插入不同格式和类型的数据，但通常情况下我们插入集合的数据都会有一定的关联性。当第一个文档插入时，集合就会被创建。</p>
+<p>合法的集合名：</p>
+<ul>
+<li>集合名不能是空字符串 “”。</li>
+<li>集合名不能含有 \0字符（空字符 )，这个字符表示集合名的结尾。</li>
+<li>集合名不能以 “system.”开头，这是为系统集合保留的前缀。</li>
+<li>用户创建的集合名字不能含有保留字符。有些驱动程序的确支持在集合名里面包含，这是因为某些系统生成的集合中包含该字符。除非你要访问这种系统创建的集合，否则千万不要在名字里出现 $。</li>
+</ul>
+<p><strong>Capped collections</strong> 就是固定大小的 collection。它有很高的性能以及队列过期的特性 (过期按照插入的顺序 ). 和标准的 collection 不同，你必须要显式的创建一个 capped collection，指定一个 collection 的大小，单位是字节。 collection 的数据存储空间是提前分配的。固定集合可以声明collection的容量大小，其行为类似于循环队列。数据插入时，新文档会被插入到队列的末尾，如果队列已经被占满，那么最老的文档会被之后插入的文档覆盖。<br>固定集合特性：固定集合很像环形队列，如果空间不足，最早的文档就会被删除，为新的文档腾出空间。一般来说，固定集合适用于任何想要自动淘汰过期属性的场景。</p>
+<p>固定集合的优点：</p>
+<ol>
+<li>写入速度提升。固定集合中的数据被顺序写入磁盘上的固定空间，所以，不会因为其他集合的一些随机性的写操作而“中断”，其写入速度非常快（不建立索引，性能更好）。</li>
+<li>固定集合会自动覆盖掉最老的文档，因此不需要再配置额外的工作来进行旧文档删除。设置 Job进行旧文档的定时删除容易形成性能的压力毛刺。</li>
+</ol>
+<p>注意事项</p>
+<ol>
+<li>固定集合创建之后就不可以改变，只能将其删除重建。</li>
+<li>普通集合可以使用 convertToCapped转换固定集合，但是固定集合不可以转换为普通集合。</li>
+<li>创建固定集合，为固定集合指定文档数量限制时（指参数 max），必须同时指定固定集合的大小（指参数 size）。不管先达到哪一个限制，之后插入的新文档都会把最老的文档移除集合。</li>
+<li>使用 convertToCapped命令将普通集合转换固定集合时，既有的索引会丢失，需要手动创建。并且，此转换命令没有限制文档数量的参数（即没有 max的参数选项）。</li>
+<li>不可以对固定集合进行分片。</li>
+<li>对固定集合中的文档可以进行更新 (update)操作，但更新不能导致文档的 Size增长或缩小，否则更新失败。<br>假如集合中有一个key,其 value 对应的数据长度为 100个字节，如果要更新这个 key 对应的 value，更新后的值也必须为100个字节，大于 100个字 节不可以，小于 100个字节也不可以。</li>
+<li>不可以对固定集合执行删除文档操作，但可以删除整个集合。</li>
+<li>还有一定需要注意，对集合估算 size时，不要依据集合的 storageSize ，而是依据集合的 size。storageSize是 wiredTiger存储引擎采用高压缩算法压缩后的。</li>
+</ol>
+<h2 id="MongoDB-数据类型"><a href="#MongoDB-数据类型" class="headerlink" title="MongoDB 数据类型"></a>MongoDB 数据类型</h2><p>下表为MongoDB中常用的几种数据类型， json基础上的扩展 。</p>
+<table>
+<thead>
+<tr>
+<th align="center">数据类型</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">String</td>
+<td align="left">字符串。存储数据常用的数据类型。在 MongoDB 中， UTF-8 编码的字符串才是合法的。</td>
+</tr>
+<tr>
+<td align="center">Integer</td>
+<td align="left">整型数值。用于存储数值。根据你所采用的服务器，可分为 32 位或 64 位。</td>
+</tr>
+<tr>
+<td align="center">Boolean</td>
+<td align="left">布尔值。用于存储布尔值（真 &#x2F;假）。</td>
+</tr>
+<tr>
+<td align="center">Double</td>
+<td align="left">双精度浮点值。用于存储浮点值。</td>
+</tr>
+<tr>
+<td align="center">Min&#x2F;Max keys</td>
+<td align="left">将一个值与 BSON（二进制的 JSON）元素的最低值和最高值相对比。</td>
+</tr>
+<tr>
+<td align="center">Array</td>
+<td align="left">用于将数组或列表或多个值存储为一个键。</td>
+</tr>
+<tr>
+<td align="center">Timestamp</td>
+<td align="left">时间戳。记录文档修改或添加的具体时间。</td>
+</tr>
+<tr>
+<td align="center">Object</td>
+<td align="left">用于内嵌文档。</td>
+</tr>
+<tr>
+<td align="center">Null</td>
+<td align="left">用于创建空值。</td>
+</tr>
+<tr>
+<td align="center">Symbol</td>
+<td align="left">符号。该数据类型基本上等同于字符串类型，但不同的是，它一般用于采用特殊符号类型的语言。</td>
+</tr>
+<tr>
+<td align="center">Date</td>
+<td align="left">日期时间。用 UNIX 时间格式来存储当前日期或时间。表示当前距离Unix新纪元（ 1970年 1月 1日）的毫秒数。日期类型是有符号的 , 负数表示 1970 年之前的日期。你可以指定自己的日期时间：创建 Date 对象，传入年月日信息。</td>
+</tr>
+<tr>
+<td align="center">Object ID</td>
+<td align="left">对象 ID。用于创建文档的 ID。</td>
+</tr>
+<tr>
+<td align="center">Binary Data</td>
+<td align="left">二进制数据。用于存储二进制数据。</td>
+</tr>
+<tr>
+<td align="center">Code</td>
+<td align="left">代码类型。用于在文档中存储 JavaScript 代码。</td>
+</tr>
+<tr>
+<td align="center">Regular expression</td>
+<td align="left">正则表达式类型。用于存储正则表达式。</td>
+</tr>
+</tbody></table>
+<p><strong>ObjectId</strong>（不自己指定，默认生成 ）<br>ObjectId 类似唯一主键 ，可以很快的去生成和排序，包含 12 bytes，含义是</p>
+<ul>
+<li>前 4 个字节表示创建 unix 时间戳 ,格林尼治时间 UTC 时间，比北京时间晚了 8 个小时</li>
+<li>接下来的 3 个字节是机器标识码</li>
+<li>紧接的两个字节由进程 id 组成 PID</li>
+<li>最后三个字节是随机数</li>
+</ul>
+<p><img src="https://s2.loli.net/2023/05/21/m4heG7pLxZ3Hq6K.jpg" alt="MongoDBObjectID类型"></p>
+<p>MongoDB 中存储的文档必须有一个 _id 键。这个键的值可以是任何类型的，默认是个 ObjectId 对象，由于 ObjectId 中保存了创建的时间戳， 所以你不需要为你的文档保存时间戳字段 ，你可以通过getTimestamp 函数来获取文档的创建时间 </p>
+<p><strong>时间戳</strong><br>BSON 有一个特殊的时间戳类型用于MongoDB内部使用，与普通的日期类型不相关。 时间戳值是一个 64 位的值。其中： 前 32位是一个 time_t 值（与 Unix新纪元相差的秒数），后 32位是在某秒中操作的一个递增的序数<br>在单个mongod 实例中，时间戳值通常是唯一的。<br>在复制集中，oplog 有一个 ts 字段。这个字段中的值使用 BSON时间戳表示了操作时间。<br>BSON 时间戳类型主要用于 MongoDB 内部使用。在大多数情况下的应用开发中，你可以使用 BSON 日期类型。</p>
+<h2 id="MongoDB-操作"><a href="#MongoDB-操作" class="headerlink" title="MongoDB 操作"></a>MongoDB 操作</h2><p><strong>集合操作</strong></p>
+<table>
+<thead>
+<tr>
+<th>操作命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>db.createCollection</td>
+<td>创建集合</td>
+</tr>
+<tr>
+<td>show collections</td>
+<td>查看当前库有多少集合</td>
+</tr>
+<tr>
+<td>show tables</td>
+<td>查看当前库有多少集合</td>
+</tr>
+<tr>
+<td>db.collection.drop()</td>
+<td>删除集合</td>
+</tr>
+<tr>
+<td>db.collection1.renameCollection( “ collection2” )</td>
+<td>将集合名collection1命名为 collection2.</td>
+</tr>
+</tbody></table>
+<p><strong>文档操作</strong></p>
+<table>
+<thead>
+<tr>
+<th>命令操作</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>db.collection.insert()</td>
+<td>将单个文档或多个文档插入到集合中</td>
+</tr>
+<tr>
+<td>db.collection.insertOne()</td>
+<td>插入文档， 3.2版中的新功能</td>
+</tr>
+<tr>
+<td>db.collection.insertMany()</td>
+<td>插入多个文档 ,3.2版中的新功能</td>
+</tr>
+<tr>
+<td>db collection update</td>
+<td>更新或替换与指定过滤器匹配的单个文档，或更新与指定过滤器匹配的所有文档。 默认情况下，db.collection.update() 方法更新单个文档。 要更新多个文档，请使用 multi 选项。</td>
+</tr>
+<tr>
+<td>db.collection.updateOne(&lt; filter &gt;,&lt;update &gt;, &lt;options&gt;)</td>
+<td>即使多个文档可能与指定的过滤器匹配，最多更新与指定的过滤器匹配的单个文档。 3.2 版中的新功能</td>
+</tr>
+<tr>
+<td>db.collection.updateMany(&lt; filter &gt;,&lt;update &gt;, &lt;options&gt;)</td>
+<td>更新所有与指定过滤器匹配的文档。 3.2 版中的新功能</td>
+</tr>
+<tr>
+<td>db.collection.replaceOne(&lt; filter &gt;,&lt;update &gt;, &lt;options&gt;)</td>
+<td>即使多个文档可能与指定过滤器匹配，也最多替换一个与指定过滤器匹配的文档。</td>
+</tr>
+<tr>
+<td>db.collection.remove</td>
+<td>删除单个文档或与指定过滤器匹配的所有文档</td>
+</tr>
+<tr>
+<td>db.collection.deleteOne()</td>
+<td>即使多个文档可能与指定过滤器匹配，也最多删除一个与指定过滤器匹配的文档。 3.2版中的新功能</td>
+</tr>
+<tr>
+<td>db.collection.deleteMany()</td>
+<td>删除所有与指定过滤器匹配的文档。 3.2版中的新功能</td>
+</tr>
+<tr>
+<td>db.collection.find(query,projection)</td>
+<td>查询文档</td>
+</tr>
+<tr>
+<td>db.collection.findOne</td>
+<td>只返回一个文档。</td>
+</tr>
+</tbody></table>
+<p><strong>MongoDB条件语句查询与RDBMS的比较</strong></p>
+<p><img src="https://s2.loli.net/2023/05/21/sED81QrpJxefYkj.png" alt="where语句比较"></p>
+<p><strong>MongoDB $type 操作符</strong></p>
+<p>类型匹配用。$type操作符是基于 BSON类型来检索集合中匹配的数据类型，并返回结果。</p>
+<p><img src="https://s2.loli.net/2023/05/21/kbypc7tXU19H4MZ.png" alt="MongoDB类型匹配type"></p>
+<p><strong>MongoDB的Limit 、Skip、 Sort</strong></p>
+<p>MongoDB Limit()：如果你需要在MongoDB中读取指定数量的数据记录，可以使用 MongoDB的Limit方法， limit()方法接受一个数字参数，该参数指定从MongoDB中读取的记录条数。limit()方法基本语法如下所示：<code>db.COLLECTION_NAME.find().limit(NUMBER)</code></p>
+<p>MongoDB Skip() ：我们除了可以使用limit()方法来读取指定数量的数据外，还可以使用 skip()方法来跳过指定数量的数<br>据， skip方法同样接受一个数字参数作为跳过的记录条数。skip() 方法脚本语法格式如下：<code>db.COLLECTION_NAME.find().limit(NUMBER).skip(NUMBER)</code></p>
+<p>MongoDB sort() ：在MongoDB 中使用 sort() 方法对数据进行排序， sort() 方法可以通过参数指定排序的字段，并使<br>用 1 和 -1 来指定排序的方式，其中 :</p>
+<ul>
+<li><p>1 为升序排列</p>
+</li>
+<li><p>-1 是用于降序排列。</p>
+<p>sort()方法基本语法如下所示：<code>db.COLLECTION_NAME.find().sort(&#123;KEY:1&#125;)</code></p>
+</li>
+</ul>
+<h2 id="MongoDB-索引创建、查询、删除"><a href="#MongoDB-索引创建、查询、删除" class="headerlink" title="MongoDB 索引创建、查询、删除"></a>MongoDB 索引创建、查询、删除</h2><p>索引通常能够极大的提高查询的效率，如果没有索引，MongoDB在读取数据时必须扫描集合中的每个文件并选取那些符合查询条件的记录。这种扫描全集合的查询效率是非常低的，特别在处理大量的数据时，查询可以要花费几十秒甚至几分钟，这对网站的性能是非常致命的。 索引是特殊的数据结构，索引存储在一个易于遍历读取的数据集合中 ，索引是对数据库表中一列或多列的值进行排序的一种结构<br>索引是特殊的数据结构，它以一种易于遍历的形式存储集合数据集的一小部分。索引存储一个或一组特定字段的值，按字段的值排序。索引项的排序支持有效的相等匹配和基于范围的查询操作。此外，MongoDB可以通过使用索引中的排序返回排序后的结果。<br>基本上，MongoDB中的索引与其他数据库系统中的索引类似。MongoDB在集合级别定义索引，并支持在MongoDB集合中文档的任何字段或子字段上的索引。</p>
+<p>1、创建索引<code>db.col.createIndex(&#123;&quot;title&quot;:1&#125;)</code><br>2、查看集合索引<code>db.col.getIndexes()</code><br>3、查看集合索引大小<code>db.col.totalIndexSize()</code> 返回当前集合所有的索引所占用的空间大小<br>4、删除集合所有索引<code>db.col.dropIndexes()</code><br>5、删除集合指定索引<code>db.col.dropIndex(&quot;索引名称 &quot;)</code></p>
+<h2 id="MongoDB-聚合"><a href="#MongoDB-聚合" class="headerlink" title="MongoDB 聚合"></a>MongoDB 聚合</h2><p>MongoDB 聚合框架（ Aggregation Framework）是一个计算框架，它可以</p>
+<ul>
+<li>作用在一个或几个集合上；</li>
+<li>对集合中的数据进行的一系列运算；</li>
+<li>将这些数据转化为期望的形式；</li>
+</ul>
+<p>从效果而言，聚合框架相当于SQL 查询中的： GROUP BY、LEFT OUTER JOIN、AS等</p>
+<p>管道（Pipeline）和步骤 Stage整个聚合运算过程称为管道（Pipeline），它是由多个步骤 Stage）组成的 ，每个管道</p>
+<ul>
+<li>接受一系列文档（原始数据）；</li>
+<li>每个步骤对这些文档进行一系列运算；</li>
+<li>结果文档输出给下一个步骤；</li>
+</ul>
+<p><img src="https://s2.loli.net/2023/05/21/jKNnWUvz6TAOyud.jpg" alt="MongoDB管道"></p>
+<p>聚合运算的基本格式：</p>
+<pre class="line-numbers language-C++"><code class="language-C++">pipeline = [$stage1, $stage2, ...$stageN];
+db.<Collection>.aggregtae(
+pipeline,
+{options}
+);
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>聚合运算常见步骤（Stage）</strong></p>
+<table>
+<thead>
+<tr>
+<th>步骤</th>
+<th>作用</th>
+<th>SQL等价运算符</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$match</td>
+<td>过滤</td>
+<td>WHERE</td>
+</tr>
+<tr>
+<td>$project</td>
+<td>投影</td>
+<td>AS</td>
+</tr>
+<tr>
+<td>$sort</td>
+<td>排序</td>
+<td>ORDER BY</td>
+</tr>
+<tr>
+<td>$group</td>
+<td>分组</td>
+<td>GROUP BY</td>
+</tr>
+<tr>
+<td>$skip&#x2F;limit</td>
+<td>结果限制</td>
+<td>SKIP&#x2F;LIMIT</td>
+</tr>
+<tr>
+<td>$lookup</td>
+<td>左外连接</td>
+<td>LEFT OUTER JOIN</td>
+</tr>
+<tr>
+<td>$unwind</td>
+<td>将数组类型的字段进行拆分</td>
+<td></td>
+</tr>
+</tbody></table>
+<p><strong>表达式操作符</strong></p>
+<p><img src="https://s2.loli.net/2023/05/21/UFuj1hnLqZgN8wM.png" alt="MongoDB表达式操作符1"></p>
+<p><img src="https://s2.loli.net/2023/05/21/WJu3DzhpUVLkvfN.png" alt="MongoDB表达式操作符2"></p>
+<h2 id="MongoDB复制（-复制集）"><a href="#MongoDB复制（-复制集）" class="headerlink" title="MongoDB复制（ 复制集）"></a>MongoDB复制（ 复制集）</h2><p>MongDB提供了两种复制部署方案：</p>
+<ul>
+<li>主从复制（ Master Slave）</li>
+<li>复制集 Replica Sets) 。</li>
+</ul>
+<p>两种方式的共同点在于都是只在一个主节点上进行写操作，然后写入的数据会异步地同步到所有的从节点上。主从复制和 复制集都使用了相同的复制机制。</p>
+<p>主从复制的弊端：<br>主从复制只有 1 个主节点，至少有 1 个从节点，可以有多个从节点。它们的身份是在启 MongoDB 数据库服务时就需要指定的。所有的从节点都会自动地去主节点获取最新数据，做到主从节点数据保持一致。注意主节点是不会去从节点上读取数据的，只会输出数据到从节点。理论上 1 个集群中可以有无数个从节点，但是这么多的从节点对主节点进行访问，主节点会受不了。</p>
+<p>在生产环境下使用主从复制集群的过程中会发现一个比较明显的缺陷：当主节点出现故障，比如停电或者死机等情况发生时，整个 MongoDB 服务集群就不能正常运作了。需要人工地去处理这种情况，修复主节点之后再重启所有服务；当主节点一时难以修复时，我们也可以把其中 1 个从节点启动为主节点，在这个过程中就需要人工操作处理，而且需要停机操作，我们对外的服务会有一段空白时间，给网站和其他应用的用户造成影响，所以说主从复制集群的容灾并不算太好。</p>
+<p><strong>复制集</strong>是为了解决主从复制集群的容灾性的问题 。 复制集是 具有自动故障恢复功能的主从集群。复制集是对主从复制的一种完善。它跟主从集群最明显的区别就是复制集没有固定的主节点，也就是主节点的身份不需要我们去指明，而是整个集群自己会选举出 1 个主节点，这个主节点不能正常工作时，又会另外选举出其他的节点作为主节点。 复制集 中总会有 1 个活跃节点（ Primary ）和 1 个或者多个备份节点 Secondary 。这样就大大提 MongoDB 服务集群的容灾性。在足够多的节点情况下，即使一两个节点不工作了， MongoDB 服务集群仍能正常提供数据服务。</p>
+<p>Mongodb 3.0版本之后一个复制集集群中可设 置 50 个成员，但只有 7 个投票成员（包括 primary其余为非投票成员 Non Voting Member ）。 非投票成员是复制集中数据的备份副本，不参与投票，但可以被投票或转成为主节点。</p>
+<p>复制集要完成数据复制以及修复集群依赖于两个基础的机制：<br>oplog (operation log，操作日志）和心跳 ( 。<br>oplog 让数据的复制成为可能，而“心跳”则监控节点的健康情况并触发故障转移。</p>
+<p><strong>阻塞复制</strong></p>
+<p>从节点复制主节点的oplog 并且执行它，对主节点来说是异步的，也就是主节点不需要等到从节点执行完同样的操作就可以继续下一个写入操作了。而当写入操作太快时，从节点的更新状态就有可能跟不上。如果从节点的操作己经被主节点落下很远， oplog 日志在从节点还没执行完， oplog 可能已经轮滚一圈了，从节点跟不上同步，复制就会停下，从节点需要新做完整的同步。为了避免此种情况，尽量保证主节点的 oplog 足够大，能够存放相当长时间的操作记录。还有一种方法就是暂时阻塞主节点的操作，以确保从节点能够跟上主节点的数据更新， 这种方式叫阻塞复制。阻塞复制是在主节点使用 getLastError 命令加参数 “w”来确保数据 的同步性。比如我们把 “w”参数设置为 N10，运行 getLastError 命令后，主节点会进入阻塞状态，直到 N-1 个从节点复制了最新的写入操作为止。</p>
+<p><strong>选举机制</strong><br>如果主节点故障了，其余的节点就会选出一个新的主节点。选举的过程可以由任意的非主节点发起，然后根据优先级和 Bully 算法（评判谁的数据更新）选举出主节点。在选举出主节点之前，整个集群服务是只读的，不能执行写入操作。非仲裁节点都有个优先级的配置，范围为 0~100 ，越大的值越优先成为主节点。默认情况下 1 ；如果是 0 ，则不能成为主节点。</p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">HL</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://haolei56.github.io/2023/052138880.html">http://haolei56.github.io/2023/052138880.html</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">HL</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/MongoDB/">
+                                    <span class="chip bg-color">MongoDB</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2023/052115674.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="STL详解">
+                        
+                        <span class="card-title">STL详解</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-05-21
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/C/" class="post-category">
+                                    C++
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/STL/">
+                        <span class="chip bg-color">STL</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/052118364.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="Redis教程">
+                        
+                        <span class="card-title">Redis教程</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-05-21
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Datebase/" class="post-category">
+                                    Datebase
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/reids/">
+                        <span class="chip bg-color">reids</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2022-2023</span>
+            
+            <a href="/about" target="_blank">HL</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:n_056haolei@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1559823213" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1559823213" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+     <!--樱花效果-->
+    <script type="text/javascript">
+    //只在桌面版网页启用特效
+    var windowWidth = $(window).width();
+    if (windowWidth > 768) {
+        document.write('<script type="text/javascript" src="/js/sakura.js"><\/script>');
+    }
+    </script>
+</body>
+
+</html>

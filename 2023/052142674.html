@@ -1,0 +1,1923 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="图床项目, 朝暮惜">
+    <meta name="description" content="图床数据库
+表：用户信息表、用户文件表、共享文件表、共享图片表、文件数量表、文件实体表
+
+
+
+用户信息表（user_info）
+
+
+
+字段名
+中文含义
+类型
+是否允许为空
+默认值
+其它
+
+
+
+id
+序号
+bigint
+否
+
+自动递增，主键
+">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', '');
+</script>
+
+
+    <title>图床项目 | 朝暮惜</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="朝暮惜" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">朝暮惜</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">朝暮惜</div>
+        <div class="logo-desc">
+            
+            活到老，学到老
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">图床项目</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/C-Project/">
+                                <span class="chip bg-color">C++ Project</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/C/" class="post-category">
+                                C++
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-05-21
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2023-05-21
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    10.6k
+                </div>
+                
+
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+        <!-- 代码块折行 -->
+        <style type="text/css">
+            code[class*="language-"], pre[class*="language-"] { white-space: pre-wrap !important; }
+        </style>
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="图床数据库"><a href="#图床数据库" class="headerlink" title="图床数据库"></a>图床数据库</h2><ul>
+<li><p>表：<strong>用户信息表、用户文件表、共享文件表、共享图片表、文件数量表、文件实体表</strong></p>
+</li>
+<li><p><img src="https://s2.loli.net/2023/05/21/VgBmyGuRwDI5L9t.jpg" alt="图床数据库关系图"></p>
+<ol>
+<li><p>用户信息表（user_info）</p>
+<table>
+<thead>
+<tr>
+<th align="center">字段名</th>
+<th align="center">中文含义</th>
+<th align="center">类型</th>
+<th align="center">是否允许为空</th>
+<th align="center">默认值</th>
+<th align="center">其它</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">id</td>
+<td align="center">序号</td>
+<td align="center">bigint</td>
+<td align="center">否</td>
+<td align="center"></td>
+<td align="center">自动递增，主键</td>
+</tr>
+<tr>
+<td align="center">user_name</td>
+<td align="center">用户名称</td>
+<td align="center">varchar(32)</td>
+<td align="center">否</td>
+<td align="center">‘’</td>
+<td align="center">唯一</td>
+</tr>
+<tr>
+<td align="center">nick_name</td>
+<td align="center">用户昵称</td>
+<td align="center">varchar(32)</td>
+<td align="center">否</td>
+<td align="center">‘’</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">phone</td>
+<td align="center">手机号码</td>
+<td align="center">varchar(16)</td>
+<td align="center">否</td>
+<td align="center">‘’</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">email</td>
+<td align="center">邮箱</td>
+<td align="center">varchar(64)</td>
+<td align="center">否</td>
+<td align="center">‘’</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">password</td>
+<td align="center">密码</td>
+<td align="center">varchar(32)</td>
+<td align="center">是</td>
+<td align="center">‘’</td>
+<td align="center">保存md5 后的加密值</td>
+</tr>
+<tr>
+<td align="center">create_time</td>
+<td align="center">用户创建时间</td>
+<td align="center">TIMESTAMP</td>
+<td align="center">否</td>
+<td align="center">CURRENT_TIMES TAMP</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<p>tips:用户重要信息(如密码 )不应该明文保存到数据库，可以通过 MD5加密后再保存,还可以对密码进行加盐，数据库中保存MD5值和盐值。MD5和BCrypt加密算法都比较流行，相对来说，BCrypt算法比MD5更安全，但是加密更慢。</p>
+</li>
+<li><p>文件信息表 (file_info)</p>
+<table>
+<thead>
+<tr>
+<th align="center">字段名</th>
+<th align="center">中文含义</th>
+<th align="center">类型</th>
+<th align="center">是否允许为空</th>
+<th align="center">默认值</th>
+<th align="center">其它</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">id</td>
+<td align="center">序号</td>
+<td align="center">bigint</td>
+<td align="center">否</td>
+<td align="center"></td>
+<td align="center">自动递增，主键</td>
+</tr>
+<tr>
+<td align="center">md5</td>
+<td align="center">文件md5</td>
+<td align="center">varchar(256)</td>
+<td align="center">否</td>
+<td align="center">‘’</td>
+<td align="center">文件上传先可以先匹对数据库是否存在相同的 md5值，如果存在意味着是同一文件。</td>
+</tr>
+<tr>
+<td align="center">file_id</td>
+<td align="center">文件id</td>
+<td align="center">varchar(256)</td>
+<td align="center">否</td>
+<td align="center">‘’</td>
+<td align="center">对应 fastdfs的文件路径。格式例如：&#x2F;group1&#x2F;M00&#x2F;00&#x2F;00&#x2F;xxx.png</td>
+</tr>
+<tr>
+<td align="center">url</td>
+<td align="center">文件url</td>
+<td align="center">varchar(512)</td>
+<td align="center">否</td>
+<td align="center">‘’</td>
+<td align="center">文件的完整存储路径。格式例如：192.168.1.2:80&#x2F;group1&#x2F;M00&#x2F;00&#x2F;00&#x2F;xxx.png</td>
+</tr>
+<tr>
+<td align="center">size</td>
+<td align="center">文件大小</td>
+<td align="center">bigint</td>
+<td align="center">否</td>
+<td align="center">0</td>
+<td align="center">以字节为单位</td>
+</tr>
+<tr>
+<td align="center">type</td>
+<td align="center">文件类型</td>
+<td align="center">varchar(32)</td>
+<td align="center">是</td>
+<td align="center">‘’</td>
+<td align="center">png, zip, mp4……</td>
+</tr>
+<tr>
+<td align="center">count</td>
+<td align="center">文件引用计数</td>
+<td align="center">int</td>
+<td align="center">否</td>
+<td align="center">1</td>
+<td align="center">文件引用计数，每增加一个用户拥有此文件，此计数器+1</td>
+</tr>
+</tbody></table>
+<p>服务器做文件MD5值计算，比较消耗cpu的资源，建议还是类似我们图床的方式去做：<br>文件MD5唯一值由客户端计算并发送给文件服务器;<br>文件服务器得到客户端提交的MD5值后，到redis+mysql的组合里面查询是否存在同样的文件。</p>
+</li>
+<li><p>用户文件列表 (user_file_list)</p>
+<table>
+<thead>
+<tr>
+<th align="center">字段名</th>
+<th align="center">中文含义</th>
+<th align="center">类型</th>
+<th align="center">是否允许为空</th>
+<th align="center">默认值</th>
+<th align="center">其它</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">id</td>
+<td align="center">序号</td>
+<td align="center">int</td>
+<td align="center">否</td>
+<td align="center"></td>
+<td align="center">自动递增，主键</td>
+</tr>
+<tr>
+<td align="center">user</td>
+<td align="center">文件所属用户</td>
+<td align="center">varchar(32)</td>
+<td align="center">否</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">md5</td>
+<td align="center">文件md5</td>
+<td align="center">varchar(256)</td>
+<td align="center">否</td>
+<td align="center"></td>
+<td align="center">根据该值去 file_info进一步查找具体的文件</td>
+</tr>
+<tr>
+<td align="center">file_name</td>
+<td align="center">文件名字</td>
+<td align="center">varchar(128)</td>
+<td align="center">否</td>
+<td align="center">‘’</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">shared_status</td>
+<td align="center">共享状态</td>
+<td align="center">int</td>
+<td align="center">否</td>
+<td align="center">0</td>
+<td align="center">0 为没有共享， 1 为共享</td>
+</tr>
+<tr>
+<td align="center">pv</td>
+<td align="center">文件下载量</td>
+<td align="center">int</td>
+<td align="center">否</td>
+<td align="center">0</td>
+<td align="center">默认值为0，下载一次加1</td>
+</tr>
+<tr>
+<td align="center">create_time</td>
+<td align="center">文件创建时间</td>
+<td align="center">TIMESTAMP</td>
+<td align="center">否</td>
+<td align="center">CURRENT_TIMES TAMP</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+</li>
+<li><p>用户文件数量表 (user_file_count)</p>
+<table>
+<thead>
+<tr>
+<th align="center">字段名</th>
+<th align="center">中文含义</th>
+<th align="center">类型</th>
+<th align="center">是否允许为空</th>
+<th align="center">默认值</th>
+<th align="center">其它</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">id</td>
+<td align="center">序号</td>
+<td align="center">int</td>
+<td align="center">否</td>
+<td align="center"></td>
+<td align="center">自动递增，主键</td>
+</tr>
+<tr>
+<td align="center">user</td>
+<td align="center">文件所属用户</td>
+<td align="center">varchar(128)</td>
+<td align="center">否</td>
+<td align="center"></td>
+<td align="center">xxx_share_xxx_file_xxx_list_xxx_count_xxx 表示共享用户</td>
+</tr>
+<tr>
+<td align="center">count</td>
+<td align="center">拥有文件的数量</td>
+<td align="center">int</td>
+<td align="center">否</td>
+<td align="center">0</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+</li>
+<li><p>共享文件列表 (share_file_list)</p>
+<table>
+<thead>
+<tr>
+<th align="center">字段名</th>
+<th align="center">中文含义</th>
+<th align="center">类型</th>
+<th align="center">是否允许为空</th>
+<th align="center">默认值</th>
+<th align="center">其它</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">id</td>
+<td align="center">序号</td>
+<td align="center">int</td>
+<td align="center">否</td>
+<td align="center"></td>
+<td align="center">自动递增，主键</td>
+</tr>
+<tr>
+<td align="center">user</td>
+<td align="center">文件所属用户</td>
+<td align="center">varchar(32)</td>
+<td align="center">否</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">md5</td>
+<td align="center">文件md5</td>
+<td align="center">varchar(256)</td>
+<td align="center">否</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">file_name</td>
+<td align="center">文件名字</td>
+<td align="center">varchar(128)</td>
+<td align="center">否</td>
+<td align="center">‘’</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">pv</td>
+<td align="center">文件下载量</td>
+<td align="center">int</td>
+<td align="center">否</td>
+<td align="center">1</td>
+<td align="center">默认值为1，下载一次加1</td>
+</tr>
+<tr>
+<td align="center">create_time</td>
+<td align="center">文件创建时间</td>
+<td align="center">TIMESTAMP</td>
+<td align="center">否</td>
+<td align="center">CURRENT_TIMES TAMP</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+</li>
+<li><p>共享图片列表 (share_picture_list)</p>
+<table>
+<thead>
+<tr>
+<th align="center">字段名</th>
+<th align="center">中文含义</th>
+<th align="center">类型</th>
+<th align="center">是否允许为空</th>
+<th align="center">默认值</th>
+<th align="center">其它</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">id</td>
+<td align="center">序号</td>
+<td align="center">int</td>
+<td align="center">否</td>
+<td align="center"></td>
+<td align="center">自动递增，主键</td>
+</tr>
+<tr>
+<td align="center">user</td>
+<td align="center">文件所属用户</td>
+<td align="center">varchar(32)</td>
+<td align="center">否</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">filemd5</td>
+<td align="center">文件md5</td>
+<td align="center">varchar(256)</td>
+<td align="center">否</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">file_name</td>
+<td align="center">文件名字</td>
+<td align="center">varchar(128)</td>
+<td align="center">否</td>
+<td align="center">‘’</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">urlmd5</td>
+<td align="center">图床urlmd5</td>
+<td align="center">varchar(256)</td>
+<td align="center">否</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">key</td>
+<td align="center">提取码</td>
+<td align="center">varchar(8)</td>
+<td align="center">否</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">pv</td>
+<td align="center">访问量</td>
+<td align="center">int</td>
+<td align="center">否</td>
+<td align="center">1</td>
+<td align="center">默认值为1，下载一次加1</td>
+</tr>
+<tr>
+<td align="center">create_time</td>
+<td align="center">文件创建时间</td>
+<td align="center">TIMESTAMP</td>
+<td align="center">否</td>
+<td align="center">CURRENT_TIMES TAMP</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="图床主要功能"><a href="#图床主要功能" class="headerlink" title="图床主要功能"></a>图床主要功能</h2><p>注册功能、登录功能、上传文件、获取用户文件列表、获取共享文件或下载榜、删除文件、分享文件、分享图片、更新文件下载计数、处理分享文件（取消分享、转存、下载共享文件）。</p>
+<p><img src="https://s2.loli.net/2023/05/21/eZdcD3gpUlSiRzN.jpg" alt="零声图床架构和功能分析v1.1"></p>
+<p><img src="https://s2.loli.net/2023/05/21/8I9YUEFrARy56tv.png" alt="图床主界面.png"></p>
+<ul>
+<li><p>登录后的Token验证</p>
+<p>Token 即 “令牌 ”，Token是一个用户自定义的任意字符串。在成功提交了开发者自定义的这个字符串之后， Token的值会保存到服务器后台。 只有服务器和客户端前端知道这个字符串 ，于是 Token就成了这两者之间的密钥，它可以让服务器确认请求是来自客户端还是恶意的第三方。</p>
+</li>
+</ul>
+<p>这里所说的Token，本质上就是 http session 。使用基于Token 的身份验证方法，在服务端不需要存储用户的登录记录。大概的流程是这样的：</p>
+<p>  客户登录成功后，服务端生成 一个 Token ，这个 Token可以存储在内存 、 磁盘 、 或者数据库里，再把这个 Token 发送给客户端。 客户端收到 Token 以后可以把它存储起来，比如放在 Cookie 里或者 Local Storage。<br>   客户端每次向服务端请求资源的时候需要带着服务端签发的Token。服务端收到请求，然后去验证客户端请求里面带着的 Token，如果验证成功，就向客户端返回请求的数据。</p>
+<p>  简单而言，本服务器程序是采用随机数+base64+md5生成的 token，对于过期时间是通过 redis的 key超时机制实现。因为二进制文件包含很多无法显示和打印的字符。Base64是一种用64个字符来表示任意二进制数据的方法，常用于在URL、Cookie、网页中传输少量二进制数据。</p>
+<h2 id="Redis的使用"><a href="#Redis的使用" class="headerlink" title="Redis的使用"></a>Redis的使用</h2><ol>
+<li><p>存储token：登录名对应的token值，并设置过期时间24小时；<br>    key：用户名<br>       value：token</p>
+</li>
+<li><p>共享文件下载排行榜：zset结构<br>    filed_id: md5(文件名)+文件内容 (为什么不直接使用文件名：相同的文件可以有不同的文件名，相同的文件名可以应对不同的文件。）<br>       value: 下载次数</p>
+</li>
+<li><p>秒传</p>
+</li>
+</ol>
+<h2 id="Nginx-FastCGI"><a href="#Nginx-FastCGI" class="headerlink" title="Nginx+FastCGI"></a>Nginx+FastCGI</h2><h3 id="CGI"><a href="#CGI" class="headerlink" title="CGI"></a>CGI</h3><p>通用网关接口(Common Gateway Interface、CGI)描述了客户端和服务器程序之间传输数据的一种标准，可以让一个客户端，从网页浏览器向执行在网络服务器上的程序请求数据。web服务器与CGI通过环境变量、标准输入、标准输出、标准错误互相传递数据。CGI使外部程序与Web服务器之间交互成为可能。CGI程序运行在独立的进程中，并对每个Web请求建立一个进程，这种方法非常容易实现，但效率很差，难以扩展。面对大量请求，进程的大量建立和消亡使操作系统性能大大下降。此外，由于地址空间无法共享，也限制了资源重用。</p>
+<p>CGI进程执行具体过程：</p>
+<blockquote>
+<ol>
+<li>加载配置, 如果有需求加载配置文件获取数据</li>
+<li>连接其他服务器: 比如数据库</li>
+<li>逻辑处理</li>
+<li>得到结果, 将结果发送给服务器</li>
+<li>退出</li>
+</ol>
+</blockquote>
+<p><img src="https://s2.loli.net/2023/05/21/nwS713QgqlmXjIo.png" alt="CGI"></p>
+<h3 id="FastCGI"><a href="#FastCGI" class="headerlink" title="FastCGI"></a>FastCGI</h3><p>CGI 是短生存期应用程序，每发布一个请求，它就会创建一个进程。FastCGI 是长生存期应用程序。FastCGI像是一个常驻(long-live)型的CGI，从一行代码便可以看出<code>while (FCGI_Accept() &gt;= 0)</code>。它可以一直执行着，不会每次都要花费时间去fork一次。FastCGI使用持续的进程来处理一连串的请求，减少Web服务器与CGI程序之间互动的开销。FastCGI的进程是由FastCGI进程管理器管理，而不是web服务器（nginx下fastcgi与nginx服务器是分离的）。FastCGI程序本身监听某个socket然后等待来自web服务器的连接，而不是像CGI程序是由web服务器 fork-exec，所以FastCGI本身是一个服务端程序，而web服务器对它来说则是客户端。</p>
+<p>FastCGI 是一种通信协议，用于将 Web 服务器和后端应用服务器进行连接。在 FastCGI 中，Web 服务器（如 Nginx）会与后端应用服务器建立多个连接，用于传递 HTTP 请求和响应。为了避免频繁建立和关闭连接的开销，通常会使用连接池技术来重复利用连接。FastCGI 连接池通常使用的是进程池，而不是线程池。具体来说，后端应用服务器会启动多个进程，每个进程都会监听一个 FastCGI 连接套接字，用于处理来自 Web 服务器的请求。当有新的请求到达时，Web 服务器会将请求分配给某个空闲的进程，并由该进程来处理该请求。当该进程处理完请求后，会将连接释放回连接池中，以便其他进程重复利用。</p>
+<p>相比于线程池，使用进程池可以更好地避免多线程共享资源的问题，提高系统的稳定性和可靠性。此外，进程池还可以更好地利用多核 CPU 的性能，提高系统的并发处理能力。</p>
+<p>具体流程如下：</p>
+<blockquote>
+<ol>
+<li>用户通过浏览器访问服务器, 发送了一个请求, 请求的url如下<a target="_blank" rel="noopener" href="http://localhost/login?user=zhang3&amp;passwd=123456&amp;age=12&amp;sex=man">http://localhost/login?user=zhang3&amp;passwd=123456&amp;age=12&amp;sex=man</a></li>
+<li>nginx服务器接收数据, 对接收的数据进行解析</li>
+<li>nginx对于一些登录数据不知道如何处理, nginx将数据发送给了fastcgi程序（通过socket接口进行连通）</li>
+<li>启动fastCGI （不是由web服务器直接启动，而是通过一个fastCGI进程管理器启动，程序猿写的 login.c -&gt; 可执行程序( login )；使用 spawn-fcgi 进程管理器启动 login 程序, 得到一进程）、加载配置(可选)、连接服务器(如：数据库)、循环（服务器有请求 -&gt; 处理，将处理结果发送给服务器，<strong>没有请求 -&gt; 阻塞</strong>）</li>
+<li>服务器将fastCGI的处理结果发送给Nginx服务器，再由nginx处理成客户端能识别的http报文发送给客户端(客户端不能理解fastcgi报文)</li>
+</ol>
+</blockquote>
+<h3 id="Nginx和Fastcgi之间的epoll通信"><a href="#Nginx和Fastcgi之间的epoll通信" class="headerlink" title="Nginx和Fastcgi之间的epoll通信"></a>Nginx和Fastcgi之间的epoll通信</h3><p>Nginx不能像Apache那样直接执行外部可执行程序，但Nginx可以作为代理服务器，将请求转发给后端服务器，这也是Nginx的主要作用之一。Nginx支持FastCGI代理，接收客户端的请求，然后将请求转发给后端FastCGI进程(Nginx只能处理静态请求，所以需要Fastcgi处理动态请求)。</p>
+<p>在 Nginx 中，使用了多个 Reactor 线程来处理多个连接和事件。具体来说，Nginx 的 Master 进程会启动多个 Worker 进程，每个 Worker 进程都会创建多个 Reactor 线程，并在其中一个线程中启动 epoll 事件循环。当有新的连接到达时，Nginx 会通过负载均衡算法将连接分配给某个 Reactor 线程，并由该线程来处理该连接。采用多 Reactor 模式可以提高系统的并发性和性能，使得 Nginx 能够同时处理大量的并发连接和请求。同时，多 Reactor 模式还可以避免单一线程的瓶颈问题，并提高系统的稳定性和可靠性。</p>
+<h2 id="FastDFS存储原理"><a href="#FastDFS存储原理" class="headerlink" title="FastDFS存储原理"></a>FastDFS存储原理</h2><p>FastDFS服务有三个角色： 跟踪服务器（tracker server），存储服务器（storage server）和客户端（client）。特别适合于中小文件（文件大小：4KB-500MB）海量数据存储问题，例如图片分享和视频分享网站。</p>
+<p>Tracker</p>
+<blockquote>
+<p>它是fastdfs的协调者，负责管理所有的storage server 和group，每个storage 在启动后会连接tracker，告知自己所属的group等信息，并保持周期性心跳，tracker根据storage 的心跳信息，建立 group&#x3D;&#x3D;》【storage server list】的映射表。Tracker需要管理的元<strong>信息很少，会全部存储在内存中</strong>，里面的信息都是由storage汇报的信息生成的，本身是不需要持久化任何数据，这就使得tracker非常容易扩展，直接增加tracker机器即可扩展为tracker cluster（集群）来服务，cluster 里每个tracker之间是完全对等，所有的tracker 都接受storage 的心跳信息，生成元数据来提供读写服务。</p>
+</blockquote>
+<p>Storage server</p>
+<blockquote>
+<p>以组（卷，group或volume）为单位组织，一个group内包含多台storage机器，数据互为备份，存储空间以group内容量最小的storage为准，故配置多个storage尽量硬件资源相同，以免造成浪费。<br> 以group为单位租住的存储能方便进行隔离，负载均衡，副本数定制（group内storage 的数量为该group的副本数），比如将不同引用数据存到不同的group就能隔离应用数据，同时还能根据应用的访问特性来将应用分配到不同的group来做负载均衡；缺点就是group的容量受单机存储容量的限制，同时当group内有机器坏掉时，数据恢复只能依赖group内的其他机器，使得恢复时间会很长。</p>
+</blockquote>
+<p>Client：</p>
+<blockquote>
+<p>FastDFS向使用者提供基本文件接口，比如monitor、upload、download、append、delete等，以客户端库的方式提供给用户使用。</p>
+</blockquote>
+<p>FastDFS的文件ID中可以反解出哪些字段？</p>
+<blockquote>
+<p>例如：group1&#x2F;M00&#x2F;00&#x2F;00&#x2F;ctepQmIWJTCAcldiAAAHuj79dAY04.conf 文件ID中除了包含group name和存储路径外，文件名中可以反解出如下几个字段：<br>1）文件创建时间（unix时间戳，32位整数）<br>2）文件大小<br>3）上传到的源storage server IP地址（32位整数）<br>4）文件crc32校验码<br>5）随机数（这个字段用来避免文件重名）</p>
+</blockquote>
+<p>FastDFS采用二进制TCP通信协议。一个数据包由 包头（header）和包体（body）组成。包头只有10个字节，格式如下：<br>pkg_len：8字节整数，body长度，不包含header，只是body的长度<br>cmd：1字节整数，命令码<br>status：1字节整数，状态码，0表示成功，非0失败（UNIX错误码）</p>
+<h3 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h3><p><img src="https://s2.loli.net/2023/05/21/N2fyHOwVeFiobd4.jpg" alt="FastDFS存储原理文件上传1"></p>
+<p><img src="https://s2.loli.net/2023/05/21/vw1qmxYon85FeGS.jpg" alt="FastDFS存储原理文件上传2"></p>
+<p>实际上传调用的函数：storage_upload_by_filename1_ex -&gt; storage_upload_by_filename_ex -&gt; storage_do_upload_file</p>
+<p><img src="https://s2.loli.net/2023/05/21/cnYWgz2DtOjAdXJ.jpg" alt="FastDFS存储原理文件上传3"></p>
+<ol>
+<li><p>当集群中不止一个tracker server时，由于tracker之间是完全对等的关系，客户端在upload文件时可以<strong>任意选择</strong>一个trakcer。客户端与任意一台Tracker server建立TCP连接并发送上传请求报文。报文结构就是上面协议中的协议头TrackerHeader。</p>
+</li>
+<li><p>查询可用的的storage：Tracker收到客户端的上传请求报文后，需要选择文件存储的group和storage，<strong>选择group的方式</strong>可在tracker.conf配置文件配置，具体配置项如下：</p>
+</li>
+</ol>
+<pre class="line-numbers language-C++"><code class="language-C++">   # 如何选择上传文件的存储group
+   # 0: 轮询
+   # 1: 指定group名称
+   # 2: 负载均衡, 选择最大剩余空间的group上传文件
+   store_lookup=2
+   # 选择哪一个存储group，当store_lookup=1时，须指定存储group的名称
+   store_group=group2
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>选择完group之后，需要选择文件存储的<strong>storage server，选择方式</strong>可在tracker.conf配置文件配置，具体配置项如下：</p>
+<pre class="line-numbers language-C++"><code class="language-C++">   # 如何选择上传文件的存储server
+   # 0: 轮询
+   # 1: 以ip地址排序的第一个地址
+   # 2: 以优先级排序(优先级在storage上配置)
+   store_server=0
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ol start="3">
+<li><p>返回Storage信息：Tracker选择完可用的Storage服务器后，向客户端返回信息。返回的报文data内容共50个字节，包含TrackerHeader、Storage的组名（group name）、Storage的ip、Storage的port、storage_index。</p>
+</li>
+<li><p>上传文件，拿到了Tracker返回的Storage服务器的group name，ip和port后，向这台Storage服务器发起TCP连接请求，建立连接后，开始上传文件，先发送一个告知文件大小的报文，之后发送header + data</p>
+</li>
+<li><p>选择存储路径、生成文件id并存储文件，storage server收到客户端上传文件的请求后，为文件分配一个数据存储目录，<strong>分配的规则</strong>可在tracker.conf配置文件中配置，具体配置项如下：</p>
+<pre class="line-numbers language-C++"><code class="language-C++"># 选择存储server的哪一个路径(磁盘或挂载点)上传文件
+# 0: 轮询
+# 2: 负载均衡, 选择空闲空间最大的路径来存储文件
+store_path=0
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>选定了存储目录后，storage文件生一个fileid，将fileid二进制串进行base64编码，转换为可打印的字符串。</p>
+<p>选择两级目录，默认每个存储目录下有两级子目录，分别是00~FF，共256*256个子目录，storage<strong>选择两级目录的规则</strong>可以在storage.conf配置文件中配置，具体配置项如下：</p>
+<pre class="line-numbers language-C++"><code class="language-C++"># 选择文件存储的路径
+# 0: 轮询（默认）
+# 1: 随机，通过hash分布
+file_distribute_path_mode=0
+# 当选择了轮询方式，存储路径从00/00开始，目录下的文件数到达这个值（默认100），
+# 就换下一个目录00/01，依次直到FF/FF
+file_distribute_rotate_count=100
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>选择了目录后，将文件以fileId为文件名存储到该子目录下。</p>
+<p>存储文件，client客户端调用 tcpsendfile_ex 上传文件，本质是调用 sendfile 发送（sendfile函数在两个文件描述符之间传递数据（完全在内核中操作），从而避免了内核缓冲区和用户缓冲区之间的数据拷贝，效率很高，被称为零拷贝。）开始发送真正的文件内容。</p>
+</li>
+<li><p>上传成功，返回访问路径：最后通过storage_upload_file_done_callback 返回。Storage将文件写入磁盘后，返回客户端文件的路径和文件名。</p>
+</li>
+</ol>
+<h3 id="秒传"><a href="#秒传" class="headerlink" title="秒传"></a>秒传</h3><p>上传文件，服务器会先做MD5校验，如果服务器上有一样的文件，就不会进行存储，只是引用计数加1。然后直接返回给你个新地址，其实你下载的都是服务器上的同一个文件。，</p>
+<ul>
+<li><p>秒传核心逻辑</p>
+<ol>
+<li><p>利用redis的set方法存放文件上传状态，其中key为文件上传的md5，value为是否上传完成的标志位。</p>
+</li>
+<li><p>当标志位true为上传已经完成，此时如果有相同文件上传，则进入秒传逻辑。如果标志位为false，则说明还没上传完成，此时继续上传文件。</p>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="分片上传"><a href="#分片上传" class="headerlink" title="分片上传"></a>分片上传</h3><p>将所要上传的文件，按照一定的大小，分隔成多个数据块（Part）进行上传，上传完之后再由服务端对所有的上传文件进行汇总整合成原始文件。</p>
+<ul>
+<li>应用场景<ol>
+<li><p>大文件上传：大文件上传一般采用分片上传的方式，这样可以提高文件上传的速度。 但<strong>fastdfs不支持多线程分片上传同一个文件</strong></p>
+<p>前端拿到文件流后根据预先设置好的切片最大数量将文件切分为一个个切片(包含块大小和序号)，核心是<code>利用 Blob.prototype.slice</code> 方法，它和数组的 slice 方法相似，调用的 slice 方法可以返回<code>原文件的某个切片</code>。然后与后端进行通讯传输，一般还会结合断点继传。</p>
+<p>服务端负责获取已经上传的分片信息、接受这些切片，并在接收到所有切片后<code>合并</code>切片</p>
+<blockquote>
+<p>何时合并切片，即切片什么时候传输完成：前端在每个切片中都携带了切片序号信息，当服务端接受到这个数量的切片时自动合并</p>
+<p>如何合并切片：使用 <code>api/merge</code>，它可以同步地将数据追加到指定文件，也就是说，当服务端接受到所有切片后，先创建一个最终的文件，然后将所有切片逐步合并到这个文件中</p>
+</blockquote>
+</li>
+<li><p>网络环境环境不好，存在需要重传风险的场景</p>
+</li>
+</ol>
+</li>
+</ul>
+<p><img src="https://s2.loli.net/2023/05/21/WBPEsa76DhN2G93.jpg" alt="分片长传"></p>
+<h3 id="断点续传"><a href="#断点续传" class="headerlink" title="断点续传"></a>断点续传</h3><p> fastdfs支持断点续传。假如在上传切块的过程中因断网、页面崩溃等原因导致上传过程被迫中断，这时其实服务端已经储存了部分切块数据，下次再次上传该文件时我们可以不再重复上传已经保存好的切块，而只上传服务端没有的切块，这样就避免了重复上传的麻烦，这就是断点续传。要实现断点续传我们在上传之前需要知道服务端已经储存了哪些切块，可以先发送一个<code>/api/check</code> 请求来进行检查，让服务端告诉前端当前文件是否上传过，是否上传完成，如果没上传完成，上传到第几个切块了。然后通过追加的方式(upload_appeder_file接口)实现断点续传。</p>
+<p> 整体思路比较简单，拿到文件，保存文件MD5，切割文件，分段上传，每次上传一段，根据MD5判断文件上传进度，直到文件的全部片段上传完毕</p>
+<p><img src="https://s2.loli.net/2023/05/21/hxHudKT3JrlsoaL.png" alt="断点续传"></p>
+<h3 id="文件下载"><a href="#文件下载" class="headerlink" title="文件下载"></a>文件下载</h3><p><img src="https://s2.loli.net/2023/05/21/uUt35vO9QNfspCA.jpg" alt="FastDFS存储原理文件下载1"></p>
+<p><img src="https://s2.loli.net/2023/05/21/pD5wGJ6kNnBYi9O.jpg" alt="FastDFS存储原理文件下载2"></p>
+<p><img src="https://s2.loli.net/2023/05/21/fznGgKT8y5csJDO.jpg" alt="FastDFS存储原理文件下载3"></p>
+<h2 id="FastDFS文件同步"><a href="#FastDFS文件同步" class="headerlink" title="FastDFS文件同步"></a>FastDFS文件同步</h2><p>storage server目录及文件结构</p>
+<pre class="line-numbers language-C++"><code class="language-C++">|__data
+|     |__.data_init_flag：当前storage server初始化信息
+|     |__storage_stat.dat：当前storage server统计信息
+|     |__sync：存放数据同步相关文件
+|     |     |__binlog.index：当前的binlog（更新操作日志）文件索引号
+|     |     |__binlog.###：存放更新操作记录（日志）
+|     |     |__${ip_addr}_${port}.mark：存放向目标服务器同步的完成情况，比如
+|     |                                 114.215.169.66_23000.mark
+|     |__一级目录：256个存放数据文件的目录，目录名为十六进制字符，如：00, 1F
+|         |__二级目录：256个存放数据文件的目录，目录名为十六进制字符，如：0A, CF
+|__logs
+    |__storaged.log：storage server日志文件
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li><p>binlog格式</p>
+<p>binglog文件，文件大小最大1G，超过1G，会重新写下个文件，同时更新。<strong>FastDFS文件同步采用binlog异步复制方式。</strong>storage server使用binlog文件记录文件上传、删除等操作，根据binlog进行文件同步。binlog中只记录文件ID和操作，不记录文件内容。下面给出几行binlog文件内容示例：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">1646123002 C M00/00/00/oYYBAF285cOIHiVCAACI-7zX1qUAAAAVgAACC8AAIkT490.txt
+1646123047 c M00/00/00/oYYBAF285luIK8jCAAAJeheau6AAAAAVgABI-cAAAmS021.xml
+1646123193 A M00/00/00/rBMYd2IaLXqASSVXAAAHuj79dAY65.txt 6 6
+1646123561 d M00/00/00/oYYBAF285luIK8jCAAAJeheau6AAAAAVgABI-cAAAmS021.xml
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>从上面可以看到，binlog文件有三列，依次为：<br>时间戳<br>操作类型<br>文件ID（不带group名称）<br>    Storage_id（ip的数值型）<br>    timestamp（创建时间）<br>    file_size（若原始值为32位则前面加入一个随机值填充，最终为64位）<br>    crc32（文件内容的检验码）<br>文件操作类型采用单个字母编码，其中源头操作用大写字母表示，被同步的操作为对应的小写字母。源表示客户端直接操作的那个Storage即为源，，其他的Storage都为副本。</p>
+</li>
+<li><p>mark文件内容示例：</p>
+<pre class="line-numbers language-C++"><code class="language-C++">binlog_index=0 //binlog索引id 表示上次同步给114.215.169.66机器的最后一条binlog文件
+索引
+binlog_offset=3944 //当前时间binlog 大小 表示上次同步给114.215.169.66机器的最后一条binlog偏移量，若程序重启了，也只要从这个位置开始向后同步即可。
+need_sync_old=1 //是否需要同步老数据
+sync_old_done=1 //是否同步完成
+until_timestamp=1621667115 //同步已有数据文件的截至时间
+scan_row_count=68 //扫描记录数
+sync_row_count=53 //同步记录数
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>Binlog同步过程</p>
+<p>在FastDFS之中，每个Storage之间的同步都是由一个独立线程负责的，该线程中的所有操作都是以同步方式执行的。</p>
+<ol>
+<li><p>获取组内的其他Storage信息 ，并启动同步线程：<br>在Storage.conf配置文件中，只配置了Tracker的IP地址，并没有配置组内其他的Storage。因此同组<br>的其他Storage必须从Tracker获取。具体过程如下：<br>1）Storage启动时为每一个配置的Tracker启动一个线程负责与该Tracker的通讯。<br>2）默认每间隔30秒，与Tracker发送一次心跳包，在心跳包的回复中，将会有该组内的其他Storage<br>信息。<br>3）Storage获取到同组的其他Storage信息之后，为组内的每个其他Storage开启一个线程负责同步。</p>
+</li>
+<li><p>每个同步线程负责到一台Storage的同步，以阻塞方式进行。</p>
+<p>1）打开对应Storage的mark文件，从中读取binlog_index、binlog_offset两个字段值。<br>2）进入一个while循环，尝试着读取一行，若读取不到则睡眠等待。若读取到一行，并且该行的操作方式为源操作（大写的），则将该行指定的操作同步给对方（非源操作不需要同步），同步成功后更新binlog_offset标志，该值会定期写入到mark文件之中。</p>
+</li>
+</ol>
+</li>
+<li><p>同步前删除：假如同步较为缓慢，那么有可能在开始同步一个文件之前，该文件已经被客户端删除，此时同步线程将打印一条日志，然后直接接着处理后面的Binlog。</p>
+</li>
+<li><p>Storage的最后最早被同步时间：例如：一组内有Storage-A、Storage-B、Storage-C三台机器。对于A这台机器来说，B与C机器都会同步Binlog（包括文件）给他，A在接收同步时会记录每台机器同步给他的最后时间（也就是Binlog中的第一个字段timpstamp）。比如B最后同步给A的Binlog-timestamp为100，C最后同步给A的Binlog-timestamp为200，那么A机器的最后最早被同步时间就为100.Storage会定期将每台机器同步给他的最后时间告诉给Tracker，Tracker在客户端要下载一个文件时，需要判断一个Storage是否有该文件，只要解析文件的创建时间，然后与该值作比较，若该值大于创建创建时间，说明该Storage存在这个文件，可以从其下载。</p>
+</li>
+<li><p>新增节点同步流程</p>
+<p><img src="https://s2.loli.net/2023/05/21/RGVMOuk8iAYBL6Z.jpg" alt="FastDFS同步机制分析"></p>
+<p>同组内的storage server之间是对等的，文件上传、删除等操作可以在任意一台storage server上进行。文件同步只在同组内的storage server之间进行，文件同步采用增量(push)方式，记录已同步的位置到mark文件中。即源头服务器同步给本组的其他存储服务器。<strong>对于同组的其他storage server，一台storage server分别启动一个线程进行文件同步。源头数据才需要同步，备份数据不需要再次同步，否则就构成环路了，源数据和备份数据区分是用binlog的操作类型来区分，操作类型是大写字母，表示源数据，小写字母表示备份数据；当先新增加一台storage server时，由已有的一台storage server将已有的所有数据（包括源头数据和备份数据）同步给该新增服务器。</strong></p>
+</li>
+</ul>
+<h2 id="小文件存储优化"><a href="#小文件存储优化" class="headerlink" title="小文件存储优化"></a>小文件存储优化</h2><p>通常我们认为大小在1MB以内的文件称为小文件，百万级数量及以上称为海量，由此量化定义海量小文件问题</p>
+<p>小文件主要有2个问题：</p>
+<ol>
+<li>如果小文件都小于&lt;1KB，Linux通过node存储文件信息，系统初始化的时候每2K设置一个node，则此时一个文件还是至少占用2K的空间**(对齐原则)，最后导致磁盘空间利用率不高。**</li>
+<li>大量的小文件，导致在增加、查找、删除文件的时候需要<strong>遍历过多的node节点，影响效率。</strong></li>
+</ol>
+<p>FastDFS支持小文件存储，相关的配置在tracker.conf中。需要注意slot_max_size 的大小，这样才知道多大的文件触发小文件存储机制。</p>
+<p>向FastDFS上传文件成功时，服务器返回该文件的存取ID叫做fileid，当没有启动合并存储时该fileid和磁盘上实际存储的文件一一对应，当采用合并存储时就不再一一对应而是多个fileid对应的文件被存储成一个大文件Trunk。<br>注意区分三个概念：<br>1）Trunk文件：storage服务器磁盘上存储的实际文件，默认大小为64MB<br>2）合并存储文件的FileId：表示服务器启用合并存储后，每次上传返回给客户端的FileId，注意此时该FileId与磁盘上的文件没有一一对应关系；<br>3）没有合并存储的FileId：表示服务器未启用合并存储时，Upload时返回的FileID</p>
+<p>在启动小文件存储时服务返回给客户端的fileid有变化</p>
+<p><img src="https://s2.loli.net/2023/05/21/AsCWqoxXpBnmJeO.jpg" alt="小文件存储时fileid变化.jpg"></p>
+<p>trunk内部是由多个小文件组成，每个小文件都会有一个trunkHeader，以及紧跟在其后的真实数据，Trunk文件64MB（默认），因此每次创建一次Trunk文件总是会产生空余空间，比如为存储一个10MB文件，创建一个Trunk文件，那么就会剩下接近54MB的空间（TrunkHeader 24字节，后面为了方便叙述暂时忽略其所占空间），下次要想再次存储10MB文件时就不需要创建新的文件，存储在已经创建的Trunk文件中即可。另外当删除一个存储的文件时，也会产生空余空间。每次创建一个trunk文件时，是按照既定的文件大小去创建该文件trunk_file_size，当要删除trunk文件时，需要该trunk文件没有存储小文件才能删除。</p>
+<p>小文件存储平衡树：在Storage内部会为每个store_path构造一颗以空闲块大小作为关键字的空闲平衡树，相同大小的空闲块保存在链表之中。每当需要存储一个文件时会首先到空闲平衡树中查找大于并且最接近的空闲块，然后试着从该空闲块中分割出多余的部分作为一个新的空闲块，加入到空闲平衡树中。例如：要求存储文件为300KB，通过空闲平衡树找到一个350KB的空闲块，那么就会将350KB的空闲块分裂成两块，前面300KB返回用于存储，后面50KB则继续放置到空闲平衡树之中。假若此时找不到可满足的空闲块，那么就会创建一个新的trunk文件(64MB)，将其加入到空闲平衡树之中，再次执行上面的查找操作（此时总是能够满足了）</p>
+<h2 id="性能测试"><a href="#性能测试" class="headerlink" title="性能测试"></a>性能测试</h2><p>QPS：Queries Per Second意思是“每秒查询率”，是一台服务器每秒能够响应的查询次数，是对一个特定的查询服务器在规定时间内所处理流量多少的衡量标准。QPS(TPS)&#x3D; 并发数&#x2F;平均响应时间</p>
+<p>并发数：并发数是指系统同时能处理的请求数量，这个也是反应了系统的负载能力。</p>
+<p>该项目的并发是多少？</p>
+<p>这个是根服务器的性能有关，写如磁盘的速度，文件的大小等等。自己测试的话上传5k大小的文件5000次，平均每次耗时0.05ms，QPS能达到2万。回答需要根据实际情况去回答，影响因素：</p>
+<ul>
+<li><p>网络带宽 ：</p>
+<blockquote>
+<p>1000Mb &#x3D; 100 MB 不能直接除以8，传输的包还需要把包头啥的算进去。</p>
+</blockquote>
+</li>
+<li><p>磁盘读写性能 : 需要1秒写入多少， 写入的次数。</p>
+<blockquote>
+<p>机械硬盘 200MB<br>固态硬盘 500MB</p>
+</blockquote>
+</li>
+<li><p>同组storage的个数：</p>
+<blockquote>
+<p>Storage越多,并发量越高 ，例如4 个storage</p>
+</blockquote>
+</li>
+<li><p>传输文件的大小 ： 文件越大，理论并发量就越小</p>
+<blockquote>
+<p>5K 100M&#x2F;5K &#x3D; 20480 * 4<br>50K &#x3D; 2048 * 4<br>500K &#x3D; 208 * 4<br>然后小文件存储多的时候，也需要考虑fastdfs 存储做的处理时间，实际值可能会更小。</p>
+</blockquote>
+</li>
+</ul>
+<p>提高并发写的能力：（上传文件）</p>
+<blockquote>
+<p>需要扩展group的数量，而不是storage的数量(storage只做同步)。<br>增加带宽<br>使用读写性能高的磁盘</p>
+</blockquote>
+<p>提高写的能力（下载文件）</p>
+<blockquote>
+<p>增加storage<br>增加group<br>增加带宽<br>使用读写性能高的磁盘</p>
+</blockquote>
+<h2 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h2><h3 id="正向代理和反向代理的区别"><a href="#正向代理和反向代理的区别" class="headerlink" title="正向代理和反向代理的区别"></a>正向代理和反向代理的区别</h3><p>正向代理：正向代理类似一个跳板机，代理访问外部资源。比如我们国内访问谷歌，直接访问访问不到，我们可以通过一个正向代理服务器，请求发到代理服，代理服务器能够访问谷歌，这样由代理去谷歌取到返回数据，再返回给我们，这样我们就能访问谷歌了。<strong>客服端知道真正的服务器，但访问不到，通过中间服务器去访问，真正的服务器不知道真正的客服端</strong></p>
+<p><img src="https://s2.loli.net/2023/05/21/SeAinfUI6FXcaGm.jpg" alt="反向代理"></p>
+<p>反向代理：实际运行方式是指以代理服务器来接受internet上的连接请求，然后将请求转发给内部网络上的服务器，并将从服务器上得到的结果返回给internet上请求连接的客户端，此时代理服务器对外就表现为一个服务器。<strong>客户端不知道真正提供服务的服务器，只和中间服务器通信</strong></p>
+<p><img src="https://s2.loli.net/2023/05/21/SeAinfUI6FXcaGm.jpg" alt="反向代理.jpg"></p>
+<h3 id="转发和重定向的区别"><a href="#转发和重定向的区别" class="headerlink" title="转发和重定向的区别"></a>转发和重定向的区别</h3><p><img src="https://s2.loli.net/2023/05/21/jbmK5pISY7CV1hG.jpg" alt="重定向.jpg"></p>
+<p><img src="https://s2.loli.net/2023/05/21/uhMF7DwOe49N2v8.jpg" alt="代理"></p>
+<p><strong>项目中的设计模式</strong></p>
+<p>在日志中，使用单例模式可以避免多个日志实例导致的冲突和资源浪费，同时还可以提高代码的可维护性和可扩展性。例如，可以使用单例模式来确保日志对象在整个应用程序中的唯一性，并使得所有的模块都可以通过该实例记录日志，从而提高代码的可读性和可维护性。在实现日志单例时，需要注意线程安全和并发性。</p>
+<p><strong>项目中的图片数据结构</strong></p>
+<p>Base64是一种编码方式，可以将二进制数据转换成ASCII字符，可以使用Base64来对图片进行编码和解码。编码时将其二进制数据进行Base64编码，然后将编码后的文本作为字符串传输。解码时可以将Base64编码后的字符串读入内存，然后使用Base64库将其解码为二进制数据。</p>
+<p>需要注意的是，使用Base64编码会增加数据的大小，因为每3个字节的二进制数据会被编码成4个字节的文本数据。将图片转换为字符串的<strong>主要目的是为了便于传输和处理</strong>。但是，字符串存储需要消耗更多的存储空间和计算资源，同时也可能会降低程序的性能和效率。所以将图片以字符串的形式存储，并不是一种常见的方法。常见的是使用RGB多维数组进行存储。</p>
+<h2 id="针对分布式文件系统FastDFS问题的理解"><a href="#针对分布式文件系统FastDFS问题的理解" class="headerlink" title="针对分布式文件系统FastDFS问题的理解"></a>针对分布式文件系统FastDFS问题的理解</h2><p>如何防止盗链</p>
+<blockquote>
+<p>防盗链（Hotlinking Protection）是一种针对图片、音视频等网络资源的保护措施，用于防止其他网站或者非法用户盗用自己网站上的资源，从而减少流量消耗和维护网站的安全性。</p>
+<p> Fastdfs采⽤token的⽅式实现防盗链, 该⽅式要求下载地址带上token，且token具有时效性(由ts参数指明);</p>
+</blockquote>
+<p>FastDFS如何应对单点故障</p>
+<blockquote>
+<p>如果storage的某个磁盘坏了，会换一个新的磁盘，配置好之后，会自动进行备份其他storage的数据。</p>
+</blockquote>
+<p>如何实现负载均衡？</p>
+<blockquote>
+<p>读写分离，可以进行一个轮询，一个storage在读或者在写的时候，下一次应该尽量用另外的storage</p>
+</blockquote>
+<p>上传文件内容一样的话，是秒传的，服务器会不会重复存储。</p>
+<blockquote>
+<p>这个根据程序中写的，如果是根据文件内容生成的md5，则不同文件名但内容一样的话，生成的md5是一样的，服务器会将该文件内容引用量加1，删除的时候会减1；如果是根据文件名加上文件内容生成的md5，就需要两者都相同才能生成相同的md5，之后传输就是秒传，过程和上面的一样。</p>
+</blockquote>
+<p>Fastdfs单机就是单集群的，在不同地区可以进行数据备份嘛？</p>
+<blockquote>
+<p>是不能的，目前还做不到，只是跟上面的一样，同一个group是一样的数据，不同地区的话，不在一个group数据是不一样的。</p>
+</blockquote>
+<p>用密码验证和用token验证有什么区别？</p>
+<blockquote>
+<p>密码：一直存在，会在（mysql）数据库（持久化）里面；读密码时候会读mysql。用密码登陆的时候，就会返回token。<br>token： 是临时的，比如24小时过期。一般存在redis中，redis可以设置过期时间。</p>
+</blockquote>
+<p>项目中是根据文件内容生成的md5值？那么文件名不一样，内容一样的话，是怎么存储的？</p>
+<blockquote>
+<p>在redis 中是根据md5值加上文件名生成的key值<br>在mysql中是md5值是一样的，文件名不一样，所以生成的url 是一样的，数量改变成了2个。<br>目前这个项目中的md5一样的，只保存一份。文件名在一个表（保证名字），存储的在另一个表（只保证文件内容，不保证名字），生成的url在存储的表中，所以只用存储一份就行了，不用重复存储。</p>
+</blockquote>
+<p>生成token 的流程</p>
+<blockquote>
+<p>在login_cgi.c中，连接redis（后续保存在redis中），产生随机数，根据des加密，然后用base64进行加密（这里是因为在互联网中发送127字节容易截断，所以用base64进行加密，加密后比原先的长1&#x2F;3），最后用md5加密生成token，这样做的目的是为了保证token 的唯一性。</p>
+</blockquote>
+<p>此项目有什么缺点？</p>
+<blockquote>
+<p>很多人同时传大文件，存储空间和性能会影响到并发，<br>所以一般用fastdfs 的是一些图片和小视频，写这个框架的作者也说这个框架只适合中小文件，500MB以内的文件<br>上传文件的流程是先保存到本地，然后保存在fastdfs里面，因为里面用的是调用的是fdfs_client应用程序，需要指定存储路径和文件<br>如果项目中是读多写少，可以通过增加storage 机器的数量来满足，一个group挂载多个机器，提高整个系统的并发量。</p>
+</blockquote>
+<p>fastdfs为什么没有存源文件名</p>
+<blockquote>
+<p>Fastdfs是根据file_id + 其他表中存储的file_name拼接成的完整的下载url，这两个表是根据md5关联的。源码就是不存储文件名的。</p>
+</blockquote>
+<p>fastdfs 在传输文件时候零拷贝是怎么实现的（特性）</p>
+<blockquote>
+<p>一般读文件是先读到内存然后发到网络里面去；直接通过sendfile ，零拷贝的方式发送过去，顶层直接访问socket发送数据。</p>
+</blockquote>
+<p>fastdfs在发送大文件，如果中途没发送完就失败了，这个怎么解决？</p>
+<blockquote>
+<p>发送比较大的文件，适合用追加的方式发送</p>
+</blockquote>
+<p>已经存在两个storage了，然后加入第三个storage，那谁同步给第三个storage</p>
+<blockquote>
+<p>新加入一个机器，这时候两个storage都会向tracker请求向新的机器同步<br>Tracker会选择其中一个作为同步源，选中哪一个就会返回哪一个的ip<br>选中ip机器就作为天选之子，开始同步；<br>另外的机器因为返回源ip不是自己就会等待新的storage C 状态为Active时，在去同步备份数据；<br>这里有两种规则： 1. 常规： 只推送大写源操作； 2. 新加入： 推送大写源操作 + 小写备份操作。这里新加入机器属于第2中操作。</p>
+</blockquote>
+<p> 已有A、B、C三个storage， 我现在上传一个文件到A，然后有一个下载请求，会不会出现从B下载，但此时B没有同步文件，导致下载失败？</p>
+<blockquote>
+<p>不会的，file_id有时间戳，下载的时候会去匹配各个storage的同步时间戳，如果B还没有做同步，则时间戳是小于file_id 的时间戳，这样就不会选择B</p>
+</blockquote>
+<p>开启了小文件存储，你的阈值是多少？</p>
+<blockquote>
+<p>在配置tracker文件中，源码中默认值是16MB，但是作者是写的是1MB，具体多少，这个需要根据自己项目中的实际情况。面试可以直接说16MB。许多小文件合并成一个大文件的大小是64MB。<br>小文件（&lt;16MB）存储是没有独立的文件名的，(&gt;16MB)文件存储是拥有独立的hash文件名</p>
+</blockquote>
+<p>fastdfs只允许唯一文件上传的原理</p>
+<blockquote>
+<p>通常做法是 1. 在客户端进行校验md5 2. 结合mysql + redis 。<br>上面是需要在storage中的配置文件中设置，相当于索引信息，如果不设置，两份相同文件就会存储两份；如果开启，第二个相同文件上传的时候就会在数据库中检查是否有相同的md5值，数据库中有此md5，就不会进行存储，只用引用计数加1。</p>
+</blockquote>
+<p>Storage是如何分组的？</p>
+<blockquote>
+<p>Storage是支持水平扩展的，只需要一组一组的扩充就行了。同一个group中不同机器是备份的数据，可以做到读写分离。如果只有一台机器是storage，那么当这台机器出现故障 时会影响整个系统都不能存储和访问文件，所以需要再另一台机器上也有同样的storage(不同的group在同一台机器上的不同位置，而统一group里的storage在不同机器上)</p>
+</blockquote>
+<p>不同的group里的storage能否做到同步</p>
+<blockquote>
+<p>不同的group的数据是不一样的，同一个group中所有storage的数据是一样。</p>
+</blockquote>
+<p>fastdfs优化策略 </p>
+<blockquote>
+<p>最⼤并发连接数设置：max_connections，默认1024 </p>
+<p>说明：FastDFS采⽤预先分配好buffer队列的做法，分配的内存⼤⼩为： max_connections * buff_size，每个连接的task 缓存是256K，1024 * 256 &#x3D; 256M。因此配置的连接数越⼤，消耗的内存越多。不建议配置得过⼤，以避免⽆谓的内存开销。这里的1024，指的是连接客户端的数量，如果有1024这样的连接客户端在传输文件被占用后，后面就连接不上了，需要等待这1024的客户端传输完成后释放资源在去连接</p>
+<p>⼯作线程数设置： work_threads （⽹络IO的⼯作线程数量） 默认4 </p>
+<p>说明：为了避免CPU上下⽂切换的开销，以及不必要的资源消耗，不建议将本参数设置得过⼤。为了发挥出多个CPU的效能，系统中的线程数总和，应等于CPU总数。</p>
+</blockquote>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">HL</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://haolei56.github.io/2023/052142674.html">http://haolei56.github.io/2023/052142674.html</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">HL</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/C-Project/">
+                                    <span class="chip bg-color">C++ Project</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2023/052152496.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="241. 为运算表达式设计优先级">
+                        
+                        <span class="card-title">241. 为运算表达式设计优先级</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-05-21
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Algorithm/" class="post-category">
+                                    Algorithm
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Recursion/">
+                        <span class="chip bg-color">Recursion</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/052126432.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="C++后台及服务器开发技术">
+                        
+                        <span class="card-title">C++后台及服务器开发技术</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-05-21
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/C/" class="post-category">
+                                    C++
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/C/">
+                        <span class="chip bg-color">C++</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2022-2023</span>
+            
+            <a href="/about" target="_blank">HL</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:n_056haolei@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1559823213" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1559823213" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+     <!--樱花效果-->
+    <script type="text/javascript">
+    //只在桌面版网页启用特效
+    var windowWidth = $(window).width();
+    if (windowWidth > 768) {
+        document.write('<script type="text/javascript" src="/js/sakura.js"><\/script>');
+    }
+    </script>
+</body>
+
+</html>

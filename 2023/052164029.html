@@ -1,0 +1,1690 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="C++11新特性, 朝暮惜">
+    <meta name="description" content="智能指针使用普通指针，容易造成堆内存泄露（忘记释放），二次释放，程序发生异常时内存泄露等问题，使用智能指针能更好的管理堆内存。C++里面的四个智能指针: auto_ptr,unique_ptr,shared_ptr, weak_ptr其中后">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', '');
+</script>
+
+
+    <title>C++11新特性 | 朝暮惜</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="朝暮惜" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">朝暮惜</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">朝暮惜</div>
+        <div class="logo-desc">
+            
+            活到老，学到老
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/19.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">C++11新特性</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/C-11/">
+                                <span class="chip bg-color">C++11</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/C/" class="post-category">
+                                C++
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-05-21
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2023-05-21
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    747
+                </div>
+                
+
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+        <!-- 代码块折行 -->
+        <style type="text/css">
+            code[class*="language-"], pre[class*="language-"] { white-space: pre-wrap !important; }
+        </style>
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="智能指针"><a href="#智能指针" class="headerlink" title="智能指针"></a>智能指针</h2><p>使用普通指针，容易造成堆内存泄露（忘记释放），二次释放，程序发生异常时内存泄露等问题，使用智能指针能更好的管理堆内存。<br>C++里面的四个智能指针: auto_ptr,unique_ptr,shared_ptr, weak_ptr其中后三个是C++11支持，并且第一个已经被C++11弃用。</p>
+<h3 id="shared-ptr"><a href="#shared-ptr" class="headerlink" title="shared_ptr"></a>shared_ptr</h3><p>使用引用计数，每一个shared_ptr的拷贝都指向相同的内存。再最后一个shared_ptr析构的时候，内存才会被释放。shared_ptr实现包含了两部分：</p>
+<ol>
+<li>一个指向堆上创建的对象的裸指针，raw_ptr</li>
+<li>一个指向内部隐藏的、共享的管理对象。share_count_object<br>use_count，可查看当前这个堆上对象被多少对象引用了，简单来说就是引用计数。</li>
+</ol>
+<ul>
+<li><p>基本用法：</p>
+<ol>
+<li><p>初始化</p>
+<pre class="line-numbers language-C++"><code class="language-C++">std::shared_ptr<int> p1(new int(1));
+
+//不能将一个原始指针直接赋值给一个智能指针。
+std::shared_ptr<int> p = new int(1)；//错误
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>对于一个未初始化的智能指针，可以通过reset方法来初始化，当智能指针有值的时候调用reset会引起引用计数减1。</p>
+<pre class="line-numbers language-C++"><code class="language-C++">std::shared_ptr<int> p3;
+p3.reset(new int(1));
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>我们应该优先使用make_shared来构造智能指针，因为他更高效。</p>
+<pre class="line-numbers language-C++"><code class="language-C++">auto sp1 = make_shared<int>(100);//相当于shared_ptr<int> sp1(new int(100));
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p>获取原始指针<br>当需要获取原始指针时，可以通过get方法来返回原始指针，谨慎使用p.get()的返回值，如果你不知道其危险性则永远不要调用get()函数。</p>
+<pre class="line-numbers language-C++"><code class="language-C++">std::shared_ptr<int> ptr(new int(1));
+int *p = ptr.get(); //尽量不要使用
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+<li><p>指定删除器<br>如果用shared_ptr管理非new对象或是没有析构函数的类时，应当为其传递合适的删除器。</p>
+<p>当我们用shared_ptr管理动态数组时，需要指定删除器，因为shared_ptr的默认删除器不支持数组对象，删除器可以是一个lambda表达式，代码如下所示：</p>
+<pre class="line-numbers language-C++"><code class="language-C++">std::shared_ptr<int> p3(new int[10], [](int *p) { delete [] p;});
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+</ol>
+</li>
+<li><p>使用shared_ptr要注意的问题</p>
+<ol>
+<li><p>不要用一个原始指针初始化多个shared_ptr</p>
+<pre class="line-numbers language-C++"><code class="language-C++">int *ptr = new int;
+shared_ptr<int> p1(ptr);
+shared_ptr<int> p2(ptr); // 逻辑错误
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>不要在函数实参中创建shared_ptr。因为C++的函数参数的计算顺序在不同的编译器不同的约定下可能是不一样的，一般是从右到左，但也可能从左到右，所以，可能的过程是先new int，然后调用g()，如果恰好g()发生异常，而shared_ptr还没有创建， 则int内存泄漏了，正确的写法应该是先创建智能指针</p>
+</li>
+</ol>
+<pre class="line-numbers language-C++"><code class="language-C++">  function(shared_ptr<int>(new int), g()); //有缺陷
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<ol start="3">
+<li>通过shared_from_this()返回this指针。不要将this指针作为shared_ptr返回出来，因为this指针本质上是一个裸指针，因此，这样可能会导致重复析构，看下面的例子。</li>
+</ol>
+<pre class="line-numbers language-C++"><code class="language-C++">  //1-1-shared_from_this2
+  #include <iostream>
+  #include <memory>
+  using namespace std;
+  class A{
+  public:
+      shared_ptr<A> GetSelf(){
+          return shared_ptr<A>(this); // 不要这么做
+      }
+      ~A(){
+          cout << "Deconstruction A" << endl;
+      }
+  };
+  int main(){
+      shared_ptr<A> sp1(new A);
+      shared_ptr<A> sp2 = sp1->GetSelf();
+      return 0;
+  }
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>  在这个例子中，由于用同一个指针（this)构造了两个智能指针sp1和sp2，而他们之间是没有任何关系的，在离开作用域之后this将会被构造的两个智能指针各自析构，导致重复析构的错误。<br>  正确返回this的shared_ptr的做法是：让目标类通过std::enable_shared_from_this类，然后使用基类的成员函数shared_from_this()来返回this的shared_ptr，如下所示。</p>
+<pre class="line-numbers language-C++"><code class="language-C++">  #include <iostream>
+  #include <memory>
+  using namespace std;
+  class A: public std::enable_shared_from_this<A>{
+  public:
+      shared_ptr<A>GetSelf(){
+          return shared_from_this(); //
+      }
+      ~A(){
+          cout << "Deconstruction A" << endl;
+      }
+  };
+  int main(){
+      shared_ptr<A> sp1(new A);
+      shared_ptr<A> sp2 = sp1->GetSelf(); // ok
+      return 0;
+  }
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ol start="4">
+<li><p>避免循环引用。循环引用会导致内存泄漏</p>
+<pre class="line-numbers language-C++"><code class="language-C++">// 1-1-cycle-shared-ptr
+#include <iostream>
+#include <memory>
+using namespace std;
+class A;
+class B;
+class A {
+public:
+    std::shared_ptr<B> bptr;
+    ~A() {
+        cout << "A is deleted" << endl;
+    }
+};
+class B {
+public:
+    std::shared_ptr<A> aptr;
+    ~B() {
+        cout << "B is deleted" << endl;
+    }
+};
+int main()
+{
+    {
+        std::shared_ptr<A> ap(new A);
+        std::shared_ptr<B> bp(new B);
+        ap->bptr = bp;
+        bp->aptr = ap;
+    }
+    cout<< "main leave" << endl; // 循环引用导致ap bp退出了作用域都没有析构
+    return 0;
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>循环引用导致ap和bp的引用计数为2，在离开作用域之后，ap和bp的引用计数减为1，并不回减为0，导致两个指针都不会被析构，产生内存泄漏。解决的办法是把A和B任何一个成员变量改为weak_ptr。</p>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="unique-ptr"><a href="#unique-ptr" class="headerlink" title="unique_ptr"></a>unique_ptr</h3><p>unique_ptr是一个独占型的智能指针，它不允许其他的智能指针共享其内部的指针，不允许通过赋值将一个unique_ptr赋值给另一个unique_ptr。unique_ptr不允许复制，但可以通过函数返回给其他的unique_ptr，还可以通过std::move来转移到其他的unique_ptr，这样它本身就不再拥有原来指针的所有权了。</p>
+<pre class="line-numbers language-C++"><code class="language-C++">unique_ptr<T> my_ptr(new T);
+unique_ptr<T> my_other_ptr = my_ptr; // 报错，不能复制
+unique_ptr<T> my_other_ptr = std::move(my_ptr); // 正确
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>除了unique_ptr的独占性， unique_ptr和shared_ptr还有一些区别，比如<br>unique_ptr可以指向一个数组</p>
+<pre class="line-numbers language-C++"><code class="language-C++">std::unique_ptr<int []> ptr(new int[10]);
+ptr[9] = 9;
+std::shared_ptr<int []> ptr2(new int[10]); // 这个是不合法的
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>unique_ptr指定删除器和shared_ptr有区别</p>
+<pre class="line-numbers language-C++"><code class="language-C++">std::shared_ptr<int> ptr3(new int(1), [](int *p){delete p;}); // 正确
+std::unique_ptr<int> ptr4(new int(1), [](int *p){delete p;}); // 错误
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>unique_ptr需要确定删除器的类型，所以不能像shared_ptr那样直接指定删除器，可以这样写：</p>
+<pre class="line-numbers language-C++"><code class="language-C++">std::unique_ptr<int, void(*)(int*)> ptr5(new int(1), [](int *p){delete p;}); //正确
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>关于shared_ptr和unique_ptr的使用场景是要根据实际应用需求来选择。如果希望只有一个智能指针管理资源或者管理数组就用unique_ptr，如果希望多个智能指针管理同一个资源就用shared_ptr。</p>
+<h3 id="weak-ptr"><a href="#weak-ptr" class="headerlink" title="weak_ptr"></a>weak_ptr</h3><p>share_ptr虽然已经很好用了，但是有一点share_ptr智能指针还是有内存泄露的情况，当两个对象相互使用一个shared_ptr成员变量指向对方，会造成循环引用，使引用计数失效，从而导致内存泄漏。<br>weak_ptr 是一种不控制对象生命周期的智能指针, 它指向一个 shared_ptr 管理的对象. 进行该对象的内存管理的是那个强引用的shared_ptr， weak_ptr只是提供了对管理对象的一个访问手段。weak_ptr 设计的目的是为配合 shared_ptr 而引入的一种智能指针来协助 shared_ptr 工作, 它只可以从一个shared_ptr 或另一个 weak_ptr 对象构造, 它的构造和析构不会引起引用记数的增加或减少。weak_ptr是用来解决shared_ptr相互引用时的死锁问题，如果说两个shared_ptr相互引用，那么这两个指针的引用计数永远不可能下降为0，资源永远不会释放。它是对对象的一种弱引用，不会增加对象的引用计数，和shared_ptr之间可以相互转化，shared_ptr可以直接赋值给它，它可以通过调用lock函数来获得shared_ptr。<br>weak_ptr没有重载操作符*和-&gt;，因为它不共享指针，不能操作资源，主要是为了通过shared_ptr获得资源的监测权，它的构造不会增加引用计数，它的析构也不会减少引用计数，纯粹只是作为一个旁观者来监视shared_ptr中管理的资源是否存在。weak_ptr还可以返回this指针和解决循环引用的问题。</p>
+<ul>
+<li><p>基本用法</p>
+<ol>
+<li><p>通过use_count()方法获取当前观察资源的引用计数，通过expired()方法判断所观察资源是否已经释放，通过lock方法获取监视的shared_ptr，如下所示：</p>
+<pre class="line-numbers language-C++"><code class="language-C++">shared_ptr<int> sp(new int(10));
+weak_ptr<int> wp(sp);
+cout << wp.use_count() << endl; //结果讲输出1
+
+
+if(wp.expired())
+cout << "weak_ptr无效,资源已释放";
+else
+cout << "weak_ptr有效";
+
+std::weak_ptr<int> gw;
+void f(){
+    if(gw.expired()) {
+        cout << "gw无效,资源已释放";
+    }
+    else {
+        auto spt = gw.lock();
+        cout << "gw有效, *spt = " << *spt << endl;
+    }
+}
+int main()
+{
+    {
+        auto sp = atd::make_shared<int>(42);
+        gw = sp;
+        f();
+    }
+    f();
+    return 0;
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>weak_ptr返回this指针<br>shared_ptr中提到不能直接将this指针返回shared_ptr，需要通过派生<br>std::enable_shared_from_this类，并通过其方法shared_from_this来返回指针，原因是<br>std::enable_shared_from_this类中有一个weak_ptr，这个weak_ptr用来观察this智能指针，调用shared_from_this()方法是，会调用内部这个weak_ptr的lock()方法，将所观察的shared_ptr返回。</p>
+</li>
+<li><p>weak_ptr解决循环引用问题<br>在shared_ptr提到智能指针循环引用的问题，因为智能指针的循环引用会导致内存泄漏，可以通过weak_ptr解决该问题，只要将A或B的任意一个成员变量改为weak_ptr</p>
+</li>
+<li><p>weak_ptr在使用前需要检查合法性。</p>
+<pre class="line-numbers language-C++"><code class="language-C++">weak_ptr<int> wp;
+{
+shared_ptr<int> sp(new int(1)); //sp.use_count()==1
+wp = sp; //wp不会改变引用计数，所以sp.use_count()==1
+shared_ptr<int> sp_ok = wp.lock(); //wp没有重载->操作符。只能这样取所指向的对象
+}
+shared_ptr<int> sp_null = wp.lock(); //sp_null .use_count()==0;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>因为上述代码中sp和sp_ok离开了作用域，其容纳的K对象已经被释放了。得到了一个容纳NULL指针的sp_null对象。在使用wp前需要调用wp.expired()函数判断一下。因为wp还仍旧存在，虽然引用计数等于0，仍有某处“全局”性的存储块保存着这个计数信息。直到最后一个weak_ptr对象被析构，这块“堆”存储块才能被回收。否则weak_ptr无法直到自己所容纳的那个指针资源的当前状态。</p>
+<p>如果shared_ptr sp_ok和weak_ptr wp;属于同一个作用域呢？如下所示：</p>
+<pre class="line-numbers language-C++"><code class="language-C++">weak_ptr<int> wp;
+shared_ptr<int> sp_ok;
+{
+shared_ptr<int> sp(new int(1)); //sp.use_count()==1
+wp = sp; //wp不会改变引用计数，所以sp.use_count()==1
+sp_ok = wp.lock(); //wp没有重载->操作符。只能这样取所指向的对象
+}
+if(wp.expired()) {
+cout << "shared_ptr is destroy" << endl;
+} else {
+cout << "shared_ptr no destroy" << endl;
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="右值引用-amp-amp"><a href="#右值引用-amp-amp" class="headerlink" title="右值引用&amp;&amp;"></a>右值引用&amp;&amp;</h2><p>右值引用就是对一个右值进行引用的类型。因为右值没有名字，所以我们只能通过引用的方式找到它。无论声明左值引用还是右值引用都必须立即进行初始化，因为引用类型本身并不拥有所把绑定对象的内存，只是该对象的一个别名。</p>
+<p>通过右值引用的声明，该右值又“重获新生”，其生命周期与右值引用类型变量的生命周期一样，只要该变量还活着，该右值临时量将会一直存活下去。</p>
+<p>&amp;&amp; 的总结如下：</p>
+<ol>
+<li><p>左值和右值是独立于它们的类型的，右值引用类型可能是左值也可能是右值。</p>
+</li>
+<li><p>auto&amp;&amp; 或函数参数类型自动推导的 T&amp;&amp; 是一个未定的引用类型，被称为 universal references，它可能是左值引用也可能是右值引用类型，取决于初始化的值类型。</p>
+</li>
+<li><p>所有的右值引用叠加到右值引用上仍然是一个右值引用，其他引用折叠都为左值引 用。当 T&amp;&amp; 为模板参数时，输入左值，它会变成左值引用，而输入右值时则变为具名的右 值引用。</p>
+</li>
+<li><p>编译器会将已命名的右值引用视为左值，而将未命名的右值引用视为右值。</p>
+<pre class="line-numbers language-C++"><code class="language-C++">int &t = a;         // a为左值，所以可以赋给左值引用
+// int &t1 = 3;     // 错误 3为一个临时值，为右值，不能赋给左值引用
+// int &&t = a;     // 错误 a为左值，不能赋给右值引用
+int &&t = 3;        // 可以
+int &&t = -a;       // 可以
+// int &t = -a;     // 不可以
+// int &&t1 = t;    // 不可以，t本身是左值
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+</ol>
+<p>有了右值引用和转移语义(move)，我们在设计和实现类时，对于需要动态申请大量资源的类，应该设计右值引用的拷贝构造函数和赋值函数，以提高应用程序的效率。</p>
+<pre class="line-numbers language-C++"><code class="language-C++">class A
+{
+public:
+    A(size_t N):m_p(new char[N])
+    {
+    }
+    A(const A & a)
+    {
+        if (this != &a)
+        {
+            delete[]m_p;
+            m_p = new char[strlen(m_p) + 1];
+            memcpy(m_p, a.m_p, strlen(m_p) + 1);
+        }
+    }
+    ~A()
+    {
+        delete []m_p;
+    }
+ 
+private:
+    char *m_p = nullptr;
+};
+ 
+A createA(size_t N)
+{
+    return A(100);
+}
+ 
+void func(A a)
+{
+    //
+}
+ 
+int main()
+{
+    func(createA(100));
+ 
+    system("pause");
+    return 0;
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>从上面会有大量得构造、析构调用 ，但是我们做的工作无非就是临时构造一个A(100)给func使用而已。那么可否将临时A(100)始终一份给到func使用呢？答案就是右值引用。如下：</p>
+<pre class="line-numbers language-C++"><code class="language-C++">class A
+{
+public:
+    A(size_t N):m_p(new char[N])
+    {
+    }
+    A(const A & a)
+    {
+        if (this != &a)
+        {
+            delete[]m_p;
+            m_p = new char[strlen(m_p) + 1];
+            memcpy(m_p, a.m_p, strlen(m_p) + 1);
+        }
+    }
+    ~A()
+    {
+        delete []m_p;
+    }
+ 
+private:
+    char *m_p = nullptr;
+};
+ 
+A createA(size_t N)
+{
+    return A(100);
+}
+ 
+void func(A a)
+{
+    //
+}
+ 
+int main()
+{
+    func(createA(100));
+ 
+    system("pause");
+    return 0;
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>将临时A(100)强制转换为了右值引用，同时func形参也是右值引用，也就是将临时对象延长到了func中，中间避免了其他构造和析构调用，提高了效率。注意到将A得拷贝构造函数去掉了，因为已经用不到。如果是第一种写法，去掉拷贝构造函数会崩溃，因为会自动调用默认拷贝构造函数，是浅拷贝，中间临时对象会提前删除公共内存，后面对象再次释放是就会重复删除内存导致崩溃。</p>
+<h2 id="将左值转换为右值（std-move）"><a href="#将左值转换为右值（std-move）" class="headerlink" title="将左值转换为右值（std::move）"></a>将左值转换为右值（std::move）</h2><p>​        右值引用只能绑定右值，那是否可以将右值引用绑定到左值呢？可以，一个很简单的写法就是强制转换，如下：</p>
+<pre class="line-numbers language-C++"><code class="language-C++">int main()
+{
+    int a = 3;
+    int &&t = (int &&)a;
+    t = 9;
+    cout << a << endl;  // a = 9
+ 
+    system("pause");
+    return 0;
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>  其实，C++11提供了更为优雅的转换函数std::move,std::move(a)无论a是左值还是右值都将转换为右值。如下：</p>
+<pre class="line-numbers language-C++"><code class="language-C++">int main()
+{
+    int a = 3;
+    int &&t = std::move(a);
+    int &&t2 = std::move(3);
+ 
+    system("pause");
+    return 0;
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="forward"><a href="#forward" class="headerlink" title="forward"></a>forward</h2><p>完美转发：forward 完美转发实现了参数在传递过程中保持其值属性的功能，即若是左值，则传递之后仍然是左值，若是右值，则传递之后仍然是右值。</p>
+<p>根据前面所描述的，这种引用类型既可以对左值引用，亦可以对右值引用。但要注意，引用以后，这个val值它本质上是一个左值！看下面例子</p>
+<pre class="line-numbers language-C++"><code class="language-C++">int &&a = 10;
+int &&b = a; //错误
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>注意这里，a是一个右值引用，但其本身a也有内存名字，所以a本身是一个左值，再用右值引用引用a这是不对的。因此我们有了std::forward()完美转发，这种T &amp;&amp;val中的val是左值，但如果我们用std::forward (val)，就会按照参数原来的类型转发；这样是正确的！</p>
+<pre class="line-numbers language-C++"><code class="language-C++">int &&a = 10;
+int &&b = std::forward<int>(a);
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h2 id="多线程thread"><a href="#多线程thread" class="headerlink" title="多线程thread"></a>多线程thread</h2><p>std::thread 需在 <code>#include &lt;thread&gt;</code>头文件中声明，主要的成员函数有</p>
+<pre class="line-numbers language-c++"><code class="language-c++">#获取线程ID
+get_id()  
+ 
+#判断线程是否可以加入等待   
+joinable()
+    
+#等该线程执行完成后才返回。   
+join()
+
+#将本线程从调用线程中分离出来，允许本线程独立执行。(但是当主进程结束的时候，即便是detach（）出去的子线程不管有没有完成都会被强制杀死)    
+detach()
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>互斥量</strong></p>
+<p>C++11提供如下4种语义的互斥量（mutex）,需要使用<code>#include &lt;mutex&gt;</code><br>std::mutex，独占的互斥量，不能递归使用。<br>std::time_mutex，带超时的独占互斥量，不能递归使用。<br>std::recursive_mutex，递归互斥量，不带超时功能。<br>std::recursive_timed_mutex，带超时的递归互斥量。</p>
+<ul>
+<li><p>独占互斥量std::mutex</p>
+<blockquote>
+<p>std::mutex 的成员函数<br>构造函数，std::mutex不允许拷贝构造，也不允许 move 拷贝，最初产生的 mutex 对象是处于unlocked 状态的。<br>lock()，调用线程将锁住该互斥量。线程调用该函数会发生下面 3 种情况：(1). 如果该互斥量当前没有被锁住，则调用线程将该互斥量锁住，直到调用 unlock之前，该线程一直拥有该锁。(2). 如果当前互斥量被其他线程锁住，则当前的调用线程被阻塞住。(3). 如果当前互斥量被当前调用线程锁住，则会产生死锁(deadlock)。<br>unlock()， 解锁，释放对互斥量的所有权。<br>try_lock()，尝试锁住互斥量，如果互斥量被其他线程占有，则当前线程也不会被阻塞。线程调用该函数也会出现下面 3 种情况，(1). 如果当前互斥量没有被其他线程占有，则该线程锁住互斥量，直到该线程调用 unlock 释放互斥量。(2). 如果当前互斥量被其他线程锁住，则当前调用线程返回false，而并不会被阻塞掉。(3). 如果当前互斥量被当前调用线程锁住，则会产生死锁(deadlock)。</p>
+</blockquote>
+</li>
+<li><p>递归互斥量std::recursive_mutex</p>
+<blockquote>
+<p>递归锁允许同一个线程多次获取该互斥锁，可以用来解决同一线程需要多次获取互斥量时死锁的问题。</p>
+<p>虽然递归锁能解决这种情况的死锁问题，但是尽量不要使用递归锁，主要原因如下:</p>
+<ol>
+<li><p>需要用到递归锁的多线程互斥处理本身就是可以简化的，允许递归很容易放纵复杂逻辑的产生，并且产生晦涩，当要使用递归锁的时候应该重新审视自己的代码是否一定要使用递归锁；</p>
+</li>
+<li><p>递归锁比起非递归锁，效率会低；</p>
+</li>
+<li><p>递归锁虽然允许同一个线程多次获得同一个互斥量，但可重复获得的最大次数并未具体说明，一旦超过一定的次数，再对lock进行调用就会抛出std::system错误。</p>
+</li>
+</ol>
+</blockquote>
+</li>
+</ul>
+<p><strong>lock_guard和unique_lock的使用和区别</strong></p>
+<p>相对于手动lock和unlock，我们可以使用RAII(通过类的构造析构)来实现更好的编码方式。</p>
+<ul>
+<li><p>unique_lock与lock_guard都能实现自动加锁和解锁，但是前者更加灵活，能实现更多的功能。使用unique_lock需要付出更多的时间、性能成本。</p>
+</li>
+<li><p>unique_lock不像lock_guard一样只能在析构时才释放锁，它可以随时释放锁，unique_lock可以进行临时解锁和再上锁，如在构造对象之后使用lck.unlock()就可以进行解锁，lck.lock()进行上锁，而不必等到析构时自动解锁。</p>
+</li>
+</ul>
+<p><strong>条件变量</strong></p>
+<p>互斥量是多线程间同时访问某一共享变量时，保证变量可被安全访问的手段。但单靠互斥量无法实现线程的同步。线程同步是指线程间需要按照预定的先后次序顺序进行的行为。C++11对这种行为也提供了有力的支持，这就是条件变量。条件变量位于头文件<code>condition_variable</code>下。</p>
+<p>条件变量使用过程：</p>
+<ol>
+<li>拥有条件变量的线程获取互斥量；</li>
+<li>循环检查某个条件，如果条件不满足则阻塞直到条件满足；如果条件满足则向下执行；</li>
+<li>某个线程满足条件执行完之后调用notify_one或notify_all唤醒一个或者所有等待线程。</li>
+</ol>
+<p>条件变量提供了两类操作：wait和notify。</p>
+<p>wait函数的工作原理：</p>
+<blockquote>
+<p>当前线程调用wait()后将被阻塞并且函数会解锁互斥量，直到另外某个线程调用notify_one或者notify_all唤醒当前线程；一旦当前线程获得通知(notify)，wait()函数也是自动调用lock()，同理不能使用lock_guard对象。<br>如果wait没有第二个参数，第一次调用默认条件不成立，直接解锁互斥量并阻塞到本行，直到某一个线程调用notify_one或notify_all为止，被唤醒后，wait重新尝试获取互斥量，如果得不到，线程会卡在这里，直到获取到互斥量，然后无条件地继续进行后面的操作。<br>如果wait包含第二个参数，如果第二个参数不满足，那么wait将解锁互斥量并堵塞到本行，直到某一个线程调用notify_one或notify_all为止，被唤醒后，wait重新尝试获取互斥量，如果得不到，线程会卡在这里，直到获取到互斥量，然后继续判断第二个参数，如果表达式为false，wait对互斥量解锁，然后休眠，如果为true，则进行后面的操作。</p>
+</blockquote>
+<p>wait_for函数</p>
+<blockquote>
+<p>和wait不同的是，wait_for可以执行一个时间段，在线程收到唤醒通知或者时间超时之前，该线程都会处于阻塞状态，如果收到唤醒通知或者时间超时，wait_for返回，剩下操作和wait类似。</p>
+</blockquote>
+<p>wait_until函数</p>
+<blockquote>
+<p>与wait_for类似，只是wait_until可以指定一个时间点，在当前线程收到通知或者指定的时间点超时之前，该线程都会处于阻塞状态。如果超时或者收到唤醒通知，wait_until返回，剩下操作和wait类似</p>
+</blockquote>
+<p>notify_one函数</p>
+<blockquote>
+<p>解锁正在等待当前条件的线程中的一个，如果没有线程在等待，则函数不执行任何操作，如果正在等待的线程多于一个，则唤醒的线程是不确定的。</p>
+</blockquote>
+<p>notify_all函数</p>
+<blockquote>
+<p>解锁正在等待当前条件的所有线程，如果没有正在等待的线程，则函数不执行任何操作。</p>
+</blockquote>
+<p><strong>原子变量</strong></p>
+<pre class="line-numbers language-c++"><code class="language-c++">std::atomic<int> foo(0); // 准确初始化
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><strong>call_once和once_flag</strong></p>
+<p>在多线程中，有一种场景是某个任务只需要执行一次，可以用C++11中的std::call_once函数配合std::once_flag来实现。多个线程同时调用某个函数，std::call_once可以保证多个线程对该函数只调用一次。</p>
+<p><strong>异步操作</strong></p>
+<p>std::future</p>
+<blockquote>
+<p>std::future期待一个返回，从一个异步调用的角度来说，future更像是执行函数的返回值，C++标准库使用std::future为一次性事件建模，如果一个事件需要等待特定的一次性事件，那么这线程可以获取一个future对象来代表这个事件。<br>异步调用往往不知道何时返回，但是如果异步调用的过程需要同步，或者说后一个异步调用需要使用前一个异步调用的结果。这个时候就要用到future。线程可以周期性的在这个future上等待一小段时间，检查future是否已经ready，如果没有，该线程可以先去做另一个任务，一旦future就绪，该future就无法复位（无法再次使用这个future等待这个事件），所以future代表的是一次性事件。</p>
+<p>在库的头文件中声明了两种future，唯一future（std::future）和共享future（std::shared_future）这两个是参照std::unique_ptr和std::shared_ptr设立的，前者的实例是仅有的一个指向其关联事件的实例，而后者可以有多个实例指向同一个关联事件，当事件就绪时，所有指向同一事件的std::shared_future实例会变成就绪。</p>
+<p>std::future是一个模板，例如std::future，模板参数就是期待返回的类型，虽然future被用于线程间通信，但其本身却并不提供同步访问，热门必须通过互斥元或其他同步机制来保护访问。future使用的时机是当你不需要立刻得到一个结果的时候，你可以开启一个线程帮你去做一项任务，并期待这个任务的返回，但是std::thread并没有提供这样的机制，这就需要用到std::async和std::future（都在头文件中声明）std::async返回一个std::future对象，而不是给你一个确定的值（所以当你不需要立刻使用此值的时候才需要用到这个机制）。当你需要使用这个值的时候，对future使用get()，线程就会阻塞直到future就绪，然后返回该值。</p>
+</blockquote>
+<p><strong>function和bind</strong></p>
+<p>function的用法</p>
+<ol>
+<li><p>保存普通函数</p>
+<pre class="line-numbers language-C++"><code class="language-C++">void printA(int a){
+    cout << a << endl;
+}
+std::function<void(int a)> func;
+func = printA;
+func(2); //2
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>保存lambda表达式</p>
+<pre class="line-numbers language-C++"><code class="language-C++">std::function<void()> func_1 = [](){cout << "hello world" << endl;};
+func_1(); //hello world
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+<li><p>保存成员函数</p>
+<pre class="line-numbers language-C++"><code class="language-C++">class Foo{
+    Foo(int num) : num_(num){}
+    void print_add(int i) const {cout << num_ + i << endl;}
+    int num_;
+};
+//保存成员函数
+std::function<void(const Foo&,int)> f_add_display = &Foo::print_add;
+Foo foo(2);
+f_add_display(foo,1);
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+</ol>
+<p>bind用法</p>
+<blockquote>
+<p>可将bind函数看作是一个通用的函数适配器，它接受一个可调用对象，生成一个新的可调用对象来“适应”原对象的参数列表。调用bind的一般形式：<code>auto newCallable = bind(callable,arg_list);</code><br>其中，newCallable本身是一个可调用对象，arg_list是一个逗号分隔的参数列表，对应给定的callable的参数。即，当我们调用newCallable时，newCallable会调用callable,并传给它arg_list中的参数。</p>
+</blockquote>
+<pre class="line-numbers language-C++"><code class="language-C++">//f1的类型为 function<void(int, int, int)>
+auto f1 = std::bind(fun_1,1,2,3); //表示绑定函数 fun 的第一，二，三个参数值为： 1 2 3
+f1(); //print: x=1,y=2,z=3
+auto f2 = std::bind(fun_1, placeholders::_1,placeholders::_2,3);//表示绑定函数 fun 的第三个参数为 3，而fun 的第一，二个参数分别由调用 f2 的第一，二个参数指定
+f2(1,2);//print: x=1,y=2,z=3
+auto f3 = std::bind(fun_1,placeholders::_2,placeholders::_1,3);//表示绑定函数 fun 的第三个参数为 3，而fun 的第一，二个参数分别由调用 f3 的第二，一个参数指定
+//注意： f2 和 f3 的区别。
+f3(1,2);//print: x=2,y=1,z=3
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>可变模板参数</strong></p>
+<p>C++11的新特性–可变模版参数（variadic templates）是C++11新增的最强大的特性之一，它对参数进行了高度泛化，它能表示0到任意个数、任意类型的参数。可变参数模板语法：</p>
+<pre class="line-numbers language-C++"><code class="language-C++">template <class... T>
+void f(T... args);
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>上面的参数args前面有省略号，所以它就是一个可变模版参数，我们把带省略号的参数称为“参数包”，它里面包含了0到N（N&gt;&#x3D;0）个模版参数。我们无法直接获取参数包args中的每个参数的，只能通过展开参数包的方式来获取参数包中的每个参数，这是使用可变模版参数的一个主要特点，也是最大的难点，即如何展开可变模版参数。</p>
+<p>展开可变模版参数函数的方法一般有两种：</p>
+<ol>
+<li><p>通过递归函数来展开参数包。需要提供一个参数包展开的函数和一个递归终止函数，递归终止函数正是用来终止递归的</p>
+<pre class="line-numbers language-C++"><code class="language-C++">#include <iostream>
+using namespace std;
+//递归终止函数
+void print(){
+    cout << "empty" << endl;
+}
+//展开函数
+template <class T, class ...Args>
+void print(T head, Args... rest){
+    cout << "parameter " << head << endl;
+    print(rest...);
+}
+int main(void){
+    print(1,2,3,4);
+    return 0;
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>上例会输出每一个参数，直到为空时输出empty。展开参数包的函数有两个，一个是递归函数，另外一个是递归终止函数，参数包Args…在展开的过程中递归调用自己，每调用一次参数包中的参数就会少一个，直到所有的参数都展开为止，当没有参数时，则调用非模板函数print终止递归过程。</p>
+</li>
+<li><p>通过逗号表达式来展开参数包。递归函数展开参数包是一种标准做法，也比较好理解，但也有一个缺点,就是必须要一个重载的递归终止函数，即必须要有一个同名的终止函数来终止递归，这样可能会感觉稍有不便。有没有一种更简单的方式呢？其实还有一种方法可以不通过递归方式来展开参数包，这种方式需要借助逗号表达式和初始化列表。比如前面print的例子可以改成这样：</p>
+<pre class="line-numbers language-C++"><code class="language-C++">#include <iostream>
+using namespace std;
+template <class T>
+void printarg(T t){
+    cout << t << endl;
+}
+template <class ...Args>
+void expand(Args... args){
+    int arr[] = {(printarg(args), 0)...};
+}
+int main(){
+    expand(1,2,3,4);
+    return 0;
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这个例子将分别打印出1,2,3,4四个数字。这种展开参数包的方式，不需要通过递归终止函数，是直接在expand函数体中展开的, printarg不是一个递归终止函数，只是一个处理参数包中每一个参数的函数。expand函数中的逗号表达式：(printarg(args), 0)，先执行printarg(args)，再得到逗号表达式的结果0。同时还用到了C++11的另外一个特性——初始化列表，通过初始化列表来初始化一个变长数组,{(printarg(args), 0)…}将会展开成((printarg(arg1),0), (printarg(arg2),0), (printarg(arg3),0), etc… )，最终会创建一个元素值都为0的数组int arr[sizeof…(Args)]。由于是逗号表达式，在创建数组的过程中会先执行逗号表达式前面的部分printarg(args)打印出参数，也就是说在构造int数组的过程中就将参数包展开了，这个数组的目的纯粹是为了在数组构造的过程展开参数包。</p>
+</li>
+</ol>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">HL</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://haolei56.github.io/2023/052164029.html">http://haolei56.github.io/2023/052164029.html</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">HL</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/C-11/">
+                                    <span class="chip bg-color">C++11</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2023/052132906.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="Git基础">
+                        
+                        <span class="card-title">Git基础</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-05-21
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Git/" class="post-category">
+                                    Git
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Git/">
+                        <span class="chip bg-color">Git</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/052120542.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="C++数据类型">
+                        
+                        <span class="card-title">C++数据类型</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-05-21
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/C/" class="post-category">
+                                    C++
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/C/">
+                        <span class="chip bg-color">C++</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2022-2023</span>
+            
+            <a href="/about" target="_blank">HL</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:n_056haolei@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1559823213" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1559823213" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+     <!--樱花效果-->
+    <script type="text/javascript">
+    //只在桌面版网页启用特效
+    var windowWidth = $(window).width();
+    if (windowWidth > 768) {
+        document.write('<script type="text/javascript" src="/js/sakura.js"><\/script>');
+    }
+    </script>
+</body>
+
+</html>
